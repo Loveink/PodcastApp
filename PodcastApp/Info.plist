@@ -10,7 +10,7 @@
 		<string>Manrope-Regular.ttf</string>
 		<string>PlusJakartaSans-Bold.ttf</string>
 		<string>PlusJakartaSans-Medium.ttf</string>
-		<string></string>
+		<string>PlusJakartaSans-SemiBold.ttf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

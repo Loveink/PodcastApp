@@ -30,6 +30,16 @@
 		57B391C92AC0CAD800BD7E82 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 57B391C42AC0CA5D00BD7E82 /* SF-Pro-Display-Semibold.otf */; };
 		57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391CB2AC0CBBE00BD7E82 /* Label.swift */; };
 		57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */; };
+		57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391D82AC1694300BD7E82 /* CreateAccountViewController.swift */; };
+		57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391DA2AC1695700BD7E82 /* CreateAccountDetailViewController.swift */; };
+		57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391DC2AC1696C00BD7E82 /* LoginViewController.swift */; };
+		57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */; };
+		57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391E92AC16A9100BD7E82 /* ChannelViewController.swift */; };
+		57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */; };
+		57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */; };
+		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
+		57B392092AC16D2800BD7E82 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 57B392082AC16D2800BD7E82 /* Realm */; };
+		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +64,14 @@
 		57B391C62AC0CA9F00BD7E82 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		57B391CB2AC0CBBE00BD7E82 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		57B391D82AC1694300BD7E82 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		57B391DA2AC1695700BD7E82 /* CreateAccountDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDetailViewController.swift; sourceTree = "<group>"; };
+		57B391DC2AC1696C00BD7E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		57B391E92AC16A9100BD7E82 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
+		57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
+		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,10 +79,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */,
 				57B391A72ABED54300BD7E82 /* Kingfisher in Frameworks */,
 				57B391A02ABED51F00BD7E82 /* FirebaseAnalytics in Frameworks */,
 				57B391A22ABED51F00BD7E82 /* FirebaseAuth in Frameworks */,
 				57B391A42ABED51F00BD7E82 /* FirebaseFirestore in Frameworks */,
+				57B392092AC16D2800BD7E82 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +149,7 @@
 		57B3918E2ABED00900BD7E82 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				57B392062AC16C3F00BD7E82 /* Realm */,
 				57B3919D2ABED31D00BD7E82 /* Firebase */,
 				57B391912ABED03800BD7E82 /* API */,
 			);
@@ -174,6 +195,9 @@
 		57B391952ABED23E00BD7E82 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				57B391E02AC1698E00BD7E82 /* Models */,
+				57B391DF2AC1698400BD7E82 /* Views */,
+				57B391DE2AC1697D00BD7E82 /* Controllers */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -181,7 +205,9 @@
 		57B391962ABED24A00BD7E82 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
-				57B391B12ABED95400BD7E82 /* HomeViewController.swift */,
+				57B391E52AC16A6E00BD7E82 /* Models */,
+				57B391E42AC16A6900BD7E82 /* Views */,
+				57B391E32AC16A5D00BD7E82 /* Controllers */,
 			);
 			path = Homepage;
 			sourceTree = "<group>";
@@ -189,6 +215,9 @@
 		57B391972ABED26400BD7E82 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				57B391E82AC16A8000BD7E82 /* Models */,
+				57B391E72AC16A7C00BD7E82 /* Views */,
+				57B391E62AC16A7700BD7E82 /* Controllers */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -196,6 +225,9 @@
 		57B391982ABED27B00BD7E82 /* NowPlaying */ = {
 			isa = PBXGroup;
 			children = (
+				57B391ED2AC16AB500BD7E82 /* Models */,
+				57B391EC2AC16AB100BD7E82 /* Views */,
+				57B391EB2AC16AAB00BD7E82 /* Controllers */,
 			);
 			path = NowPlaying;
 			sourceTree = "<group>";
@@ -203,7 +235,8 @@
 		57B391992ABED28B00BD7E82 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				57B391B32ABED98100BD7E82 /* SearchViewController.swift */,
+				57B391F32AC16AF100BD7E82 /* Search */,
+				57B391F42AC16AFB00BD7E82 /* SearchResults */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -211,7 +244,9 @@
 		57B3919B2ABED2BF00BD7E82 /* Favourites */ = {
 			isa = PBXGroup;
 			children = (
-				57B391B52ABED9B700BD7E82 /* FavoritesViewController.swift */,
+				57B391FC2AC16B5000BD7E82 /* Models */,
+				57B391FB2AC16B4B00BD7E82 /* Views */,
+				57B391FA2AC16B4500BD7E82 /* Controllers */,
 			);
 			path = Favourites;
 			sourceTree = "<group>";
@@ -219,8 +254,8 @@
 		57B3919C2ABED2D500BD7E82 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				57B392022AC16C1800BD7E82 /* Profile */,
 				57B391A92ABED57400BD7E82 /* AccountSettings */,
-				57B391B72ABED9E900BD7E82 /* ProfileSettingsViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -242,6 +277,9 @@
 		57B391A92ABED57400BD7E82 /* AccountSettings */ = {
 			isa = PBXGroup;
 			children = (
+				57B391FF2AC16B7600BD7E82 /* Models */,
+				57B391FE2AC16B6600BD7E82 /* Views */,
+				57B391FD2AC16B5F00BD7E82 /* Controllers */,
 			);
 			path = AccountSettings;
 			sourceTree = "<group>";
@@ -249,6 +287,9 @@
 		57B391AA2ABED5DC00BD7E82 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				57B391D72AC1692B00BD7E82 /* Models */,
+				57B391D62AC1691D00BD7E82 /* Views */,
+				57B391D52AC1691600BD7E82 /* Controllers */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -256,6 +297,9 @@
 		57B391AB2ABED5E500BD7E82 /* CreateAccount */ = {
 			isa = PBXGroup;
 			children = (
+				57B391D42AC168F100BD7E82 /* Models */,
+				57B391D32AC168E400BD7E82 /* Views */,
+				57B391D22AC168D900BD7E82 /* Controllers */,
 			);
 			path = CreateAccount;
 			sourceTree = "<group>";
@@ -298,6 +342,286 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		57B391D22AC168D900BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391D82AC1694300BD7E82 /* CreateAccountViewController.swift */,
+				57B391DA2AC1695700BD7E82 /* CreateAccountDetailViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391D32AC168E400BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391D42AC168F100BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391D52AC1691600BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391DC2AC1696C00BD7E82 /* LoginViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391D62AC1691D00BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391D72AC1692B00BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391DE2AC1697D00BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391DF2AC1698400BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391E02AC1698E00BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391E32AC16A5D00BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391B12ABED95400BD7E82 /* HomeViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391E42AC16A6900BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391E52AC16A6E00BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391E62AC16A7700BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391E92AC16A9100BD7E82 /* ChannelViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391E72AC16A7C00BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391E82AC16A8000BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391EB2AC16AAB00BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391EC2AC16AB100BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391ED2AC16AB500BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391F02AC16ACB00BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391B32ABED98100BD7E82 /* SearchViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391F12AC16AD500BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391F22AC16ADB00BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391F32AC16AF100BD7E82 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				57B391F22AC16ADB00BD7E82 /* Models */,
+				57B391F12AC16AD500BD7E82 /* Views */,
+				57B391F02AC16ACB00BD7E82 /* Controllers */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		57B391F42AC16AFB00BD7E82 /* SearchResults */ = {
+			isa = PBXGroup;
+			children = (
+				57B391F62AC16B1E00BD7E82 /* Models */,
+				57B391F72AC16B2200BD7E82 /* Views */,
+				57B391F52AC16B1700BD7E82 /* Controllers */,
+			);
+			path = SearchResults;
+			sourceTree = "<group>";
+		};
+		57B391F52AC16B1700BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391F62AC16B1E00BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391F72AC16B2200BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391FA2AC16B4500BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391B52ABED9B700BD7E82 /* FavoritesViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391FB2AC16B4B00BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391FC2AC16B5000BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B391FD2AC16B5F00BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B391FE2AC16B6600BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B391FF2AC16B7600BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B392022AC16C1800BD7E82 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				57B392052AC16C3200BD7E82 /* Models */,
+				57B392042AC16C2E00BD7E82 /* Views */,
+				57B392032AC16C2600BD7E82 /* Controllers */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		57B392032AC16C2600BD7E82 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57B391B72ABED9E900BD7E82 /* ProfileSettingsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		57B392042AC16C2E00BD7E82 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57B392052AC16C3200BD7E82 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57B392062AC16C3F00BD7E82 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -319,6 +643,8 @@
 				57B391A12ABED51F00BD7E82 /* FirebaseAuth */,
 				57B391A32ABED51F00BD7E82 /* FirebaseFirestore */,
 				57B391A62ABED54300BD7E82 /* Kingfisher */,
+				57B392082AC16D2800BD7E82 /* Realm */,
+				57B3920A2AC16D2800BD7E82 /* RealmSwift */,
 			);
 			productName = PodcastApp;
 			productReference = 57724E8C2ABDAB52006C3318 /* PodcastApp.app */;
@@ -351,6 +677,7 @@
 			packageReferences = (
 				57B3919E2ABED51F00BD7E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 57724E8D2ABDAB52006C3318 /* Products */;
 			projectDirPath = "";
@@ -385,15 +712,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */,
+				57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */,
 				57B391C72AC0CA9F00BD7E82 /* Fonts.swift in Sources */,
 				57B391B42ABED98100BD7E82 /* SearchViewController.swift in Sources */,
 				57724E902ABDAB52006C3318 /* AppDelegate.swift in Sources */,
+				57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */,
+				57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
 				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
 				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
 				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
+				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
 				57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */,
+				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
+				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
+				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,6 +963,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -650,6 +993,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		57B392082AC16D2800BD7E82 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		57B3920A2AC16D2800BD7E82 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
