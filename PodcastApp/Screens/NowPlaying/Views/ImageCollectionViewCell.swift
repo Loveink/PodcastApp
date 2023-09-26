@@ -12,11 +12,13 @@ class ImageCollectionViewCell: UICollectionViewCell {
   let imageView: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .scaleToFill
+    imageView.layer.cornerRadius = 20
     return imageView
   }()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    backgroundColor = .red
     setupViews()
   }
 

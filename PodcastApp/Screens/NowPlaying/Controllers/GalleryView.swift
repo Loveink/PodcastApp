@@ -47,7 +47,7 @@ class GalleryView: UIView {
       collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
       collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
       collectionView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-      collectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4)
+      collectionView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.7)
     ])
   }
 }
@@ -71,7 +71,7 @@ extension GalleryView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     let screenHeight = UIScreen.main.bounds.height
     let isSelected = indexPath == selectedIndexPath
     let itemWidth = isSelected ? (screenWidth * 0.7) : (screenWidth * 0.6)
-    let itemHeight = isSelected ? screenHeight * 0.4 : screenHeight * 0.3
+    let itemHeight = isSelected ? screenHeight * 0.5 : screenHeight * 0.4
     return CGSize(width: itemWidth, height: itemHeight)
   }
   
