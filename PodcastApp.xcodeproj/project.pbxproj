@@ -40,6 +40,8 @@
 		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
 		57B392092AC16D2800BD7E82 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 57B392082AC16D2800BD7E82 /* Realm */; };
 		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
+		57B3920D2AC2DE9600BD7E82 /* PodcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3920C2AC2DE9600BD7E82 /* PodcastView.swift */; };
+		57B3920F2AC2E47300BD7E82 /* PodcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3920E2AC2E47300BD7E82 /* PodcastViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		57B3920C2AC2DE9600BD7E82 /* PodcastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
+		57B3920E2AC2E47300BD7E82 /* PodcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */,
+				57B3920E2AC2E47300BD7E82 /* PodcastViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -464,6 +469,7 @@
 		57B391EC2AC16AB100BD7E82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				57B3920C2AC2DE9600BD7E82 /* PodcastView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -718,6 +724,8 @@
 				57B391B42ABED98100BD7E82 /* SearchViewController.swift in Sources */,
 				57724E902ABDAB52006C3318 /* AppDelegate.swift in Sources */,
 				57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */,
+				57B3920D2AC2DE9600BD7E82 /* PodcastView.swift in Sources */,
+				57B3920F2AC2E47300BD7E82 /* PodcastViewController.swift in Sources */,
 				57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
 				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,

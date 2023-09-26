@@ -9,21 +9,20 @@ import UIKit
 
 class NowPlayingViewController: UIViewController {
 
+  var podcast = PodcastView()
+  var galleryViewController = GalleryViewController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+      view.backgroundColor = .white
 
-        // Do any additional setup after loading the view.
+      view.addSubview(galleryViewController.collectionView)
+
+      galleryViewController.collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+      galleryViewController.collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+      galleryViewController.didMove(toParent: self)
+
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
