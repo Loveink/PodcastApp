@@ -10,19 +10,26 @@ import UIKit
 class NowPlayingViewController: UIViewController {
 
   var podcast = PodcastView()
-  var galleryViewController = GalleryViewController()
+  var galleryViewController = GalleryView()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      view.backgroundColor = .white
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = .white
 
-      view.addSubview(galleryViewController.collectionView)
+    setupConstraints()
 
-      galleryViewController.collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-      galleryViewController.collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-      galleryViewController.didMove(toParent: self)
+  }
+  
+  func setupConstraints() {
+    galleryViewController.translatesAutoresizingMaskIntoConstraints = false
 
-    }
+    view.addSubview(galleryViewController)
 
-
+    NSLayoutConstraint.activate([
+      galleryViewController.topAnchor.constraint(equalTo: view.topAnchor),
+      galleryViewController.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      galleryViewController.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      galleryViewController.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ])
+  }
 }
