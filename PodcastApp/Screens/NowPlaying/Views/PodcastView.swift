@@ -14,7 +14,7 @@ final class PodcastView: UIView {
     label.textAlignment = .center
     label.numberOfLines = 1
     label.text = "Robot Rock"
-    label.font = .systemFont(ofSize: 30)
+    label.font = .manropeBold(size: 20)
     label.textColor = .black
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -23,36 +23,12 @@ final class PodcastView: UIView {
   lazy var performerNameLabel: UILabel = {
     let label = UILabel()
     label.text = "Daft Punk"
-    label.font = .systemFont(ofSize: 20)
-    label.textColor = .gray
+    label.font = .manropeRegular(size: 16)
+    label.textColor = .textGrey
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
 
-  lazy var backHomeButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setImage(UIImage(named: "arrow_back"), for: .normal)
-    button.tintColor = .white
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
-
-  lazy var shareButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setImage(UIImage(named: "share"), for: .normal)
-    button.tintColor = .white
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
-  
-  lazy var likeButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setImage(UIImage(systemName: "heart"), for: .normal)
-    button.tintColor = .white
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
-  
   lazy var buttonsStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
@@ -63,7 +39,6 @@ final class PodcastView: UIView {
   
   lazy var sliderView: UISlider = {
     let slider = UISlider()
-    slider.thumbTintColor = .blue
     slider.thumbTintColor = .blue
     slider.minimumTrackTintColor = .blue
     slider.maximumTrackTintColor = .blueBorder
@@ -76,9 +51,9 @@ final class PodcastView: UIView {
   
   lazy var leftSliderLabel: UILabel = {
     let label = UILabel()
-    label.font = .systemFont(ofSize: 30)
+    label.font = .systemFont(ofSize: 14)
     label.textColor = .black
-    label.text = "0"
+    label.text = "44:30"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
     
@@ -86,8 +61,9 @@ final class PodcastView: UIView {
   
   lazy var rightSliderLabel: UILabel = {
     let label = UILabel()
-    label.font = .systemFont(ofSize: 30)
+    label.font = .systemFont(ofSize: 14)
     label.textColor = .black
+    label.text = "56:30"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
     
@@ -165,13 +141,13 @@ final class PodcastView: UIView {
 
       sliderView.topAnchor.constraint(equalTo: performerNameLabel.bottomAnchor, constant: 20),
       sliderView.centerXAnchor.constraint(equalTo: centerXAnchor),
-      sliderView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7),
+      sliderView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
 
       leftSliderLabel.trailingAnchor.constraint(equalTo: sliderView.leadingAnchor, constant: -10),
-      leftSliderLabel.centerXAnchor.constraint(equalTo: sliderView.centerXAnchor),
+      leftSliderLabel.centerYAnchor.constraint(equalTo: sliderView.centerYAnchor),
 
       rightSliderLabel.leadingAnchor.constraint(equalTo: sliderView.trailingAnchor, constant: 10),
-      rightSliderLabel.centerXAnchor.constraint(equalTo: sliderView.centerXAnchor),
+      rightSliderLabel.centerYAnchor.constraint(equalTo: sliderView.centerYAnchor),
 
       buttonsStackView.topAnchor.constraint(equalTo: sliderView.bottomAnchor, constant: 30),
       buttonsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),

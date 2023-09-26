@@ -43,6 +43,8 @@
 		57B3920D2AC2DE9600BD7E82 /* PodcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3920C2AC2DE9600BD7E82 /* PodcastView.swift */; };
 		57B3920F2AC2E47300BD7E82 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3920E2AC2E47300BD7E82 /* GalleryView.swift */; };
 		57B392112AC3841200BD7E82 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392102AC3841200BD7E82 /* ImageCollectionViewCell.swift */; };
+		57B392132AC3997400BD7E82 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392122AC3997400BD7E82 /* Podcast.swift */; };
+		57B392152AC39B4F00BD7E82 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392142AC39B4F00BD7E82 /* Episode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		57B3920C2AC2DE9600BD7E82 /* PodcastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
 		57B3920E2AC2E47300BD7E82 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		57B392102AC3841200BD7E82 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		57B392122AC3997400BD7E82 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
+		57B392142AC39B4F00BD7E82 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +169,8 @@
 		57B391912ABED03800BD7E82 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				57B392122AC3997400BD7E82 /* Podcast.swift */,
+				57B392142AC39B4F00BD7E82 /* Episode.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -735,10 +741,12 @@
 				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
 				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
 				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
+				57B392152AC39B4F00BD7E82 /* Episode.swift in Sources */,
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
 				57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */,
 				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
+				57B392132AC3997400BD7E82 /* Podcast.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
 				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,

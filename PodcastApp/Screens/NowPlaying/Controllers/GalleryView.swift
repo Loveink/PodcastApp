@@ -78,5 +78,13 @@ extension GalleryView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     selectedIndexPath = indexPath
     collectionView.reloadData()
+    
+    guard let selectedIndexPath = selectedIndexPath else { return }
+    let centerX = collectionView.bounds.width / 2
+    if let attributes = collectionView.layoutAttributesForItem(at: selectedIndexPath) {
+      let cellCenterX = attributes.center.x
+      let offsetX = cellCenterX - centerX
+      collectionView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
+    }
   }
 }
