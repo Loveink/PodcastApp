@@ -95,47 +95,38 @@ final class PodcastView: UIView {
   
       lazy var shuffleButton: UIButton = {
           let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "shuffle"), for: .normal)
-          button.tintColor = .blue
+        button.setImage(UIImage(named: "shuffle 1"), for: .normal)
+          button.tintColor = .gray
         button.translatesAutoresizingMaskIntoConstraints = false
           return button
       }()
   
   lazy var previousTrackButton: UIButton = {
     let button = UIButton(type: .system)
-    button.setImage(UIImage(systemName: "backward.end"), for: .normal)
-    button.tintColor = .blue
+    button.setImage(UIImage(named: "next 2"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
   lazy var playButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.tintColor = .black
-    button.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
-    button.backgroundColor = .blue
-    button.layer.cornerRadius = 37
-    button.layer.masksToBounds = true
-    button.layer.shadowColor = UIColor.black.cgColor
-    button.layer.shadowOpacity = 1
-    button.layer.shadowOffset = CGSize(width: 30, height: 30)
-    button.layer.shadowRadius = 15
+    let button = UIButton(type: .custom)
+//    button.tintColor = .blue
+    button.setImage(UIImage(named: "play"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
   lazy var nextTrackButton: UIButton = {
     let button = UIButton(type: .system)
-    button.setImage(UIImage(systemName: "forward.end"), for: .normal)
-    button.tintColor = .blue
+    button.setImage(UIImage(named: "next 1"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
   lazy var repeatButton: UIButton = {
     let button = UIButton(type: .system)
-    button.setImage(UIImage(systemName: "shuffle"), for: .normal)
-    button.tintColor = .blue
+    button.setImage(UIImage(named: "repeat"), for: .normal)
+    button.tintColor = .gray
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
