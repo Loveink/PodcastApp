@@ -17,16 +17,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     self.window = window
 
+
+      //таббар
 //      let tabBarController = CustomTabBar()
 //      let navigationController = UINavigationController(rootViewController: tabBarController)
 //      window.rootViewController = navigationController
 
-      let loginVC = LoginViewController()
-      window.rootViewController = loginVC
+      //стартовый вход
+//      let loginVC = LoginViewController()
+//      window.rootViewController = loginVC
+
+      //детали создания аккаунта
+//      let createAccountDetailVC = CreateAccountDetailViewController()
+      window.rootViewController = createAccountDetailVC()
 
 //      navigationController.navigationBar.isHidden = true
       window.makeKeyAndVisible()
   }
+
+    func createAccountDetailVC() -> UINavigationController {
+        let createAccountDetailVC = CreateAccountDetailViewController()
+        return UINavigationController(rootViewController: createAccountDetailVC)
+    }
 
   func sceneDidDisconnect(_ scene: UIScene) {
     // Called as the scene is being released by the system.
