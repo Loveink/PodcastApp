@@ -4,6 +4,8 @@ class CreateAccountDetailViewController: UIViewController {
 
     // MARK: - Properties
 
+    private let notificationCenter = NotificationCenter.default
+
     // MARK: - UI Elements
 
     private lazy var createAccountDetailView = CreateAccountDetailView()
@@ -32,6 +34,25 @@ class CreateAccountDetailViewController: UIViewController {
         layout()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notificationCenter.addObserver (self, selector: #selector (keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if touches.first != nil {
+            view.endEditing(true)
+        }
+        super .touchesBegan(touches, with: event)
+    }
+
     // MARK: - Methods
 
     private func setupNavigation() {
@@ -58,12 +79,29 @@ class CreateAccountDetailViewController: UIViewController {
             createAccountDetailView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             createAccountDetailView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             createAccountDetailView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            createAccountDetailView.heightAnchor.constraint(equalToConstant: 1000),
+            createAccountDetailView.heightAnchor.constraint(equalToConstant: 800),
             createAccountDetailView.widthAnchor.constraint(equalToConstant: screenWidth)
         ])
     }
 
     @objc private func backButtonAction() {
         print("back button tapped")
+    }
+
+    @objc
+    private func keyboardShow(notification: NSNotification) {
+        if let keyboardSize: CGRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            scrollView.contentInset.bottom = keyboardSize.height + 130
+            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0,
+                                                                    left: 0,
+                                                                    bottom: keyboardSize.height,
+                                                                    right: 0)
+        }
+    }
+
+    @objc
+    private func keyboardHide() {
+        scrollView.contentInset.bottom = .zero
+        scrollView.verticalScrollIndicatorInsets = .zero
     }
 }
