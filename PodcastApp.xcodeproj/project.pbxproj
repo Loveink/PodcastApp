@@ -40,6 +40,7 @@
 		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
 		57B392092AC16D2800BD7E82 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 57B392082AC16D2800BD7E82 /* Realm */; };
 		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
+		E57CF00A2AC43B7A001600A8 /* ProfileSettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -587,7 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				57B392052AC16C3200BD7E82 /* Models */,
-				57B392042AC16C2E00BD7E82 /* Views */,
+				E57CF0002AC36644001600A8 /* Views */,
 				57B392032AC16C2600BD7E82 /* Controllers */,
 			);
 			path = Profile;
@@ -601,18 +603,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		57B392042AC16C2E00BD7E82 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		57B392052AC16C3200BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Models;
+			name = Models;
+			path = Views/Models;
 			sourceTree = "<group>";
 		};
 		57B392062AC16C3F00BD7E82 /* Realm */ = {
@@ -620,6 +616,14 @@
 			children = (
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		E57CF0002AC36644001600A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -726,6 +730,7 @@
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
 				57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */,
 				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
+				E57CF00A2AC43B7A001600A8 /* ProfileSettingsViewCell.swift in Sources */,
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
 				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
