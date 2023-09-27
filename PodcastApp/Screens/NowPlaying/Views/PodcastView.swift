@@ -39,7 +39,7 @@ final class PodcastView: UIView {
   
   lazy var sliderView: UISlider = {
     let slider = UISlider()
-    slider.thumbTintColor = .blue
+    slider.thumbTintColor = .black
     slider.minimumTrackTintColor = .blue
     slider.maximumTrackTintColor = .blueBorder
     slider.maximumValue = 0.00

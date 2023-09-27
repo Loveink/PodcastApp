@@ -11,12 +11,39 @@ class NowPlayingViewController: UIViewController {
 
   var podcast = PodcastView()
   var galleryViewController = GalleryView()
+  var feeds: [Podcast] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
 
+
+    let networkService = NetworkService()
+    networkService.fetchData(forPath: "/search/byterm?q=bastiat") { (result: Result<PodcastResponse, APIError>) in
+        switch result {
+        case .success(let podcastResponse):
+          self.feeds.append(contentsOf: podcastResponse.feeds)
+
+            for podcast in self.feeds {
+                let imageURL = podcast.image
+                self.galleryViewController.images.append(imageURL)
+            }
+
+            DispatchQueue.main.async {
+                self.galleryViewController.collectionView.reloadData()
+            }
+        case .failure(let error):
+            print("Error: \(error)")
+        }
+      print(self.galleryViewController.images)
+    }
+
+
     setupConstraints()
+
+
+
+
   }
 
   func setupConstraints() {

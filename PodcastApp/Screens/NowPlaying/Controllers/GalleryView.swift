@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Kingfisher
+
 
 class GalleryView: UIView {
   
   var collectionView: UICollectionView!
-  var images: [UIImage] = [UIImage(named: "SongImage1")!, UIImage(named: "ImageLeft")!, UIImage(named: "ImageRight")!]
+  var images: [String] = []
   var selectedIndexPath: IndexPath?
   
   override init(frame: CGRect) {
@@ -24,20 +26,20 @@ class GalleryView: UIView {
   }
   
   func configureCollection() {
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    layout.minimumLineSpacing = 10
-    layout.minimumInteritemSpacing = 10
-    
-    // Используйте let для инициализации collectionView
-    collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-    collectionView.showsHorizontalScrollIndicator = false
-    collectionView.dataSource = self
-    collectionView.delegate = self
-    collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCell")
-    collectionView.backgroundColor = .clear
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
+      let layout = UICollectionViewFlowLayout()
+      layout.scrollDirection = .horizontal
+      layout.minimumLineSpacing = 10
+      layout.minimumInteritemSpacing = 10
+
+      collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+      collectionView.showsHorizontalScrollIndicator = false
+      collectionView.dataSource = self
+      collectionView.delegate = self
+      collectionView.register(ImageCollectionViewCell.self, forCellWithReuseIdentifier: "ImageCell")
+      collectionView.backgroundColor = .clear
+      collectionView.translatesAutoresizingMaskIntoConstraints = false
   }
+
   
   private func setupView() {
     selectedIndexPath = IndexPath(row: 0, section: 0)
@@ -59,12 +61,28 @@ extension GalleryView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCollectionViewCell else {
-      fatalError("Unable to dequeue ImageCollectionViewCell")
-    }
-    cell.configure(with: images[indexPath.item])
-    return cell
+      guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as? ImageCollectionViewCell else {
+          fatalError("Unable to dequeue ImageCollectionViewCell")
+      }
+
+      let imageUrlString = images[indexPath.item]
+      if let imageUrl = URL(string: imageUrlString) {
+          // Используйте Kingfisher для загрузки и кэширования изображения
+          cell.imageView.kf.setImage(with: imageUrl) { result in
+              switch result {
+              case .success(let value):
+                  // Изображение успешно загружено и отображено
+                  print("Image downloaded: \(value.source.url?.absoluteString ?? "")")
+              case .failure(let error):
+                  // Произошла ошибка при загрузке изображения
+                  print("Error downloading image: \(error.localizedDescription)")
+              }
+          }
+      }
+
+      return cell
   }
+
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let screenWidth = UIScreen.main.bounds.width

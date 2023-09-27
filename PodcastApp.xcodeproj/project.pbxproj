@@ -45,6 +45,8 @@
 		57B392112AC3841200BD7E82 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392102AC3841200BD7E82 /* ImageCollectionViewCell.swift */; };
 		57B392132AC3997400BD7E82 /* Podcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392122AC3997400BD7E82 /* Podcast.swift */; };
 		57B392152AC39B4F00BD7E82 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392142AC39B4F00BD7E82 /* Episode.swift */; };
+		57B392172AC409D500BD7E82 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392162AC409D500BD7E82 /* NetworkManager.swift */; };
+		57B392192AC42E6C00BD7E82 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392182AC42E6C00BD7E82 /* String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +84,8 @@
 		57B392102AC3841200BD7E82 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		57B392122AC3997400BD7E82 /* Podcast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Podcast.swift; sourceTree = "<group>"; };
 		57B392142AC39B4F00BD7E82 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		57B392162AC409D500BD7E82 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		57B392182AC42E6C00BD7E82 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				57B392122AC3997400BD7E82 /* Podcast.swift */,
+				57B392162AC409D500BD7E82 /* NetworkManager.swift */,
 				57B392142AC39B4F00BD7E82 /* Episode.swift */,
 			);
 			path = API;
@@ -179,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				57B391C62AC0CA9F00BD7E82 /* Fonts.swift */,
+				57B392182AC42E6C00BD7E82 /* String.swift */,
 				57B391CB2AC0CBBE00BD7E82 /* Label.swift */,
 				57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */,
 			);
@@ -739,10 +745,12 @@
 				57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
 				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
+				57B392172AC409D500BD7E82 /* NetworkManager.swift in Sources */,
 				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
 				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
 				57B392152AC39B4F00BD7E82 /* Episode.swift in Sources */,
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
+				57B392192AC42E6C00BD7E82 /* String.swift in Sources */,
 				57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */,
 				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
