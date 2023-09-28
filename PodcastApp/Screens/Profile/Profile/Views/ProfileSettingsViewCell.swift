@@ -22,14 +22,14 @@ class ProfileSettingsViewCell: UITableViewCell {
     private let iconImageView: UIImageView = {
         let icon = UIImageView()
         icon.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        icon.tintColor = .symbolsLightPurple
+        icon.tintColor = .symbolsPurple
         icon.contentMode = .scaleAspectFill
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.image = UIImage(systemName: "questionmark")
         return icon
     }()
     
-    private let titleLabel = UILabel.makeLabelForCells(text: "line", font: .manropeRegular(size: 16), textColor: .textDarkPurple, numberOfLines: 0)
+    private let titleLabel = UILabel.makeLabelForCells(text: "", font: .manropeRegular(size: 16), textColor: .textDarkPurple, numberOfLines: 0)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -50,7 +50,7 @@ class ProfileSettingsViewCell: UITableViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            iconBackground.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 11),
+            iconBackground.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             iconBackground.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             
             iconImageView.centerYAnchor.constraint(equalTo: iconBackground.centerYAnchor),

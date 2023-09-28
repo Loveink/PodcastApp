@@ -41,6 +41,8 @@
 		57B392092AC16D2800BD7E82 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 57B392082AC16D2800BD7E82 /* Realm */; };
 		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
 		E57CF00A2AC43B7A001600A8 /* ProfileSettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */; };
+		E57CF00D2AC59B31001600A8 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF00C2AC59B31001600A8 /* AccountSettingsView.swift */; };
+		E57CF00F2AC59C92001600A8 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF00E2AC59C92001600A8 /* TextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +76,8 @@
 		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewCell.swift; sourceTree = "<group>"; };
+		E57CF00C2AC59B31001600A8 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		E57CF00E2AC59C92001600A8 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,7 @@
 				57B391C62AC0CA9F00BD7E82 /* Fonts.swift */,
 				57B391CB2AC0CBBE00BD7E82 /* Label.swift */,
 				57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */,
+				E57CF00E2AC59C92001600A8 /* TextField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -280,7 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				57B391FF2AC16B7600BD7E82 /* Models */,
-				57B391FE2AC16B6600BD7E82 /* Views */,
+				E57CF00B2AC59AD6001600A8 /* View */,
 				57B391FD2AC16B5F00BD7E82 /* Controllers */,
 			);
 			path = AccountSettings;
@@ -571,13 +576,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		57B391FE2AC16B6600BD7E82 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		57B391FF2AC16B7600BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -624,6 +622,14 @@
 				E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		E57CF00B2AC59AD6001600A8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E57CF00C2AC59B31001600A8 /* AccountSettingsView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -719,6 +725,7 @@
 				57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */,
 				57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */,
 				57B391C72AC0CA9F00BD7E82 /* Fonts.swift in Sources */,
+				E57CF00F2AC59C92001600A8 /* TextField.swift in Sources */,
 				57B391B42ABED98100BD7E82 /* SearchViewController.swift in Sources */,
 				57724E902ABDAB52006C3318 /* AppDelegate.swift in Sources */,
 				57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */,
@@ -734,6 +741,7 @@
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
 				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
+				E57CF00D2AC59B31001600A8 /* AccountSettingsView.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

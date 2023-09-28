@@ -41,7 +41,7 @@ extension UIColor {
         return UIColor(red: 0.93, green: 0.94, blue: 0.99, alpha: 1)
     }
     
-    static var symbolsLightPurple: UIColor {
+    static var symbolsPurple: UIColor {
         return UIColor(red:0.52, green:0.59, blue:0.53, alpha:1)
     }
 }

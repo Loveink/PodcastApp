@@ -26,7 +26,7 @@ class ProfileSettingsViewController: UIViewController {
     private var userNameLabel = UILabel.makeLabelForCells(text: "User Name", font: .manropeBold(size: 16), textColor: .textDarkPurple, numberOfLines: 0)
     private var userStatus = UILabel.makeLabelForCells(text: "love and chill", font: .manropeRegular(size: 14), textColor: .textDarkPurple, numberOfLines: 0)
     
-    var profileImage: UIImageView = {
+    private var profileImage: UIImageView = {
         let image = UIImageView()
         //image.image =
         image.frame = CGRect(x: 0, y: 0, width: 48, height: 48)
@@ -148,7 +148,7 @@ extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSou
         let imageForCheckmark = UIImage(systemName: "chevron.right")
         let checkmark  = UIImageView(frame:CGRect(x:0, y:0, width:(imageForCheckmark?.size.width)!, height:(imageForCheckmark?.size.height)!))
         checkmark.image = imageForCheckmark
-        checkmark.tintColor = .symbolsLightPurple
+        checkmark.tintColor = .symbolsPurple
         cell.accessoryView = checkmark
 
     
@@ -157,5 +157,10 @@ extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSou
         return cell
     }
     
-    
+    private func showAccountSettingsVC() {
+            let accountSettingsVC = AccountSettingsViewController()
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(accountSettingsVC, animated: true)
+            }
+        }
 }
