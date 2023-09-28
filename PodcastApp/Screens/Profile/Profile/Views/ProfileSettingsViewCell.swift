@@ -21,6 +21,7 @@ class ProfileSettingsViewCell: UITableViewCell {
     
     private let iconImageView: UIImageView = {
         let icon = UIImageView()
+        icon.frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         icon.tintColor = .symbolsLightPurple
         icon.contentMode = .scaleAspectFill
         icon.translatesAutoresizingMaskIntoConstraints = false
@@ -42,23 +43,24 @@ class ProfileSettingsViewCell: UITableViewCell {
     
     private func setupView() {
         contentView.addSubview(iconBackground)
-        contentView.addSubview(iconImageView)
+        iconBackground.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
         backgroundColor = .clear
         
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            iconBackground.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            iconBackground.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 11),
             iconBackground.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            iconBackground.heightAnchor.constraint(equalToConstant: 48),
-            iconBackground.widthAnchor.constraint(equalToConstant: 48),
             
             iconImageView.centerYAnchor.constraint(equalTo: iconBackground.centerYAnchor),
             iconImageView.centerXAnchor.constraint(equalTo: iconBackground.centerXAnchor),
-            iconImageView.heightAnchor.constraint(equalToConstant: 24),
-            iconImageView.widthAnchor.constraint(equalToConstant: 24),
-       
+            //            iconImageView.heightAnchor.constraint(equalToConstant: 24),
+            //            iconImageView.widthAnchor.constraint(equalToConstant: 24),
+            
             titleLabel.centerYAnchor.constraint(equalTo: iconBackground.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: iconBackground.trailingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
             
             
         ])
@@ -68,6 +70,7 @@ class ProfileSettingsViewCell: UITableViewCell {
     func configure(image: UIImage, title: String) {
         iconImageView.image = image
         titleLabel.text = title
+        
         
     }
 

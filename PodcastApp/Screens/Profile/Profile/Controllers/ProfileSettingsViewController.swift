@@ -29,6 +29,7 @@ class ProfileSettingsViewController: UIViewController {
     var profileImage: UIImageView = {
         let image = UIImageView()
         //image.image =
+        image.frame = CGRect(x: 0, y: 0, width: 48, height: 48)
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.isUserInteractionEnabled = true
@@ -95,7 +96,7 @@ class ProfileSettingsViewController: UIViewController {
             profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             profileImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             profileImage.widthAnchor.constraint(equalToConstant: 48),
-            profileImage.heightAnchor.constraint(equalToConstant: 48),
+            profileImage.heightAnchor.constraint(equalToConstant: 52),
             
             userNameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
             userNameLabel.topAnchor.constraint(equalTo: profileImage.topAnchor),
@@ -110,7 +111,7 @@ class ProfileSettingsViewController: UIViewController {
             logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -23),
             logOutButton.heightAnchor.constraint(equalToConstant: 60),
             
-            tableView.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 56),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 160),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             tableView.bottomAnchor.constraint(equalTo: logOutButton.topAnchor, constant: -12)
@@ -144,7 +145,15 @@ extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSou
         let image = rowsIconSettings[indexPath.row]
         let textInRow = rowsTextSettings[indexPath.row]
         cell.configure(image: image, title: textInRow)
-        cell.accessoryType = .disclosureIndicator
+        let imageForCheckmark = UIImage(systemName: "chevron.right")
+        let checkmark  = UIImageView(frame:CGRect(x:0, y:0, width:(imageForCheckmark?.size.width)!, height:(imageForCheckmark?.size.height)!))
+        checkmark.image = imageForCheckmark
+        checkmark.tintColor = .symbolsLightPurple
+        cell.accessoryView = checkmark
+
+    
+
+        //cell.accessoryType = .detailDisclosureButton
         return cell
     }
     
