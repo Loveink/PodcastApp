@@ -33,13 +33,14 @@
 		57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391D82AC1694300BD7E82 /* CreateAccountViewController.swift */; };
 		57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391DA2AC1695700BD7E82 /* CreateAccountDetailViewController.swift */; };
 		57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391DC2AC1696C00BD7E82 /* LoginViewController.swift */; };
-		57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */; };
+		57B391E22AC16A5600BD7E82 /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391E12AC16A5600BD7E82 /* PagesViewController.swift */; };
 		57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391E92AC16A9100BD7E82 /* ChannelViewController.swift */; };
 		57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */; };
 		57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */; };
 		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
 		57B392092AC16D2800BD7E82 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 57B392082AC16D2800BD7E82 /* Realm */; };
 		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
+		F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */; };
 		F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60A2AC2F028007AF64F /* LoginView.swift */; };
 		F4DBA60D2AC30919007AF64F /* TextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */; };
 		F4DBA60F2AC445A8007AF64F /* CreateAccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */; };
@@ -70,11 +71,12 @@
 		57B391D82AC1694300BD7E82 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		57B391DA2AC1695700BD7E82 /* CreateAccountDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDetailViewController.swift; sourceTree = "<group>"; };
 		57B391DC2AC1696C00BD7E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		57B391E12AC16A5600BD7E82 /* PagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		57B391E92AC16A9100BD7E82 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F4DBA60A2AC2F028007AF64F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldExtension.swift; sourceTree = "<group>"; };
 		F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDetailView.swift; sourceTree = "<group>"; };
@@ -399,7 +401,8 @@
 		57B391DE2AC1697D00BD7E82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */,
+				57B391E12AC16A5600BD7E82 /* PagesViewController.swift */,
+				F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -739,9 +742,10 @@
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
 				F4DBA60F2AC445A8007AF64F /* CreateAccountDetailView.swift in Sources */,
-				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
+				57B391E22AC16A5600BD7E82 /* PagesViewController.swift in Sources */,
 				F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
+				F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

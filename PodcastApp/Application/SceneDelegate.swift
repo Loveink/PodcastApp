@@ -28,8 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //      window.rootViewController = loginVC
 
       //детали создания аккаунта
-//      let createAccountDetailVC = CreateAccountDetailViewController()
-      window.rootViewController = createAccountDetailVC()
+      window.rootViewController = createOnboardingViewController()
+
 
 //      navigationController.navigationBar.isHidden = true
       window.makeKeyAndVisible()
@@ -38,6 +38,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func createAccountDetailVC() -> UINavigationController {
         let createAccountDetailVC = CreateAccountDetailViewController()
         return UINavigationController(rootViewController: createAccountDetailVC)
+    }
+
+    func createOnboardingViewController() -> UINavigationController {
+        let onboardingViewController = PagesViewController()
+        return UINavigationController(rootViewController: onboardingViewController)
     }
 
   func sceneDidDisconnect(_ scene: UIScene) {
