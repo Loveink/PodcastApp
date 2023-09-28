@@ -40,6 +40,10 @@
 		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
 		57B392092AC16D2800BD7E82 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 57B392082AC16D2800BD7E82 /* Realm */; };
 		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
+		A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED22AC57F320013AC4B /* ChannelModel.swift */; };
+		A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */; };
+		A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */; };
+		A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +76,10 @@
 		57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
+		A0594ED22AC57F320013AC4B /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
+		A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteChannelCell.swift; sourceTree = "<group>"; };
+		A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
+		A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +226,7 @@
 				57B391E82AC16A8000BD7E82 /* Models */,
 				57B391E72AC16A7C00BD7E82 /* Views */,
 				57B391E62AC16A7700BD7E82 /* Controllers */,
+				A0594EDA2AC5A0680013AC4B /* Models */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -435,6 +444,7 @@
 			isa = PBXGroup;
 			children = (
 				57B391E92AC16A9100BD7E82 /* ChannelViewController.swift */,
+				A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -449,6 +459,7 @@
 		57B391E82AC16A8000BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -543,6 +554,7 @@
 			isa = PBXGroup;
 			children = (
 				57B391B52ABED9B700BD7E82 /* FavoritesViewController.swift */,
+				A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -557,6 +569,7 @@
 		57B391FC2AC16B5000BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A0594ED22AC57F320013AC4B /* ChannelModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -620,6 +633,13 @@
 			children = (
 			);
 			path = Realm;
+			sourceTree = "<group>";
+		};
+		A0594EDA2AC5A0680013AC4B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -720,9 +740,12 @@
 				57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */,
 				57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
+				A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */,
 				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
 				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
+				A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */,
 				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
+				A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */,
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
 				57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */,
 				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
@@ -730,6 +753,7 @@
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
 				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
+				A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
