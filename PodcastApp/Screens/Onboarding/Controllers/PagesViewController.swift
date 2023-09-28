@@ -19,20 +19,20 @@ class PagesViewController: UIPageViewController {
     let skipButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Skip", for: .normal)
-        $0.addTarget(self, action: #selector(skipTapped(_:)), for: .primaryActionTriggered)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.addTarget(PagesViewController.self, action: #selector(skipTapped(_:)), for: .primaryActionTriggered)
         return $0
     }(UIButton())
 
     let nextButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Next", for: .normal)
-        $0.addTarget(self, action: #selector(nextTapped(_:)), for: .primaryActionTriggered)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.backgroundColor = UIColor.borderGray
+        $0.layer.cornerRadius = 20
+        $0.addTarget(PagesViewController.self, action: #selector(nextTapped(_:)), for: .primaryActionTriggered)
         return $0
     }(UIButton())
-
-    var pageControlBottomAnchor: NSLayoutConstraint?
-//    var skipButtonTopAnchor: NSLayoutConstraint?
-//    var nextButtonTopAnchor: NSLayoutConstraint?
 
     // MARK: - Init
 
@@ -68,7 +68,7 @@ extension PagesViewController {
                                                                                   font: UIFont.plusJakartaSansBold(size: 34),
                                                                                   textColor: UIColor.textDarkgray2,
                                                                                   numberOfLines: 3),
-                                             secondLabel: UILabel.makeLabelForCells(text: "Superapp Superapp Superapp",
+                                             secondLabel: UILabel.makeLabelForCells(text: "SUPERAPP SUPERAPP SUPERAPP",
                                                                                     font: UIFont.plusJakartaSansMedium(size: 15),
                                                                                     textColor: UIColor.textDarkgray2,
                                                                                     numberOfLines: 3))
@@ -78,17 +78,14 @@ extension PagesViewController {
                                                                                   font: UIFont.plusJakartaSansBold(size: 34),
                                                                                   textColor: UIColor.textDarkgray2,
                                                                                   numberOfLines: 3),
-                                             secondLabel: UILabel.makeLabelForCells(text: "Superapp Superapp Superapp",
+                                             secondLabel: UILabel.makeLabelForCells(text: "SUPERAPP SUPERAPP SUPERAPP",
                                                                                     font: UIFont.plusJakartaSansMedium(size: 15),
                                                                                     textColor: UIColor.textDarkgray2,
                                                                                     numberOfLines: 3))
 
-        let page4 = LoginViewController()
-
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
-        pages.append(page4)
 
         setViewControllers([pages[initialPage]], direction: .forward, animated: true, completion: nil)
     }
@@ -106,19 +103,28 @@ extension PagesViewController {
             pageControl.widthAnchor.constraint(equalTo: view.widthAnchor),
             pageControl.heightAnchor.constraint(equalToConstant: 20),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pageControl.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
 
-            skipButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            skipButton.widthAnchor.constraint(equalToConstant: 85),
+            skipButton.heightAnchor.constraint(equalToConstant: 58),
+            skipButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
+            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
 
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: nextButton.trailingAnchor, multiplier: 2)
+            nextButton.widthAnchor.constraint(equalToConstant: 85),
+            nextButton.heightAnchor.constraint(equalToConstant: 58),
+            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60)
         ])
 
-        pageControlBottomAnchor = view.bottomAnchor.constraint(equalToSystemSpacingBelow: pageControl.bottomAnchor, multiplier: 4)
-//        skipButtonTopAnchor = skipButton.topAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: 2)
-//        nextButtonTopAnchor = nextButton.topAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: 2)
+//        pageControlBottomAnchor = view.bottomAnchor.constraint(equalToSystemSpacingBelow: pageControl.bottomAnchor, multiplier: 4)
+//        skipButtonBottomAnchor = skipButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: -20)
+        
+//        nextButtonBottomAnchor = nextButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: -40)
+//        nextButtonTrailingAnchor = nextButton.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: -40)
 
-        pageControlBottomAnchor?.isActive = true
-//        skipButtonTopAnchor?.isActive = true
-//        nextButtonTopAnchor?.isActive = true
+//        nextButtonTrailingAnchor?.isActive = true
+//        skipButtonBottomAnchor?.isActive = true
+//        nextButtonBottomAnchor?.isActive = true
     }
 }
 
@@ -181,7 +187,7 @@ extension PagesViewController: UIPageViewControllerDelegate {
     }
 
     private func showControls() {
-        pageControlBottomAnchor?.constant = -30
+//        pageControlBottomAnchor?.constant = -30
     }
 }
 
