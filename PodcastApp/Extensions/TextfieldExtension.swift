@@ -2,7 +2,7 @@ import UIKit
 
 extension UITextField {
 
-    static func makeTextfield(text: String = "", textColor: UIColor, backgroundColor: UIColor, security: Bool) -> UITextField {
+    static func makeTextfield(text: String = "", textColor: UIColor, backgroundColor: UIColor, security: Bool, securityButton: Bool) -> UITextField {
 
         let field = UITextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: field.frame.size.height))
@@ -18,6 +18,7 @@ extension UITextField {
         field.isSecureTextEntry = security
         field.clearButtonMode = .whileEditing
         field.translatesAutoresizingMaskIntoConstraints = false
+
         return field
     }
 }

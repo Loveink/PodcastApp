@@ -1,22 +1,44 @@
 import Foundation
 import UIKit
 
+// добавить сокрытие клавиатуры по тапу где-нибудь (на кнопку return например)
+
 class CreateAccountDetailView: UIView {
 
     // MARK: - UI Elements
 
     private lazy var headLabel = UILabel.makeLabel(text: "Complete your account", font: UIFont.plusJakartaSansBold(size: 24), textColor: UIColor.black)
 
-    // поля для ввода данных пользователя
-    private lazy var firstnameField = UITextField.makeTextfield(text: "Enter your first name", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false)
+    // поля для textField
+    private lazy var firstnameField = UITextField.makeTextfield(text: "Enter your first name", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false, securityButton: false)
 
-    private lazy var lastnameField = UITextField.makeTextfield(text: "Enter your last name", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false)
+    private lazy var lastnameField = UITextField.makeTextfield(text: "Enter your last name", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false, securityButton: false)
 
-    private lazy var passwordField = UITextField.makeTextfield(text: "••••••", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false)
+    private lazy var passwordField = UITextField.makeTextfield(text: "••••••", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false, securityButton: true)
 
-    private lazy var confirmField = UITextField.makeTextfield(text: "••••••", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false)
+    private lazy var confirmField = UITextField.makeTextfield(text: "••••••", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false, securityButton: true)
 
-    // лейблы к каждому полю
+//    private lazy var passwordField: UITextField = {
+//        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.size.height))
+//        let eyeButton = UIButton(frame: CGRect (x: 0, y: 0, width: 30, height: 30))
+//        eyeButton.setImage(UIImage (named: "eyeOpen"), for: .normal)
+//        eyeButton.setImage(UIImage (named: "eyeClosed"), for: .selected)
+//        eyeButton.addTarget(self, action: #selector(eyeButtonAction), for: .touchUpInside)
+//        $0.translatesAutoresizingMaskIntoConstraints = false
+//        $0.backgroundColor = UIColor.textfieldGray
+//        $0.layer.cornerRadius = 10
+//        $0.layer.borderWidth = 0.5
+//        $0.layer.borderColor = UIColor.borderGray.cgColor
+//        $0.placeholder = "••••••"
+//        $0.leftView = paddingView
+//        $0.rightView = eyeButton
+//        $0.leftViewMode = .always
+//        $0.rightViewMode = .always
+//        $0.isSecureTextEntry = true
+//        return $0
+//    }(UITextField())
+
+    // лейблы к каждому textField
     private lazy var firstnameLabel = UILabel.makeLabel(text: "First Name", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textGrey)
 
     private lazy var lastnameLabel = UILabel.makeLabel(text: "Last Name", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textGrey)
@@ -113,4 +135,9 @@ class CreateAccountDetailView: UIView {
     @objc private func signupButtonAction() {
         print ("sign up button tapped")
     }
+
+//    @objc private func eyeButtonAction() {
+//        passwordField.isSecureTextEntry.toggle()
+//        passwordField.rightView?.isSelected.toggle()
+//    }
 }
