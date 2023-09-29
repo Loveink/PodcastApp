@@ -13,7 +13,7 @@ final class PodcastView: UIView {
 
   var audioPlayer: AVAudioPlayer?
   var currentTrackIndex: Int = 0
-  var musicArray: [String] = []
+  var musicArray: [String?] = []
 
   lazy var songNameLabel: UILabel = {
     let label = UILabel()
@@ -166,57 +166,49 @@ final class PodcastView: UIView {
   }
 
   @objc func playButtonTapped() {
-    if let audioPlayer = audioPlayer, audioPlayer.isPlaying {
-      // Если песня воспроизводится, приостановите её
-      audioPlayer.pause()
-//      playButton.setImage(UIImage(named: "play"), for: .normal)
-    } else {
-      // В противном случае, начните воспроизведение текущей песни (или первой)
-      if audioPlayer == nil {
-        playTrack(at: currentTrackIndex)
+    if let audioPlayer = audioPlayer {
+      if audioPlayer.isPlaying {
+        audioPlayer.pause()
+        playButton.setImage(UIImage(named: "play"), for: .normal)
       } else {
-        audioPlayer?.play()
+        audioPlayer.play()
+        playButton.setImage(UIImage(named: "pause"), for: .normal)
       }
-//      playButton.setImage(UIImage(named: "pause"), for: .normal)
+    } else {
+      // If audioPlayer is nil, you may want to handle this case (e.g., start playback from the beginning).
+      if let audioURLString = musicArray.first, let audioURLStringUnwrapped = audioURLString, let audioURL = URL(string: audioURLStringUnwrapped + ".mp3") {
+          playTrack(withURL: audioURL)
+      }
     }
   }
 
-  func playTrack(at index: Int) {
-//    guard index >= 0, index < musicArray.count else {
-//        return
-//    }
-
-    let audioURLString = "https://download-2.megafono.host/bu22/3cc5aa32-4d45-4b74-b437-a69123848e2d/audio.mp3?source=feed"
-    print("Audio URL String: \(audioURLString)")
-
-    if let audioURL = URL(string: audioURLString) {
-        do {
-//             Попробуйте создать AVAudioPlayer
-            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
-          print("ok")
-            audioPlayer?.delegate = self
-            audioPlayer?.play()
-
-            // Обновите информацию о текущем треке
-            songNameLabel.text = "Название трека" // Замените на соответствующее название
-            performerNameLabel.text = "Daft Punk" // Замените на соответствующего исполнителя
-
-            currentTrackIndex = index
-            print("Audio Player Created and Playing")
-        } catch {
-            print("Error creating audio player: \(error)")
-        }
+  func playTrack(withURL audioURL: URL) {
+    do {
+      audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+      audioPlayer?.delegate = self
+      audioPlayer?.prepareToPlay()
+      audioPlayer?.play()
+      playButton.setImage(UIImage(named: "pause"), for: .normal)
+    } catch {
+      print("Error playing audio: \(error)")
     }
   }
-  }
+}
 
 
 extension PodcastView: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        // Проверьте, закончилась ли песня и переключитесь на следующую (если есть)
-      if flag && currentTrackIndex < musicArray.count - 1 {
-            currentTrackIndex += 1
-            playTrack(at: currentTrackIndex)
+  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+      if flag {
+        // Track finished, you can handle this event here.
+        // For example, move to the next track if available.
+        currentTrackIndex += 1
+        if currentTrackIndex < musicArray.count {
+          if let audioURLString = musicArray[currentTrackIndex], let audioURL = URL(string: audioURLString + ".mp3") {
+            playTrack(withURL: audioURL)
+          }
+        } else {
+          // No more tracks to play, you can handle this case accordingly.
         }
+      }
     }
-}
+  }

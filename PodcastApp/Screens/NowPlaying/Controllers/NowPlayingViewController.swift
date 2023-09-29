@@ -6,13 +6,17 @@
 //
 
 import UIKit
+import AVFoundation
 
 class NowPlayingViewController: UIViewController {
 
   var podcast = PodcastView()
   var galleryViewController = GalleryView()
   var feeds: [Podcast] = []
-  
+
+  var audioPlayer: AVAudioPlayer?
+  var currentTrackIndex: Int = 0
+  var musicArray: [String] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,74 +26,103 @@ class NowPlayingViewController: UIViewController {
   }
 
   func fetch() {
-      let dispatchGroup = DispatchGroup()
-      var xmls = [String]()
+        let dispatchGroup = DispatchGroup()
+        var xmls = [String]()
 
-      // Первый запрос к API
-      dispatchGroup.enter() // Входим в группу
-      let networkService = NetworkService()
-      networkService.fetchData(forPath: "/search/byterm?q=bastiat") { (result: Result<PodcastResponse, APIError>) in
-          defer {
-              dispatchGroup.leave()
+        // Первый запрос к API
+        dispatchGroup.enter() // Входим в группу
+        let networkService = NetworkService()
+        networkService.fetchData(forPath: "/search/byterm?q=batman") { (result: Result<PodcastResponse, APIError>) in
+            defer {
+                dispatchGroup.leave()
+            }
+
+            switch result {
+            case .success(let podcastResponse):
+                self.feeds.append(contentsOf: podcastResponse.feeds)
+
+                for podcast in self.feeds {
+                    let imageURL = podcast.image
+                    self.galleryViewController.images.append(imageURL)
+                    xmls.append(podcast.url)
+                }
+
+                // Запускаем запросы к XML для каждого URL из xmls
+                for xmlURLString in xmls {
+                    guard let xmlURL = URL(string: xmlURLString) else {
+                        continue // Пропустим неверный URL
+                    }
+
+                    dispatchGroup.enter() // Входим в группу
+                    let session = URLSession.shared
+                    let task = session.dataTask(with: xmlURL) { (data, response, error) in
+                        defer {
+                            dispatchGroup.leave() // Покидаем группу после завершения запроса
+                        }
+
+                        if let error = error {
+                            print("Error: \(error.localizedDescription)")
+                            return
+                        }
+
+                        if let data = data {
+                            let xmlParser = XMLParser(data: data)
+                            xmlParser.delegate = self
+
+                            if xmlParser.parse() {
+  //                              print("XML parsing complete")
+                            } else {
+                                print("XML parsing failed")
+                            }
+                        }
+                    }
+                    task.resume()
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+
+        // Ожидаем завершения всех запросов
+        dispatchGroup.notify(queue: .main) {
+            // Этот код выполнится после завершения всех запросов
+            self.galleryViewController.collectionView.reloadData()
+            if let audioURLString = self.musicArray.first,
+               let audioURL = URL(string: audioURLString + ".mp3") {
+                self.playAudio(withURL: audioURL)
+            } else {
+                print("Первый аудиофайл в массиве не найден.")
+            }
+        }
+    }
+
+
+  func canPlayAudioFile(withURL audioURL: URL) {
+      let session = URLSession.shared
+      let task = session.dataTask(with: audioURL) { [weak self] (data, response, error) in
+          if let error = error {
+              print("Error loading audio data: \(error.localizedDescription)")
+              return
           }
 
-          switch result {
-          case .success(let podcastResponse):
-              self.feeds.append(contentsOf: podcastResponse.feeds)
-
-              for podcast in self.feeds {
-                  let imageURL = podcast.image
-                  self.galleryViewController.images.append(imageURL)
-//                  xmls.append(podcast.url)
+          if let data = data {
+              do {
+                  self?.audioPlayer = try AVAudioPlayer(data: data)
+                  self?.audioPlayer?.delegate = self
+                  self?.audioPlayer?.play()
+              } catch {
+                  print("Error creating audio player: \(error)")
               }
-
-              // Запускаем запросы к XML для каждого URL из xmls
-              for xmlURLString in xmls {
-                  guard let xmlURL = URL(string: xmlURLString) else {
-                      continue // Пропустим неверный URL
-                  }
-
-                  dispatchGroup.enter() // Входим в группу
-                  let session = URLSession.shared
-                  let task = session.dataTask(with: xmlURL) { (data, response, error) in
-                      defer {
-                          dispatchGroup.leave() // Покидаем группу после завершения запроса
-                      }
-
-                      if let error = error {
-                          print("Error: \(error.localizedDescription)")
-                          return
-                      }
-
-                      if let data = data {
-                          let xmlParser = XMLParser(data: data)
-                          xmlParser.delegate = self
-
-                          if xmlParser.parse() {
-//                              print("XML parsing complete")
-                          } else {
-                              print("XML parsing failed")
-                          }
-                      }
-                  }
-
-                  task.resume()
-              }
-          case .failure(let error):
-              print("Error: \(error)")
           }
       }
-
-      // Ожидаем завершения всех запросов
-      dispatchGroup.notify(queue: .main) {
-          // Этот код выполнится после завершения всех запросов
-          self.galleryViewController.collectionView.reloadData()
-      }
+      task.resume()
   }
 
-  
-  func setupConstraints() {
+  func playAudio(withURL audioURL: URL) {
+      canPlayAudioFile(withURL: audioURL)
+  }
 
+  func setupConstraints() {
     galleryViewController.translatesAutoresizingMaskIntoConstraints = false
     podcast.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(galleryViewController)
@@ -112,8 +145,13 @@ class NowPlayingViewController: UIViewController {
 extension NowPlayingViewController: XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         if elementName == "enclosure", let enclosureURL = attributeDict["url"] {
-//            print("Enclosure URL: \(enclosureURL)")
-          podcast.musicArray.append(enclosureURL)
+          musicArray.append(enclosureURL)
         }
     }
+}
+
+extension NowPlayingViewController: AVAudioPlayerDelegate {
+  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    // Ваш код обработки завершения воспроизведения аудио
+  }
 }
