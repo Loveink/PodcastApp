@@ -26,7 +26,7 @@ class CustomTabBar: UITabBarController, UITabBarControllerDelegate {
     let homepage = HomeViewController()
     homepage.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Home")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "HomeFill")?.withRenderingMode(.alwaysOriginal))
 
-    let search = NowPlayingViewController()
+    let search = SearchViewController()
     search.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Search")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "SearchFill")?.withRenderingMode(.alwaysOriginal))
 
     let favorites = FavoritesViewController()
