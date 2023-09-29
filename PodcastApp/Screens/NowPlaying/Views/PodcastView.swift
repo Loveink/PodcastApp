@@ -6,8 +6,14 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 final class PodcastView: UIView {
+
+  var audioPlayer: AVAudioPlayer?
+  var currentTrackIndex: Int = 0
+  var musicArray: [String] = []
 
   lazy var songNameLabel: UILabel = {
     let label = UILabel()
@@ -69,13 +75,13 @@ final class PodcastView: UIView {
     
   }()
   
-      lazy var shuffleButton: UIButton = {
-          let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "shuffle 1"), for: .normal)
-          button.tintColor = .gray
-        button.translatesAutoresizingMaskIntoConstraints = false
-          return button
-      }()
+  lazy var shuffleButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setImage(UIImage(named: "shuffle 1"), for: .normal)
+    button.tintColor = .gray
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
+  }()
   
   lazy var previousTrackButton: UIButton = {
     let button = UIButton(type: .system)
@@ -86,9 +92,10 @@ final class PodcastView: UIView {
   
   lazy var playButton: UIButton = {
     let button = UIButton(type: .custom)
-//    button.tintColor = .blue
+    //    button.tintColor = .blue
     button.setImage(UIImage(named: "play"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
+    button.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
     return button
   }()
   
@@ -108,14 +115,14 @@ final class PodcastView: UIView {
   }()
 
   override init(frame: CGRect) {
-          super.init(frame: frame)
-          setupViews()
-      }
+    super.init(frame: frame)
+    setupViews()
+  }
 
-      required init?(coder aDecoder: NSCoder) {
-          super.init(coder: aDecoder)
-          setupViews()
-      }
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    setupViews()
+  }
 
   private func setupViews() {
     addSubview(songNameLabel)
@@ -157,5 +164,59 @@ final class PodcastView: UIView {
 
     ])
   }
-}
 
+  @objc func playButtonTapped() {
+    if let audioPlayer = audioPlayer, audioPlayer.isPlaying {
+      // Если песня воспроизводится, приостановите её
+      audioPlayer.pause()
+//      playButton.setImage(UIImage(named: "play"), for: .normal)
+    } else {
+      // В противном случае, начните воспроизведение текущей песни (или первой)
+      if audioPlayer == nil {
+        playTrack(at: currentTrackIndex)
+      } else {
+        audioPlayer?.play()
+      }
+//      playButton.setImage(UIImage(named: "pause"), for: .normal)
+    }
+  }
+
+  func playTrack(at index: Int) {
+//    guard index >= 0, index < musicArray.count else {
+//        return
+//    }
+
+    let audioURLString = "https://download-2.megafono.host/bu22/3cc5aa32-4d45-4b74-b437-a69123848e2d/audio.mp3?source=feed"
+    print("Audio URL String: \(audioURLString)")
+
+    if let audioURL = URL(string: audioURLString) {
+        do {
+//             Попробуйте создать AVAudioPlayer
+            audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
+          print("ok")
+            audioPlayer?.delegate = self
+            audioPlayer?.play()
+
+            // Обновите информацию о текущем треке
+            songNameLabel.text = "Название трека" // Замените на соответствующее название
+            performerNameLabel.text = "Daft Punk" // Замените на соответствующего исполнителя
+
+            currentTrackIndex = index
+            print("Audio Player Created and Playing")
+        } catch {
+            print("Error creating audio player: \(error)")
+        }
+    }
+  }
+  }
+
+
+extension PodcastView: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        // Проверьте, закончилась ли песня и переключитесь на следующую (если есть)
+      if flag && currentTrackIndex < musicArray.count - 1 {
+            currentTrackIndex += 1
+            playTrack(at: currentTrackIndex)
+        }
+    }
+}

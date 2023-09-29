@@ -10,15 +10,13 @@ import Foundation
 struct PodcastResponse: Decodable {
     let status: String
     let feeds: [Podcast]
-    let count: Int
-    let query: String
     let description: String
 }
 
 struct Podcast: Decodable {
     let id: Int
     let title: String
-//    let url: String
+    let url: String
 //    let originalUrl: String
 //    let link: String
     let description: String
@@ -34,7 +32,7 @@ struct Podcast: Decodable {
 //    let lastGoodHttpStatusTime: Int
 //    let lastHttpStatus: Int
 //    let contentType: String
-//    let itunesId: Int?
+    let itunesId: Int?
 //    let generator: String
 //    let language: String
 //    let type: Int

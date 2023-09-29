@@ -67,12 +67,11 @@ extension GalleryView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
 
       let imageUrlString = images[indexPath.item]
       if let imageUrl = URL(string: imageUrlString) {
-          // Используйте Kingfisher для загрузки и кэширования изображения
+
           cell.imageView.kf.setImage(with: imageUrl) { result in
               switch result {
-              case .success(let value):
-                  // Изображение успешно загружено и отображено
-                  print("Image downloaded: \(value.source.url?.absoluteString ?? "")")
+              case .success(_): break
+//                  print("Image downloaded: \(value.source.url?.absoluteString ?? "")")
               case .failure(let error):
                   // Произошла ошибка при загрузке изображения
                   print("Error downloading image: \(error.localizedDescription)")
@@ -83,7 +82,6 @@ extension GalleryView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
       return cell
   }
 
-  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height

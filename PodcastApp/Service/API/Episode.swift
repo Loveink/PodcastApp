@@ -25,7 +25,7 @@ struct PodcastItem: Codable {
     let datePublished: Int
     let datePublishedPretty: String
     let dateCrawled: Int
-    let enclosureUrl: String
+    let enclosureUrl: String?
     let enclosureType: String
     let enclosureLength: Int
     let duration: String?
