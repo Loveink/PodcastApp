@@ -10,13 +10,13 @@ import Foundation
 struct PodcastEpisode: Codable {
     let status: String
     let liveItems: [String]
-    let items: [PodcastItem]
+    let items: [Item]
     let count: Int
     let query: String
     let description: String
 }
 
-struct PodcastItem: Codable {
+struct Item: Codable {
     let id: Int
     let title: String
     let link: String

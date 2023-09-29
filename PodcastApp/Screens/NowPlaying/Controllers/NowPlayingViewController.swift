@@ -12,7 +12,7 @@ class NowPlayingViewController: UIViewController {
 
   var podcast = PodcastView()
   var galleryViewController = GalleryView()
-  var feeds: [Podcast] = []
+  var feeds: [Feed] = []
 
   var audioPlayer: AVAudioPlayer?
   var currentTrackIndex: Int = 0
@@ -32,7 +32,7 @@ class NowPlayingViewController: UIViewController {
         // Первый запрос к API
         dispatchGroup.enter() // Входим в группу
         let networkService = NetworkService()
-        networkService.fetchData(forPath: "/search/byterm?q=batman") { (result: Result<PodcastResponse, APIError>) in
+        networkService.fetchData(forPath: "/search/byterm?q=man") { (result: Result<PodcastSearch, APIError>) in
             defer {
                 dispatchGroup.leave()
             }
