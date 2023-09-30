@@ -15,17 +15,12 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
 
       if let vc = self.vc {
           vc.audioURLHandler = { [weak self] receivedAudioURL in
-              // Вызывается при получении URL из parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)
               if receivedAudioURL == audioURL {
-                  // Если это тот же самый URL, то остановите аудиоплеер
                   self?.audioPlayer?.stop()
               } else {
-                  // Если URL различается, передайте его в FetchFunc для воспроизведения
                 vc.getMusic(audioURL: receivedAudioURL)
               }
           }
-
-          // Вызовите audioURLHandler с переданным audioURL
           vc.audioURLHandler?(audioURL)
       }
   }
