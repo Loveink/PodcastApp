@@ -71,7 +71,7 @@ extension GalleryView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
           cell.imageView.kf.setImage(with: imageUrl) { result in
               switch result {
               case .success(_): break
-//                  print("Image downloaded: \(value.source.url?.absoluteString ?? "")")
+                  print("Image downloaded: \(imageUrl)")
               case .failure(let error):
                   // Произошла ошибка при загрузке изображения
                   print("Error downloading image: \(error.localizedDescription)")
