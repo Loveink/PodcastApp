@@ -10,33 +10,25 @@ import AVFoundation
 
 class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
   func didSelectRecipe(_ audioURL: String) {
-        // Остановите предыдущий аудиоплеер, если он существует
-        audioPlayer?.stop()
+      // Остановите предыдущий аудиоплеер, если он существует
+      audioPlayer?.stop()
 
-        // Определите индекс выбранной ячейки
-        if let indexPath = selectedIndexPath {
-            // Получите URL аудиофайла для выбранной ячейки
-            let audioURLString = categoryCollectionView.recipes[indexPath.row].audioURL
+      if let vc = self.vc {
+          vc.audioURLHandler = { [weak self] receivedAudioURL in
+              // Вызывается при получении URL из parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)
+              if receivedAudioURL == audioURL {
+                  // Если это тот же самый URL, то остановите аудиоплеер
+                  self?.audioPlayer?.stop()
+              } else {
+                  // Если URL различается, передайте его в FetchFunc для воспроизведения
+                vc.getMusic(audioURL: receivedAudioURL)
+              }
+          }
 
-            // Проверьте, что URL совпадает с переданным URL
-            if audioURLString == audioURL {
-                // Если это тот же самый URL, то остановите аудиоплеер
-                audioPlayer?.stop()
-                selectedIndexPath = nil
-            } else {
-                // Если URL различается, создайте новый аудиоплеер и проиграйте музыку
-                if let audioURL = URL(string: audioURL) {
-                    do {
-                        audioPlayer = try AVAudioPlayer(contentsOf: audioURL)
-                        audioPlayer?.play()
-                        selectedIndexPath = indexPath
-                    } catch {
-                        print("Error creating audio player: \(error)")
-                    }
-                }
-            }
-        }
-    }
+          // Вызовите audioURLHandler с переданным audioURL
+          vc.audioURLHandler?(audioURL)
+      }
+  }
 
 
   var audioPlayer: AVAudioPlayer?
@@ -56,15 +48,7 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
     dispatchGroup.notify(queue: .main) {
       print("All tasks are completed.")
     }
-    if let vc = self.vc {
-      print("start")
-      vc.audioURLHandler = { [weak self] audioURL in
-        // Вызывается при получении URL из parser(_:didStartElement:namespaceURI:qualifiedName:attributes:)
-        vc.getMusic(audioURL: audioURL)
-      }
-
       categoryCollectionView.delegate = self
-    }
   }
 
   private func setupCollectionView() {
@@ -95,7 +79,7 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
                   self.feeds.append(contentsOf: podcastResponse.feeds)
                   var xmls = [String]()
 
-                for (index, podcast) in self.feeds.enumerated() {
+                for podcast in self.feeds {
                     let imageURL = podcast.image
                     let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL, audioURL: podcast.url)
                     self.categoryCollectionView.recipes.append(podcastItem)
