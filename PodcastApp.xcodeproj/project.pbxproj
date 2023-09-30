@@ -11,9 +11,7 @@
 		5769D0BF2AC76F8400D93A56 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0BC2AC76F8400D93A56 /* Episode.swift */; };
 		5769D0C02AC76F8400D93A56 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0BD2AC76F8400D93A56 /* NetworkManager.swift */; };
 		5769D0C22AC76FA000D93A56 /* PodcastItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0C12AC76FA000D93A56 /* PodcastItem.swift */; };
-		5769D0C82AC76FA700D93A56 /* CategoriesNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0C32AC76FA700D93A56 /* CategoriesNames.swift */; };
 		5769D0C92AC76FA700D93A56 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0C52AC76FA700D93A56 /* CategoryCell.swift */; };
-		5769D0CA2AC76FA700D93A56 /* CategoryNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0C62AC76FA700D93A56 /* CategoryNameCell.swift */; };
 		5769D0CB2AC76FA700D93A56 /* CategoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0C72AC76FA700D93A56 /* CategoriesCollectionView.swift */; };
 		5769D0CE2AC76FC700D93A56 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0CC2AC76FC700D93A56 /* ImageCollectionViewCell.swift */; };
 		5769D0CF2AC76FC700D93A56 /* PodcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0CD2AC76FC700D93A56 /* PodcastView.swift */; };
@@ -68,9 +66,7 @@
 		5769D0BC2AC76F8400D93A56 /* Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		5769D0BD2AC76F8400D93A56 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5769D0C12AC76FA000D93A56 /* PodcastItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastItem.swift; sourceTree = "<group>"; };
-		5769D0C32AC76FA700D93A56 /* CategoriesNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesNames.swift; sourceTree = "<group>"; };
 		5769D0C52AC76FA700D93A56 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		5769D0C62AC76FA700D93A56 /* CategoryNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryNameCell.swift; sourceTree = "<group>"; };
 		5769D0C72AC76FA700D93A56 /* CategoriesCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionView.swift; sourceTree = "<group>"; };
 		5769D0CC2AC76FC700D93A56 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		5769D0CD2AC76FC700D93A56 /* PodcastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
@@ -146,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				5769D0C52AC76FA700D93A56 /* CategoryCell.swift */,
-				5769D0C62AC76FA700D93A56 /* CategoryNameCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -485,7 +480,6 @@
 			isa = PBXGroup;
 			children = (
 				5769D0C72AC76FA700D93A56 /* CategoriesCollectionView.swift */,
-				5769D0C32AC76FA700D93A56 /* CategoriesNames.swift */,
 				5769D0C42AC76FA700D93A56 /* Cells */,
 			);
 			path = Views;
@@ -820,7 +814,6 @@
 				5769D0C02AC76F8400D93A56 /* NetworkManager.swift in Sources */,
 				E75FA2E52AC1BE1A005C947C /* CustomSearchBar.swift in Sources */,
 				A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */,
-				5769D0CA2AC76FA700D93A56 /* CategoryNameCell.swift in Sources */,
 				5769D0BF2AC76F8400D93A56 /* Episode.swift in Sources */,
 				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
 				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
@@ -836,7 +829,6 @@
 				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
-				5769D0C82AC76FA700D93A56 /* CategoriesNames.swift in Sources */,
 				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 				5769D0D12AC76FCD00D93A56 /* GalleryView.swift in Sources */,

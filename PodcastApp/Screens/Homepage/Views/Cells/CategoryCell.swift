@@ -14,6 +14,8 @@ class CategoryCell: UICollectionViewCell {
   var liked: Bool = false
   var currentRecipe: PodcastItemCell?
   var audioURL: String?
+   var audioURLs: [String] = []
+
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -48,13 +50,14 @@ class CategoryCell: UICollectionViewCell {
   ]
 
   public func configureCell(_ data: PodcastItemCell) {
-    DispatchQueue.main.async {
-      self.titleLabel.text = data.title
-      self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
-      self.currentRecipe = data
-      self.audioURL = data.audioURL
-    }
+      DispatchQueue.main.async {
+          self.titleLabel.text = data.title
+          self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
+          self.currentRecipe = data
+        self.audioURLs = [data.audioURL] // Сохраняем только первый URL
+      }
   }
+
 
   private func setupViews() {
 
@@ -67,8 +70,7 @@ class CategoryCell: UICollectionViewCell {
   private func setupConstraints() {
     NSLayoutConstraint.activate([
 
-      dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-      dishImageView.centerYAnchor.constraint(equalTo: contentView.topAnchor),
+      dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
       dishImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
       dishImageView.heightAnchor.constraint(equalToConstant: 250),
       dishImageView.widthAnchor.constraint(equalToConstant: 300),
