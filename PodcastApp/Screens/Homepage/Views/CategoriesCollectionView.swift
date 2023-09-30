@@ -21,6 +21,8 @@ class CategoriesCollectionView: UIView {
     }
   }
 
+  var selectedCell: CategoryCell?
+
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -75,14 +77,16 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      if recipes.count > 0 {
-          let selectedRecipe = recipes[indexPath.item]
-          delegate?.didSelectRecipe(selectedRecipe)
+    if recipes.count > 0 {
+      if let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCell,
+         let audioURLString = selectedCell.audioURL {
+        delegate?.didSelectRecipe(audioURLString)
       }
+    }
   }
 }
 
 //MARK: - Protocols
 protocol CategoriesCollectionViewDelegate: AnyObject {
-    func didSelectRecipe(_ recipe: PodcastItemCell)
+    func didSelectRecipe(_ audioURL: String)
 }

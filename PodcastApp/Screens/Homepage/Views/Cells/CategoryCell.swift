@@ -13,7 +13,7 @@ class CategoryCell: UICollectionViewCell {
   static let identifier = "CategoryCell"
   var liked: Bool = false
   var currentRecipe: PodcastItemCell?
-//  let bookmarksManager = BookmarksManager.shared
+  var audioURL: String?
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -52,6 +52,7 @@ class CategoryCell: UICollectionViewCell {
       self.titleLabel.text = data.title
       self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
       self.currentRecipe = data
+      self.audioURL = data.audioURL
     }
   }
 
