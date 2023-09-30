@@ -44,7 +44,7 @@ class CustomTabBar: UITabBarController, UITabBarControllerDelegate {
     let bezierPath = UIBezierPath(
       roundedRect: CGRect(
         x: positionOnX,
-        y: tabBar.bounds.minY - positionOnY,
+        y: tabBar.bounds.minY + positionOnY - 7,
         width: width,
         height: height
       ),
