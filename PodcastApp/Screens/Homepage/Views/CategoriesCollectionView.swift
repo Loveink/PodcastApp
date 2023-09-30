@@ -10,10 +10,9 @@ import UIKit
 class CategoriesCollectionView: UIView {
   
   var collectionView: UICollectionView!
-
   weak var delegate: CategoriesCollectionViewDelegate?
   
-  var recipes: [PodcastItemCell] = [] {
+  var podcast: [PodcastItemCell] = [] {
     didSet {
       DispatchQueue.main.async {
         self.collectionView.reloadData()
@@ -25,7 +24,6 @@ class CategoriesCollectionView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     configureCollection()
-    addSubview(collectionView)
     setupConstraints()
   }
   
@@ -46,6 +44,7 @@ class CategoriesCollectionView: UIView {
   }
   
   private func setupConstraints() {
+    addSubview(collectionView)
     NSLayoutConstraint.activate([
       collectionView.topAnchor.constraint(equalTo: topAnchor),
       collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -59,14 +58,14 @@ class CategoriesCollectionView: UIView {
 extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return recipes.count
+    return podcast.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
       return UICollectionViewCell()
     }
-    cell.configureCell(recipes[indexPath.row])
+    cell.configureCell(podcast[indexPath.row])
     return cell
   }
   
@@ -75,14 +74,14 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      if recipes.count > 0 {
-          let selectedRecipe = recipes[indexPath.item]
-          delegate?.didSelectRecipe(selectedRecipe)
+      if podcast.count > 0 {
+          let selectedPodcast = podcast[indexPath.item]
+          delegate?.didSelectPodcast(selectedPodcast)
       }
   }
 }
 
 //MARK: - Protocols
 protocol CategoriesCollectionViewDelegate: AnyObject {
-    func didSelectRecipe(_ recipe: PodcastItemCell)
+    func didSelectPodcast(_ recipe: PodcastItemCell)
 }

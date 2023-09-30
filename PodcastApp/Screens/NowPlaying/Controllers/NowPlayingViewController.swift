@@ -12,7 +12,7 @@ class NowPlayingViewController: UIViewController {
 
   var podcast = PodcastView()
   var galleryViewController = GalleryView()
-  var feeds: [Feed] = []
+  var feeds: [EpisodeItem] = []
 
   var audioPlayer: AVAudioPlayer?
   var currentTrackIndex: Int = 0
@@ -27,56 +27,23 @@ class NowPlayingViewController: UIViewController {
 
   func fetch() {
         let dispatchGroup = DispatchGroup()
-        var xmls = [String]()
 
-        // Первый запрос к API
         dispatchGroup.enter() // Входим в группу
         let networkService = NetworkService()
-        networkService.fetchData(forPath: "/search/byterm?q=man") { (result: Result<PodcastSearch, APIError>) in
+        networkService.fetchData(forPath: "/episodes/byfeedid?id=656983") { (result: Result<EpisodeFeed, APIError>) in
             defer {
                 dispatchGroup.leave()
             }
 
             switch result {
             case .success(let podcastResponse):
-                self.feeds.append(contentsOf: podcastResponse.feeds)
+              self.feeds.append(contentsOf: podcastResponse.items)
 
                 for podcast in self.feeds {
-                    let imageURL = podcast.image
+                    let imageURL = podcast.feedImage
                     self.galleryViewController.images.append(imageURL)
-                    xmls.append(podcast.url)
-                }
-
-                // Запускаем запросы к XML для каждого URL из xmls
-                for xmlURLString in xmls {
-                    guard let xmlURL = URL(string: xmlURLString) else {
-                        continue // Пропустим неверный URL
-                    }
-
-                    dispatchGroup.enter() // Входим в группу
-                    let session = URLSession.shared
-                    let task = session.dataTask(with: xmlURL) { (data, response, error) in
-                        defer {
-                            dispatchGroup.leave() // Покидаем группу после завершения запроса
-                        }
-
-                        if let error = error {
-                            print("Error: \(error.localizedDescription)")
-                            return
-                        }
-
-                        if let data = data {
-                            let xmlParser = XMLParser(data: data)
-                            xmlParser.delegate = self
-
-                            if xmlParser.parse() {
-  //                              print("XML parsing complete")
-                            } else {
-                                print("XML parsing failed")
-                            }
-                        }
-                    }
-                    task.resume()
+                    self.musicArray.append(podcast.enclosureUrl)
+                  print(self.musicArray)
                 }
             case .failure(let error):
                 print("Error: \(error)")
@@ -87,8 +54,9 @@ class NowPlayingViewController: UIViewController {
         dispatchGroup.notify(queue: .main) {
             // Этот код выполнится после завершения всех запросов
             self.galleryViewController.collectionView.reloadData()
+          print("reload")
             if let audioURLString = self.musicArray.first,
-               let audioURL = URL(string: audioURLString + ".mp3") {
+               let audioURL = URL(string: audioURLString) {
                 self.playAudio(withURL: audioURL)
             } else {
                 print("Первый аудиофайл в массиве не найден.")
@@ -140,14 +108,6 @@ class NowPlayingViewController: UIViewController {
       podcast.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
   }
-}
-
-extension NowPlayingViewController: XMLParserDelegate {
-    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        if elementName == "enclosure", let enclosureURL = attributeDict["url"] {
-          musicArray.append(enclosureURL)
-        }
-    }
 }
 
 extension NowPlayingViewController: AVAudioPlayerDelegate {

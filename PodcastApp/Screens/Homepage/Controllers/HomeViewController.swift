@@ -27,23 +27,18 @@ class HomeViewController: UIViewController {
     NSLayoutConstraint.activate([
       categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
       categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-      categoryCollectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+      categoryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       categoryCollectionView.heightAnchor.constraint(equalToConstant: 300),
     ])
   }
 
   func fetch() {
       let dispatchGroup = DispatchGroup()
-    let xmls = [String]()
+      let xmls = [String]()
 
-      // Первый запрос к API
-      dispatchGroup.enter() // Входим в группу
-
+      dispatchGroup.enter()
       fetchPodcasts(dispatchGroup: dispatchGroup)
-
-      // Ожидаем завершения всех запросов
       dispatchGroup.notify(queue: .main) {
-          // Этот код выполнится после завершения всех запросов
           self.handlePodcastFetchCompletion(xmls)
       }
   }
@@ -65,7 +60,7 @@ class HomeViewController: UIViewController {
               for podcast in self.feeds {
                   let imageURL = podcast.image
                   let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL)
-                  self.categoryCollectionView.recipes.append(podcastItem)
+                  self.categoryCollectionView.podcast.append(podcastItem)
                   xmls.append(podcast.url)
               }
 

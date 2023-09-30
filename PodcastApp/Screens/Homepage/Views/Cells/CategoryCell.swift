@@ -12,7 +12,7 @@ class CategoryCell: UICollectionViewCell {
 
   static let identifier = "CategoryCell"
   var liked: Bool = false
-  var currentRecipe: PodcastItemCell?
+  var currentItem: PodcastItemCell?
 //  let bookmarksManager = BookmarksManager.shared
 
   override init(frame: CGRect) {
@@ -28,7 +28,7 @@ class CategoryCell: UICollectionViewCell {
   //MARK: - Outlets
 
 
-  private let dishImageView: UIImageView = {
+  private let podcastImageView: UIImageView = {
       let imageView = UIImageView()
       imageView.contentMode = .scaleAspectFit
       imageView.clipsToBounds = true
@@ -50,14 +50,14 @@ class CategoryCell: UICollectionViewCell {
   public func configureCell(_ data: PodcastItemCell) {
     DispatchQueue.main.async {
       self.titleLabel.text = data.title
-      self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
-      self.currentRecipe = data
+      self.podcastImageView.kf.setImage(with: URL(string: data.image), options: self.options)
+      self.currentItem = data
     }
   }
 
   private func setupViews() {
 
-    contentView.addSubview(dishImageView)
+    contentView.addSubview(podcastImageView)
     contentView.addSubview(titleLabel)
 
   }
@@ -66,14 +66,13 @@ class CategoryCell: UICollectionViewCell {
   private func setupConstraints() {
     NSLayoutConstraint.activate([
 
-      dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-      dishImageView.centerYAnchor.constraint(equalTo: contentView.topAnchor),
-      dishImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      dishImageView.heightAnchor.constraint(equalToConstant: 250),
-      dishImageView.widthAnchor.constraint(equalToConstant: 300),
+      podcastImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+      podcastImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      podcastImageView.heightAnchor.constraint(equalToConstant: 250),
+      podcastImageView.widthAnchor.constraint(equalToConstant: 300),
 
       titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor),
+      titleLabel.topAnchor.constraint(equalTo: podcastImageView.bottomAnchor),
 
     ])
   }

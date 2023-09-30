@@ -134,6 +134,8 @@
 		5769D0BA2AC76F8400D93A56 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5769D0BC2AC76F8400D93A56 /* Episode.swift */,
+				5769D0BB2AC76F8400D93A56 /* Podcast.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,10 +217,8 @@
 		57B391912ABED03800BD7E82 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				5769D0BC2AC76F8400D93A56 /* Episode.swift */,
 				5769D0BA2AC76F8400D93A56 /* Models */,
 				5769D0BD2AC76F8400D93A56 /* NetworkManager.swift */,
-				5769D0BB2AC76F8400D93A56 /* Podcast.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
