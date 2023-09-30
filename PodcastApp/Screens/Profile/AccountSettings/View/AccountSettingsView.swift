@@ -9,6 +9,8 @@ import UIKit
 
 class AccountSettingsView: UIView {
     
+    //MARK: - UI Components
+    
     private lazy var firstNameField = UITextField.makeBlueTextField(text: "")
     
     private lazy var lastNameField = UITextField.makeBlueTextField(text: "")
@@ -57,6 +59,8 @@ class AccountSettingsView: UIView {
         return button
     }()
     
+    //MARK: - Unit
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
@@ -69,6 +73,8 @@ class AccountSettingsView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - Layout
     
     private func addSubviews() {
         
@@ -136,6 +142,7 @@ class AccountSettingsView: UIView {
         ])
     }
     
+    //MARK: - Methods
     
     @objc func handleDatePicker(sender: UIDatePicker) {
         let dateFormatter = DateFormatter()

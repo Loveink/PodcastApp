@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileSettingsViewController: UIViewController {
     
-    //MARK: - Variables
+    //MARK: - Properties
     private let rowsIconSettings: [UIImage] = [
         UIImage(systemName: "person")!,
         UIImage(systemName: "checkmark.shield")!,
@@ -23,7 +23,9 @@ class ProfileSettingsViewController: UIViewController {
     ]
     
     //MARK: - UI Components
+    
     private var userNameLabel = UILabel.makeLabelForCells(text: "User Name", font: .manropeBold(size: 16), textColor: .textDarkPurple, numberOfLines: 0)
+    
     private var userStatus = UILabel.makeLabelForCells(text: "love and chill", font: .manropeRegular(size: 14), textColor: .textDarkPurple, numberOfLines: 0)
     
     private var profileImage: UIImageView = {
@@ -73,7 +75,6 @@ class ProfileSettingsViewController: UIViewController {
         view.backgroundColor = .white
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 70
         addSubviews()
         setupConstraints()
         
@@ -81,7 +82,7 @@ class ProfileSettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    //MARK: - Setup UI
+    //MARK: - Layout
     
     private func addSubviews() {
         view.addSubview(profileImage)
@@ -121,12 +122,26 @@ class ProfileSettingsViewController: UIViewController {
         ])
     }
     
+    //MARK: - Methods
+    
+    private func showProfileVC() {
+        let vc = AccountSettingsViewController()
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
+
+//MARK: - Extensions
 
 extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 0 {
+            self.showProfileVC()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -134,8 +149,8 @@ extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-           return 70
-       }
+        return 70
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ProfileSettingsViewCell.identifier, for: indexPath) as? ProfileSettingsViewCell else {
@@ -150,17 +165,11 @@ extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSou
         checkmark.image = imageForCheckmark
         checkmark.tintColor = .symbolsPurple
         cell.accessoryView = checkmark
-
-    
-
+        
+        
+        
         //cell.accessoryType = .detailDisclosureButton
         return cell
     }
-    
-    private func showAccountSettingsVC() {
-            let accountSettingsVC = AccountSettingsViewController()
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(accountSettingsVC, animated: true)
-            }
-        }
+
 }

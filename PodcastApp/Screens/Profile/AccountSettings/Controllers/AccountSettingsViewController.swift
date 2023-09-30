@@ -9,7 +9,9 @@ import UIKit
 
 class AccountSettingsViewController: UIViewController {
     
-    private lazy var accountSettintsView = AccountSettingsView()
+    //MARK: - UI Components
+    
+    private lazy var accountSettingsView = AccountSettingsView()
     
     private lazy var titleLabel = UILabel.makeLabel(text: "Profile", font: UIFont.plusJakartaSansBold(size: 18), textColor: UIColor.black)
     
@@ -19,26 +21,7 @@ class AccountSettingsViewController: UIViewController {
         return button
     }()
     
-    private var profileImage: UIImageView = {
-        let image = UIImageView()
-        //image.image =
-        //        image.frame = CGRect(x: 0, y: 0, width: 48, height: 48)
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.isUserInteractionEnabled = true
-        image.backgroundColor = .pinkBackground
-        image.layer.cornerRadius = 50
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    private let editButton: UIButton = {
-        let button = UIButton()
-        let image = UIImage(systemName: "pencil.circle.fill")
-        image?.withTintColor(.bluePlayer)
-        button.setImage(image, for: .normal)
-        return button
-    }()
+    private lazy var accountImageView = AccountImageView()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -46,6 +29,7 @@ class AccountSettingsViewController: UIViewController {
         return scrollView
     }()
     
+    //MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,24 +42,21 @@ class AccountSettingsViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        
-        navigationController?.navigationBar.titleTextAttributes = [
-            .foregroundColor: UIColor.black,
-            .font: UIFont.manropeRegular(size: 18) ?? UIFont.systemFont(ofSize: 18)
-        ]
-        
+    
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = UIColor.black
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.largeTitleDisplayMode = .never
-        navigationItem.title = "Profile"
+        navigationItem.titleView = titleLabel
+        
     }
     
+    //MARK: - Layout
+    
     private func addSubviews() {
-        view.addSubview(profileImage)
-        profileImage.addSubview(editButton)
+        view.addSubview(accountImageView)
         view.addSubview(scrollView)
         
-        scrollView.addSubview(accountSettintsView)
+        scrollView.addSubview(accountSettingsView)
     }
     
     private func setupConstraints() {
@@ -84,31 +65,28 @@ class AccountSettingsViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            profileImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 145),
-            profileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImage.widthAnchor.constraint(equalToConstant: 100),
-            profileImage.heightAnchor.constraint(equalToConstant: 100),
-            
-            editButton.bottomAnchor.constraint(equalTo: profileImage.bottomAnchor),
-            editButton.trailingAnchor.constraint(equalTo: profileImage.trailingAnchor),
-            editButton.widthAnchor.constraint(equalToConstant: 32),
-            editButton.heightAnchor.constraint(equalToConstant: 32),
+            accountImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 145),
+            accountImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            accountImageView.widthAnchor.constraint(equalToConstant: 105),
+            accountImageView.heightAnchor.constraint(equalToConstant: 100),
+        
             
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 261),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            accountSettintsView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            accountSettintsView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            accountSettintsView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            accountSettintsView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            accountSettintsView.heightAnchor.constraint(equalToConstant: 800),
-            accountSettintsView.widthAnchor.constraint(equalToConstant: screenWidth)
+            accountSettingsView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            accountSettingsView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            accountSettingsView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            accountSettingsView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            accountSettingsView.heightAnchor.constraint(equalToConstant: 760),
+            accountSettingsView.widthAnchor.constraint(equalToConstant: screenWidth)
         ])
     }
     
-    
+    //MARK: - Methods
+
     @objc private func backButtonTapped() {
         print("back button tapped")
         tabBarController?.tabBar.isHidden = false
