@@ -18,7 +18,7 @@ class CustomTabBar: UITabBarController, UITabBarControllerDelegate {
 
   private func setupItems() {
 
-    let homepage = HomeViewController()
+    let homepage = HomePageViewController3()
     homepage.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Home")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "HomeFill")?.withRenderingMode(.alwaysOriginal))
 
     let search = SearchViewController()
