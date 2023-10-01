@@ -14,7 +14,8 @@ final class PodcastView: UIView {
   var audioPlayer: AVAudioPlayer?
   var currentTrackIndex: Int = 0
   var musicArray: [String?] = []
-
+  var dur: Int = 0
+  
   lazy var songNameLabel: UILabel = {
     let label = UILabel()
     label.textAlignment = .center
@@ -49,9 +50,11 @@ final class PodcastView: UIView {
     slider.minimumTrackTintColor = .blue
     slider.maximumTrackTintColor = .blueBorder
     slider.maximumValue = 0.00
-    slider.maximumValue = 3.05
-    slider.value = 2.43
+    slider.maximumValue = 3
+    slider.value = 2
     slider.translatesAutoresizingMaskIntoConstraints = false
+    slider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
+
     return slider
   }()
   
@@ -59,7 +62,7 @@ final class PodcastView: UIView {
     let label = UILabel()
     label.font = .systemFont(ofSize: 14)
     label.textColor = .black
-    label.text = "44:30"
+    label.text = "00:00"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
     
@@ -69,7 +72,7 @@ final class PodcastView: UIView {
     let label = UILabel()
     label.font = .systemFont(ofSize: 14)
     label.textColor = .black
-    label.text = "56:30"
+    label.text = String(dur)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
     
@@ -123,6 +126,15 @@ final class PodcastView: UIView {
     super.init(coder: aDecoder)
     setupViews()
   }
+  
+  @objc func sliderValueChanged(_ slider: UISlider) {
+      let durationInMilliseconds = Float(dur)
+      let durationInSeconds = durationInMilliseconds / 1000.0 // Convert milliseconds to seconds
+
+      let currentTime = slider.value * durationInSeconds
+      audioPlayer?.currentTime = TimeInterval(currentTime)
+  }
+
 
   private func setupViews() {
     addSubview(songNameLabel)

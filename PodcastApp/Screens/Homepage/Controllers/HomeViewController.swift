@@ -32,6 +32,8 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
   var feeds: [Feed] = []
   var vc: FetchFunc?
   var selectedIndexPath: IndexPath?
+  private let musicPlayer = MusicPlayer.instance
+  private let miniPlayerVC = MiniPlayerVC()
 
   override func viewDidLoad() {
     super.viewDidLoad()
