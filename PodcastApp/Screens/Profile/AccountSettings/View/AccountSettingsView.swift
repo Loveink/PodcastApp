@@ -31,8 +31,6 @@ class AccountSettingsView: UIView {
     
     private lazy var birthdayLabel = UILabel.makeLabel(text: "Date of Birth", font: UIFont.plusJakartaSansMedium(size: 14), textColor: UIColor.textGrey)
     
-    private lazy var genderLabel = UILabel.makeLabel(text: "Gender", font: UIFont.plusJakartaSansMedium(size: 14), textColor: UIColor.textGrey)
-    
     private lazy var calendarButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "calendar"), for: .normal)
@@ -46,6 +44,8 @@ class AccountSettingsView: UIView {
         datePicker.timeZone = TimeZone.current
         return datePicker
     }()
+    
+    private let genderSection = AccountGenderSelectorView()
     
     private lazy var saveButton: UIButton = {
         let button = UIButton()
@@ -87,7 +87,8 @@ class AccountSettingsView: UIView {
         self.addSubview(lastNameLabel)
         self.addSubview(emailLabel)
         self.addSubview(birthdayLabel)
-        self.addSubview(genderLabel)
+        
+        self.addSubview(genderSection)
         
         self.addSubview(saveButton)
         
@@ -132,8 +133,13 @@ class AccountSettingsView: UIView {
             calendarButton.centerYAnchor.constraint(equalTo: birthdayField.centerYAnchor),
             calendarButton.trailingAnchor.constraint(equalTo: birthdayField.trailingAnchor, constant: -16),
             
-            genderLabel.topAnchor.constraint(equalTo: birthdayField.bottomAnchor, constant: 16),
-            genderLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
+            genderSection.topAnchor.constraint(equalTo: birthdayField.bottomAnchor, constant: 8),
+            genderSection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
+            genderSection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
+            
+            
+            
+            
             
             saveButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -34),
             saveButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),

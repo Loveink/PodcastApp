@@ -8,9 +8,10 @@
 import UIKit
 
 extension UITextField {
-
+    
     static func makeBlueTextField(text: String = "") -> UITextField {
-
+        let padding = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
+        
         let field = UITextField()
         field.placeholder = text
         field.textColor = .black
@@ -19,7 +20,8 @@ extension UITextField {
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.blueBorder.cgColor
         field.leftViewMode = .always
-        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
+        field.leftView = padding
+        field.rightView = padding
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }

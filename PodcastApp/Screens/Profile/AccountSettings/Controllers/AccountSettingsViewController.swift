@@ -67,7 +67,7 @@ class AccountSettingsViewController: UIViewController {
             
             accountImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 145),
             accountImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            accountImageView.widthAnchor.constraint(equalToConstant: 105),
+            accountImageView.widthAnchor.constraint(equalToConstant: 100),
             accountImageView.heightAnchor.constraint(equalToConstant: 100),
         
             
