@@ -25,12 +25,7 @@ class AccountImageView: UIView {
     
     private let editButton: UIButton = {
         let button = UIButton()
-        //button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
-        let image = UIImage(systemName: "pencil.circle.fill")
-        image?.withTintColor(.bluePlayer)
-        button.layer.cornerRadius = 16
-        button.layer.borderWidth = 3
-        button.layer.borderColor = UIColor.white.cgColor
+        let image = UIImage(named: "Edit")
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

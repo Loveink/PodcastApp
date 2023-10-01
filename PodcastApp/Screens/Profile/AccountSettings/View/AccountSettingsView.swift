@@ -33,8 +33,9 @@ class AccountSettingsView: UIView {
     
     private lazy var calendarButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "calendar"), for: .normal)
-        button.tintColor = .symbolsPurple
+        button.setImage(UIImage(named: "Calendar"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(datePickerTapped), for: .touchUpInside)
         return button
     }()
     
@@ -64,6 +65,7 @@ class AccountSettingsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.isHidden = true
         birthdayField.inputView = datePicker
         datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
         addSubviews()
@@ -131,15 +133,13 @@ class AccountSettingsView: UIView {
             birthdayField.heightAnchor.constraint(equalToConstant: 52),
             
             calendarButton.centerYAnchor.constraint(equalTo: birthdayField.centerYAnchor),
-            calendarButton.trailingAnchor.constraint(equalTo: birthdayField.trailingAnchor, constant: -16),
+            calendarButton.trailingAnchor.constraint(equalTo: birthdayField.trailingAnchor, constant: -12),
+            calendarButton.heightAnchor.constraint(equalToConstant: 24),
+            calendarButton.widthAnchor.constraint(equalToConstant: 24),
             
             genderSection.topAnchor.constraint(equalTo: birthdayField.bottomAnchor, constant: 8),
             genderSection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
             genderSection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
-            
-            
-            
-            
             
             saveButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -34),
             saveButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
@@ -158,5 +158,9 @@ class AccountSettingsView: UIView {
     
     @objc private func saveButtonTapped() {
         print ("Save button tapped")
+    }
+    
+    @objc private func datePickerTapped() {
+        datePicker.isHidden = false
     }
 }
