@@ -33,9 +33,9 @@ final class CollectionViewCell2: UICollectionViewCell {
     }()
     
 
-    private let title2 = UILabel.makeLabel(text: "title2", font: R.Fonts.helvelticaRegular(with: 14), textColor: R.Colors.titleGray)
+    private let title2 = UILabel.makeLabel(text: "title2", font: .manropeBold(size: 14), textColor: .textGrey)
 
-    private let subtitle2 = UILabel.makeLabel(text: "subtitle2", font: R.Fonts.helvelticaRegular(with: 14), textColor: R.Colors.titleGray)
+    private let subtitle2 = UILabel.makeLabel(text: "subtitle2", font: .manropeRegular(size: 14), textColor: .textGrey)
 
     
     override init(frame: CGRect) {

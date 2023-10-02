@@ -40,13 +40,13 @@ final class CollectionViewCell3: UICollectionViewCell {
         return view
     }()
     
-    private let title = UILabel.makeLabelForCells(text: "Title", font: .manropeBold(size: 14), textColor: R.Colors.titleGray, numberOfLines: 1)
+    private let title = UILabel.makeLabelForCells(text: "Title", font: .manropeBold(size: 14), textColor: .textGrey, numberOfLines: 1)
 
-    private let subtitle = UILabel.makeLabelForCells(text: "subtitle", font: .manropeRegular(size: 14), textColor: R.Colors.titleGray, numberOfLines: 1)
+    private let subtitle = UILabel.makeLabelForCells(text: "subtitle", font: .manropeRegular(size: 14), textColor: .textGrey, numberOfLines: 1)
 
-    private let title2 = UILabel.makeLabelForCells(text: "title2", font: .manropeRegular(size: 14), textColor: R.Colors.titleGray, numberOfLines: 1)
+    private let title2 = UILabel.makeLabelForCells(text: "title2", font: .manropeRegular(size: 14), textColor: .textGrey, numberOfLines: 1)
 
-    private let subtitle2 = UILabel.makeLabelForCells(text: "subtitle2", font: .manropeRegular(size: 14), textColor: R.Colors.titleGray, numberOfLines: 1)
+    private let subtitle2 = UILabel.makeLabelForCells(text: "subtitle2", font: .manropeRegular(size: 14), textColor: .textGrey, numberOfLines: 1)
 
     
     private let imagePinkView: UIImageView = {
