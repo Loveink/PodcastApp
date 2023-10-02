@@ -22,9 +22,7 @@ class CategoriesCollectionView: UIView {
   }
 
   var selectedCell: CategoryCell?
-  var audioURLs: [Int: String] = [:]
-
-
+  var id: Int?
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -71,6 +69,7 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
       return UICollectionViewCell()
     }
     cell.configureCell(recipes[indexPath.row])
+    cell.id = Int(recipes[indexPath.row].id)
     return cell
   }
 
@@ -80,10 +79,10 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       if recipes.count > 0 {
-          if let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCell,
-             let audioURL = selectedCell.audioURLs.first { // Получаем первый URL из массива audioURLs
-              delegate?.didSelectRecipe(audioURL)
-          }
+        if let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCell,
+           let id = selectedCell.id {
+           delegate?.didSelectRecipe(id: id)
+        }
       }
   }
 
@@ -94,5 +93,5 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
 
 //MARK: - Protocols
 protocol CategoriesCollectionViewDelegate: AnyObject {
-  func didSelectRecipe(_ audioURL: String)
+  func didSelectRecipe(id: Int)
 }
