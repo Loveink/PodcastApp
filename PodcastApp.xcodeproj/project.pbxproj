@@ -54,6 +54,12 @@
 		A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */; };
 		A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */; };
 		A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */; };
+		E56199802AC6EE7300EC542D /* AccountImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E561997F2AC6EE7300EC542D /* AccountImageView.swift */; };
+		E56199822AC9790300EC542D /* AccountGenderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56199812AC9790300EC542D /* AccountGenderButton.swift */; };
+		E56199842AC97F5C00EC542D /* AccountGenderSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56199832AC97F5C00EC542D /* AccountGenderSelectorView.swift */; };
+		E57CF00A2AC43B7A001600A8 /* ProfileSettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */; };
+		E57CF00D2AC59B31001600A8 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF00C2AC59B31001600A8 /* AccountSettingsView.swift */; };
+		E57CF00F2AC59C92001600A8 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF00E2AC59C92001600A8 /* TextField.swift */; };
 		E75FA2E52AC1BE1A005C947C /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2E42AC1BE1A005C947C /* CustomSearchBar.swift */; };
 		E75FA2E72AC1FBC3005C947C /* TopGenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2E62AC1FBC3005C947C /* TopGenresView.swift */; };
 		E75FA2E92AC1FCA6005C947C /* GenreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2E82AC1FCA6005C947C /* GenreCell.swift */; };
@@ -105,6 +111,12 @@
 		A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteChannelCell.swift; sourceTree = "<group>"; };
 		A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
 		A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
+		E561997F2AC6EE7300EC542D /* AccountImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountImageView.swift; sourceTree = "<group>"; };
+		E56199812AC9790300EC542D /* AccountGenderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGenderButton.swift; sourceTree = "<group>"; };
+		E56199832AC97F5C00EC542D /* AccountGenderSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountGenderSelectorView.swift; sourceTree = "<group>"; };
+		E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewCell.swift; sourceTree = "<group>"; };
+		E57CF00C2AC59B31001600A8 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		E57CF00E2AC59C92001600A8 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		E75FA2E42AC1BE1A005C947C /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomSearchBar.swift; path = PodcastApp/Screens/Search/Search/CustomSearchBar.swift; sourceTree = SOURCE_ROOT; };
 		E75FA2E62AC1FBC3005C947C /* TopGenresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopGenresView.swift; path = PodcastApp/Screens/Search/Search/TopGenresView.swift; sourceTree = SOURCE_ROOT; };
 		E75FA2E82AC1FCA6005C947C /* GenreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenreCell.swift; path = PodcastApp/Screens/Search/Search/GenreCell.swift; sourceTree = SOURCE_ROOT; };
@@ -227,6 +239,7 @@
 				57B391C62AC0CA9F00BD7E82 /* Fonts.swift */,
 				57B391CB2AC0CBBE00BD7E82 /* Label.swift */,
 				57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */,
+				E57CF00E2AC59C92001600A8 /* TextField.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -337,7 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				57B391FF2AC16B7600BD7E82 /* Models */,
-				57B391FE2AC16B6600BD7E82 /* Views */,
+				E57CF00B2AC59AD6001600A8 /* View */,
 				57B391FD2AC16B5F00BD7E82 /* Controllers */,
 			);
 			path = AccountSettings;
@@ -643,13 +656,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		57B391FE2AC16B6600BD7E82 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		57B391FF2AC16B7600BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,7 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				57B392052AC16C3200BD7E82 /* Models */,
-				57B392042AC16C2E00BD7E82 /* Views */,
+				E57CF0002AC36644001600A8 /* Views */,
 				57B392032AC16C2600BD7E82 /* Controllers */,
 			);
 			path = Profile;
@@ -675,18 +681,12 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		57B392042AC16C2E00BD7E82 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		57B392052AC16C3200BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = Models;
+			name = Models;
+			path = Views/Models;
 			sourceTree = "<group>";
 		};
 		57B392062AC16C3F00BD7E82 /* Realm */ = {
@@ -701,6 +701,25 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E57CF0002AC36644001600A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E57CF00B2AC59AD6001600A8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E57CF00C2AC59B31001600A8 /* AccountSettingsView.swift */,
+				E561997F2AC6EE7300EC542D /* AccountImageView.swift */,
+				E56199812AC9790300EC542D /* AccountGenderButton.swift */,
+				E56199832AC97F5C00EC542D /* AccountGenderSelectorView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -796,6 +815,7 @@
 				57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */,
 				57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */,
 				57B391C72AC0CA9F00BD7E82 /* Fonts.swift in Sources */,
+				E57CF00F2AC59C92001600A8 /* TextField.swift in Sources */,
 				57B391B42ABED98100BD7E82 /* SearchViewController.swift in Sources */,
 				57724E902ABDAB52006C3318 /* AppDelegate.swift in Sources */,
 				5769D0CF2AC76FC700D93A56 /* PodcastView.swift in Sources */,
@@ -803,6 +823,7 @@
 				5769D0CB2AC76FA700D93A56 /* CategoriesCollectionView.swift in Sources */,
 				57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */,
 				E75FA2E92AC1FCA6005C947C /* GenreCell.swift in Sources */,
+				E56199822AC9790300EC542D /* AccountGenderButton.swift in Sources */,
 				E75FA2EF2AC48BFF005C947C /* SearchResultView.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
 				E75FA2E72AC1FBC3005C947C /* TopGenresView.swift in Sources */,
@@ -811,6 +832,7 @@
 				E75FA2ED2AC2D45A005C947C /* BrowseAllView.swift in Sources */,
 				5769D0CE2AC76FC700D93A56 /* ImageCollectionViewCell.swift in Sources */,
 				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
+				E56199842AC97F5C00EC542D /* AccountGenderSelectorView.swift in Sources */,
 				5769D0C02AC76F8400D93A56 /* NetworkManager.swift in Sources */,
 				E75FA2E52AC1BE1A005C947C /* CustomSearchBar.swift in Sources */,
 				A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */,
@@ -825,11 +847,14 @@
 				5769D0D32AC809F900D93A56 /* FetchFunc.swift in Sources */,
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
 				57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */,
+				E56199802AC6EE7300EC542D /* AccountImageView.swift in Sources */,
 				5769D0C22AC76FA000D93A56 /* PodcastItem.swift in Sources */,
 				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
+				E57CF00A2AC43B7A001600A8 /* ProfileSettingsViewCell.swift in Sources */,
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
 				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
+				E57CF00D2AC59B31001600A8 /* AccountSettingsView.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 				5769D0D12AC76FCD00D93A56 /* GalleryView.swift in Sources */,
 				A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */,
