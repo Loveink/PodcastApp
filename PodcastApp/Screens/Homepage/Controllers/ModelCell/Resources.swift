@@ -26,7 +26,7 @@ enum R {
 
         static let background = UIColor(hexString: "#FFFFFF")
 
-        static let foreground = UIColor(hexString: "#FFFFFF").withAlphaComponent(0.3)
+        static let forxeground = UIColor(hexString: "#FFFFFF").withAlphaComponent(0.3)
         static let titleGray = UIColor(hexString: "#545C77")
         static let cellBackground = UIColor(hexString: "#EDF0FC")
         
@@ -43,10 +43,4 @@ enum R {
             static let imageBlue = UIImage(named: "97D7F2")
         }
     }
-    
-//    enum Fonts {
-//        static func helvelticaRegular(with size: CGFloat) -> UIFont {
-//            UIFont(name: "Helvetica", size: size) ?? UIFont()
-//        }
-//    }
 }

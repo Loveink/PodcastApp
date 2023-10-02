@@ -24,6 +24,7 @@ final class CollectionViewCell2: UICollectionViewCell {
         imagePinkView.layer.masksToBounds = true
         return imagePinkView
     }()
+    
     private let imageWhiteView2: UIImageView = {
         let imagePinkView = UIImageView()
         imagePinkView.image = R.Images.Overview.imageWhite?.alpha(0.3)
@@ -32,24 +33,19 @@ final class CollectionViewCell2: UICollectionViewCell {
         return imagePinkView
     }()
     
-
     private let title2 = UILabel.makeLabel(text: "title2", font: .manropeBold(size: 14), textColor: .textGrey)
-
     private let subtitle2 = UILabel.makeLabel(text: "subtitle2", font: .manropeRegular(size: 14), textColor: .textGrey)
 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         constaintViews()
-//                configureAppearance()
     }
     
     required init?(coder: NSCoder) {
         super.init(frame: .zero)
-                setupViews()
-                constaintViews()
-//                configureAppearance()
+        setupViews()
+        constaintViews()
     }
 }
 
@@ -74,9 +70,7 @@ private extension CollectionViewCell2 {
             title2.topAnchor.constraint(equalTo: imageWhiteView2.topAnchor,constant: 14),
             title2.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             subtitle2.leadingAnchor.constraint(equalTo: title2.leadingAnchor),
-            subtitle2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: 5),
-        
-            
+            subtitle2.topAnchor.constraint(equalTo: title2.bottomAnchor, constant: 5)
         ])
     }
 }

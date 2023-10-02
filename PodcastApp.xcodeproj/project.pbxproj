@@ -26,7 +26,6 @@
 		57B391A42ABED51F00BD7E82 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 57B391A32ABED51F00BD7E82 /* FirebaseFirestore */; };
 		57B391A72ABED54300BD7E82 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 57B391A62ABED54300BD7E82 /* Kingfisher */; };
 		57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391AF2ABED87C00BD7E82 /* CustomTabBar.swift */; };
-		57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391B12ABED95400BD7E82 /* HomeViewController.swift */; };
 		57B391B42ABED98100BD7E82 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391B32ABED98100BD7E82 /* SearchViewController.swift */; };
 		57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391B52ABED9B700BD7E82 /* FavoritesViewController.swift */; };
 		57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391B72ABED9E900BD7E82 /* ProfileSettingsViewController.swift */; };
@@ -54,8 +53,8 @@
 		A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */; };
 		A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */; };
 		A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */; };
-		B9B1E7762AC978FB00C8FA73 /* HomePageViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B1E7752AC978FB00C8FA73 /* HomePageViewController2.swift */; };
-		B9B1E7782AC9792A00C8FA73 /* HomePageViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B1E7772AC9792A00C8FA73 /* HomePageViewController3.swift */; };
+		B917BCF92ACB34BF00C40AE0 /* CollectionViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = B917BCF82ACB34BF00C40AE0 /* CollectionViewCell1.swift */; };
+		B9B1E7782AC9792A00C8FA73 /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B1E7772AC9792A00C8FA73 /* HomePageViewController.swift */; };
 		B9B1E77A2AC9795200C8FA73 /* CollectionViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B1E7792AC9795200C8FA73 /* CollectionViewCell2.swift */; };
 		B9B1E77C2AC9795F00C8FA73 /* CollectionViewCell3.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B1E77B2AC9795F00C8FA73 /* CollectionViewCell3.swift */; };
 		B9B1E7802AC9799100C8FA73 /* UIColor+ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B1E77D2AC9799100C8FA73 /* UIColor+ext.swift */; };
@@ -86,7 +85,6 @@
 		57724E9B2ABDAB54006C3318 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57724E9D2ABDAB54006C3318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57B391AF2ABED87C00BD7E82 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
-		57B391B12ABED95400BD7E82 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		57B391B32ABED98100BD7E82 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		57B391B52ABED9B700BD7E82 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		57B391B72ABED9E900BD7E82 /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
@@ -112,8 +110,8 @@
 		A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteChannelCell.swift; sourceTree = "<group>"; };
 		A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
 		A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
-		B9B1E7752AC978FB00C8FA73 /* HomePageViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController2.swift; sourceTree = "<group>"; };
-		B9B1E7772AC9792A00C8FA73 /* HomePageViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController3.swift; sourceTree = "<group>"; };
+		B917BCF82ACB34BF00C40AE0 /* CollectionViewCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell1.swift; sourceTree = "<group>"; };
+		B9B1E7772AC9792A00C8FA73 /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		B9B1E7792AC9795200C8FA73 /* CollectionViewCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell2.swift; sourceTree = "<group>"; };
 		B9B1E77B2AC9795F00C8FA73 /* CollectionViewCell3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell3.swift; sourceTree = "<group>"; };
 		B9B1E77D2AC9799100C8FA73 /* UIColor+ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+ext.swift"; sourceTree = "<group>"; };
@@ -487,9 +485,7 @@
 			children = (
 				B9B1E7842AC97FCF00C8FA73 /* ModelCell */,
 				B9B1E7832AC97F4700C8FA73 /* Cell */,
-				B9B1E7772AC9792A00C8FA73 /* HomePageViewController3.swift */,
-				B9B1E7752AC978FB00C8FA73 /* HomePageViewController2.swift */,
-				57B391B12ABED95400BD7E82 /* HomeViewController.swift */,
+				B9B1E7772AC9792A00C8FA73 /* HomePageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -726,6 +722,7 @@
 			children = (
 				B9B1E77B2AC9795F00C8FA73 /* CollectionViewCell3.swift */,
 				B9B1E7792AC9795200C8FA73 /* CollectionViewCell2.swift */,
+				B917BCF82ACB34BF00C40AE0 /* CollectionViewCell1.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -846,7 +843,6 @@
 				E75FA2E72AC1FBC3005C947C /* TopGenresView.swift in Sources */,
 				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
 				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
-				B9B1E7762AC978FB00C8FA73 /* HomePageViewController2.swift in Sources */,
 				E75FA2ED2AC2D45A005C947C /* BrowseAllView.swift in Sources */,
 				5769D0CE2AC76FC700D93A56 /* ImageCollectionViewCell.swift in Sources */,
 				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
@@ -860,12 +856,12 @@
 				5769D0BE2AC76F8400D93A56 /* Podcast.swift in Sources */,
 				A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */,
 				5769D0C92AC76FA700D93A56 /* CategoryCell.swift in Sources */,
+				B917BCF92ACB34BF00C40AE0 /* CollectionViewCell1.swift in Sources */,
 				B9B1E7802AC9799100C8FA73 /* UIColor+ext.swift in Sources */,
 				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
 				A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */,
 				5769D0D32AC809F900D93A56 /* FetchFunc.swift in Sources */,
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
-				57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */,
 				B9B1E77C2AC9795F00C8FA73 /* CollectionViewCell3.swift in Sources */,
 				5769D0C22AC76FA000D93A56 /* PodcastItem.swift in Sources */,
 				B9B1E7812AC9799100C8FA73 /* Resources.swift in Sources */,
@@ -875,7 +871,7 @@
 				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 				5769D0D12AC76FCD00D93A56 /* GalleryView.swift in Sources */,
-				B9B1E7782AC9792A00C8FA73 /* HomePageViewController3.swift in Sources */,
+				B9B1E7782AC9792A00C8FA73 /* HomePageViewController.swift in Sources */,
 				A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,9 +13,9 @@ final class CollectionViewCell3: UICollectionViewCell {
     let constantRetreat = CGFloat(10)
     
     let heartView: UIImageView = {
-        let imageView = UIImageView(image: R.Images.Overview.heartImage)
-        imageView.tintColor = R.Colors.heartNotDone
-        return imageView
+        let heartView = UIImageView(image: R.Images.Overview.heartImage)
+        heartView.tintColor = R.Colors.heartNotDone
+        return heartView
     }()
     
     var isFilled: Bool = false {
@@ -59,55 +59,26 @@ final class CollectionViewCell3: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
+ 
         setupViews()
         constaintViews()
         heartViewTap()
-        configureAppearance()
+//        configureAppearance()
         
     }
     
     required init?(coder: NSCoder) {
         super.init(frame: .zero)
-        
-        //        setupViews()
-        //        constaintViews()
-        //        heartViewTap()
-//                configureAppearance()
+        setupViews()
+        constaintViews()
+        heartViewTap()
     }
 }
 
 private extension CollectionViewCell3 {
-    
-    
-    // Загрузите JSON из файла или с удаленного сервера
-    func configureAppearance() {
-        if let url = URL(string: "https://ormp.ros.chat/ajax/config.json") {
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let data = data {
-                    do {
-                        // Распарсите JSON
-                        let myData = try JSONDecoder().decode(MyData.self, from: data)
 
-                        // Обновите UI на основе данных из JSON
-                        DispatchQueue.main.async { [self] in
-                            
-                            title.text = myData.objectId
-                            subtitle.text = myData.objectId
-                        }
-                    } catch {
-                        print("Ошибка при распарсивании JSON: \(error)")
-                    }
-                } else if let error = error {
-                    print("Ошибка при загрузке данных: \(error)")
-                }
-            }.resume()
-        }
-    }
-    
     func setupViews() {
-    setupView(heartView)
+        setupView(heartView)
         setupView(stackView)
         setupView(stackView2)
         stackView.addArrangedSubview(title)
@@ -115,9 +86,8 @@ private extension CollectionViewCell3 {
         stackView2.addArrangedSubview(title2)
         stackView2.addArrangedSubview(subtitle2)
         setupView(imagePinkView)
-        
     }
-    
+
     func constaintViews() {
         NSLayoutConstraint.activate([
             imagePinkView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: constantRetreat),
@@ -147,11 +117,34 @@ private extension CollectionViewCell3 {
     }
     
     @objc func handleHeartTap() {
-        // Переключите значение isFilled
+        // Переключите значение isFilled красное серое сердце
         isFilled = !isFilled
-        
-        // Здесь вы можете выполнить дополнительные действия, связанные с нажатием сердца, если это необходимо
+      
     }
+    
+    // Загрузите JSON из файла или с удаленного сервера
+    func configureAppearance() {
+        if let url = URL(string: "https://ormp.ros.chat/ajax/config.json") {
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data {
+                    do {
+                        // Распарсите JSON
+                        let myData = try JSONDecoder().decode(MyData.self, from: data)
 
+                        // Обновите UI на основе данных из JSON
+                        DispatchQueue.main.async { [self] in
+                            
+                            title.text = myData.objectId
+                            subtitle.text = myData.objectId
+                        }
+                    } catch {
+                        print("Ошибка при распарсивании JSON: \(error)")
+                    }
+                } else if let error = error {
+                    print("Ошибка при загрузке данных: \(error)")
+                }
+            }.resume()
+        }
+    }
 }
 
