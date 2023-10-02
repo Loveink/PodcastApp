@@ -6,11 +6,14 @@
 //
 
 import UIKit
+import Kingfisher
 
 class EpisodeCell: UICollectionViewCell {
     
-    var episode: EpisodeModel?
-    
+    var episode: EpisodeItemCell?
+  let options: KingfisherOptionsInfo = [
+    .cacheOriginalImage
+  ]
 // MARK: - User Interface
     
     private let episodeImageView: UIImageView = {
@@ -78,14 +81,17 @@ class EpisodeCell: UICollectionViewCell {
         self.addSubview(episodeImageView)
         self.addSubview(stackView)
         stackView.addArrangedSubview(episodeTitleLabel)
-        stackView.addArrangedSubview(episodeDetaisLabel)
+//        stackView.addArrangedSubview(episodeDetaisLabel)
     }
-    
-    func setup(withEpisode episode: EpisodeModel) {
-        episodeImageView.image = UIImage(named: episode.episodeImageName)
-        episodeTitleLabel.text = episode.episodeTitle
-        episodeDetaisLabel.text = "\(episode.episodeDutarion) | \(episode.episodeNumber) Eps"
+
+
+  func setup(withEpisode episode: EpisodeItemCell) {
+    DispatchQueue.main.async {
+      self.episodeImageView.kf.setImage(with: URL(string: episode.image), options: self.options)
+      self.episodeTitleLabel.text = episode.title
+      //      episodeDetaisLabel.text = "\(episode.episodeDutarion) | \(episode.episodeNumber) Eps"
     }
+  }
     
 }
 

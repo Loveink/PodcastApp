@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ChannelViewController: UIViewController {
 
 // MARK: - User Interface
-    
+  var channelID: Int = 0
+  var feeds: [EpisodeItem] = []
+  var audioPlayer: AVAudioPlayer?
+
     private let channelImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -89,9 +93,11 @@ class ChannelViewController: UIViewController {
         return collectionView
     }()
     
-    
+  var vc: FetchFunc?
+
 // MARK: - private properties
-    private let episodes = EpisodeModel.makeMockData()
+  var episodes: [EpisodeItemCell] = []
+//  EpisodeModel.makeMockData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,6 +106,13 @@ class ChannelViewController: UIViewController {
         self.setupCollectionView()
         self.setupNavigationBar()
         self.setupChannel()
+
+      vc = FetchFunc(collectionView: episodesCollectionView)
+      let dispatchGroup = DispatchGroup()
+      fetchPodcasts(dispatchGroup: dispatchGroup)
+      dispatchGroup.notify(queue: .main) {
+        print("All tasks are completed.")
+      }
     }
     
     private func setupView() {
@@ -160,6 +173,16 @@ extension ChannelViewController: UICollectionViewDataSource {
         cell.setup(withEpisode: episode)
         return cell
     }
+
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    self.audioPlayer?.stop()
+    let episode = episodes[indexPath.row]
+    let audioURLString = episode.audioURL
+    if let audioURL = URL(string: audioURLString) {
+      canPlayAudioFile(withURL: audioURL)
+      print(audioURL)
+    }
+  }
 }
 
 
@@ -185,31 +208,91 @@ extension ChannelViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - setup constraints
 extension ChannelViewController {
-    
-    private func setupConstraints() {
-        
-        let constraints: [NSLayoutConstraint] = [
-            
-            channelImageView.heightAnchor.constraint(equalToConstant: 84),
-            channelImageView.widthAnchor.constraint(equalToConstant: 84),
-            channelImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
-            channelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            channelTitleLabel.topAnchor.constraint(equalTo: channelImageView.bottomAnchor, constant: 20),
-            channelTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            stackView.topAnchor.constraint(equalTo: channelTitleLabel.bottomAnchor, constant: 5),
-            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            collectionTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-            collectionTitle.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 32),
-            
-            episodesCollectionView.topAnchor.constraint(equalTo: collectionTitle.bottomAnchor, constant: 16),
-            episodesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            episodesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            episodesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+
+  private func setupConstraints() {
+
+    let constraints: [NSLayoutConstraint] = [
+
+      channelImageView.heightAnchor.constraint(equalToConstant: 84),
+      channelImageView.widthAnchor.constraint(equalToConstant: 84),
+      channelImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+      channelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+      channelTitleLabel.topAnchor.constraint(equalTo: channelImageView.bottomAnchor, constant: 20),
+      channelTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+      stackView.topAnchor.constraint(equalTo: channelTitleLabel.bottomAnchor, constant: 5),
+      stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+      collectionTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+      collectionTitle.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 32),
+
+      episodesCollectionView.topAnchor.constraint(equalTo: collectionTitle.bottomAnchor, constant: 16),
+      episodesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      episodesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      episodesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ]
+
+    NSLayoutConstraint.activate(constraints)
+  }
+
+  func fetchPodcasts(dispatchGroup: DispatchGroup) {
+    let networkService = NetworkService()
+    dispatchGroup.enter() // Входим в группу
+
+    networkService.fetchData(forPath: "/episodes/byfeedid?id=\(channelID)") { [weak self] (result: Result<EpisodeFeed, APIError>) in
+      guard let self = self else { return }
+
+      defer {
+        dispatchGroup.leave() // Покидаем группу после завершения запроса
+      }
+
+      switch result {
+      case .success(let podcastResponse):
+        self.feeds.append(contentsOf: podcastResponse.items)
+        var xmls = [String]()
+
+        for podcast in self.feeds {
+          let imageURL = podcast.feedImage
+          let podcastItem = EpisodeItemCell(title: podcast.title, image: imageURL, audioURL: podcast.enclosureUrl)
+          self.episodes.append(podcastItem)
+          xmls.append(podcast.enclosureUrl)
+        }
+
+        if let vc = self.vc {
+          vc.fetchXMLs(xmls, dispatchGroup: dispatchGroup)
+        } else {
+          print("FetchFunc is nil.")
+        }
+
+        // Обновляем коллекцию данных
+        DispatchQueue.main.async {
+          self.episodesCollectionView.reloadData()
+        }
+
+      case .failure(let error):
+        print("Error: \(error)")
+      }
     }
+  }
+
+  func canPlayAudioFile(withURL audioURL: URL) {
+      let session = URLSession.shared
+      let task = session.dataTask(with: audioURL) { [weak self] (data, response, error) in
+          if let error = error {
+              print("Error loading audio data: \(error.localizedDescription)")
+              return
+          }
+
+          if let data = data {
+              do {
+                  self?.audioPlayer = try AVAudioPlayer(data: data)
+                  self?.audioPlayer?.play()
+              } catch {
+                  print("Error creating audio player: \(error)")
+              }
+          }
+      }
+      task.resume()
+  }
 }

@@ -8,7 +8,37 @@
 import UIKit
 import AVFoundation
 
-class NowPlayingViewController: UIViewController {
+class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
+  var favoriteVC: FavoritesViewController?
+
+  func reloadLikeButton() {
+
+  }
+
+  func configureCell(with musicResult: EpisodeModel1) {
+
+  }
+
+  func updateButtonImage(isPlay: Bool) {
+
+  }
+
+  func updateCurrentTimeLabel(duration: Int) {
+
+  }
+
+  func updateTotalDuration(duration: Float) {
+
+  }
+
+  func updateSlider(value: Float) {
+
+  }
+
+  func setDurationTime() {
+
+  }
+
 
   var podcast = PodcastView()
   var galleryViewController = GalleryView()
@@ -17,6 +47,8 @@ class NowPlayingViewController: UIViewController {
   var audioPlayer: AVAudioPlayer?
   var currentTrackIndex: Int = 0
   var musicArray: [String] = []
+  private let musicPlayer = MusicPlayer.instance
+  private var currentTrackModel: EpisodeModel?
 
   override func viewDidLoad() {
     super.viewDidLoad()

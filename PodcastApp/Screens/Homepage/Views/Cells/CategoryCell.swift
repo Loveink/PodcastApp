@@ -13,8 +13,8 @@ class CategoryCell: UICollectionViewCell {
   static let identifier = "CategoryCell"
   var liked: Bool = false
   var currentRecipe: PodcastItemCell?
-  var audioURL: String?
-   var audioURLs: [String] = []
+  var id: Int?
+  var audioURLs: [String] = []
 
 
   override init(frame: CGRect) {
@@ -54,7 +54,6 @@ class CategoryCell: UICollectionViewCell {
           self.titleLabel.text = data.title
           self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
           self.currentRecipe = data
-        self.audioURLs = [data.audioURL] // Сохраняем только первый URL
       }
   }
 

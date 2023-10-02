@@ -62,6 +62,7 @@ class FetchFunc: UIViewController {
 
         if let data = data {
           self.parseXML(data)
+
         }
       }
       task.resume()
@@ -79,16 +80,28 @@ class FetchFunc: UIViewController {
     collectionView1.reloadData()
   }
 
-    func getMusic(audioURL: String?) {
-        guard let audioURLString = audioURL, let audioURL = URL(string: audioURLString + ".mp3") else {
-            print("URL for audio is invalid.")
-            return
-        }
+//    func getMusic(audioURL: String?) {
+//        guard let audioURLString = audioURL, let audioURL = URL(string: audioURLString + ".mp3") else {
+//            print("URL for audio is invalid.")
+//            return
+//        }
+//
+//        playAudio(withURL: audioURL)
+//        print("play")
+//
+//  }
 
-        playAudio(withURL: audioURL)
-        print("play")
-
+  func getMusic(audioURL: String?) {
+      guard let audioURLString = audioURL else {
+          print("URL for audio is invalid.")
+          return
+      }
+      if let episode = musicArray.first {
+      MusicPlayer.instance.playMusicWithURL(episode)
+      print("play")
+    }
   }
+
 
   func playAudio(withURL audioURL: URL) {
     let session = URLSession.shared
