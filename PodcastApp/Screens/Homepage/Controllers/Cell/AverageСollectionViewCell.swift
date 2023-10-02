@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class CollectionViewCell1: UICollectionViewCell {
+final class AverageСollectionViewCell: UICollectionViewCell {
     static let id = "CollectionViewCell1"
     
     private let stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.spacing = 3
+        view.spacing = 0
         return view
     }()
     
@@ -32,7 +32,7 @@ final class CollectionViewCell1: UICollectionViewCell {
     }
 }
 
-private extension CollectionViewCell1 {
+private extension AverageСollectionViewCell {
     func setupViews() {
         setupView(stackView)
         stackView.setupView(title2)
@@ -41,7 +41,8 @@ private extension CollectionViewCell1 {
     func constaintViews() {
         NSLayoutConstraint.activate([
             
-//            title2.topAnchor.constraint(equalTo: topAnchor,constant: 14),
+            title2.centerXAnchor.constraint(equalTo: centerXAnchor),
+            title2.centerYAnchor.constraint(equalTo: centerYAnchor)
 //            title2.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
         ])
     }

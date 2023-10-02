@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CollectionViewCell3: UICollectionViewCell {
+final class LowerCollectionViewCell: UICollectionViewCell {
     static let id = "CollectionViewCell"
     
     let constantRetreat = CGFloat(10)
@@ -75,7 +75,7 @@ final class CollectionViewCell3: UICollectionViewCell {
     }
 }
 
-private extension CollectionViewCell3 {
+private extension LowerCollectionViewCell {
 
     func setupViews() {
         setupView(heartView)

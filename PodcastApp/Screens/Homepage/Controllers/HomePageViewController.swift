@@ -7,50 +7,50 @@
 
 import UIKit
 
-struct CollectionViews {
-
-    static func collectionViewTwo() -> UICollectionView {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-
-        let collectionViewTwo = UICollectionView(frame: CGRect(x: 32, y: 184, width: 500, height: 200), collectionViewLayout: layout)
-        collectionViewTwo.showsHorizontalScrollIndicator = false
-        return collectionViewTwo
-    }
-
-    static func collectionViewOne() -> UICollectionView {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-
-        let collectionViewOne = UICollectionView(frame: CGRect(x: 32, y: 468, width: 330, height: 216), collectionViewLayout: layout)
-        collectionViewOne.showsHorizontalScrollIndicator = false
-        collectionViewOne.showsVerticalScrollIndicator = false
-        return collectionViewOne
-    }
-    
-    static func collectionViewThree() -> UICollectionView {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-
-        let collectionViewThree = UICollectionView(frame: CGRect(x: 32, y: 328, width: 500, height: 44), collectionViewLayout: layout)
-        collectionViewThree.showsHorizontalScrollIndicator = false
-        return collectionViewThree
-    }
-}
-
 class HomePageViewController: UIViewController {
     let cellReuseIdentifier = "MyCollectionViewCell3"
-    let collectionViewOne = CollectionViews.collectionViewOne()
-    let collectionViewTwo = CollectionViews.collectionViewTwo()
-    let collectionViewThree = CollectionViews.collectionViewThree()
-    var myArray = CollectionViewCell3.id
-    var myArray2 = CollectionViewCell2.id
-    var myArray3 = CollectionViewCell1.id
+    
+    let topСollectionView: UICollectionView
+    let averageСollectionView: UICollectionView
+    let lowerCollectionView: UICollectionView
+    
 
+//    var myArray2 = TopСollectionViewCell.id
+//    var myArray3 = AverageСollectionViewCell.id
+//    var myArray = LowerCollectionViewCell.id
+    
+    init() {
+        // Создание коллекций с заданными настройками
+        
+        let layoutOne = UICollectionViewFlowLayout()
+        layoutOne.scrollDirection = .horizontal
+        topСollectionView = UICollectionView(frame: .zero, collectionViewLayout: layoutOne)
+        
+        let layoutTwo = UICollectionViewFlowLayout()
+        layoutTwo.scrollDirection = .horizontal
+        averageСollectionView = UICollectionView(frame: .zero, collectionViewLayout: layoutTwo)
+        
+        let layoutThre = UICollectionViewFlowLayout()
+        layoutThre.scrollDirection = .vertical
+        lowerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layoutThre)
+  
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollection()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        topСollectionView.reloadData()
+        averageСollectionView.reloadData()
+        lowerCollectionView.reloadData()
     }
 }
 
@@ -58,17 +58,17 @@ class HomePageViewController: UIViewController {
 extension HomePageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.collectionViewOne {
-//               return myArray.count
+        if collectionView == self.topСollectionView {
             return 5
-           } else {
-//               return myArray2.count
-               return 5
-           }
+        } else if collectionView == self.averageСollectionView {
+            return 5
+        } else {
+            return 5 // Для новой коллекции
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.collectionViewOne {
+        if collectionView == self.topСollectionView {
             let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath)
             
             myCell.backgroundColor = R.Colors.cellBackground
@@ -79,6 +79,16 @@ extension HomePageViewController: UICollectionViewDataSource {
             myCell.layer.shadowOpacity = 0.2 // Прозрачность тени (0 - полностью прозрачная, 1 - полностью непрозрачная)
             myCell.layer.masksToBounds = false // Это позволяет тени выходить за границы ячейки
             
+            return myCell
+        } else if collectionView == self.averageСollectionView {
+            let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath)
+            myCell.backgroundColor = R.Colors.cellBackground
+            myCell.layer.cornerRadius = 16
+            myCell.layer.shadowColor = UIColor.black.cgColor
+            myCell.layer.shadowOffset = CGSize(width: 0, height: 2) // Смещение тени (по горизонтали и вертикали)
+            myCell.layer.shadowRadius = 4 // Радиус тени (чем больше, тем более размытой будет тень)
+            myCell.layer.shadowOpacity = 0.2 // Прозрачность тени (0 - полностью прозрачная, 1 - полностью непрозрачная)
+            myCell.layer.masksToBounds = false // Это позволяет тени выходить за границы ячейки
             return myCell
         } else {
             let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath)
@@ -92,43 +102,83 @@ extension HomePageViewController: UICollectionViewDataSource {
             return myCell
         }
     }
-    }
+}
 
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension HomePageViewController:  UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == self.collectionViewOne {
-            return CGSize(width: 311, height: 72)
-        } else {
+        if collectionView == self.topСollectionView  {
             return CGSize(width: 144, height: 200)
+            
+        } else if collectionView == self.averageСollectionView{
+            return CGSize(width: 120, height: 44)
+        } else {
+            return CGSize(width: view.bounds.width - 64, height: 72)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        if collectionView == self.collectionViewOne {
-            return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        if collectionView == self.topСollectionView {
+            return UIEdgeInsets(top: 10, left: 32, bottom: 10, right: 10)
+        } else if collectionView == self.averageСollectionView {
+            return UIEdgeInsets(top: 10, left: 32, bottom: 10, right: 10)
         } else {
-            return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+            return UIEdgeInsets(top: 10, left: 32, bottom: 10, right: 32)
         }
     }
 }
 
 extension HomePageViewController {
-
+    
     func setupCollection() {
         view.backgroundColor = R.Colors.background
+
+        view.addSubview(topСollectionView)
+        topСollectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topСollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 184),
+            topСollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            topСollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
+            topСollectionView.heightAnchor.constraint(equalToConstant: 216)
+        ])
+        topСollectionView.delegate = self
+        topСollectionView.dataSource = self
+        topСollectionView.register(TopСollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        topСollectionView.showsHorizontalScrollIndicator = false
         
-        collectionViewOne.delegate = self
-        collectionViewOne.dataSource = self
-        collectionViewOne.register(CollectionViewCell3.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-        view.addSubview(collectionViewOne)
+       
+        view.addSubview(averageСollectionView)
+        averageСollectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            averageСollectionView.topAnchor.constraint(equalTo: topСollectionView.bottomAnchor, constant: 10),
+            averageСollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            averageСollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
+            averageСollectionView.heightAnchor.constraint(equalToConstant: 50)
+        ])
         
-        collectionViewTwo.delegate = self
-        collectionViewTwo.dataSource = self
-        collectionViewTwo.register(CollectionViewCell2.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-        view.addSubview(collectionViewTwo)
+        averageСollectionView.delegate = self
+        averageСollectionView.dataSource = self
+        averageСollectionView.register(AverageСollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        averageСollectionView.showsHorizontalScrollIndicator = false
+        
+        view.addSubview(lowerCollectionView)
+        lowerCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        let height = 74
+        NSLayoutConstraint.activate([
+            lowerCollectionView.topAnchor.constraint(equalTo: averageСollectionView.bottomAnchor, constant: 10),
+            lowerCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            lowerCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
+            lowerCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 30),
+            lowerCollectionView.heightAnchor.constraint(equalToConstant: CGFloat(height * 5))
+        ])
+        
+        lowerCollectionView.delegate = self
+        lowerCollectionView.dataSource = self
+        lowerCollectionView.register(LowerCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        lowerCollectionView.showsVerticalScrollIndicator = false
+        
     }
 }

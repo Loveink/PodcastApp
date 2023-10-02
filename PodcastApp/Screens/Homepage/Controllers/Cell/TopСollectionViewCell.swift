@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CollectionViewCell2: UICollectionViewCell {
+final class TopСollectionViewCell: UICollectionViewCell {
     static let id = "CollectionViewCell2"
     
     private let stackView: UIStackView = {
@@ -49,7 +49,7 @@ final class CollectionViewCell2: UICollectionViewCell {
     }
 }
 
-private extension CollectionViewCell2 {
+private extension TopСollectionViewCell {
     func setupViews() {
         setupView(imagePinkView2)
         setupView(imageWhiteView2)
