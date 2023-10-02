@@ -8,17 +8,15 @@
 import UIKit
 import Foundation
 
-struct Item {
-    let title: String
-}
+//struct Item {
+//    let title: String
+//}
 
 // Создайте структуру для представления данных из JSON
 struct MyData: Codable {
     let objectId: String
     // Добавьте другие свойства, если они есть в вашем JSON
 }
-
-
 
 enum R {
     enum Colors {
@@ -46,9 +44,9 @@ enum R {
         }
     }
     
-    enum Fonts {
-        static func helvelticaRegular(with size: CGFloat) -> UIFont {
-            UIFont(name: "Helvetica", size: size) ?? UIFont()
-        }
-    }
+//    enum Fonts {
+//        static func helvelticaRegular(with size: CGFloat) -> UIFont {
+//            UIFont(name: "Helvetica", size: size) ?? UIFont()
+//        }
+//    }
 }

@@ -14,14 +14,14 @@ class HomePageViewController2: UIViewController {
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 16
+        layout.minimumLineSpacing = 8
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureAppearance()
+//        configureAppearance()
     }
 }
 
@@ -79,7 +79,7 @@ extension HomePageViewController2:  UICollectionViewDelegateFlowLayout {
       
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            collectionView.heightAnchor.constraint(equalToConstant: 220),
+//            collectionView.heightAnchor.constraint(equalToConstant: 220),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),

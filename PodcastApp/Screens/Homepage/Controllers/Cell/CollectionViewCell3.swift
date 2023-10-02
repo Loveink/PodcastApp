@@ -92,6 +92,7 @@ private extension CollectionViewCell3 {
 
                         // Обновите UI на основе данных из JSON
                         DispatchQueue.main.async { [self] in
+                            
                             title.text = myData.objectId
                             subtitle.text = myData.objectId
                         }

@@ -7,12 +7,43 @@
 
 import UIKit
 
+class collectionViews {
+
+    static func collectionViewOne() -> UICollectionView {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionViewOne = UICollectionView(frame: CGRect(x: 32, y: 350, width: 311, height: 300), collectionViewLayout: layout)
+        return collectionViewOne
+        
+    }
+    
+    static func collectionViewTwo() -> UICollectionView {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionViewTwo = UICollectionView(frame: CGRect(x: 32, y: 100, width: 250, height: 250), collectionViewLayout: layout)
+        return collectionViewTwo
+        
+    }
+    
+    
+}
+
 class HomePageViewController3: UIViewController {
+    
+    
+    let collectionViewOne = collectionViews.collectionViewOne()
+    let collectionViewTwo = collectionViews.collectionViewTwo()
+    var myArray = CollectionViewCell3.id
+    var myArray2 = CollectionViewCell2.id
+    
+    
     let cellReuseIdentifier = "MyCollectionViewCell3"
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .white
         return collectionView
@@ -20,7 +51,21 @@ class HomePageViewController3: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureAppearance()
+        collectionView.backgroundColor = R.Colors.background
+        view.backgroundColor = R.Colors.background
+        
+        collectionViewOne.delegate = self
+        collectionViewOne.dataSource = self
+        collectionViewOne.register(CollectionViewCell3.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        view.addSubview(collectionViewOne)
+
+
+        collectionViewTwo.delegate = self
+        collectionViewTwo.dataSource = self
+        collectionViewTwo.register(CollectionViewCell2.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        view.addSubview(collectionViewTwo)
+        
+//        configureAppearance()
     }
 }
 
@@ -28,15 +73,40 @@ class HomePageViewController3: UIViewController {
 extension HomePageViewController3: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if collectionView == self.collectionViewOne {
+               return myArray.count
+           } else {
+               return myArray2.count
+           }
+        
         // Верните количество ячеек, которые вы хотите отобразить
-        return cellReuseIdentifier.count
+//        return cellReuseIdentifier.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        customMyCell()
+        
+        if collectionView == self.collectionViewOne {
+               let myCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath)
+
+//               myCell.backgroundColor = UIColor.red
+
+               return myCell
+
+           } else {
+
+               let myCell2 = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath)
+
+//               myCell2.backgroundColor = UIColor.blue
+
+               return myCell2
+           }
+
+       }
+//        customMyCell()
         
     }
-}
+
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension HomePageViewController3:  UICollectionViewDelegateFlowLayout {
