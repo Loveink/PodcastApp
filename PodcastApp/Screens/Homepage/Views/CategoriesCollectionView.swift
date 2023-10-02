@@ -69,7 +69,7 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
       return UICollectionViewCell()
     }
     cell.configureCell(recipes[indexPath.row])
-    cell.id = recipes[indexPath.row].id
+    cell.id = Int(recipes[indexPath.row].id)
     return cell
   }
 

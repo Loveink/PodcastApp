@@ -11,7 +11,7 @@ import Kingfisher
 class EpisodeCell: UICollectionViewCell {
     
     var episode: EpisodeItemCell?
-  let options: KingfisherOptionsInfo = [
+    let options: KingfisherOptionsInfo = [
     .cacheOriginalImage
   ]
 // MARK: - User Interface
@@ -81,7 +81,7 @@ class EpisodeCell: UICollectionViewCell {
         self.addSubview(episodeImageView)
         self.addSubview(stackView)
         stackView.addArrangedSubview(episodeTitleLabel)
-//        stackView.addArrangedSubview(episodeDetaisLabel)
+        stackView.addArrangedSubview(episodeDetaisLabel)
     }
 
 
@@ -89,6 +89,8 @@ class EpisodeCell: UICollectionViewCell {
     DispatchQueue.main.async {
       self.episodeImageView.kf.setImage(with: URL(string: episode.image), options: self.options)
       self.episodeTitleLabel.text = episode.title
+      let formattedDuration = self.formatDuration(length: episode.duration)
+      self.episodeDetaisLabel.text = formattedDuration
       //      episodeDetaisLabel.text = "\(episode.episodeDutarion) | \(episode.episodeNumber) Eps"
     }
   }
@@ -118,6 +120,12 @@ extension EpisodeCell {
         
         NSLayoutConstraint.activate(constraints)
         
+    }
+
+  func formatDuration(length: Int) -> String {
+       let minutes = (length % 3600) / 60
+       let seconds = length % 60
+      return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 

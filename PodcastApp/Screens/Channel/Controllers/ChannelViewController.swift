@@ -254,7 +254,7 @@ extension ChannelViewController {
 
         for podcast in self.feeds {
           let imageURL = podcast.feedImage
-          let podcastItem = EpisodeItemCell(title: podcast.title, image: imageURL, audioURL: podcast.enclosureUrl)
+          let podcastItem = EpisodeItemCell(title: podcast.title, image: imageURL, audioURL: podcast.enclosureUrl, duration: podcast.enclosureLength)
           self.episodes.append(podcastItem)
           xmls.append(podcast.enclosureUrl)
         }

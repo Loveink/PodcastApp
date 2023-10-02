@@ -28,10 +28,10 @@ class MusicPlayer {
     private var currentURL: String?
     private var currentSongIndex: Int = 0
     private var currentPlayerType: PlayerType = .musicResults
-    private var musicResults: [EpisodeModel1] = []
+    private var musicResults: [EpisodeItemCell] = []
 
-    func loadPlayer(from episode: EpisodeModel1) {
-        guard let musicURL = URL(string: episode.url) else {
+    func loadPlayer(from episode: EpisodeItemCell) {
+      guard let musicURL = URL(string: episode.audioURL) else {
             print("Invalid music URL")
             return
         }
@@ -41,20 +41,20 @@ class MusicPlayer {
         playerItem = AVPlayerItem(url: musicURL)
         player = AVPlayer(playerItem: playerItem)
         player?.play()
-        currentURL = episode.url
+      currentURL = episode.audioURL
         delegate?.updatePlayButtonState(isPlaying: true)
-        delegate?.updateCurrentURL(episode.url)
+      delegate?.updateCurrentURL(episode.audioURL)
         songController?.setDurationTime()
         songController?.updateButtonImage(isPlay: true)
         updatePlayerValues()
     }
 
-    func playMusicWithURL(_ episode: EpisodeModel1) {
-        if isPlayingMusic(from: episode.url) {
+    func playMusicWithURL(_ episode: EpisodeItemCell) {
+      if isPlayingMusic(from: episode.audioURL) {
             pauseMusic()
         } else {
             loadPlayer(from: episode)
-            currentURL = episode.url
+          currentURL = episode.audioURL
         }
     }
 
@@ -91,14 +91,6 @@ class MusicPlayer {
         return duration.seconds
     }
 
-//    func updatePlayerValues() {
-//        player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 60)) { [weak self] CMTime in
-//            guard let self = self else { return }
-//            self.songController?.updateSlider(value: Float(CMTime.seconds))
-//            self.songController?.updateCurrentTimeLabel(duration: Int(CMTime.seconds))
-//        }
-//    }
-
   func updatePlayerValues() {
       player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 60), queue: DispatchQueue.main) { [weak self] CMTime in
           guard let self = self else { return }
@@ -129,7 +121,7 @@ class MusicPlayer {
         loadPlayer(from: previousEpisode)
     }
 
-    func updateMusicResults(_ results: [EpisodeModel1]) {
+    func updateMusicResults(_ results: [EpisodeItemCell]) {
         musicResults = results
         currentSongIndex = 0
     }

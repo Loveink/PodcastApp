@@ -12,7 +12,7 @@ import UIKit
 class FetchFunc: UIViewController {
 
   var audioPlayer: AVAudioPlayer?
-  var musicArray: [EpisodeModel1] = []
+  var musicArray: [ParsePodcast] = []
   var collectionView: UICollectionView
   var audioURLHandler: ((String) -> Void)?
 
@@ -80,24 +80,13 @@ class FetchFunc: UIViewController {
     collectionView1.reloadData()
   }
 
-//    func getMusic(audioURL: String?) {
-//        guard let audioURLString = audioURL, let audioURL = URL(string: audioURLString + ".mp3") else {
-//            print("URL for audio is invalid.")
-//            return
-//        }
-//
-//        playAudio(withURL: audioURL)
-//        print("play")
-//
-//  }
-
   func getMusic(audioURL: String?) {
       guard let audioURLString = audioURL else {
           print("URL for audio is invalid.")
           return
       }
       if let episode = musicArray.first {
-      MusicPlayer.instance.playMusicWithURL(episode)
+//      MusicPlayer.instance.playMusicWithURL(episode)
       print("play")
     }
   }
@@ -148,14 +137,14 @@ extension FetchFunc: XMLParserDelegate {
           if elementName == "item" {
               currentTitle = currentTitle.trimmingCharacters(in: .whitespacesAndNewlines)
               currentLength = currentLength.trimmingCharacters(in: .whitespacesAndNewlines)
-              let episode = EpisodeModel1(title: currentTitle, length: currentLength, url: currentURL, imageURL: currentImageURL, category: currentCategory)
+              let episode = ParsePodcast(title: currentTitle, length: currentLength, url: currentURL, imageURL: currentImageURL, category: currentCategory)
               musicArray.append(episode)
-              print(musicArray)
           } else if elementName == "title" {
               currentTitle = currentTitle.trimmingCharacters(in: .whitespacesAndNewlines)
           } else if elementName == "length" {
               currentLength = currentLength.trimmingCharacters(in: .whitespacesAndNewlines)
           }
+    print(musicArray)
       }
 
   func parser(_ parser: XMLParser, foundCharacters string: String) {
@@ -165,4 +154,12 @@ extension FetchFunc: XMLParserDelegate {
           currentLength += string
       }
   }
+}
+
+struct ParsePodcast {
+    let title: String
+    let length: String
+    let url: String
+    let imageURL: String
+    let category: String
 }

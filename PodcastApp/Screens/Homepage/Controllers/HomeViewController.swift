@@ -36,6 +36,8 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
     fetchPodcasts(dispatchGroup: dispatchGroup)
     dispatchGroup.notify(queue: .main) {
       print("All tasks are completed.")
+//      print(vc?.musicArray)
+
     }
       categoryCollectionView.delegate = self
   }

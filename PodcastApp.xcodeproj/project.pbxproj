@@ -23,6 +23,11 @@
 		5769D0DB2AC9C8FB00D93A56 /* SongViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0DA2AC9C8FB00D93A56 /* SongViewControllerProtocol.swift */; };
 		5769D0DD2AC9CAEC00D93A56 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0DC2AC9CAEC00D93A56 /* HomeViewController.swift */; };
 		5769D0DF2AC9DBB600D93A56 /* EpisodeItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0DE2AC9DBB600D93A56 /* EpisodeItemCell.swift */; };
+		5769D0E22ACADD4D00D93A56 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0E02ACADD4D00D93A56 /* DataModel.xcdatamodeld */; };
+		5769D0E42ACAE49700D93A56 /* SaveToCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0E32ACAE49700D93A56 /* SaveToCoreData.swift */; };
+		5769D0E52ACAFFAA00D93A56 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391CB2AC0CBBE00BD7E82 /* Label.swift */; };
+		5769D0E62ACAFFBD00D93A56 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391C62AC0CA9F00BD7E82 /* Fonts.swift */; };
+		5769D0E72ACAFFC000D93A56 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */; };
 		57724E902ABDAB52006C3318 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57724E8F2ABDAB52006C3318 /* AppDelegate.swift */; };
 		57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57724E912ABDAB52006C3318 /* SceneDelegate.swift */; };
 		57724E992ABDAB54006C3318 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57724E982ABDAB54006C3318 /* Assets.xcassets */; };
@@ -35,17 +40,13 @@
 		57B391B22ABED95400BD7E82 /* HomeViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391B12ABED95400BD7E82 /* HomeViewController1.swift */; };
 		57B391B42ABED98100BD7E82 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391B32ABED98100BD7E82 /* SearchViewController.swift */; };
 		57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391B52ABED9B700BD7E82 /* FavoritesViewController.swift */; };
-		57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391B72ABED9E900BD7E82 /* ProfileSettingsViewController.swift */; };
 		57B391BC2AC0C92C00BD7E82 /* PlusJakartaSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57B391B92AC0C92C00BD7E82 /* PlusJakartaSans-Medium.ttf */; };
 		57B391BD2AC0C92C00BD7E82 /* PlusJakartaSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57B391BA2AC0C92C00BD7E82 /* PlusJakartaSans-SemiBold.ttf */; };
 		57B391BE2AC0C92C00BD7E82 /* PlusJakartaSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57B391BB2AC0C92C00BD7E82 /* PlusJakartaSans-Bold.ttf */; };
 		57B391C22AC0C95000BD7E82 /* Manrope-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57B391C02AC0C95000BD7E82 /* Manrope-Bold.ttf */; };
 		57B391C32AC0C95000BD7E82 /* Manrope-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57B391C12AC0C95000BD7E82 /* Manrope-Regular.ttf */; };
-		57B391C72AC0CA9F00BD7E82 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391C62AC0CA9F00BD7E82 /* Fonts.swift */; };
 		57B391C82AC0CAD800BD7E82 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 57B391C52AC0CA6C00BD7E82 /* SF-Pro-Display-Regular.otf */; };
 		57B391C92AC0CAD800BD7E82 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 57B391C42AC0CA5D00BD7E82 /* SF-Pro-Display-Semibold.otf */; };
-		57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391CB2AC0CBBE00BD7E82 /* Label.swift */; };
-		57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */; };
 		57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391D82AC1694300BD7E82 /* CreateAccountViewController.swift */; };
 		57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391DA2AC1695700BD7E82 /* CreateAccountDetailViewController.swift */; };
 		57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391DC2AC1696C00BD7E82 /* LoginViewController.swift */; };
@@ -54,7 +55,6 @@
 		57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */; };
 		57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */; };
 		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
-		57B392092AC16D2800BD7E82 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 57B392082AC16D2800BD7E82 /* Realm */; };
 		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
 		A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED22AC57F320013AC4B /* ChannelModel.swift */; };
 		A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */; };
@@ -84,6 +84,8 @@
 		5769D0DA2AC9C8FB00D93A56 /* SongViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewControllerProtocol.swift; sourceTree = "<group>"; };
 		5769D0DC2AC9CAEC00D93A56 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		5769D0DE2AC9DBB600D93A56 /* EpisodeItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeItemCell.swift; sourceTree = "<group>"; };
+		5769D0E12ACADD4D00D93A56 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		5769D0E32ACAE49700D93A56 /* SaveToCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToCoreData.swift; sourceTree = "<group>"; };
 		57724E8C2ABDAB52006C3318 /* PodcastApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57724E8F2ABDAB52006C3318 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57724E912ABDAB52006C3318 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,7 +136,6 @@
 				57B391A02ABED51F00BD7E82 /* FirebaseAnalytics in Frameworks */,
 				57B391A22ABED51F00BD7E82 /* FirebaseAuth in Frameworks */,
 				57B391A42ABED51F00BD7E82 /* FirebaseFirestore in Frameworks */,
-				57B392092AC16D2800BD7E82 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +217,7 @@
 		57B3918E2ABED00900BD7E82 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				57B392062AC16C3F00BD7E82 /* Realm */,
+				57B392062AC16C3F00BD7E82 /* CoreData */,
 				57B3919D2ABED31D00BD7E82 /* Firebase */,
 				57B391912ABED03800BD7E82 /* API */,
 				5769D0D42AC876BC00D93A56 /* MusicPlayer.swift */,
@@ -707,11 +708,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		57B392062AC16C3F00BD7E82 /* Realm */ = {
+		57B392062AC16C3F00BD7E82 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				5769D0E02ACADD4D00D93A56 /* DataModel.xcdatamodeld */,
+				5769D0E32ACAE49700D93A56 /* SaveToCoreData.swift */,
 			);
-			path = Realm;
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		A0594EDA2AC5A0680013AC4B /* Models */ = {
@@ -742,7 +745,6 @@
 				57B391A12ABED51F00BD7E82 /* FirebaseAuth */,
 				57B391A32ABED51F00BD7E82 /* FirebaseFirestore */,
 				57B391A62ABED54300BD7E82 /* Kingfisher */,
-				57B392082AC16D2800BD7E82 /* Realm */,
 				57B3920A2AC16D2800BD7E82 /* RealmSwift */,
 			);
 			productName = PodcastApp;
@@ -811,9 +813,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5769D0E72ACAFFC000D93A56 /* CustomColors.swift in Sources */,
+				5769D0E62ACAFFBD00D93A56 /* Fonts.swift in Sources */,
+				5769D0E52ACAFFAA00D93A56 /* Label.swift in Sources */,
 				57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */,
 				57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */,
-				57B391C72AC0CA9F00BD7E82 /* Fonts.swift in Sources */,
 				57B391B42ABED98100BD7E82 /* SearchViewController.swift in Sources */,
 				5769D0D72AC972B500D93A56 /* MiniPlayerVC.swift in Sources */,
 				5769D0DD2AC9CAEC00D93A56 /* HomeViewController.swift in Sources */,
@@ -827,25 +831,21 @@
 				E75FA2EF2AC48BFF005C947C /* SearchResultView.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
 				E75FA2E72AC1FBC3005C947C /* TopGenresView.swift in Sources */,
-				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
+				5769D0E22ACADD4D00D93A56 /* DataModel.xcdatamodeld in Sources */,
 				5769D0D52AC876BC00D93A56 /* MusicPlayer.swift in Sources */,
-				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
 				E75FA2ED2AC2D45A005C947C /* BrowseAllView.swift in Sources */,
 				5769D0CE2AC76FC700D93A56 /* ImageCollectionViewCell.swift in Sources */,
-				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
 				5769D0C02AC76F8400D93A56 /* NetworkManager.swift in Sources */,
 				E75FA2E52AC1BE1A005C947C /* CustomSearchBar.swift in Sources */,
 				A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */,
 				5769D0BF2AC76F8400D93A56 /* Episode.swift in Sources */,
-				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
-				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
 				5769D0BE2AC76F8400D93A56 /* Podcast.swift in Sources */,
 				5769D0D92AC972E700D93A56 /* PodcastsSingltone.swift in Sources */,
 				A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */,
 				5769D0C92AC76FA700D93A56 /* CategoryCell.swift in Sources */,
-				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
 				A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */,
 				5769D0D32AC809F900D93A56 /* FetchFunc.swift in Sources */,
+				5769D0E42ACAE49700D93A56 /* SaveToCoreData.swift in Sources */,
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
 				57B391B22ABED95400BD7E82 /* HomeViewController1.swift in Sources */,
 				5769D0C22AC76FA000D93A56 /* PodcastItem.swift in Sources */,
@@ -1121,17 +1121,25 @@
 			package = 57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
-		57B392082AC16D2800BD7E82 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
 		57B3920A2AC16D2800BD7E82 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		5769D0E02ACADD4D00D93A56 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5769D0E12ACADD4D00D93A56 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 5769D0E12ACADD4D00D93A56 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 57724E842ABDAB52006C3318 /* Project object */;
 }
