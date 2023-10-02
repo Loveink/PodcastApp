@@ -13,10 +13,10 @@ struct Item {
 }
 
 // Создайте структуру для представления данных из JSON
-//struct MyData: Codable {
-//    let objectId: String
-//    // Добавьте другие свойства, если они есть в вашем JSON
-//}
+struct MyData: Codable {
+    let objectId: String
+    // Добавьте другие свойства, если они есть в вашем JSON
+}
 
 
 

@@ -32,23 +32,11 @@ final class CollectionViewCell2: UICollectionViewCell {
         return imagePinkView
     }()
     
-    
-        
-    private let title2: UILabel = {
-            let lable = UILabel()
-            lable.text = "Music & Fun"
-            lable.font = R.Fonts.helvelticaRegular(with: 14)
-            lable.textColor = R.Colors.titleGray
-            return lable
-        }()
-    
-        private let subtitle2: UILabel = {
-            let lable = UILabel()
-            lable.text = "84 Podcast"
-            lable.font = R.Fonts.helvelticaRegular(with: 12)
-            lable.textColor = R.Colors.inactive
-            return lable
-        }()
+
+    private let title2 = UILabel.makeLabel(text: "title2", font: R.Fonts.helvelticaRegular(with: 14), textColor: R.Colors.titleGray)
+
+    private let subtitle2 = UILabel.makeLabel(text: "subtitle2", font: R.Fonts.helvelticaRegular(with: 14), textColor: R.Colors.titleGray)
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)

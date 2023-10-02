@@ -40,36 +40,14 @@ final class CollectionViewCell3: UICollectionViewCell {
         return view
     }()
     
-    private let title: UILabel = {
-        let lable = UILabel()
-        lable.text = "Sruput Nendang"
-        lable.font = R.Fonts.helvelticaRegular(with: 14)
-        lable.textColor = R.Colors.titleGray
-        return lable
-    }()
-    
-    private let subtitle: UILabel = {
-        let lable = UILabel()
-        lable.text = "Music & Fun"
-        lable.font = R.Fonts.helvelticaRegular(with: 12)
-        lable.textColor = R.Colors.inactive
-        return lable
-    }()
-    private let title2: UILabel = {
-        let lable = UILabel()
-        lable.text = "Gofar Hilman"
-        lable.font = R.Fonts.helvelticaRegular(with: 12)
-        lable.textColor = R.Colors.titleGray
-        return lable
-    }()
-    
-    private let subtitle2: UILabel = {
-        let lable = UILabel()
-        lable.text = "23 Eps"
-        lable.font = R.Fonts.helvelticaRegular(with: 12)
-        lable.textColor = R.Colors.inactive
-        return lable
-    }()
+    private let title = UILabel.makeLabelForCells(text: "Title", font: .manropeBold(size: 14), textColor: R.Colors.titleGray, numberOfLines: 1)
+
+    private let subtitle = UILabel.makeLabelForCells(text: "subtitle", font: .manropeRegular(size: 14), textColor: R.Colors.titleGray, numberOfLines: 1)
+
+    private let title2 = UILabel.makeLabelForCells(text: "title2", font: .manropeRegular(size: 14), textColor: R.Colors.titleGray, numberOfLines: 1)
+
+    private let subtitle2 = UILabel.makeLabelForCells(text: "subtitle2", font: .manropeRegular(size: 14), textColor: R.Colors.titleGray, numberOfLines: 1)
+
     
     private let imagePinkView: UIImageView = {
         let imagePinkView = UIImageView()
@@ -86,7 +64,8 @@ final class CollectionViewCell3: UICollectionViewCell {
         setupViews()
         constaintViews()
         heartViewTap()
-//        configureAppearance()
+        configureAppearance()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -100,28 +79,31 @@ final class CollectionViewCell3: UICollectionViewCell {
 }
 
 private extension CollectionViewCell3 {
-//    // Загрузите JSON из файла или с удаленного сервера
-//    func configureAppearance() {
-//        if let url = URL(string: "https://") {
-//            URLSession.shared.dataTask(with: url) { (data, response, error) in
-//                if let data = data {
-//                    do {
-//                        // Распарсите JSON
-//                        let myData = try JSONDecoder().decode(MyData.self, from: data)
-//
-//                        // Обновите UI на основе данных из JSON
-//                        DispatchQueue.main.async { [self] in
-//                            title.text = myData.objectId
-//                        }
-//                    } catch {
-//                        print("Ошибка при распарсивании JSON: \(error)")
-//                    }
-//                } else if let error = error {
-//                    print("Ошибка при загрузке данных: \(error)")
-//                }
-//            }.resume()
-//        }
-//    }
+    
+    
+    // Загрузите JSON из файла или с удаленного сервера
+    func configureAppearance() {
+        if let url = URL(string: "https://ormp.ros.chat/ajax/config.json") {
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let data = data {
+                    do {
+                        // Распарсите JSON
+                        let myData = try JSONDecoder().decode(MyData.self, from: data)
+
+                        // Обновите UI на основе данных из JSON
+                        DispatchQueue.main.async { [self] in
+                            title.text = myData.objectId
+                            subtitle.text = myData.objectId
+                        }
+                    } catch {
+                        print("Ошибка при распарсивании JSON: \(error)")
+                    }
+                } else if let error = error {
+                    print("Ошибка при загрузке данных: \(error)")
+                }
+            }.resume()
+        }
+    }
     
     func setupViews() {
     setupView(heartView)
