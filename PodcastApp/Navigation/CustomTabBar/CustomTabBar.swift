@@ -27,7 +27,7 @@ class CustomTabBar: UITabBarController, UITabBarControllerDelegate {
     let favorites = FavoritesViewController()
     favorites.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Bookmark")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "BookmarkFill")?.withRenderingMode(.alwaysOriginal))
 
-    let settings = ProfileSettingsViewController()
+    let settings = NowPlayingViewController()
     settings.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Setting")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "SettingFill")?.withRenderingMode(.alwaysOriginal))
 
     setViewControllers([homepage, search, favorites, settings], animated: true)

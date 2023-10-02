@@ -85,7 +85,7 @@ class FavouriteChannelCell: UITableViewCell {
         stackView.addArrangedSubview(favChannelTitleLabel)
         stackView.addArrangedSubview(episodesNumberLabel)
     }
-    
+    //PodcastItemCell
     func setup(withChanel chanel: ChannelModel) {
         favChannelImageView.image = UIImage(named: chanel.imageName)
         favChannelTitleLabel.text = chanel.channelName

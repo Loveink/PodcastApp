@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
             let networkService = NetworkService()
             dispatchGroup.enter() // Входим в группу
 
-            networkService.fetchData(forPath: "/podcasts/trending?max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
+            networkService.fetchData(forPath: "/search/byterm?q=batman") { [weak self] (result: Result<PodcastSearch, APIError>) in
                 guard let self = self else { return }
 
                 defer {
