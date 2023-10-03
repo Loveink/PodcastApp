@@ -8,7 +8,7 @@
 import UIKit
 
 final class TopСollectionViewCell: UICollectionViewCell {
-    static let id = "CollectionViewCell2"
+    static let id = "Cell"
     
     private let stackView: UIStackView = {
         let view = UIStackView()
@@ -59,7 +59,6 @@ private extension TopСollectionViewCell {
     
     func constaintViews() {
         NSLayoutConstraint.activate([
-            
             imagePinkView2.heightAnchor.constraint(equalToConstant: 200),
             imagePinkView2.widthAnchor.constraint(equalToConstant: 144),
             

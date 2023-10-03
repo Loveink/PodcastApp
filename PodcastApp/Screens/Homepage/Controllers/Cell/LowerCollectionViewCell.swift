@@ -20,7 +20,6 @@ final class LowerCollectionViewCell: UICollectionViewCell {
     
     var isFilled: Bool = false {
         didSet {
-            // Меняем цвет изображения в зависимости от состояния
             let imageColor = isFilled ? R.Colors.heartDone : R.Colors.heartNotDone
             heartView.tintColor = imageColor
         }
@@ -40,15 +39,11 @@ final class LowerCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let title = UILabel.makeLabelForCells(text: "Title", font: .manropeBold(size: 14), textColor: .textGrey, numberOfLines: 1)
+    private let title = UILabel.makeLabel(text: "Title", font: .manropeBold(size: 14), textColor: .textGrey)
+    private let subtitle = UILabel.makeLabel(text: "subtitle", font: .manropeRegular(size: 14), textColor: .textGrey)
+    private let title2 = UILabel.makeLabel(text: "title2", font: .manropeRegular(size: 14), textColor: .textGrey)
+    private let subtitle2 = UILabel.makeLabel(text: "subtitle2", font: .manropeRegular(size: 14), textColor: .textGrey)
 
-    private let subtitle = UILabel.makeLabelForCells(text: "subtitle", font: .manropeRegular(size: 14), textColor: .textGrey, numberOfLines: 1)
-
-    private let title2 = UILabel.makeLabelForCells(text: "title2", font: .manropeRegular(size: 14), textColor: .textGrey, numberOfLines: 1)
-
-    private let subtitle2 = UILabel.makeLabelForCells(text: "subtitle2", font: .manropeRegular(size: 14), textColor: .textGrey, numberOfLines: 1)
-
-    
     private let imagePinkView: UIImageView = {
         let imagePinkView = UIImageView()
         imagePinkView.image = R.Images.Overview.imagePink

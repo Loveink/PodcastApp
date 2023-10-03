@@ -43,7 +43,6 @@ private extension AverageСollectionViewCell {
             
             title2.centerXAnchor.constraint(equalTo: centerXAnchor),
             title2.centerYAnchor.constraint(equalTo: centerYAnchor)
-//            title2.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
         ])
     }
 }
