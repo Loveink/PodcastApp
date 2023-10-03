@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol AccountImageViewDelegate: AnyObject {
+    func changePictureTapped()
+}
+
 class AccountImageView: UIView {
+    
+    weak var delegate: AccountImageViewDelegate?
     
     //MARK: - UI Components
     
@@ -38,19 +44,19 @@ class AccountImageView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         addSubviews()
         setupConstraints()
+        editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Layout
     
     
     private func addSubviews() {
-        self.addSubview(profileImage)
-        self.addSubview(editButton)
+        addSubview(profileImage)
+        addSubview(editButton)
     }
     
     private func setupConstraints() {
@@ -66,4 +72,10 @@ class AccountImageView: UIView {
             editButton.heightAnchor.constraint(equalToConstant: 32),
         ])
     }
+    
+    //MARK: - Methods
+    
+    @objc private func editButtonTapped() {
+            delegate?.changePictureTapped()
+        }
 }

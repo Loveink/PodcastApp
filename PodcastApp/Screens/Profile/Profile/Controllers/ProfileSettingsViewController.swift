@@ -49,6 +49,7 @@ class ProfileSettingsViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Log Out", for: .normal)
         button.setTitleColor(.blueBorder, for: .normal)
+        button.titleLabel?.font = UIFont.plusJakartaSansMedium(size: 16)
         button.backgroundColor = .clear
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.blueBorder.cgColor
@@ -77,6 +78,7 @@ class ProfileSettingsViewController: UIViewController {
         tableView.dataSource = self
         addSubviews()
         setupConstraints()
+        logOutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         
         
         // Do any additional setup after loading the view.
@@ -131,6 +133,13 @@ class ProfileSettingsViewController: UIViewController {
         }
     }
     
+    @objc private func logoutButtonTapped() {
+        let vc = LoginViewController()
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
 
 //MARK: - Extensions
@@ -165,10 +174,6 @@ extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSou
         checkmark.image = imageForCheckmark
         checkmark.tintColor = .symbolsPurple
         cell.accessoryView = checkmark
-        
-        
-        
-        //cell.accessoryType = .detailDisclosureButton
         return cell
     }
 

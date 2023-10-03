@@ -38,11 +38,11 @@ class AccountSettingsViewController: UIViewController {
         addSubviews()
         setupConstraints()
         setupNavigation()
-        
+        accountImageView.delegate = self
     }
     
     private func setupNavigation() {
-    
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = UIColor.black
         navigationItem.leftBarButtonItem = backButton
@@ -69,7 +69,7 @@ class AccountSettingsViewController: UIViewController {
             accountImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             accountImageView.widthAnchor.constraint(equalToConstant: 100),
             accountImageView.heightAnchor.constraint(equalToConstant: 100),
-        
+            
             
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 261),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -80,16 +80,26 @@ class AccountSettingsViewController: UIViewController {
             accountSettingsView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             accountSettingsView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             accountSettingsView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            accountSettingsView.heightAnchor.constraint(equalToConstant: 760),
+            accountSettingsView.heightAnchor.constraint(equalToConstant: 700),
             accountSettingsView.widthAnchor.constraint(equalToConstant: screenWidth)
         ])
     }
     
     //MARK: - Methods
-
+    
     @objc private func backButtonTapped() {
         print("back button tapped")
         tabBarController?.tabBar.isHidden = false
         navigationController?.popViewController(animated: true)
     }
+}
+ 
+extension AccountSettingsViewController: AccountImageViewDelegate {
+    func changePictureTapped() {
+        let vc = ChangePictureViewController()
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true, completion: nil)
+    }
+    
 }

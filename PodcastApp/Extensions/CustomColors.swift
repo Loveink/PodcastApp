@@ -17,6 +17,10 @@ extension UIColor {
         return UIColor(red: 0.259, green: 0.247, blue: 0.318, alpha: 1)
     }
     
+    static var textRed: UIColor {
+        return UIColor(red: 0.898, green: 0.224, blue: 0.208, alpha: 1)
+    }
+    
     static var blueMiniPlayer: UIColor {
         return UIColor(red: 0.8, green: 0.882, blue: 0.984, alpha: 1)
     }
@@ -43,5 +47,9 @@ extension UIColor {
     
     static var symbolsPurple: UIColor {
         return UIColor(red:0.52, green:0.59, blue:0.53, alpha:1)
+    }
+    
+    static var lightGray: UIColor {
+        return UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
     }
 }
