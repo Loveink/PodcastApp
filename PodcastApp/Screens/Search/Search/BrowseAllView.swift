@@ -9,8 +9,6 @@ import UIKit
 
 class BrowseAllView: UIView {
     
-    let categoryList = ["Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty"]
-    
     var titleLabel = UILabel()
     var collectionView: UICollectionView!
     
@@ -20,6 +18,7 @@ class BrowseAllView: UIView {
         super.init(frame: .zero)
         configureUI()
         setConstraints()
+        
     }
     
     required init?(coder: NSCoder) {

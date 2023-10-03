@@ -49,6 +49,8 @@
 		A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */; };
 		A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */; };
 		A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */; };
+		E7B4C16E2ACB467B00B27053 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C16D2ACB467B00B27053 /* View.swift */; };
+		E7B4C1702ACB48CB00B27053 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C16F2ACB48CB00B27053 /* CategoryList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteChannelCell.swift; sourceTree = "<group>"; };
 		A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
 		A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
+		E7B4C16D2ACB467B00B27053 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		E7B4C16F2ACB48CB00B27053 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryList.swift; path = PodcastApp/Extensions/CategoryList.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,8 @@
 				57B391C62AC0CA9F00BD7E82 /* Fonts.swift */,
 				57B391CB2AC0CBBE00BD7E82 /* Label.swift */,
 				57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */,
+				E57CF00E2AC59C92001600A8 /* TextField.swift */,
+				E7B4C16D2ACB467B00B27053 /* View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -518,6 +524,7 @@
 		57B391F22AC16ADB00BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E7B4C16F2ACB48CB00B27053 /* CategoryList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -747,6 +754,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B4C16E2ACB467B00B27053 /* View.swift in Sources */,
+				5769D0E92ACB020E00D93A56 /* HomeViewController1.swift in Sources */,
+				5769D0E82ACB01AC00D93A56 /* ProfileSettingsViewController.swift in Sources */,
+				5769D0E72ACAFFC000D93A56 /* CustomColors.swift in Sources */,
+				5769D0E62ACAFFBD00D93A56 /* Fonts.swift in Sources */,
+				5769D0E52ACAFFAA00D93A56 /* Label.swift in Sources */,
 				57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */,
 				57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */,
 				57B391C72AC0CA9F00BD7E82 /* Fonts.swift in Sources */,
@@ -773,6 +786,8 @@
 				57B391B22ABED95400BD7E82 /* HomeViewController.swift in Sources */,
 				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
 				57B391B62ABED9B700BD7E82 /* FavoritesViewController.swift in Sources */,
+				5769D0DF2AC9DBB600D93A56 /* EpisodeItemCell.swift in Sources */,
+				E7B4C1702ACB48CB00B27053 /* CategoryList.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
 				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,

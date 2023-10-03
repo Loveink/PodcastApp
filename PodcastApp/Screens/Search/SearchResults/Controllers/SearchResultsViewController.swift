@@ -9,8 +9,13 @@ import UIKit
 
 class SearchResultsViewController: UIViewController {
 
+    var feeds: [Feed] = []
+    let dispatchGroup = DispatchGroup()
+    let networkService = NetworkService()
+    
     let searchBar = CustomSearchBar()
     let searchResult = SearchResultView()
+    let categoryCollectionView = CategoryC()
     
     let backButton = UIButton()
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -22,9 +27,13 @@ class SearchResultsViewController: UIViewController {
 //            -----------
 //            API REQUEST
 //            -----------
+        
+        fetchPodcasts(dispatchGroup: dispatchGroup)
+
         searchBar.textField.text = text
     }
     
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -44,6 +53,37 @@ class SearchResultsViewController: UIViewController {
 //        after API response
 //        searchResult.configureView(<#T##title: String##String#>, <#T##image: UIImage##UIImage#>, <#T##episodes: String##String#>, <#T##creator: String##String#>)
         
+    }
+    
+    
+    
+    func fetchPodcasts(dispatchGroup: DispatchGroup) {
+        let networkService = NetworkService()
+        dispatchGroup.enter() // Входим в группу
+        
+        networkService.fetchData(forPath: "/podcasts/trending?cat=News") { [weak self] (result: Result<PodcastSearch, APIError>) in
+            guard let self = self else { return }
+            
+            defer {
+                dispatchGroup.leave() // Покидаем группу после завершения запроса
+            }
+            
+            switch result {
+            case .success(let podcastResponse):
+                self.feeds.append(contentsOf: podcastResponse.feeds)
+                
+                for podcast in self.feeds {
+                    let imageURL = podcast.image
+                    let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id)
+                    self.categoryCollectionView.recipes.append(podcastItem)
+                    
+                    id.append(podcast.id)
+                }
+                
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
     }
     
     

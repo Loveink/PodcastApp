@@ -9,8 +9,6 @@ import UIKit
 
 class TopGenresView: UIView {
     
-    let categoryList = ["TopGenresView", "TopGenresView", "TopGenresView", "Fashion Top Genres View TopGenresView", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty"]
-    
     var titleLabel = UILabel.makeLabel(text: "Top Genres", font: .manropeBold(size: 18), textColor: .black)
     let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
@@ -111,16 +109,14 @@ class TopGenresView: UIView {
 
 extension TopGenresView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryList.count
-    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { topGenresList.count }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCell.identifier, for: indexPath) as? GenreCell else {
             return UICollectionViewCell()
         }
-        cell.configureCell(categoryList[indexPath.row], indexPath.row)
+        cell.configureCell(topGenresList[indexPath.row], indexPath.row)
         return cell
     }
     
