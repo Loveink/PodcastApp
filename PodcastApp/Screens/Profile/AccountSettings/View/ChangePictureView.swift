@@ -8,7 +8,7 @@
 import UIKit
 
 class ChangePictureView: UIView {
-
+    
     //MARK: - UI Components
     
     private let titleLabel = UILabel.makeLabel(text: "Change you picture", font: UIFont.plusJakartaSansSemiBold(size: 20), textColor: .black)
@@ -61,12 +61,9 @@ class ChangePictureView: UIView {
         addSubview(titleLabel)
         addSubview(lineView)
         addSubview(stackView)
-        
         stackView.addArrangedSubview(takePhotoButton)
         stackView.addArrangedSubview(choosePhotoButton)
         stackView.addArrangedSubview(deletePhotoButton)
-
-        
     }
     
     private func setupConstraints() {
@@ -86,5 +83,5 @@ class ChangePictureView: UIView {
         ])
     }
     
-
+    
 }

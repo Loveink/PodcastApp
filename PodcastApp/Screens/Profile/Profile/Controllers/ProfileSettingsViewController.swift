@@ -30,15 +30,13 @@ class ProfileSettingsViewController: UIViewController {
     
     private var profileImage: UIImageView = {
         let image = UIImageView()
-        //image.image =
-        image.frame = CGRect(x: 0, y: 0, width: 48, height: 48)
         image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
+        image.clipsToBounds = false
         image.isUserInteractionEnabled = true
         image.backgroundColor = .pinkBackground
         image.layer.cornerRadius = 12
-        image.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        image.layer.shadowOpacity = 1
+        image.layer.shadowColor = UIColor.black.cgColor
+        image.layer.shadowOpacity = 0.25
         image.layer.shadowRadius = 4
         image.layer.shadowOffset = CGSize(width: 0, height: 4)
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -79,9 +77,6 @@ class ProfileSettingsViewController: UIViewController {
         addSubviews()
         setupConstraints()
         logOutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     //MARK: - Layout
@@ -99,7 +94,7 @@ class ProfileSettingsViewController: UIViewController {
             profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             profileImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             profileImage.widthAnchor.constraint(equalToConstant: 48),
-            profileImage.heightAnchor.constraint(equalToConstant: 52),
+            profileImage.heightAnchor.constraint(equalToConstant: 48),
             
             userNameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
             userNameLabel.topAnchor.constraint(equalTo: profileImage.topAnchor),
@@ -118,9 +113,6 @@ class ProfileSettingsViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             tableView.bottomAnchor.constraint(equalTo: logOutButton.topAnchor, constant: -12)
-            
-            
-            
         ])
     }
     

@@ -7,6 +7,8 @@
 
 import UIKit
 
+//MARK: - AccountImageViewDelegate
+
 protocol AccountImageViewDelegate: AnyObject {
     func changePictureTapped()
 }
@@ -76,6 +78,6 @@ class AccountImageView: UIView {
     //MARK: - Methods
     
     @objc private func editButtonTapped() {
-            delegate?.changePictureTapped()
-        }
+        delegate?.changePictureTapped()
+    }
 }

@@ -71,10 +71,7 @@ class ProfileSettingsViewCell: UITableViewCell {
             titleLabel.centerYAnchor.constraint(equalTo: iconBackground.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: iconBackground.trailingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-            
-            
         ])
-        
     }
     
     //MARK: - Methods
@@ -82,8 +79,5 @@ class ProfileSettingsViewCell: UITableViewCell {
     func configure(image: UIImage, title: String) {
         iconImageView.image = image
         titleLabel.text = title
-        
-        
     }
-    
 }

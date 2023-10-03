@@ -79,7 +79,6 @@ class AccountSettingsView: UIView {
     //MARK: - Layout
     
     private func addSubviews() {
-        
         self.addSubview(firstNameField)
         self.addSubview(lastNameField)
         self.addSubview(emailField)
@@ -95,7 +94,6 @@ class AccountSettingsView: UIView {
         self.addSubview(saveButton)
         
         birthdayField.addSubview(calendarButton)
-        
     }
     
     private func setupConstraints() {

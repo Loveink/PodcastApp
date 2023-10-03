@@ -50,12 +50,14 @@ class ChangePictureViewController: UIViewController {
         ])
     }
     
+    //MARK: - Methods
+    
     private func setupTapGesture() {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-            view.addGestureRecognizer(tapGesture)
-        }
-
-        @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
-            dismiss(animated: true, completion: nil)
-        }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
+        dismiss(animated: true, completion: nil)
+    }
 }

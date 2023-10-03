@@ -93,7 +93,9 @@ class AccountSettingsViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 }
- 
+
+//MARK: - AccountImageViewDelegate
+
 extension AccountSettingsViewController: AccountImageViewDelegate {
     func changePictureTapped() {
         let vc = ChangePictureViewController()
