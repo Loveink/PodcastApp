@@ -6,6 +6,7 @@ class PagesViewController: UIPageViewController {
 
     var pages = [UIViewController]()
     let initialPage = 0
+    var nextIndex = 0
 
     // MARK: - UI Elements
 
@@ -20,7 +21,7 @@ class PagesViewController: UIPageViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Skip", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
-        $0.addTarget(self, action: #selector(skipTapped(_:)), for: .primaryActionTriggered)
+        $0.addTarget(self, action: #selector(goToLoginPage(_:)), for: .primaryActionTriggered)
         return $0
     }(UIButton())
 
@@ -115,16 +116,6 @@ extension PagesViewController {
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
             nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60)
         ])
-
-//        pageControlBottomAnchor = view.bottomAnchor.constraint(equalToSystemSpacingBelow: pageControl.bottomAnchor, multiplier: 4)
-//        skipButtonBottomAnchor = skipButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: -20)
-        
-//        nextButtonBottomAnchor = nextButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.bottomAnchor, multiplier: -40)
-//        nextButtonTrailingAnchor = nextButton.trailingAnchor.constraint(equalToSystemSpacingAfter: view.trailingAnchor, multiplier: -40)
-
-//        nextButtonTrailingAnchor?.isActive = true
-//        skipButtonBottomAnchor?.isActive = true
-//        nextButtonBottomAnchor?.isActive = true
     }
 }
 
@@ -136,10 +127,13 @@ extension PagesViewController: UIPageViewControllerDataSource {
 
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
 
-        if currentIndex == 0 {
-            return pages.last
-        } else {
+        nextIndex = currentIndex - 1
+
+        if currentIndex != 0 {
+            pageControl.currentPage = nextIndex
             return pages[currentIndex - 1]
+        } else {
+            return nil
         }
     }
 
@@ -147,62 +141,52 @@ extension PagesViewController: UIPageViewControllerDataSource {
 
         guard let currentIndex = pages.firstIndex(of: viewController) else { return nil }
 
+        nextIndex = currentIndex + 1
+
         if currentIndex < pages.count - 1 {
+            pageControl.currentPage = nextIndex
             return pages[currentIndex + 1]
         } else {
-            return pages.first
-        }
-    }
-}
-
-    // MARK: - Delegate
-
-extension PagesViewController: UIPageViewControllerDelegate {
-
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-
-        guard let viewControllers = pageViewController.viewControllers else { return }
-        guard let currentIndex = pages.firstIndex(of: viewControllers[0]) else { return }
-
-        pageControl.currentPage = currentIndex
-        animateControlsIfNeeded()
-    }
-
-    private func animateControlsIfNeeded() {
-        let lastPage = pageControl.currentPage == pages.count - 1
-
-        if lastPage {
+            let loginVC = LoginViewController()
             hideControls()
-        } else {
-            showControls()
+            return loginVC
         }
-
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5, delay: 0, options: [.curveEaseOut], animations: {
-            self.view.layoutIfNeeded()
-        }, completion: nil)
     }
 
     private func hideControls() {
-//        pageControlBottomAnchor?.constant = -80
-    }
-
-    private func showControls() {
-//        pageControlBottomAnchor?.constant = -30
+        self.skipButton.isHidden = true
+        self.nextButton.isHidden = true
+        self.pageControl.isHidden = true
     }
 }
 
+    // MARK: - Extension
+
 extension PagesViewController {
+
+    func goToNextPage() {
+
+        guard let currentPage = viewControllers?.first as? OnboardingViewController, let currentIndex = pages.firstIndex(of: currentPage) else { return }
+
+        let nextIndex = currentIndex + 1
+        if nextIndex < pages.count && nextIndex != 3 {
+            setViewControllers([pages[nextIndex]], direction: .forward, animated: true, completion: nil)
+        } else if nextIndex == 3 {
+            self.goToLoginPage(skipButton)
+        }
+    }
+
+    private func animateControlsIfNeeded() {
+
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.5,
+                                                       delay: 0,
+                                                       options: [.curveEaseOut],
+                                                       animations: { self.view.layoutIfNeeded() },
+                                                       completion: nil)
+    }
 
     @objc func pageControlTapped(_ sender: UIPageControl) {
         setViewControllers([pages[sender.currentPage]], direction: .forward, animated: true, completion: nil)
-        animateControlsIfNeeded()
-    }
-
-    @objc func skipTapped (_ sender: UIButton) {
-        let lastPage = pages.count - 1
-        pageControl.currentPage = lastPage
-
-        goToLoginPage(index: lastPage, ofViewControllers: pages)
         animateControlsIfNeeded()
     }
 
@@ -211,25 +195,10 @@ extension PagesViewController {
         goToNextPage()
         animateControlsIfNeeded()
     }
-}
 
-extension UIPageViewController {
-
-    func goToNextPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        guard let currentPage = viewControllers?[0] else { return }
-        guard let nextPage = dataSource?.pageViewController(self, viewControllerAfter: currentPage) else { return }
-
-        setViewControllers([nextPage], direction: .forward, animated: animated, completion: completion)
-    }
-
-    func goToPreviousPage(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        guard let currentPage = viewControllers?[0] else { return }
-        guard let prevPage = dataSource?.pageViewController(self, viewControllerAfter: currentPage) else { return }
-
-        setViewControllers([prevPage], direction: .forward, animated: animated, completion: completion)
-    }
-
-    func goToLoginPage(index: Int, ofViewControllers pages: [UIViewController]) {
-        setViewControllers([pages[index]], direction: .forward, animated: true, completion: nil)
+    @objc func goToLoginPage (_ sender: UIButton) {
+        let loginVC = LoginViewController()
+        loginVC.modalPresentationStyle = .fullScreen
+        present(loginVC, animated: true)
     }
 }
