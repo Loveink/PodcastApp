@@ -17,7 +17,7 @@ final class AverageСollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let title2 = UILabel.makeLabel(text: "title2", font: .manropeBold(size: 14), textColor: .textGrey)
+    private let title2 = UILabel.makeLabel(text: "title2", font: .manropeBold(size: 14), textColor: .textBlack)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

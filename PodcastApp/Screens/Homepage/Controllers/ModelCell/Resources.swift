@@ -8,10 +8,6 @@
 import UIKit
 import Foundation
 
-//struct Item {
-//    let title: String
-//}
-
 // Создайте структуру для представления данных из JSON
 struct MyData: Codable {
     let objectId: String

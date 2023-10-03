@@ -13,7 +13,8 @@ final class HomePageViewController: UIViewController {
     let topСollectionView: UICollectionView
     let averageСollectionView: UICollectionView
     let lowerCollectionView: UICollectionView
-    
+    let labelCategory = UILabel.makeLabel(text: "Category", font: .manropeBold(size: 16), textColor: .textBlack)
+    let labelSeeAll = UILabel.makeLabel(text: "Category", font: .manropeBold(size: 16), textColor: .textGrey)
     init() {
         let layoutOne = UICollectionViewFlowLayout()
         layoutOne.scrollDirection = .horizontal
@@ -26,6 +27,7 @@ final class HomePageViewController: UIViewController {
         let layoutThre = UICollectionViewFlowLayout()
         layoutThre.scrollDirection = .vertical
         lowerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layoutThre)
+        
         
         super.init(nibName: nil, bundle: nil)
     }

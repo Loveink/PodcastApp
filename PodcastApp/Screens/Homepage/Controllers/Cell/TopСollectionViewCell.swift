@@ -33,7 +33,7 @@ final class TopСollectionViewCell: UICollectionViewCell {
         return imagePinkView
     }()
     
-    private let title2 = UILabel.makeLabel(text: "title2", font: .manropeBold(size: 14), textColor: .textGrey)
+    private let title2 = UILabel.makeLabel(text: "title2", font: .manropeBold(size: 14), textColor: .textBlack)
     private let subtitle2 = UILabel.makeLabel(text: "subtitle2", font: .manropeRegular(size: 14), textColor: .textGrey)
 
     override init(frame: CGRect) {

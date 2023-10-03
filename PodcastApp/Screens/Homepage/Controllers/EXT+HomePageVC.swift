@@ -89,6 +89,16 @@ extension HomePageViewController {
     func setupCollection() {
         view.backgroundColor = R.Colors.background
         
+        view.addSubview(labelCategory)
+        labelCategory.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            labelCategory.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 144),
+            labelCategory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+             //labelCategory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
+           // labelCategory.heightAnchor.constraint(equalToConstant: 216)
+        ])
+        
         view.addSubview(topСollectionView)
         topСollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

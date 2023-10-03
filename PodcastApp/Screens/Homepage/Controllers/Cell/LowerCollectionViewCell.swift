@@ -39,7 +39,7 @@ final class LowerCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    private let title = UILabel.makeLabel(text: "Title", font: .manropeBold(size: 14), textColor: .textGrey)
+    private let title = UILabel.makeLabel(text: "Title", font: .manropeBold(size: 14), textColor: .textBlack)
     private let subtitle = UILabel.makeLabel(text: "subtitle", font: .manropeRegular(size: 14), textColor: .textGrey)
     private let title2 = UILabel.makeLabel(text: "title2", font: .manropeRegular(size: 14), textColor: .textGrey)
     private let subtitle2 = UILabel.makeLabel(text: "subtitle2", font: .manropeRegular(size: 14), textColor: .textGrey)
@@ -58,8 +58,6 @@ final class LowerCollectionViewCell: UICollectionViewCell {
         setupViews()
         constaintViews()
         heartViewTap()
-//        configureAppearance()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -114,32 +112,6 @@ private extension LowerCollectionViewCell {
     @objc func handleHeartTap() {
         // Переключите значение isFilled красное серое сердце
         isFilled = !isFilled
-      
-    }
-    
-    // Загрузите JSON из файла или с удаленного сервера
-    func configureAppearance() {
-        if let url = URL(string: "https://ormp.ros.chat/ajax/config.json") {
-            URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if let data = data {
-                    do {
-                        // Распарсите JSON
-                        let myData = try JSONDecoder().decode(MyData.self, from: data)
-
-                        // Обновите UI на основе данных из JSON
-                        DispatchQueue.main.async { [self] in
-                            
-                            title.text = myData.objectId
-                            subtitle.text = myData.objectId
-                        }
-                    } catch {
-                        print("Ошибка при распарсивании JSON: \(error)")
-                    }
-                } else if let error = error {
-                    print("Ошибка при загрузке данных: \(error)")
-                }
-            }.resume()
-        }
     }
 }
 
