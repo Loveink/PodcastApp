@@ -17,32 +17,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     self.window = window
 
+      let loginVC = LoginViewController()
+      let onboardingVC = PagesViewController()
+      let createAccountVC = CreateAccountDetailViewController()
+      let createAccountDetailVC = CreateAccountDetailViewController()
+
+      let navigationController = UINavigationController(rootViewController: onboardingVC)
+
+      navigationController.setViewControllers([loginVC, createAccountVC, createAccountDetailVC, onboardingVC], animated: false)
 
       //таббар
 //      let tabBarController = CustomTabBar()
-//      let navigationController = UINavigationController(rootViewController: tabBarController)
-//      window.rootViewController = navigationController
 
-      //стартовый вход
-//      let loginVC = LoginViewController()
-//      window.rootViewController = loginVC
+      //логинка
+//      window.rootViewController = createLoginVC()
+
+      //создание аккаунта
+//      window.rootViewController = createAccountVC()
 
       //детали создания аккаунта
-      window.rootViewController = createOnboardingViewController()
+//      window.rootViewController = createOnboardingViewController()
 
+      navigationController.navigationBar.isHidden = true
 
-//      navigationController.navigationBar.isHidden = true
+      window.rootViewController = navigationController
       window.makeKeyAndVisible()
   }
-
-    func createAccountDetailVC() -> UINavigationController {
-        let createAccountDetailVC = CreateAccountDetailViewController()
-        return UINavigationController(rootViewController: createAccountDetailVC)
-    }
 
     func createOnboardingViewController() -> UINavigationController {
         let onboardingViewController = PagesViewController()
         return UINavigationController(rootViewController: onboardingViewController)
+    }
+
+    func createLoginVC() -> UINavigationController {
+        let loginVC = LoginViewController()
+        return UINavigationController(rootViewController: loginVC)
+    }
+
+    func createAccountVC() -> UINavigationController {
+        let createAccountVC = CreateAccountViewController()
+        return UINavigationController(rootViewController: createAccountVC)
+    }
+
+    func createAccountDetailVC() -> UINavigationController {
+        let createAccountDetailVC = CreateAccountDetailViewController()
+        return UINavigationController(rootViewController: createAccountDetailVC)
     }
 
   func sceneDidDisconnect(_ scene: UIScene) {

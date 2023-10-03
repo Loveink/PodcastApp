@@ -1,6 +1,10 @@
 import Foundation
 import UIKit
 
+
+//добавить распознаватель тапа на лейбл внизу
+//добавить вход через google
+
 class LoginView: UIView {
 
     // MARK: - UI Elements
@@ -17,19 +21,16 @@ class LoginView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Log In", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.sfProSemiBold(size: 16)
+        $0.titleLabel?.font = UIFont.manropeBold(size: 16)
         $0.backgroundColor = UIColor.bluePlayer
         $0.layer.cornerRadius = 28
         $0.addTarget(self, action: #selector(loginButtonAction), for: .touchUpInside)
         return $0
     }(UIButton())
 
-    private lazy var contitueLabel = UILabel.makeLabel(text: "Or continue with", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
+    private lazy var continueLabel = UILabel.makeLabel(text: "Or continue with", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
 
-    //добавить распознаватель тапа
     private lazy var signupLabel = UILabel.makeLabel(text: "Don't have an account yet? Sign up", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
-
-    //добавить вход через google
 
     // MARK: - Init
 
@@ -49,8 +50,8 @@ class LoginView: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
 
-        let labelCenterX = contitueLabel.center.x
-        let labelCenterY = contitueLabel.center.y
+        let labelCenterX = continueLabel.center.x
+        let labelCenterY = continueLabel.center.y
 
         let leftLine = UIBezierPath()
         leftLine.move(to: CGPoint (x: labelCenterX - 130, y: labelCenterY))
@@ -69,7 +70,7 @@ class LoginView: UIView {
 
     private func layout() {
 
-        [loginField, loginLabel, passwordLabel, passwordField, loginButton, contitueLabel, signupLabel].forEach { self.addSubview($0) }
+        [loginField, loginLabel, passwordLabel, passwordField, loginButton, continueLabel, signupLabel].forEach { self.addSubview($0) }
 
         let updownInset: CGFloat = 12
         let sideInset: CGFloat = 20
@@ -97,8 +98,8 @@ class LoginView: UIView {
             loginButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
             loginButton.heightAnchor.constraint(equalToConstant: 57),
 
-            contitueLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            contitueLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: updownInset*4),
+            continueLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            continueLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: updownInset*4),
 
             signupLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             signupLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
@@ -106,6 +107,15 @@ class LoginView: UIView {
     }
 
     @objc private func loginButtonAction() {
-        print ("login touched")
+        var responder: UIResponder? = loginButton
+        while let nextResponder = responder?.next {
+            if let viewController = nextResponder as? UIViewController {
+                let createAccountVC = CreateAccountViewController()
+                createAccountVC.modalPresentationStyle = .fullScreen
+                viewController.present(createAccountVC, animated: true, completion: nil)
+                break
+            }
+            responder = nextResponder
+        }
     }
 }

@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 
 // добавить сокрытие клавиатуры по тапу где-нибудь (на кнопку return например)
+// добавить распознаватель тапа для текста внизу
 
 class CreateAccountDetailView: UIView {
 
@@ -18,26 +19,6 @@ class CreateAccountDetailView: UIView {
 
     private lazy var confirmField = UITextField.makeTextfield(text: "••••••", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false, securityButton: true)
 
-//    private lazy var passwordField: UITextField = {
-//        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: $0.frame.size.height))
-//        let eyeButton = UIButton(frame: CGRect (x: 0, y: 0, width: 30, height: 30))
-//        eyeButton.setImage(UIImage (named: "eyeOpen"), for: .normal)
-//        eyeButton.setImage(UIImage (named: "eyeClosed"), for: .selected)
-//        eyeButton.addTarget(self, action: #selector(eyeButtonAction), for: .touchUpInside)
-//        $0.translatesAutoresizingMaskIntoConstraints = false
-//        $0.backgroundColor = UIColor.textfieldGray
-//        $0.layer.cornerRadius = 10
-//        $0.layer.borderWidth = 0.5
-//        $0.layer.borderColor = UIColor.borderGray.cgColor
-//        $0.placeholder = "••••••"
-//        $0.leftView = paddingView
-//        $0.rightView = eyeButton
-//        $0.leftViewMode = .always
-//        $0.rightViewMode = .always
-//        $0.isSecureTextEntry = true
-//        return $0
-//    }(UITextField())
-
     // лейблы к каждому textField
     private lazy var firstnameLabel = UILabel.makeLabel(text: "First Name", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textGrey)
 
@@ -51,14 +32,14 @@ class CreateAccountDetailView: UIView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Sign Up", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.plusJakartaSansBold(size: 16)
+        $0.titleLabel?.font = UIFont.manropeBold(size: 16)
         $0.backgroundColor = UIColor.bluePlayer
         $0.layer.cornerRadius = 28
         $0.addTarget(self, action: #selector(signupButtonAction), for: .touchUpInside)
         return $0
     }(UIButton())
 
-    private lazy var loginLabel = UILabel.makeLabel(text: "Already have an account? Login", font: UIFont.plusJakartaSansBold(size: 16), textColor: UIColor.darkGray)
+    private lazy var loginLabel = UILabel.makeLabel(text: "Already have an account? Login", font: UIFont.plusJakartaSansSemiBold(size: 16), textColor: UIColor.darkGray)
 
     // MARK: - Init
 
@@ -133,11 +114,15 @@ class CreateAccountDetailView: UIView {
     }
 
     @objc private func signupButtonAction() {
-        print ("sign up button tapped")
+        var responder: UIResponder? = signupButton
+        while let nextResponder = responder?.next {
+            if let viewController = nextResponder as? UIViewController {
+                let tabbar = CustomTabBar()
+                tabbar.modalPresentationStyle = .fullScreen
+                viewController.present(tabbar, animated: true, completion: nil)
+                break
+            }
+            responder = nextResponder
+        }
     }
-
-//    @objc private func eyeButtonAction() {
-//        passwordField.isSecureTextEntry.toggle()
-//        passwordField.rightView?.isSelected.toggle()
-//    }
 }
