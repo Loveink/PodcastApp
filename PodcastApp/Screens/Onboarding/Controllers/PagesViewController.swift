@@ -35,6 +35,17 @@ class PagesViewController: UIPageViewController {
         return $0
     }(UIButton())
 
+    let getStarted: UIButton = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.setTitle("Get Started", for: .normal)
+        $0.setTitleColor(UIColor.white, for: .normal)
+        $0.titleLabel?.font = UIFont.manropeBold(size: 16)
+        $0.backgroundColor = UIColor.bluePlayer
+        $0.layer.cornerRadius = 20
+        $0.addTarget(self, action: #selector(goToLoginPage(_:)), for: .primaryActionTriggered)
+        return $0
+    }(UIButton())
+
     // MARK: - Init
 
     override func viewDidLoad() {
@@ -92,9 +103,10 @@ extension PagesViewController {
     }
 
     func layout() {
-        view.addSubview(pageControl)
-        view.addSubview(nextButton)
-        view.addSubview(skipButton)
+
+        [pageControl, nextButton, skipButton, getStarted].forEach { view.addSubview($0) }
+
+        getStarted.isHidden = true
 
         pageControl.numberOfPages = pages.count
         pageControl.currentPage = initialPage
@@ -109,12 +121,17 @@ extension PagesViewController {
             skipButton.widthAnchor.constraint(equalToConstant: 85),
             skipButton.heightAnchor.constraint(equalToConstant: 58),
             skipButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
-            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60),
+            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70),
 
             nextButton.widthAnchor.constraint(equalToConstant: 85),
             nextButton.heightAnchor.constraint(equalToConstant: 58),
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60)
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70),
+
+            getStarted.heightAnchor.constraint(equalToConstant: 58),
+            getStarted.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
+            getStarted.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
+            getStarted.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70)
         ])
     }
 }
