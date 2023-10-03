@@ -89,14 +89,41 @@ extension HomePageViewController {
     func setupCollection() {
         view.backgroundColor = R.Colors.background
         
+        view.addSubview(stackView1)
+        stackView1.addArrangedSubview(title1)
+        stackView1.addArrangedSubview(subtitle1)
+        
+        stackView1.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 57),
+            stackView1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            stackView1.heightAnchor.constraint(equalToConstant: 49),
+            stackView1.widthAnchor.constraint(equalToConstant: 186),
+        ])
+        
+        
+        view.addSubview(imagePinkView)
+        imagePinkView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            imagePinkView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 56),
+            imagePinkView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
+            imagePinkView.heightAnchor.constraint(equalToConstant: 56),
+            imagePinkView.widthAnchor.constraint(equalToConstant: 56),
+        ])
+        
         view.addSubview(labelCategory)
         labelCategory.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             labelCategory.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 144),
             labelCategory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
-             //labelCategory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
-           // labelCategory.heightAnchor.constraint(equalToConstant: 216)
+        ])
+        
+        view.addSubview(labelSeeAll)
+        labelSeeAll.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            labelSeeAll.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 144),
+            labelSeeAll.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
         ])
         
         view.addSubview(topСollectionView)
@@ -107,6 +134,7 @@ extension HomePageViewController {
             topСollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
             topСollectionView.heightAnchor.constraint(equalToConstant: 216)
         ])
+        
         topСollectionView.delegate = self
         topСollectionView.dataSource = self
         topСollectionView.register(TopСollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)

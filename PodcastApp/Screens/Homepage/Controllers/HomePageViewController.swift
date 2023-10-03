@@ -14,7 +14,30 @@ final class HomePageViewController: UIViewController {
     let averageСollectionView: UICollectionView
     let lowerCollectionView: UICollectionView
     let labelCategory = UILabel.makeLabel(text: "Category", font: .manropeBold(size: 16), textColor: .textBlack)
-    let labelSeeAll = UILabel.makeLabel(text: "Category", font: .manropeBold(size: 16), textColor: .textGrey)
+    let labelSeeAll = UILabel.makeLabel(text: "See all", font: .manropeBold(size: 16), textColor: .textGrey)
+
+    let imagePinkView: UIImageView = {
+        let imagePinkView = UIImageView()
+        imagePinkView.image = R.Images.Overview.imagePink
+        imagePinkView.layer.cornerRadius = 16
+        imagePinkView.layer.masksToBounds = true
+        imagePinkView.layer.shadowColor = UIColor.black.cgColor
+        imagePinkView.layer.shadowOffset = CGSize(width: 0, height: 2) // Смещение тени (по горизонтали и вертикали)
+        imagePinkView.layer.shadowRadius = 4 // Радиус тени (чем больше, тем более размытой будет тень)
+        imagePinkView.layer.shadowOpacity = 0.2 // Прозрачность тени (0 - полностью прозрачная, 1 - полностью непрозрачная)
+        return imagePinkView
+    }()
+    
+    let stackView1: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.spacing = 3
+        return view
+    }()
+    
+    let title1 = UILabel.makeLabel(text: "Title", font: .manropeBold(size: 14), textColor: .textBlack)
+    let subtitle1 = UILabel.makeLabel(text: "subtitle", font: .manropeRegular(size: 14), textColor: .textGrey)
+ 
     init() {
         let layoutOne = UICollectionViewFlowLayout()
         layoutOne.scrollDirection = .horizontal
@@ -27,7 +50,6 @@ final class HomePageViewController: UIViewController {
         let layoutThre = UICollectionViewFlowLayout()
         layoutThre.scrollDirection = .vertical
         lowerCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layoutThre)
-        
         
         super.init(nibName: nil, bundle: nil)
     }
