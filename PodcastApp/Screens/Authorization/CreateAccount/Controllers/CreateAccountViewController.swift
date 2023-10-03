@@ -9,21 +9,30 @@ import UIKit
 
 class CreateAccountViewController: UIViewController {
 
+    // MARK: - UI Elements
+    
+    private lazy var createAccountView = CreateAccountView()
+
+    // MARK: - Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        layout()
     }
-    
 
-    /*
-    // MARK: - Navigation
+    // MARK: - Methods
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func layout() {
+
+        view.addSubview(createAccountView)
+
+        NSLayoutConstraint.activate([
+
+            createAccountView.topAnchor.constraint(equalTo: view.topAnchor),
+            createAccountView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            createAccountView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            createAccountView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+        ])
     }
-    */
-
 }

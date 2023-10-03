@@ -1,29 +1,30 @@
-//
-//  LoginViewController.swift
-//  PodcastApp
-//
-//  Created by Александра Савчук on 25.09.2023.
-//
-
 import UIKit
 
 class LoginViewController: UIViewController {
 
+    //MARK: - Properties
+
+    let loginView = LoginView()
+
+    // MARK: - Init
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        layout()
     }
-    
 
-    /*
-    // MARK: - Navigation
+    // MARK: - Methods
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func layout() {
+
+        view.addSubview(loginView)
+
+        NSLayoutConstraint.activate([
+
+            loginView.topAnchor.constraint(equalTo: view.topAnchor),
+            loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
-    */
-
 }
