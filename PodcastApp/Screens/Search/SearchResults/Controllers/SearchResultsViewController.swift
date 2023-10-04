@@ -8,17 +8,18 @@
 import UIKit
 
 class SearchResultsViewController: UIViewController {
-
+    
+    var id: [Int] = []
     var feeds: [Feed] = []
     let dispatchGroup = DispatchGroup()
-    let networkService = NetworkService()
+    var fetchFunc: FetchFunc!
+    
     
     let searchBar = CustomSearchBar()
     let searchResult = SearchResultView()
-    let categoryCollectionView = CategoryC()
+    let allPodcasts = AllPodcastsView()
     
     let backButton = UIButton()
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     
     
@@ -28,7 +29,7 @@ class SearchResultsViewController: UIViewController {
 //            API REQUEST
 //            -----------
         
-        fetchPodcasts(dispatchGroup: dispatchGroup)
+        fetchPodcasts(text)
 
         searchBar.textField.text = text
     }
@@ -51,31 +52,37 @@ class SearchResultsViewController: UIViewController {
 
     func configureView() {
 //        after API response
-//        searchResult.configureView(<#T##title: String##String#>, <#T##image: UIImage##UIImage#>, <#T##episodes: String##String#>, <#T##creator: String##String#>)
+//        searchResult.configureView()
         
     }
     
     
     
-    func fetchPodcasts(dispatchGroup: DispatchGroup) {
+    func fetchPodcasts(_ text: String) {
         let networkService = NetworkService()
-        dispatchGroup.enter() // Входим в группу
+        dispatchGroup.enter()
         
-        networkService.fetchData(forPath: "/podcasts/trending?cat=News") { [weak self] (result: Result<PodcastSearch, APIError>) in
+        networkService.fetchData(forPath: "/podcasts/trending?cat=" + text + "&max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
             guard let self = self else { return }
             
             defer {
-                dispatchGroup.leave() // Покидаем группу после завершения запроса
+                self.dispatchGroup.leave()
             }
             
             switch result {
             case .success(let podcastResponse):
                 self.feeds.append(contentsOf: podcastResponse.feeds)
-                
+                print("feeds.count ", feeds.count)
                 for podcast in self.feeds {
                     let imageURL = podcast.image
-                    let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id)
-                    self.categoryCollectionView.recipes.append(podcastItem)
+                    
+                    DispatchQueue.main.sync {
+                        self.fetchFunc = FetchFunc(collectionView: self.allPodcasts.collectionView)
+                    }
+                    
+                    let item = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id)
+                    
+                    self.allPodcasts.podcasts.append(item)
                     
                     id.append(podcast.id)
                 }
@@ -98,6 +105,7 @@ class SearchResultsViewController: UIViewController {
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchResult.translatesAutoresizingMaskIntoConstraints = false
+        allPodcasts.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
@@ -105,11 +113,17 @@ class SearchResultsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    
+}
+
+
+
+
+extension SearchResultsViewController {
     private func setCostraints() {
         view.addSubview(backButton)
         view.addSubview(searchBar)
         view.addSubview(searchResult)
+        view.addSubview(allPodcasts)
         
         NSLayoutConstraint.activate([
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -124,8 +138,13 @@ class SearchResultsViewController: UIViewController {
             
             searchResult.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
             searchResult.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
-            searchResult.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30)
+            searchResult.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
+            searchResult.bottomAnchor.constraint(equalTo: searchResult.topAnchor, constant: 100),
+            
+            allPodcasts.topAnchor.constraint(equalTo: searchResult.bottomAnchor),
+            allPodcasts.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            allPodcasts.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
+            allPodcasts.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-    
 }
