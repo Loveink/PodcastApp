@@ -51,7 +51,7 @@
 		57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391D82AC1694300BD7E82 /* CreateAccountViewController.swift */; };
 		57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391DA2AC1695700BD7E82 /* CreateAccountDetailViewController.swift */; };
 		57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391DC2AC1696C00BD7E82 /* LoginViewController.swift */; };
-		57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */; };
+		57B391E22AC16A5600BD7E82 /* PagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391E12AC16A5600BD7E82 /* PagesViewController.swift */; };
 		57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391E92AC16A9100BD7E82 /* ChannelViewController.swift */; };
 		57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */; };
 		57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */; };
@@ -75,6 +75,15 @@
 		E7B4C16E2ACB467B00B27053 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C16D2ACB467B00B27053 /* View.swift */; };
 		E7B4C1702ACB48CB00B27053 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C16F2ACB48CB00B27053 /* CategoryList.swift */; };
 		E7B4C1722ACC053E00B27053 /* AllPodcatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C1712ACC053E00B27053 /* AllPodcatsView.swift */; };
+		F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */; };
+		F4B839E62ACC50410044E921 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E52ACC50410044E921 /* CreateAccountView.swift */; };
+		F4CC1EB42ACCC1CA00370E6B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */; };
+		F4CC1EB62ACCC1CA00370E6B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4CC1EB52ACCC1CA00370E6B /* GoogleSignInSwift */; };
+		F4CC1EBA2ACCDBC400370E6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1EB92ACCDBC400370E6B /* GoogleService-Info.plist */; };
+		F4CC1EBC2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1EBB2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist */; };
+		F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60A2AC2F028007AF64F /* LoginView.swift */; };
+		F4DBA60D2AC30919007AF64F /* TextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */; };
+		F4DBA60F2AC445A8007AF64F /* CreateAccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,7 +129,7 @@
 		57B391D82AC1694300BD7E82 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		57B391DA2AC1695700BD7E82 /* CreateAccountDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDetailViewController.swift; sourceTree = "<group>"; };
 		57B391DC2AC1696C00BD7E82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		57B391E12AC16A5600BD7E82 /* PagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesViewController.swift; sourceTree = "<group>"; };
 		57B391E92AC16A9100BD7E82 /* ChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelViewController.swift; sourceTree = "<group>"; };
 		57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +152,13 @@
 		E7B4C16D2ACB467B00B27053 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		E7B4C16F2ACB48CB00B27053 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryList.swift; path = PodcastApp/Extensions/CategoryList.swift; sourceTree = SOURCE_ROOT; };
 		E7B4C1712ACC053E00B27053 /* AllPodcatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AllPodcatsView.swift; path = PodcastApp/Screens/Search/SearchResults/AllPodcatsView.swift; sourceTree = SOURCE_ROOT; };
+		F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		F4B839E52ACC50410044E921 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		F4CC1EB92ACCDBC400370E6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F4CC1EBB2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist"; sourceTree = "<group>"; };
+		F4DBA60A2AC2F028007AF64F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldExtension.swift; sourceTree = "<group>"; };
+		F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,9 +168,11 @@
 			files = (
 				57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */,
 				57B391A72ABED54300BD7E82 /* Kingfisher in Frameworks */,
+				F4CC1EB62ACCC1CA00370E6B /* GoogleSignInSwift in Frameworks */,
 				57B391A02ABED51F00BD7E82 /* FirebaseAnalytics in Frameworks */,
 				57B391A22ABED51F00BD7E82 /* FirebaseAuth in Frameworks */,
 				57B391A42ABED51F00BD7E82 /* FirebaseFirestore in Frameworks */,
+				F4CC1EB42ACCC1CA00370E6B /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +199,7 @@
 		57724E832ABDAB52006C3318 = {
 			isa = PBXGroup;
 			children = (
+				F46E70972ACCBAD1002AA4FB /* Firebase */,
 				57724E8E2ABDAB52006C3318 /* PodcastApp */,
 				57724E8D2ABDAB52006C3318 /* Products */,
 			);
@@ -204,6 +223,8 @@
 				57B391922ABED04400BD7E82 /* Extensions */,
 				57B391932ABED06500BD7E82 /* Resourses */,
 				57724E9D2ABDAB54006C3318 /* Info.plist */,
+				F4CC1EB92ACCDBC400370E6B /* GoogleService-Info.plist */,
+				F4CC1EBB2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist */,
 			);
 			path = PodcastApp;
 			sourceTree = "<group>";
@@ -263,6 +284,7 @@
 				57B391C62AC0CA9F00BD7E82 /* Fonts.swift */,
 				57B391CB2AC0CBBE00BD7E82 /* Label.swift */,
 				57B391CD2AC0CE3E00BD7E82 /* CustomColors.swift */,
+				F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */,
 				E57CF00E2AC59C92001600A8 /* TextField.swift */,
 				E7B4C16D2ACB467B00B27053 /* View.swift */,
 			);
@@ -451,6 +473,8 @@
 		57B391D32AC168E400BD7E82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */,
+				F4B839E52ACC50410044E921 /* CreateAccountView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -473,6 +497,7 @@
 		57B391D62AC1691D00BD7E82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F4DBA60A2AC2F028007AF64F /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -487,7 +512,8 @@
 		57B391DE2AC1697D00BD7E82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				57B391E12AC16A5600BD7E82 /* OnboardingViewController.swift */,
+				57B391E12AC16A5600BD7E82 /* PagesViewController.swift */,
+				F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -753,6 +779,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F46E70972ACCBAD1002AA4FB /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -775,6 +808,8 @@
 				57B391A32ABED51F00BD7E82 /* FirebaseFirestore */,
 				57B391A62ABED54300BD7E82 /* Kingfisher */,
 				57B3920A2AC16D2800BD7E82 /* RealmSwift */,
+				F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */,
+				F4CC1EB52ACCC1CA00370E6B /* GoogleSignInSwift */,
 			);
 			productName = PodcastApp;
 			productReference = 57724E8C2ABDAB52006C3318 /* PodcastApp.app */;
@@ -808,6 +843,7 @@
 				57B3919E2ABED51F00BD7E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 57724E8D2ABDAB52006C3318 /* Products */;
 			projectDirPath = "";
@@ -825,11 +861,13 @@
 			files = (
 				57B391C82AC0CAD800BD7E82 /* SF-Pro-Display-Regular.otf in Resources */,
 				57B391C92AC0CAD800BD7E82 /* SF-Pro-Display-Semibold.otf in Resources */,
+				F4CC1EBA2ACCDBC400370E6B /* GoogleService-Info.plist in Resources */,
 				57724E9C2ABDAB54006C3318 /* LaunchScreen.storyboard in Resources */,
 				57724E992ABDAB54006C3318 /* Assets.xcassets in Resources */,
 				57B391BE2AC0C92C00BD7E82 /* PlusJakartaSans-Bold.ttf in Resources */,
 				57B391BC2AC0C92C00BD7E82 /* PlusJakartaSans-Medium.ttf in Resources */,
 				57B391BD2AC0C92C00BD7E82 /* PlusJakartaSans-SemiBold.ttf in Resources */,
+				F4CC1EBC2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist in Resources */,
 				57B391C22AC0C95000BD7E82 /* Manrope-Bold.ttf in Resources */,
 				57B391C32AC0C95000BD7E82 /* Manrope-Regular.ttf in Resources */,
 			);
@@ -864,6 +902,8 @@
 				E56199822AC9790300EC542D /* AccountGenderButton.swift in Sources */,
 				E75FA2EF2AC48BFF005C947C /* SearchResultView.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
+				F4B839E62ACC50410044E921 /* CreateAccountView.swift in Sources */,
+				F4DBA60D2AC30919007AF64F /* TextfieldExtension.swift in Sources */,
 				E75FA2E72AC1FBC3005C947C /* TopGenresView.swift in Sources */,
 				5769D0E22ACADD4D00D93A56 /* DataModel.xcdatamodeld in Sources */,
 				5769D0D52AC876BC00D93A56 /* MusicPlayer.swift in Sources */,
@@ -891,7 +931,12 @@
 				5769D0DF2AC9DBB600D93A56 /* EpisodeItemCell.swift in Sources */,
 				E7B4C1702ACB48CB00B27053 /* CategoryList.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
-				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
+				F4DBA60F2AC445A8007AF64F /* CreateAccountDetailView.swift in Sources */,
+				57B391E22AC16A5600BD7E82 /* PagesViewController.swift in Sources */,
+				F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */,
+				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
+				F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */,
+				57B391E22AC16A5600BD7E82 /* PagesViewController.swift in Sources */,
 				E57CF00D2AC59B31001600A8 /* AccountSettingsView.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 				5769D0D12AC76FCD00D93A56 /* GalleryView.swift in Sources */,
@@ -1137,6 +1182,14 @@
 				kind = branch;
 			};
 		};
+		F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1164,6 +1217,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		F4CC1EB52ACCC1CA00370E6B /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
