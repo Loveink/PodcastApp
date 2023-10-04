@@ -123,7 +123,7 @@ class LoginView: UIView {
                 } else {
                     if let user = user {
                         print("Пользователь авторизован: \(user)")
-                      let createAccountVC = CreateAccountViewController()
+                      let createAccountVC = CustomTabBar()
                       self.navigationController?.pushViewController(createAccountVC, animated: true)
                     }
                 }

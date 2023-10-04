@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
       navigationController.navigationBar.isHidden = true
 
-      window.rootViewController = loginVC
+      window.rootViewController = navigationController
       window.makeKeyAndVisible()
   }
 
