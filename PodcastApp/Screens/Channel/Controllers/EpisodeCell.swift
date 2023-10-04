@@ -30,7 +30,8 @@ class EpisodeCell: UICollectionViewCell {
     private lazy var episodeTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.numberOfLines = 0
+        label.numberOfLines = 1
+        label.clipsToBounds = true
         label.font = UIFont(name: "Manrope", size: 14)
         label.font = .systemFont(ofSize: 14, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +113,7 @@ extension EpisodeCell {
             
             stackView.leadingAnchor.constraint(equalTo: episodeImageView.trailingAnchor, constant: 15),
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-//            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -47),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
         
             
             
