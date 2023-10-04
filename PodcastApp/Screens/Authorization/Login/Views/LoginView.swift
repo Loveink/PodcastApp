@@ -6,6 +6,7 @@ import UIKit
 //добавить вход через google
 
 class LoginView: UIView {
+  var navigationController: UINavigationController?
 
     // MARK: - UI Elements
 
@@ -106,16 +107,8 @@ class LoginView: UIView {
         ])
     }
 
-    @objc private func loginButtonAction() {
-        var responder: UIResponder? = loginButton
-        while let nextResponder = responder?.next {
-            if let viewController = nextResponder as? UIViewController {
-                let createAccountVC = CreateAccountViewController()
-                createAccountVC.modalPresentationStyle = .fullScreen
-                viewController.present(createAccountVC, animated: true, completion: nil)
-                break
-            }
-            responder = nextResponder
-        }
-    }
+  @objc private func loginButtonAction(_ sender: UIButton) {
+    let createAccountVC = CreateAccountViewController()
+    self.navigationController?.pushViewController(createAccountVC, animated: true)
+  }
 }

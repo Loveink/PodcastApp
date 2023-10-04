@@ -15,7 +15,30 @@ class ChannelViewController: UIViewController {
   var feeds: [EpisodeItem] = []
   var audioPlayer: AVAudioPlayer?
 
-    private let channelImageView: UIImageView = {
+  private lazy var titleLabel = UILabel.makeLabel(text: "Channel", font: UIFont.plusJakartaSansBold(size: 18), textColor: UIColor.black)
+
+  private lazy var backButton: UIBarButtonItem = {
+      let button = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+      button.tintColor = .symbolsPurple
+      return button
+  }()
+
+  @objc private func backButtonTapped() {
+      print("back button tapped")
+      tabBarController?.tabBar.isHidden = false
+      navigationController?.popViewController(animated: true)
+  }
+
+  private func setupNavigation() {
+      navigationController?.navigationBar.isHidden = false
+      navigationController?.navigationBar.prefersLargeTitles = true
+      navigationController?.navigationBar.tintColor = UIColor.black
+      navigationItem.leftBarButtonItem = backButton
+      navigationItem.titleView = titleLabel
+
+  }
+
+     var channelImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 21
@@ -26,7 +49,7 @@ class ChannelViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var channelTitleLabel: UILabel = {
+    var channelTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -104,8 +127,7 @@ class ChannelViewController: UIViewController {
         self.setupView()
         self.setupConstraints()
         self.setupCollectionView()
-        self.setupNavigationBar()
-        self.setupChannel()
+        setupNavigation()
 
       vc = FetchFunc(collectionView: episodesCollectionView)
       let dispatchGroup = DispatchGroup()
@@ -138,13 +160,10 @@ class ChannelViewController: UIViewController {
             forCellWithReuseIdentifier: EpisodeCell.reuseIdentifier)
     }
 
-    private func setupNavigationBar() {
-        self.navigationItem.title = "Channel"
-    }
     
     private func setupChannel() {
-        channelTitleLabel.text = "Baby Pesut Podcast"
-        numberOfEpisodes.text = "56 Esp"
+//        channelTitleLabel.text = "Baby Pesut Podcast"
+        numberOfEpisodes.text = String(feeds.count) + " Esp"
         channelAuthor.text = "Dr. Oi om jean"
     }
     
@@ -213,9 +232,9 @@ extension ChannelViewController {
 
     let constraints: [NSLayoutConstraint] = [
 
-      channelImageView.heightAnchor.constraint(equalToConstant: 84),
-      channelImageView.widthAnchor.constraint(equalToConstant: 84),
-      channelImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+      channelImageView.heightAnchor.constraint(equalToConstant: 100),
+      channelImageView.widthAnchor.constraint(equalToConstant: 100),
+      channelImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       channelImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
       channelTitleLabel.topAnchor.constraint(equalTo: channelImageView.bottomAnchor, constant: 20),
@@ -265,9 +284,9 @@ extension ChannelViewController {
           print("FetchFunc is nil.")
         }
 
-        // Обновляем коллекцию данных
         DispatchQueue.main.async {
           self.episodesCollectionView.reloadData()
+          self.numberOfEpisodes.text = String(self.feeds.count) + " Esp"
         }
 
       case .failure(let error):

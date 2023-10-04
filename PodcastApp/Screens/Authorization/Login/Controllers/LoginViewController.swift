@@ -11,6 +11,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+      loginView.navigationController = navigationController
     }
 
     // MARK: - Methods

@@ -18,6 +18,7 @@ class CreateAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+      createAccountView.navigationController = navigationController
     }
 
     // MARK: - Methods

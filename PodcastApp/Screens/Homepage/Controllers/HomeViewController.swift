@@ -11,11 +11,28 @@ import AVFoundation
 class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
 
   func didSelectRecipe(id: Int) {
-    let channelVC = ChannelViewController()
-    channelVC.channelID = id
-    navigationController?.pushViewController(channelVC, animated: true)
-    print(id)
+      let channelVC = ChannelViewController()
+      channelVC.channelID = id
+
+      if let index = feeds.firstIndex(where: { $0.id == id }) {
+          let selectedFeed = feeds[index]
+        channelVC.channelTitleLabel.text = selectedFeed.title
+          let imageURLString = selectedFeed.image
+
+          if let imageURL = URL(string: imageURLString) {
+              URLSession.shared.dataTask(with: imageURL) { (data, _, _) in
+                  if let data = data, let image = UIImage(data: data) {
+                      DispatchQueue.main.async {
+                        channelVC.channelImageView.image = image
+                          self.navigationController?.pushViewController(channelVC, animated: true)
+                      }
+                  } else {
+                  }
+              }.resume()
+          }
+      }
   }
+
 
   var audioPlayer: AVAudioPlayer?
   var musicArray: [String] = []
@@ -36,8 +53,6 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
     fetchPodcasts(dispatchGroup: dispatchGroup)
     dispatchGroup.notify(queue: .main) {
       print("All tasks are completed.")
-//      print(vc?.musicArray)
-
     }
       categoryCollectionView.delegate = self
   }
