@@ -55,6 +55,8 @@ class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
     view.backgroundColor = .white
     fetch()
     setupConstraints()
+    galleryViewController.musicArray = self.musicArray
+    galleryViewController.musicPlayer = self.audioPlayer
   }
 
   func fetch() {
@@ -85,18 +87,18 @@ class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
         }
 
         // Ожидаем завершения всех запросов
-        dispatchGroup.notify(queue: .main) {
-            // Этот код выполнится после завершения всех запросов
-            self.galleryViewController.collectionView.reloadData()
-          print("reload")
-            if let audioURLString = self.musicArray.first,
-               let audioURL = URL(string: audioURLString) {
-                self.playAudio(withURL: audioURL)
-//                self.podcast.dur = podcast.enclosureLength
-            } else {
-                print("Первый аудиофайл в массиве не найден.")
-            }
-        }
+    dispatchGroup.notify(queue: .main) {
+      // Этот код выполнится после завершения всех запросов
+      self.galleryViewController.collectionView.reloadData()
+      print("reload")
+      if let audioURLString = self.musicArray.first,
+         let audioURL = URL(string: audioURLString) {
+        self.playAudio(withURL: audioURL)
+        
+      } else {
+        print("Первый аудиофайл в массиве не найден.")
+      }
+    }
     }
 
 
@@ -146,26 +148,26 @@ class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
 }
 
 extension NowPlayingViewController: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if flag {
-            // Track finished, you can handle this event here.
-            // For example, move to the next track if available.
-            currentTrackIndex += 1
-            if currentTrackIndex < musicArray.count {
-              let audioURLString = musicArray[currentTrackIndex]
-              if let audioURL = URL(string: audioURLString + ".mp3") {
-                  playAudio(withURL: audioURL)
-              }
-            } else {
-                // No more tracks to play, you can handle this case accordingly.
-            }
-
-            // Update the slider value to show the current position
-            if let audioPlayer = audioPlayer {
-                let duration = audioPlayer.duration
-                let currentTime = audioPlayer.currentTime
-                podcast.sliderView.value = Float(currentTime / duration)
-            }
+  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    if flag {
+      // Track finished, you can handle this event here.
+      // For example, move to the next track if available.
+      currentTrackIndex += 1
+      if currentTrackIndex < musicArray.count {
+        let audioURLString = musicArray[currentTrackIndex]
+        if let audioURL = URL(string: audioURLString) {
+          playAudio(withURL: audioURL)
         }
+      } else {
+        // No more tracks to play, you can handle this case accordingly.
+      }
+
+      // Update the slider value to show the current position
+      if let audioPlayer = audioPlayer {
+        let duration = audioPlayer.duration
+        let currentTime = audioPlayer.currentTime
+        podcast.sliderView.value = Float(currentTime / duration)
+      }
     }
+  }
 }
