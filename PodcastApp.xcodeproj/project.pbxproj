@@ -57,11 +57,6 @@
 		57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */; };
 		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
 		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
-		F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */; };
-		F4B839E62ACC50410044E921 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E52ACC50410044E921 /* CreateAccountView.swift */; };
-		F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60A2AC2F028007AF64F /* LoginView.swift */; };
-		F4DBA60D2AC30919007AF64F /* TextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */; };
-		F4DBA60F2AC445A8007AF64F /* CreateAccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */; };
 		A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED22AC57F320013AC4B /* ChannelModel.swift */; };
 		A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */; };
 		A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */; };
@@ -77,6 +72,15 @@
 		E75FA2E92AC1FCA6005C947C /* GenreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2E82AC1FCA6005C947C /* GenreCell.swift */; };
 		E75FA2ED2AC2D45A005C947C /* BrowseAllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2EC2AC2D45A005C947C /* BrowseAllView.swift */; };
 		E75FA2EF2AC48BFF005C947C /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2EE2AC48BFF005C947C /* SearchResultView.swift */; };
+		F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */; };
+		F4B839E62ACC50410044E921 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E52ACC50410044E921 /* CreateAccountView.swift */; };
+		F4CC1EB42ACCC1CA00370E6B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */; };
+		F4CC1EB62ACCC1CA00370E6B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F4CC1EB52ACCC1CA00370E6B /* GoogleSignInSwift */; };
+		F4CC1EBA2ACCDBC400370E6B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1EB92ACCDBC400370E6B /* GoogleService-Info.plist */; };
+		F4CC1EBC2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4CC1EBB2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist */; };
+		F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60A2AC2F028007AF64F /* LoginView.swift */; };
+		F4DBA60D2AC30919007AF64F /* TextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */; };
+		F4DBA60F2AC445A8007AF64F /* CreateAccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,11 +131,6 @@
 		57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
-		F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		F4B839E52ACC50410044E921 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
-		F4DBA60A2AC2F028007AF64F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldExtension.swift; sourceTree = "<group>"; };
-		F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDetailView.swift; sourceTree = "<group>"; };
 		A0594ED22AC57F320013AC4B /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteChannelCell.swift; sourceTree = "<group>"; };
 		A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
@@ -147,6 +146,13 @@
 		E75FA2E82AC1FCA6005C947C /* GenreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenreCell.swift; path = PodcastApp/Screens/Search/Search/GenreCell.swift; sourceTree = SOURCE_ROOT; };
 		E75FA2EC2AC2D45A005C947C /* BrowseAllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BrowseAllView.swift; path = PodcastApp/Screens/Search/Search/BrowseAllView.swift; sourceTree = SOURCE_ROOT; };
 		E75FA2EE2AC48BFF005C947C /* SearchResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchResultView.swift; path = PodcastApp/Screens/Search/Search/SearchResultView.swift; sourceTree = SOURCE_ROOT; };
+		F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		F4B839E52ACC50410044E921 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		F4CC1EB92ACCDBC400370E6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F4CC1EBB2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist"; sourceTree = "<group>"; };
+		F4DBA60A2AC2F028007AF64F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldExtension.swift; sourceTree = "<group>"; };
+		F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,9 +162,11 @@
 			files = (
 				57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */,
 				57B391A72ABED54300BD7E82 /* Kingfisher in Frameworks */,
+				F4CC1EB62ACCC1CA00370E6B /* GoogleSignInSwift in Frameworks */,
 				57B391A02ABED51F00BD7E82 /* FirebaseAnalytics in Frameworks */,
 				57B391A22ABED51F00BD7E82 /* FirebaseAuth in Frameworks */,
 				57B391A42ABED51F00BD7E82 /* FirebaseFirestore in Frameworks */,
+				F4CC1EB42ACCC1CA00370E6B /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,6 +193,7 @@
 		57724E832ABDAB52006C3318 = {
 			isa = PBXGroup;
 			children = (
+				F46E70972ACCBAD1002AA4FB /* Firebase */,
 				57724E8E2ABDAB52006C3318 /* PodcastApp */,
 				57724E8D2ABDAB52006C3318 /* Products */,
 			);
@@ -208,6 +217,8 @@
 				57B391922ABED04400BD7E82 /* Extensions */,
 				57B391932ABED06500BD7E82 /* Resourses */,
 				57724E9D2ABDAB54006C3318 /* Info.plist */,
+				F4CC1EB92ACCDBC400370E6B /* GoogleService-Info.plist */,
+				F4CC1EBB2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist */,
 			);
 			path = PodcastApp;
 			sourceTree = "<group>";
@@ -759,6 +770,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F46E70972ACCBAD1002AA4FB /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -781,6 +799,8 @@
 				57B391A32ABED51F00BD7E82 /* FirebaseFirestore */,
 				57B391A62ABED54300BD7E82 /* Kingfisher */,
 				57B3920A2AC16D2800BD7E82 /* RealmSwift */,
+				F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */,
+				F4CC1EB52ACCC1CA00370E6B /* GoogleSignInSwift */,
 			);
 			productName = PodcastApp;
 			productReference = 57724E8C2ABDAB52006C3318 /* PodcastApp.app */;
@@ -814,6 +834,7 @@
 				57B3919E2ABED51F00BD7E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 57724E8D2ABDAB52006C3318 /* Products */;
 			projectDirPath = "";
@@ -831,11 +852,13 @@
 			files = (
 				57B391C82AC0CAD800BD7E82 /* SF-Pro-Display-Regular.otf in Resources */,
 				57B391C92AC0CAD800BD7E82 /* SF-Pro-Display-Semibold.otf in Resources */,
+				F4CC1EBA2ACCDBC400370E6B /* GoogleService-Info.plist in Resources */,
 				57724E9C2ABDAB54006C3318 /* LaunchScreen.storyboard in Resources */,
 				57724E992ABDAB54006C3318 /* Assets.xcassets in Resources */,
 				57B391BE2AC0C92C00BD7E82 /* PlusJakartaSans-Bold.ttf in Resources */,
 				57B391BC2AC0C92C00BD7E82 /* PlusJakartaSans-Medium.ttf in Resources */,
 				57B391BD2AC0C92C00BD7E82 /* PlusJakartaSans-SemiBold.ttf in Resources */,
+				F4CC1EBC2ACCE14E00370E6B /* client_1056669238379-jdnkp5qvfjrfuub0sai0ba8a5uv4bi6i.apps.googleusercontent.com.plist in Resources */,
 				57B391C22AC0C95000BD7E82 /* Manrope-Bold.ttf in Resources */,
 				57B391C32AC0C95000BD7E82 /* Manrope-Regular.ttf in Resources */,
 			);
@@ -869,11 +892,8 @@
 				E56199822AC9790300EC542D /* AccountGenderButton.swift in Sources */,
 				E75FA2EF2AC48BFF005C947C /* SearchResultView.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
-				57B391B82ABED9E900BD7E82 /* ProfileSettingsViewController.swift in Sources */,
 				F4B839E62ACC50410044E921 /* CreateAccountView.swift in Sources */,
 				F4DBA60D2AC30919007AF64F /* TextfieldExtension.swift in Sources */,
-				57B391CC2AC0CBBE00BD7E82 /* Label.swift in Sources */,
-				57B391CE2AC0CE3E00BD7E82 /* CustomColors.swift in Sources */,
 				E75FA2E72AC1FBC3005C947C /* TopGenresView.swift in Sources */,
 				5769D0E22ACADD4D00D93A56 /* DataModel.xcdatamodeld in Sources */,
 				5769D0D52AC876BC00D93A56 /* MusicPlayer.swift in Sources */,
@@ -904,7 +924,7 @@
 				F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 				F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */,
-				57B391E22AC16A5600BD7E82 /* OnboardingViewController.swift in Sources */,
+				57B391E22AC16A5600BD7E82 /* PagesViewController.swift in Sources */,
 				E57CF00D2AC59B31001600A8 /* AccountSettingsView.swift in Sources */,
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 				5769D0D12AC76FCD00D93A56 /* GalleryView.swift in Sources */,
@@ -1150,6 +1170,14 @@
 				kind = branch;
 			};
 		};
+		F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1177,6 +1205,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		F4CC1EB52ACCC1CA00370E6B /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
