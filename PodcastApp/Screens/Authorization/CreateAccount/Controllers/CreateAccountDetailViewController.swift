@@ -32,6 +32,7 @@ class CreateAccountDetailViewController: UIViewController {
         view.backgroundColor = .white
         setupNavigation()
         layout()
+        createAccountDetailView.navigationController = navigationController
     }
 
     override func viewWillAppear(_ animated: Bool) {

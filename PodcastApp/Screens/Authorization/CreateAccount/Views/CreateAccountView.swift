@@ -6,7 +6,7 @@ import UIKit
 //добавить распознаватель тапа
 
 class CreateAccountView: UIView {
-
+  var navigationController: UINavigationController?
     // MARK: - UI Elements
 
     private lazy var headLabel = UILabel.makeLabel(text: "Create account", font: UIFont.plusJakartaSansBold(size: 24), textColor: UIColor.white)
@@ -111,16 +111,8 @@ class CreateAccountView: UIView {
             ])
     }
 
-    @objc private func continueButtonAction() {
-        var responder: UIResponder? = continueButton
-        while let nextResponder = responder?.next {
-            if let viewController = nextResponder as? UIViewController {
-                let createAccountDetailVC = CreateAccountDetailViewController()
-                createAccountDetailVC.modalPresentationStyle = .fullScreen
-                viewController.present(createAccountDetailVC, animated: true, completion: nil)
-                break
-            }
-            responder = nextResponder
-        }
-    }
+  @objc private func continueButtonAction(_ sender: UIButton) {
+    let createAccountDetailVC = CreateAccountDetailViewController()
+    self.navigationController?.pushViewController(createAccountDetailVC, animated: true)
+  }
 }

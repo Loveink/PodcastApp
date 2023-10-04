@@ -8,6 +8,7 @@ import FirebaseAuth
 //добавить вход через google
 
 class LoginView: UIView {
+  var navigationController: UINavigationController?
 
     // MARK: - UI Elements
 
@@ -113,7 +114,7 @@ class LoginView: UIView {
         ])
     }
 
-    @objc private func loginButtonAction() {
+    @objc private func loginButtonAction(_ sender: UIButton) {
 
         if let email = loginField.text, let password = passwordField.text {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
@@ -122,16 +123,8 @@ class LoginView: UIView {
                 } else {
                     if let user = user {
                         print("Пользователь авторизован: \(user)")
-                        var responder: UIResponder? = self.loginButton
-                        while let nextResponder = responder?.next {
-                            if let viewController = nextResponder as? UIViewController {
-                                let tabbar = CustomTabBar()
-                                tabbar.modalPresentationStyle = .fullScreen
-                                viewController.present(tabbar, animated: true, completion: nil)
-                                break
-                            }
-                            responder = nextResponder
-                        }
+                      let createAccountVC = CreateAccountViewController()
+                      self.navigationController?.pushViewController(createAccountVC, animated: true)
                     }
                 }
             }

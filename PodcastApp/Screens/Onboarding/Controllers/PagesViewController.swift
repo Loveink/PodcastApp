@@ -198,7 +198,6 @@ extension PagesViewController {
 
     @objc func goToLoginPage (_ sender: UIButton) {
         let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        present(loginVC, animated: true)
+        self.navigationController?.pushViewController(loginVC, animated: true)
     }
 }
