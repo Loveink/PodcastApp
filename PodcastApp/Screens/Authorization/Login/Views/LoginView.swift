@@ -1,5 +1,7 @@
 import Foundation
 import UIKit
+import Firebase
+import FirebaseAuth
 
 
 //добавить распознаватель тапа на лейбл внизу
@@ -102,13 +104,36 @@ class LoginView: UIView {
             continueLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             continueLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: updownInset*4),
 
+            //            googleButton.topAnchor.constraint(equalTo: continueLabel.bottomAnchor, constant: updownInset*2),
+            //            googleButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: sideInset),
+            //            googleButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
+            //            googleButton.heightAnchor.constraint(equalToConstant: 57),
+
             signupLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             signupLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
         ])
     }
 
-  @objc private func loginButtonAction(_ sender: UIButton) {
-    let createAccountVC = CreateAccountViewController()
-    self.navigationController?.pushViewController(createAccountVC, animated: true)
-  }
+    @objc private func loginButtonAction(_ sender: UIButton) {
+
+        if let email = loginField.text, let password = passwordField.text {
+            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+                if let error = error {
+                    print("Ошибка входа: \(error.localizedDescription)")
+                } else {
+                    if let user = user {
+                        print("Пользователь авторизован: \(user)")
+                      let createAccountVC = CustomTabBar()
+                      self.navigationController?.pushViewController(createAccountVC, animated: true)
+                    }
+                }
+            }
+        }
+
+        if let user = Auth.auth().currentUser {
+            let uid = user.uid
+            let email = user.email
+            print (uid, email ?? "no email")
+        }
+    }
 }
