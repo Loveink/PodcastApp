@@ -2,6 +2,8 @@ import UIKit
 import Firebase
 import GoogleSignIn
 
+// почему не пушится экран при успешной авторизации через гугл?
+
 class LoginViewController: UIViewController {
 
     // MARK: - Properties
