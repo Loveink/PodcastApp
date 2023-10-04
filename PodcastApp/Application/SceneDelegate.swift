@@ -36,11 +36,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //      window.rootViewController = createAccountVC()
 
       //детали создания аккаунта
-//      window.rootViewController = createOnboardingViewController()
+//      window.rootViewController = createAccountDetailVC()
 
       navigationController.navigationBar.isHidden = true
 
-      window.rootViewController = navigationController
+      window.rootViewController = loginVC
       window.makeKeyAndVisible()
   }
 

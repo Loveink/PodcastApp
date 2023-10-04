@@ -125,9 +125,9 @@ class LoginView: UIView {
                         var responder: UIResponder? = self.loginButton
                         while let nextResponder = responder?.next {
                             if let viewController = nextResponder as? UIViewController {
-                                let createAccountVC = CreateAccountViewController()
-                                createAccountVC.modalPresentationStyle = .fullScreen
-                                viewController.present(createAccountVC, animated: true, completion: nil)
+                                let tabbar = CustomTabBar()
+                                tabbar.modalPresentationStyle = .fullScreen
+                                viewController.present(tabbar, animated: true, completion: nil)
                                 break
                             }
                             responder = nextResponder

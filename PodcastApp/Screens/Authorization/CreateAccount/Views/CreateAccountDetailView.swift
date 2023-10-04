@@ -1,8 +1,11 @@
 import Foundation
 import UIKit
+import FirebaseAuth
 
 // добавить сокрытие клавиатуры по тапу где-нибудь (на кнопку return например)
 // добавить распознаватель тапа для текста внизу
+// !!! решить вопрос с имейлом: либо тянуть с прошлого экрана, либо удалять тот экран и добавлять сюда новое текстовое поле
+// добавить проверки и условия текстовых полей, чтобы вводились корректные данные
 
 class CreateAccountDetailView: UIView {
 
@@ -114,15 +117,26 @@ class CreateAccountDetailView: UIView {
     }
 
     @objc private func signupButtonAction() {
-        var responder: UIResponder? = signupButton
-        while let nextResponder = responder?.next {
-            if let viewController = nextResponder as? UIViewController {
-                let tabbar = CustomTabBar()
-                tabbar.modalPresentationStyle = .fullScreen
-                viewController.present(tabbar, animated: true, completion: nil)
-                break
+
+        // в качестве логина временно принимается текст из firstnameField. Логин нужно указывать с доменом @
+        //уже зарегистрированы пользователи doctor@gmail.com и doctor1@gmail.com с одинаковыми паролями 123456
+        Auth.auth().createUser(withEmail: firstnameField.text!, password: passwordField.text!) { (authResult, error) in
+            if let error = error {
+                print("Ошибка регистрации: \(error.localizedDescription)")
+            } else {
+                print ("Успешно зарегистрирован пользователь \(authResult?.user.email as Any)")
             }
-            responder = nextResponder
         }
+
+//        var responder: UIResponder? = signupButton
+//        while let nextResponder = responder?.next {
+//            if let viewController = nextResponder as? UIViewController {
+//                let tabbar = CustomTabBar()
+//                tabbar.modalPresentationStyle = .fullScreen
+//                viewController.present(tabbar, animated: true, completion: nil)
+//                break
+//            }
+//            responder = nextResponder
+//        }
     }
 }

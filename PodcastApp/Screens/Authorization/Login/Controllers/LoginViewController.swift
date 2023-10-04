@@ -73,7 +73,10 @@ class LoginViewController: UIViewController {
 
             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                            accessToken: user.accessToken.tokenString)
-            print (user.userID as Any, user.idToken as Any)
+            print (credential, user.userID as Any, user.idToken as Any, "авторизация успешна")
+//            if let tabbar = self.tabBarController {
+//                navigationController?.pushViewController(tabbar, animated: true)
+//            }
         }
     }
 }
