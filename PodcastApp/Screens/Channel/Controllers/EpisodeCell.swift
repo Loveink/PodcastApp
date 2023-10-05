@@ -10,7 +10,7 @@ import Kingfisher
 
 class EpisodeCell: UICollectionViewCell {
     
-    var episode: EpisodeItemCell?
+    var episode: EpisodeItem?
     let options: KingfisherOptionsInfo = [
     .cacheOriginalImage
   ]
@@ -86,11 +86,11 @@ class EpisodeCell: UICollectionViewCell {
     }
 
 
-  func setup(withEpisode episode: EpisodeItemCell) {
+  func setup(withEpisode episode: EpisodeItem) {
     DispatchQueue.main.async {
       self.episodeImageView.kf.setImage(with: URL(string: episode.image), options: self.options)
       self.episodeTitleLabel.text = episode.title
-      let formattedDuration = self.formatDuration(length: episode.duration)
+      let formattedDuration = self.formatDuration(length: episode.enclosureLength)
       self.episodeDetaisLabel.text = formattedDuration
     }
   }

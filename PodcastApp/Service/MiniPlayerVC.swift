@@ -26,7 +26,7 @@ class MiniPlayerVC: UIView {
     private let backButton = UIButton(type: .system)
     let playButton = UIButton(type: .system)
     private let forwardButton = UIButton(type: .system)
-    private var targetController: UIPageViewController?
+    private var targetController: UIViewController?
     private var currentViewController: UIViewController?
 
     init() {
@@ -120,7 +120,7 @@ class MiniPlayerVC: UIView {
         currentViewController = controller
     }
 
-    func setupTargetController(controller: UIPageViewController) {
+    func setupTargetController(controller: UIViewController) {
         targetController = controller
     }
 

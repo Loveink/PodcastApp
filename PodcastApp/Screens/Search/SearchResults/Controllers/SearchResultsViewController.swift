@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol SearchResultCellsDelegate {
-    func cellDidSelected(_ podcastItem: PodcastItemCell)
+    func cellDidSelected(_ id: Int)
 }
 
 
@@ -18,9 +18,7 @@ class SearchResultsViewController: UIViewController {
     var id: [Int] = []
     var feeds: [Feed] = []
     let dispatchGroup = DispatchGroup()
-    var fetchFunc: FetchFunc!
-    
-    
+
     let searchBar = CustomSearchBar()
     let searchResult = SearchResultView()
     let allPodcasts = AllPodcastsView()
@@ -76,12 +74,7 @@ class SearchResultsViewController: UIViewController {
                 self.feeds.append(contentsOf: podcastResponse.feeds)
                 for podcast in self.feeds {
                     let imageURL = podcast.image
-                    
-                    DispatchQueue.main.sync {
-                        self.fetchFunc = FetchFunc(collectionView: self.allPodcasts.collectionView)
-                    }
-                    
-                    let item = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id)
+                  let item = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id, author: podcast.author, categories: podcast.categories)
                     
                     self.allPodcasts.podcasts.append(item)
                     
@@ -129,11 +122,27 @@ class SearchResultsViewController: UIViewController {
 
 
 extension SearchResultsViewController: SearchResultCellsDelegate {
-    func cellDidSelected(_ podcastItem: PodcastItemCell) {
-        let channelVC = ChannelViewController()
-        self.navigationController?.pushViewController(channelVC, animated: true)
-        
+  func cellDidSelected(_ id: Int) {
+    let channelVC = ChannelViewController()
+    channelVC.channelID = id
+
+    if let index = feeds.firstIndex(where: { $0.id == id }) {
+      let selectedFeed = feeds[index]
+      channelVC.channelTitleLabel.text = selectedFeed.title
+      let imageURLString = selectedFeed.image
+
+      if let imageURL = URL(string: imageURLString) {
+        URLSession.shared.dataTask(with: imageURL) { (data, _, _) in
+          if let data = data, let image = UIImage(data: data) {
+            DispatchQueue.main.async {
+              channelVC.channelImageView.image = image
+              self.navigationController?.pushViewController(channelVC, animated: true)
+            }
+          }
+        }.resume()
+      }
     }
+  }
 }
 
 

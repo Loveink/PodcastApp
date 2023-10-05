@@ -28,10 +28,10 @@ class MusicPlayer {
     private var currentURL: String?
     private var currentSongIndex: Int = 0
     private var currentPlayerType: PlayerType = .musicResults
-    private var musicResults: [EpisodeItemCell] = []
+    private var musicResults: [EpisodeItem] = []
 
-    func loadPlayer(from episode: EpisodeItemCell) {
-      guard let musicURL = URL(string: episode.audioURL) else {
+    func loadPlayer(from episode: EpisodeItem) {
+      guard let musicURL = URL(string: episode.enclosureUrl) else {
             print("Invalid music URL")
             return
         }
@@ -41,20 +41,20 @@ class MusicPlayer {
         playerItem = AVPlayerItem(url: musicURL)
         player = AVPlayer(playerItem: playerItem)
         player?.play()
-      currentURL = episode.audioURL
+        currentURL = episode.enclosureUrl
         delegate?.updatePlayButtonState(isPlaying: true)
-      delegate?.updateCurrentURL(episode.audioURL)
+        delegate?.updateCurrentURL(episode.enclosureUrl)
         songController?.setDurationTime()
         songController?.updateButtonImage(isPlay: true)
         updatePlayerValues()
     }
 
-    func playMusicWithURL(_ episode: EpisodeItemCell) {
-      if isPlayingMusic(from: episode.audioURL) {
+    func playMusicWithURL(_ episode: EpisodeItem) {
+      if isPlayingMusic(from: episode.enclosureUrl) {
             pauseMusic()
         } else {
             loadPlayer(from: episode)
-          currentURL = episode.audioURL
+          currentURL = episode.enclosureUrl
         }
     }
 
@@ -121,7 +121,7 @@ class MusicPlayer {
         loadPlayer(from: previousEpisode)
     }
 
-    func updateMusicResults(_ results: [EpisodeItemCell]) {
+    func updateMusicResults(_ results: [EpisodeItem]) {
         musicResults = results
         currentSongIndex = 0
     }

@@ -16,7 +16,6 @@ class PodcastCell: UICollectionViewCell {
   var currentPodcast: PodcastItemCell?
   var id: Int?
   var audioURLs: [String] = []
-  var vc: FetchFunc?
 
   override init(frame: CGRect) {
     super.init(frame: frame)

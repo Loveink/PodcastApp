@@ -15,16 +15,13 @@ class HomeViewController: UIViewController {
   let categoriesName = CategoriesNames()
 
   var feeds: [Feed] = []
-  var vc: FetchFunc?
   var id: [Int] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupCollectionView()
-    vc = FetchFunc(collectionView: categoryCollectionView.collectionView)
-    let dispatchGroup = DispatchGroup()
-    fetchPodcasts(dispatchGroup: dispatchGroup)
+    fetchPodcasts()
     categoryCollectionView.delegate = self
     trendingCollectionView.categoryDictionary = categoryDictionary
   }
@@ -57,16 +54,11 @@ class HomeViewController: UIViewController {
   }
 
 
-  func fetchPodcasts(dispatchGroup: DispatchGroup) {
+  func fetchPodcasts() {
     let networkService = NetworkService()
-    dispatchGroup.enter()
 
     networkService.fetchData(forPath: "/podcasts/trending?max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
       guard let self = self else { return }
-
-      defer {
-        dispatchGroup.leave()
-      }
 
       switch result {
       case .success(let podcastResponse):
