@@ -128,6 +128,7 @@ class ChannelViewController: UIViewController {
         setupNavigation()
       fetchPodcasts()
       miniPlayerVC.setupCurrentViewController(controller: self)
+      miniPlayerVC.setupTargetController(controller: songPageViewController)
       miniPlayerVC.delegate = self
       musicPlayer.delegate = self
     }

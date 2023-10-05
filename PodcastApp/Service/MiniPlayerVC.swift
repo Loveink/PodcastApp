@@ -116,14 +116,14 @@ class MiniPlayerVC: UIView {
         songImageView.image = image
     }
 
-    func setupCurrentViewController(controller: UIViewController) {
-        currentViewController = controller
-    }
+  func setupCurrentViewController(controller: UIViewController) {
+      currentViewController = controller
+  }
 
-    func setupTargetController(controller: UIViewController) {
-        targetController = controller
-    }
-
+  func setupTargetController(controller: UIViewController) {
+      targetController = controller
+  }
+  
     private func addGestureToBackgroundView() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(switchToSongPageViewController))
         let removeGesture = UISwipeGestureRecognizer(target: self, action: #selector(removeMiniPlayerFromParentView))
