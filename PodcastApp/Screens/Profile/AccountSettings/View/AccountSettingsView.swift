@@ -19,10 +19,6 @@ class AccountSettingsView: UIView {
     
     private lazy var birthdayField = UITextField.makeBlueTextField(text: "")
     
-    private lazy var maleField = UITextField.makeBlueTextField(text: "Male")
-    
-    private lazy var femaleField = UITextField.makeBlueTextField(text: "Female")
-    
     private lazy var firstNameLabel = UILabel.makeLabel(text: "First Name", font: UIFont.plusJakartaSansMedium(size: 14), textColor: UIColor.textGrey)
     
     private lazy var lastNameLabel = UILabel.makeLabel(text: "Last Name", font: UIFont.plusJakartaSansMedium(size: 14), textColor: UIColor.textGrey)
