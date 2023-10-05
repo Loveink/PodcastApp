@@ -10,7 +10,7 @@ import UIKit
 
 struct SaveToCoreData {
 
-  static func saveRecipeInfoToCoreData(_ image: String, _ title: String, _ id: Int)  {
+  static func savePodcastInfoToCoreData(_ image: String, _ title: String, _ id: Int)  {
     var context: NSManagedObjectContext!
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
       return
