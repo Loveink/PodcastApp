@@ -7,6 +7,12 @@
 
 import UIKit
 
+
+protocol SearchResultCellsDelegate {
+    func cellDidSelected(_ podcastItem: PodcastItemCell)
+}
+
+
 class SearchResultsViewController: UIViewController {
     
     var id: [Int] = []
@@ -25,12 +31,7 @@ class SearchResultsViewController: UIViewController {
     
     init(_ text: String) {
         super.init(nibName: nil, bundle: nil)
-//            -----------
-//            API REQUEST
-//            -----------
-        
-        fetchPodcasts(text)
-
+        makeRequest(text)
         searchBar.textField.text = text
     }
     
@@ -46,6 +47,7 @@ class SearchResultsViewController: UIViewController {
         configureUI()
         setCostraints()
         searchBar.setCloseSquare()
+        allPodcasts.delegate = self
     }
     
     
@@ -62,7 +64,7 @@ class SearchResultsViewController: UIViewController {
         let networkService = NetworkService()
         dispatchGroup.enter()
         
-        networkService.fetchData(forPath: "/podcasts/trending?cat=" + text + "&max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
+        networkService.fetchData(forPath: "/podcasts/trending?cat=" + text + "&max=15") { [weak self] (result: Result<PodcastSearch, APIError>) in
             guard let self = self else { return }
             
             defer {
@@ -72,7 +74,6 @@ class SearchResultsViewController: UIViewController {
             switch result {
             case .success(let podcastResponse):
                 self.feeds.append(contentsOf: podcastResponse.feeds)
-                print("feeds.count ", feeds.count)
                 for podcast in self.feeds {
                     let imageURL = podcast.image
                     
@@ -95,6 +96,15 @@ class SearchResultsViewController: UIViewController {
     
     
     
+    private func makeRequest(_ text: String) {
+        let encodedStr = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        fetchPodcasts(encodedStr)
+        dispatchGroup.notify(queue: .main) {
+            self.allPodcasts.collectionView.reloadData()
+        }
+    }
+    
+    
     private func configureUI() {
         view.backgroundColor = .white
         
@@ -113,6 +123,17 @@ class SearchResultsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+}
+
+
+
+
+extension SearchResultsViewController: SearchResultCellsDelegate {
+    func cellDidSelected(_ podcastItem: PodcastItemCell) {
+        let channelVC = ChannelViewController()
+        self.navigationController?.pushViewController(channelVC, animated: true)
+        
+    }
 }
 
 

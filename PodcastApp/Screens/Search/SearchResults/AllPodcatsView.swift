@@ -10,18 +10,14 @@ import UIKit
 
 class AllPodcastsView: UIView {
     
+    var delegate: SearchResultCellsDelegate?
+    
     let dispatchGroup = DispatchGroup()
     
-    var podcasts: [PodcastItemCell] = [] {
-      didSet {
-        DispatchQueue.main.async {
-          self.collectionView.reloadData()
-        }
-      }
-    }
+    var podcasts: [PodcastItemCell] = []
     
     let titleLabel = UILabel.makeLabel(text: "All Podcasts", font: .manropeRegular(size: 14), textColor: .black)
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    var collectionView: UICollectionView!
     
     
     
@@ -29,7 +25,6 @@ class AllPodcastsView: UIView {
         super.init(frame: .zero)
         configureUI()
         setConstraints()
-        podcasts.append(PodcastItemCell(title: "TITLE", image: "image", id: 0))
         
     }
     
@@ -44,13 +39,16 @@ class AllPodcastsView: UIView {
     
     
     private func configureUI() {
+        let layout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         addSubview(titleLabel)
-        collectionView.backgroundColor = .brown
+        collectionView.backgroundColor = .none
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(
-            EpisodeCell.self, forCellWithReuseIdentifier: EpisodeCell.reuseIdentifier)
+            SearchCell.self, forCellWithReuseIdentifier: SearchCell.identifier)
         addSubview(collectionView)
 
     }
@@ -67,32 +65,35 @@ extension AllPodcastsView {
             
             collectionView.leftAnchor.constraint(equalTo: leftAnchor),
             collectionView.rightAnchor.constraint(equalTo: rightAnchor),
-            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 }
 
 
-extension AllPodcastsView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension AllPodcastsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { podcasts.count }
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EpisodeCell.reuseIdentifier, for: indexPath) as? EpisodeCell else {
-            let cell = EpisodeCell()
-            return cell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else {
+            return UICollectionViewCell()
         }
         let podcast = self.podcasts[indexPath.row]
-        cell.setup(withEpisode: EpisodeItemCell(title: podcast.title, image: podcast.image, audioURL: "", duration: 0))
+        cell.configureCell(podcast)
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print(frame)
-        return CGSize(width: frame.width - 35, height: 85)
+        return CGSize(width: frame.width, height: 76)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let podcast = self.podcasts[indexPath.row]
+        delegate?.cellDidSelected(podcast)
     }
     
 }

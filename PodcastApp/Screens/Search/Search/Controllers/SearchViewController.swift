@@ -13,6 +13,10 @@ protocol SearchViewControllerDelegate {
     func endTyping()
 }
 
+protocol SearchCellsDelegate {
+    func cellDidSelected(_ text: String)
+}
+
 
 
 class SearchViewController: UIViewController {
@@ -26,6 +30,7 @@ class SearchViewController: UIViewController {
     var standartConstraints = [NSLayoutConstraint]()
     var bigTopGenresConstraints = [NSLayoutConstraint]()
     
+    var cellDidSelected: (_ text: String) -> () = {_ in }
     
     
     override func viewDidLoad() {
@@ -34,6 +39,9 @@ class SearchViewController: UIViewController {
         configureUI()
         configureConstraints()
         addGestureRecognizer()
+        
+        topGenresView.delegate = self
+        browseAllView.delegate = self
     }
     
     
@@ -95,6 +103,15 @@ extension SearchViewController: SearchViewControllerDelegate {
             let resultVC = SearchResultsViewController(text)
             navigationController?.pushViewController(resultVC, animated: true)
         }
+    }
+}
+
+
+extension SearchViewController: SearchCellsDelegate {
+    func cellDidSelected(_ text: String) {
+        endTyping()
+        let resultVC = SearchResultsViewController(text)
+        navigationController?.pushViewController(resultVC, animated: true)
     }
 }
 

@@ -9,6 +9,8 @@ import UIKit
 
 class TopGenresView: UIView {
     
+    var delegate: SearchCellsDelegate?
+    
     var titleLabel = UILabel.makeLabel(text: "Top Genres", font: .manropeBold(size: 18), textColor: .black)
     let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
@@ -130,7 +132,9 @@ extension TopGenresView: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("You selected Top Genre Cell #\(indexPath.item)!")
+        let text = topGenresList[indexPath.item]
+        delegate?.cellDidSelected(text)
+        
     }
     
 }

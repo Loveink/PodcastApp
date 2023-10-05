@@ -9,6 +9,8 @@ import UIKit
 
 class BrowseAllView: UIView {
     
+    var delegate: SearchCellsDelegate?
+    
     var titleLabel = UILabel()
     var collectionView: UICollectionView!
     
@@ -85,7 +87,8 @@ extension BrowseAllView: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("You selected Browse All Cell #\(indexPath.item)!")
+        let text = categoryList[indexPath.row]
+        delegate?.cellDidSelected(text)
     }
     
     
