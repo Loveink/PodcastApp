@@ -21,7 +21,8 @@ class FavoritesViewController: UIViewController {
     
     
 // MARK: - private properties
-    private var favouriteChanels = ChannelModel.makeMockData()
+    var favouriteChanels: [PodcastItemCell] = []
+//    private var favouriteChanels = ChannelModel.makeMockData()
     
     override func viewDidLoad() {
         super.viewDidLoad()

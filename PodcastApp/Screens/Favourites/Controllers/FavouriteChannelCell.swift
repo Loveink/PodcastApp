@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol Reusable {
     static var reuseIdentifier: String { get }
@@ -14,6 +15,9 @@ protocol Reusable {
 class FavouriteChannelCell: UITableViewCell {
     
     var channel: ChannelModel?
+    let options: KingfisherOptionsInfo = [
+    .cacheOriginalImage
+  ]
     
 // MARK: - User Interface
     
@@ -78,18 +82,23 @@ class FavouriteChannelCell: UITableViewCell {
     private func setupCell() {
         contentView.backgroundColor = .white
         self.addSubview(favChannelImageView)
-//        self.addSubview(favChanelTitleLabel)
-//        self.addSubview(episodesNumberLabel)
-//        episodesNumberLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
         self.addSubview(stackView)
         stackView.addArrangedSubview(favChannelTitleLabel)
         stackView.addArrangedSubview(episodesNumberLabel)
     }
     
-    func setup(withChanel chanel: ChannelModel) {
-        favChannelImageView.image = UIImage(named: chanel.imageName)
-        favChannelTitleLabel.text = chanel.channelName
-        episodesNumberLabel.text = "\(chanel.numberOfEpisodes) Eps"
+//    func setup(withChanel chanel: ChannelModel) {
+//        favChannelImageView.image = UIImage(named: chanel.imageName)
+//        favChannelTitleLabel.text = chanel.channelName
+//        episodesNumberLabel.text = "\(chanel.numberOfEpisodes) Eps"
+//    }
+    
+
+    func setup(withChanel chanel: PodcastItemCell) {
+      DispatchQueue.main.async {
+        self.favChannelImageView.kf.setImage(with: URL(string: chanel.image), options: self.options)
+        self.favChannelTitleLabel.text = chanel.title
+      }
     }
     
 }
@@ -110,16 +119,6 @@ extension FavouriteChannelCell {
             stackView.leadingAnchor.constraint(equalTo: favChannelImageView.trailingAnchor, constant: 15),
             stackView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -47),
-            
-//            favChanelTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
-//            favChanelTitleLabel.leadingAnchor.constraint(equalTo: favChanelImageView.trailingAnchor, constant: 15),
-//            favChanelTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -47),
-//
-//            episodesNumberLabel.leadingAnchor.constraint(equalTo: favChanelTitleLabel.leadingAnchor),
-//            episodesNumberLabel.topAnchor.constraint(equalTo: favChanelTitleLabel.bottomAnchor, constant: 4),
-//            episodesNumberLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
-            
-            
         ]
         
         NSLayoutConstraint.activate(constraints)
