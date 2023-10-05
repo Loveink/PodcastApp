@@ -38,6 +38,10 @@ final class HomePageViewController: UIViewController {
     let title1 = UILabel.makeLabel(text: "Title", font: .manropeBold(size: 14), textColor: .textBlack)
     let subtitle1 = UILabel.makeLabel(text: "subtitle", font: .manropeRegular(size: 14), textColor: .textGrey)
  
+        var myArray2 = TopСollectionViewCell.id
+        var myArray3 = AverageСollectionViewCell.id
+        var myArray = LowerCollectionViewCell.id
+    
     init() {
         let layoutOne = UICollectionViewFlowLayout()
         layoutOne.scrollDirection = .horizontal

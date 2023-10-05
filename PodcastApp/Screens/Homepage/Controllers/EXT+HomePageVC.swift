@@ -12,11 +12,11 @@ extension HomePageViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.topСollectionView {
-            return 5
+            return myArray.count
         } else if collectionView == self.averageСollectionView {
-            return 5
+            return myArray2.count
         } else {
-            return 5 // Для новой коллекции
+            return myArray3.count
         }
     }
     
