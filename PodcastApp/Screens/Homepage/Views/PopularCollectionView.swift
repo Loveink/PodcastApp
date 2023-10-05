@@ -1,5 +1,5 @@
 //
-//  CategoriesCollectionView.swift
+//  PopularCollectionView.swift
 //  BestRecipes
 //
 //  Created by Александра Савчук on 31.08.2023.
@@ -7,13 +7,12 @@
 
 import UIKit
 
-class CategoriesCollectionView: UIView {
+class PopularCollectionView: UIView {
 
   var collectionView: UICollectionView!
+  weak var delegate: PopularCollectionViewDelegate?
 
-  weak var delegate: CategoriesCollectionViewDelegate?
-
-  var recipes: [PodcastItemCell] = [] {
+  var podcasts: [PodcastItemCell] = [] {
     didSet {
       DispatchQueue.main.async {
         self.collectionView.reloadData()
@@ -21,7 +20,7 @@ class CategoriesCollectionView: UIView {
     }
   }
 
-  var selectedCell: CategoryCell?
+  var selectedCell: PodcastCell?
   var id: Int?
 
   override init(frame: CGRect) {
@@ -37,12 +36,12 @@ class CategoriesCollectionView: UIView {
 
   func configureCollection() {
     let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
+    layout.scrollDirection = .vertical
     collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.backgroundColor = .clear
     collectionView.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
+    collectionView.register(PodcastCell.self, forCellWithReuseIdentifier: PodcastCell.identifier)
     collectionView.delegate = self
     collectionView.dataSource = self
   }
@@ -58,40 +57,37 @@ class CategoriesCollectionView: UIView {
 }
 
 //MARK: - Extensions
-extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PopularCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return recipes.count
+    return podcasts.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PodcastCell.identifier, for: indexPath) as? PodcastCell else {
       return UICollectionViewCell()
     }
-    cell.configureCell(recipes[indexPath.row])
-    cell.id = Int(recipes[indexPath.row].id)
+    cell.configureCell(podcasts[indexPath.row])
+    cell.id = Int(podcasts[indexPath.row].id)
     return cell
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 300, height: 300)
+      let cellWidth = collectionView.frame.width - 20
+      return CGSize(width: cellWidth, height: 80)
   }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      if recipes.count > 0 {
-        if let selectedCell = collectionView.cellForItem(at: indexPath) as? CategoryCell,
-           let id = selectedCell.id {
-           delegate?.didSelectRecipe(id: id)
-        }
+    if podcasts.count > 0 {
+      if let selectedCell = collectionView.cellForItem(at: indexPath) as? PodcastCell,
+         let id = selectedCell.id {
+        delegate?.didSelectPodcast(id: id)
       }
+    }
   }
-
-
-
-
 }
 
 //MARK: - Protocols
-protocol CategoriesCollectionViewDelegate: AnyObject {
-  func didSelectRecipe(id: Int)
+protocol PopularCollectionViewDelegate: AnyObject {
+  func didSelectPodcast(id: Int)
 }

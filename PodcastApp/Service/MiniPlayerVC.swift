@@ -26,12 +26,14 @@ class MiniPlayerVC: UIView {
     private let backButton = UIButton(type: .system)
     let playButton = UIButton(type: .system)
     private let forwardButton = UIButton(type: .system)
-    private var targetController: UIPageViewController?
+    private var targetController: UIViewController?
     private var currentViewController: UIViewController?
 
     init() {
         super.init(frame: .zero)
-        backgroundView.backgroundColor = .blue
+        backgroundView.backgroundColor = UIColor(red: 0.8, green: 0.882, blue: 0.984, alpha: 1)
+      backgroundView.layer.cornerRadius = 12
+      
         setupViews()
         setupConstraints()
         addGestureToBackgroundView()
@@ -118,7 +120,7 @@ class MiniPlayerVC: UIView {
         currentViewController = controller
     }
 
-    func setupTargetController(controller: UIPageViewController) {
+    func setupTargetController(controller: UIViewController) {
         targetController = controller
     }
 

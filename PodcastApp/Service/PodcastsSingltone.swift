@@ -11,7 +11,6 @@ class Music {
   static let shared = Music()
   var podcastResults: [Feed] = []
   var episodeResults: [EpisodeItem] = []
-  var musicResult: [EpisodeModel1] = []
 }
 
 struct EpisodeModel1 {

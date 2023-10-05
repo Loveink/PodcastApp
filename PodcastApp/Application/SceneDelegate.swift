@@ -22,47 +22,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let createAccountVC = CreateAccountDetailViewController()
       let createAccountDetailVC = CreateAccountDetailViewController()
 
-      let navigationController = UINavigationController(rootViewController: onboardingVC)
-
-//      navigationController.setViewControllers([loginVC, createAccountVC, createAccountDetailVC, onboardingVC], animated: false)
-
-      //таббар
-//      let tabBarController = CustomTabBar()
-
-      //логинка
-//      window.rootViewController = createLoginVC()
-
-      //создание аккаунта
-//      window.rootViewController = createAccountVC()
-
-      //детали создания аккаунта
-//      window.rootViewController = createAccountDetailVC()
-
+      let navigationController = UINavigationController(rootViewController: loginVC)
       navigationController.navigationBar.isHidden = true
+
+    navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController.navigationBar.shadowImage = UIImage()
 
       window.rootViewController = navigationController
       window.makeKeyAndVisible()
   }
-
-    func createOnboardingViewController() -> UINavigationController {
-        let onboardingViewController = PagesViewController()
-        return UINavigationController(rootViewController: onboardingViewController)
-    }
-
-    func createLoginVC() -> UINavigationController {
-        let loginVC = LoginViewController()
-        return UINavigationController(rootViewController: loginVC)
-    }
-
-    func createAccountVC() -> UINavigationController {
-        let createAccountVC = CreateAccountViewController()
-        return UINavigationController(rootViewController: createAccountVC)
-    }
-
-    func createAccountDetailVC() -> UINavigationController {
-        let createAccountDetailVC = CreateAccountDetailViewController()
-        return UINavigationController(rootViewController: createAccountDetailVC)
-    }
 
   func sceneDidDisconnect(_ scene: UIScene) {
     // Called as the scene is being released by the system.

@@ -42,8 +42,15 @@ class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
 
   var podcast = PodcastView()
   var galleryViewController = GalleryView()
-  var feeds: [EpisodeItem] = []
 
+  var trackInfo: EpisodeItem? {
+      didSet {
+          if let trackInfo = trackInfo {
+//              songVC.configureCell(with: trackInfo)
+//              albumVC.configureCell(with: trackInfo)
+          }
+      }
+  }
   var audioPlayer: AVAudioPlayer?
   var currentTrackIndex: Int = 0
   var musicArray: [String] = []
@@ -58,45 +65,45 @@ class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
   }
 
   func fetch() {
-        let dispatchGroup = DispatchGroup()
-
-        dispatchGroup.enter() // Входим в группу
-        let networkService = NetworkService()
-        networkService.fetchData(forPath: "/episodes/byfeedid?id=6569768") { (result: Result<EpisodeFeed, APIError>) in
-            defer {
-                dispatchGroup.leave()
-            }
-
-            switch result {
-            case .success(let podcastResponse):
-              self.feeds.append(contentsOf: podcastResponse.items)
-
-                for podcast in self.feeds {
-                    let imageURL = podcast.feedImage
-                    self.galleryViewController.images.append(imageURL)
-                    self.musicArray.append(podcast.enclosureUrl)
-
-                  print(self.musicArray)
-                  print(podcast.enclosureLength)
-                }
-            case .failure(let error):
-                print("Error: \(error)")
-            }
-        }
-
-        // Ожидаем завершения всех запросов
-        dispatchGroup.notify(queue: .main) {
-            // Этот код выполнится после завершения всех запросов
-            self.galleryViewController.collectionView.reloadData()
-          print("reload")
-            if let audioURLString = self.musicArray.first,
-               let audioURL = URL(string: audioURLString) {
-                self.playAudio(withURL: audioURL)
-//                self.podcast.dur = podcast.enclosureLength
-            } else {
-                print("Первый аудиофайл в массиве не найден.")
-            }
-        }
+//        let dispatchGroup = DispatchGroup()
+//
+//        dispatchGroup.enter() // Входим в группу
+//        let networkService = NetworkService()
+//        networkService.fetchData(forPath: "/episodes/byfeedid?id=6569768") { (result: Result<EpisodeFeed, APIError>) in
+//            defer {
+//                dispatchGroup.leave()
+//            }
+//
+//            switch result {
+//            case .success(let podcastResponse):
+////              self.feeds.append(contentsOf: podcastResponse.items)
+//
+//                for podcast in self.feeds {
+//                    let imageURL = podcast.feedImage
+//                    self.galleryViewController.images.append(imageURL)
+//                    self.musicArray.append(podcast.enclosureUrl)
+//
+//                  print(self.musicArray)
+//                  print(podcast.enclosureLength)
+//                }
+//            case .failure(let error):
+//                print("Error: \(error)")
+//            }
+//        }
+//
+//        // Ожидаем завершения всех запросов
+//        dispatchGroup.notify(queue: .main) {
+//            // Этот код выполнится после завершения всех запросов
+//            self.galleryViewController.collectionView.reloadData()
+//          print("reload")
+//            if let audioURLString = self.musicArray.first,
+//               let audioURL = URL(string: audioURLString) {
+//                self.playAudio(withURL: audioURL)
+////                self.podcast.dur = podcast.enclosureLength
+//            } else {
+//                print("Первый аудиофайл в массиве не найден.")
+//            }
+//        }
     }
 
 

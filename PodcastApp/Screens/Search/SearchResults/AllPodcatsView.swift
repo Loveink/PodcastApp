@@ -93,7 +93,7 @@ extension AllPodcastsView: UICollectionViewDelegate, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let podcast = self.podcasts[indexPath.row]
-        delegate?.cellDidSelected(podcast)
+      delegate?.cellDidSelected(podcast.id)
     }
     
 }
