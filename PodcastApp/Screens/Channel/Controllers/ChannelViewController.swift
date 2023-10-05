@@ -14,6 +14,7 @@ class ChannelViewController: UIViewController {
   var channelID: Int = 0
   var feeds: [EpisodeItem] = []
   var audioPlayer: AVAudioPlayer?
+  var miniPlayerVC = MiniPlayerVC()
 
   private lazy var titleLabel = UILabel.makeLabel(text: "Channel", font: UIFont.plusJakartaSansBold(size: 18), textColor: UIColor.black)
 
@@ -199,7 +200,7 @@ extension ChannelViewController: UICollectionViewDataSource {
     let audioURLString = episode.audioURL
     if let audioURL = URL(string: audioURLString) {
       canPlayAudioFile(withURL: audioURL)
-      print(audioURL)
+      showMiniPlayer()
     }
   }
 }
@@ -313,5 +314,16 @@ extension ChannelViewController {
           }
       }
       task.resume()
+  }
+
+  func showMiniPlayer() {
+      miniPlayerVC.translatesAutoresizingMaskIntoConstraints = false
+      view.addSubview(miniPlayerVC)
+      NSLayoutConstraint.activate([
+          miniPlayerVC.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+          miniPlayerVC.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+          miniPlayerVC.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+          miniPlayerVC.heightAnchor.constraint(equalToConstant: 70)
+      ])
   }
 }

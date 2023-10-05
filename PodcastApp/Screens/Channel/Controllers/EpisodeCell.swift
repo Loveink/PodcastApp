@@ -92,7 +92,6 @@ class EpisodeCell: UICollectionViewCell {
       self.episodeTitleLabel.text = episode.title
       let formattedDuration = self.formatDuration(length: episode.duration)
       self.episodeDetaisLabel.text = formattedDuration
-      //      episodeDetaisLabel.text = "\(episode.episodeDutarion) | \(episode.episodeNumber) Eps"
     }
   }
     

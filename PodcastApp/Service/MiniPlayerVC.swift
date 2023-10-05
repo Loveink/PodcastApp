@@ -31,7 +31,9 @@ class MiniPlayerVC: UIView {
 
     init() {
         super.init(frame: .zero)
-        backgroundView.backgroundColor = .blue
+        backgroundView.backgroundColor = UIColor(red: 0.8, green: 0.882, blue: 0.984, alpha: 1)
+      backgroundView.layer.cornerRadius = 12
+      
         setupViews()
         setupConstraints()
         addGestureToBackgroundView()
