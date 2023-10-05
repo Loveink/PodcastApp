@@ -34,14 +34,32 @@ class SearchResultView: UIView {
     
     
     func configureView(_ podcastItem: PodcastItemCell) {
-        print("configureView")
         titleLabel.text = podcastItem.title
-//        timeLabel.text = "12:12"
-//        episodeCounterLabel.text = "56 Eps"
+        episodesCounter.text = "56 Eps"
+        creatorNameTitle.text = "Dr. Oi om jean"
         
         DispatchQueue.main.async {
             self.imageView.kf.setImage(with: URL(string: podcastItem.image))
         }
+    }
+    
+    
+    func makeVisible() {
+        creatorNameTitle.isHidden = false
+        episodesCounter.isHidden = false
+        imageView.isHidden = false
+        verticalDivisionView.isHidden = false
+        titleLabel.isHidden = false
+    }
+    
+    
+    func makeInvisible() {
+        creatorNameTitle.isHidden = true
+        episodesCounter.isHidden = true
+        imageView.isHidden = true
+        verticalDivisionView.isHidden = true
+        titleLabel.isHidden = true
+        titleLabel.text = ""
     }
     
     
@@ -59,6 +77,7 @@ class SearchResultView: UIView {
         titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        imageView.layer.borderWidth = 1
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 15
         imageView.backgroundColor = .black

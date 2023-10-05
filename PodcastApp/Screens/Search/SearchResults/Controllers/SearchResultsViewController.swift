@@ -19,6 +19,8 @@ class SearchResultsViewController: UIViewController {
     var feeds: [Feed] = []
     let dispatchGroup = DispatchGroup()
 
+    let errorLabel = UILabel.makeLabel(text: "No results...", font: .manropeRegular(size: 14), textColor: .black)
+    
     let searchBar = CustomSearchBar()
     let searchResult = SearchResultView()
     let allPodcasts = AllPodcastsView()
@@ -84,6 +86,11 @@ class SearchResultsViewController: UIViewController {
                 
             case .failure(let error):
                 print("Error: \(error)")
+                DispatchQueue.main.async {
+                    self.allPodcasts.isHidden = true
+                    self.searchResult.makeInvisible()
+                    self.errorLabel.isHidden = false
+                }
             }
         }
     }
@@ -99,10 +106,24 @@ class SearchResultsViewController: UIViewController {
     }
     
     
+    @objc func searchButtonTapped() {
+        id = []
+        feeds = []
+        allPodcasts.podcasts = []
+        errorLabel.isHidden = true
+        allPodcasts.isHidden = false
+        searchResult.makeVisible()
+        makeRequest(searchBar.textField.text ?? "")
+    }
+    
     private func configureUI() {
+        searchBar.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        view.backgroundColor = .white
+        
+        errorLabel.isHidden = true
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
         
         searchResult.button.addTarget(self, action: #selector(firstCellSelected), for: .touchUpInside)
-        view.backgroundColor = .white
         
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
@@ -161,6 +182,7 @@ extension SearchResultsViewController {
         view.addSubview(searchBar)
         view.addSubview(searchResult)
         view.addSubview(allPodcasts)
+        view.addSubview(errorLabel)
         
         NSLayoutConstraint.activate([
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -181,7 +203,10 @@ extension SearchResultsViewController {
             allPodcasts.topAnchor.constraint(equalTo: searchResult.bottomAnchor, constant: 30),
             allPodcasts.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
             allPodcasts.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
-            allPodcasts.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            allPodcasts.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
