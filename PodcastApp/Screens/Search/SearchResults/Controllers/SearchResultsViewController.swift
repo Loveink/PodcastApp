@@ -50,10 +50,8 @@ class SearchResultsViewController: UIViewController {
     
     
 
-    func configureView() {
-//        after API response
-//        searchResult.configureView()
-        
+    func configureSearchResult(_ podcastItem: PodcastItemCell) {
+        self.searchResult.configureView(podcastItem)
     }
     
     
@@ -74,10 +72,13 @@ class SearchResultsViewController: UIViewController {
                 self.feeds.append(contentsOf: podcastResponse.feeds)
                 for podcast in self.feeds {
                     let imageURL = podcast.image
-                  let item = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id, author: podcast.author, categories: podcast.categories)
-                    
+                    let item = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id, author: podcast.author, categories: podcast.categories)
                     self.allPodcasts.podcasts.append(item)
-                    
+                    DispatchQueue.main.async {
+                        if self.searchResult.titleLabel.text == "" {
+                            self.configureSearchResult(item)
+                        }
+                    }
                     id.append(podcast.id)
                 }
                 
@@ -99,6 +100,8 @@ class SearchResultsViewController: UIViewController {
     
     
     private func configureUI() {
+        
+        searchResult.button.addTarget(self, action: #selector(firstCellSelected), for: .touchUpInside)
         view.backgroundColor = .white
         
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
@@ -114,6 +117,10 @@ class SearchResultsViewController: UIViewController {
     
     @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func firstCellSelected() {
+        cellDidSelected(id[0])
     }
     
 }
@@ -171,7 +178,7 @@ extension SearchResultsViewController {
             searchResult.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
             searchResult.bottomAnchor.constraint(equalTo: searchResult.topAnchor, constant: 100),
             
-            allPodcasts.topAnchor.constraint(equalTo: searchResult.bottomAnchor),
+            allPodcasts.topAnchor.constraint(equalTo: searchResult.bottomAnchor, constant: 30),
             allPodcasts.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
             allPodcasts.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
             allPodcasts.bottomAnchor.constraint(equalTo: view.bottomAnchor)

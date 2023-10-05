@@ -33,10 +33,6 @@ class AllPodcastsView: UIView {
     }
     
     
-    func appendCell(_ cell: PodcastItemCell, _ url: String) {
-//        let episodeCell = EpisodeItemCell(title: cell.title, image: cell.image, audioURL: <#T##String#>, duration: <#T##Int#>)
-    }
-    
     
     private func configureUI() {
         let layout = UICollectionViewFlowLayout()
@@ -74,14 +70,14 @@ extension AllPodcastsView {
 
 extension AllPodcastsView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { podcasts.count }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int { podcasts.count - 1}
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchCell.identifier, for: indexPath) as? SearchCell else {
             return UICollectionViewCell()
         }
-        let podcast = self.podcasts[indexPath.row]
+        let podcast = self.podcasts[indexPath.row + 1]
         cell.configureCell(podcast)
         return cell
     }
@@ -92,8 +88,8 @@ extension AllPodcastsView: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let podcast = self.podcasts[indexPath.row]
-      delegate?.cellDidSelected(podcast.id)
+        let podcast = self.podcasts[indexPath.row + 1]
+        delegate?.cellDidSelected(podcast.id)
     }
     
 }

@@ -66,7 +66,8 @@ class SearchCell: UICollectionViewCell {
         self.layer.cornerRadius = 15
         self.clipsToBounds = true
         
-        
+        titleLabel.adjustsFontSizeToFitWidth = false
+        titleLabel.lineBreakMode = .byTruncatingTail
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         
@@ -107,6 +108,7 @@ extension SearchCell {
             titleLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 15),
             titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: imageView.centerYAnchor),
+            titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
 
             timeLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 15),
             timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
