@@ -79,10 +79,10 @@ class SearchResultView: UIView {
             topDivisionView.topAnchor.constraint(equalTo: topAnchor),
             topDivisionView.heightAnchor.constraint(equalToConstant: 1),
             
-            imageView.leftAnchor.constraint(equalTo: leftAnchor),
+            imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             imageView.topAnchor.constraint(equalTo: topDivisionView.bottomAnchor, constant: 20),
-            imageView.heightAnchor.constraint(equalToConstant: 60),
-            imageView.widthAnchor.constraint(equalToConstant: 60),
+            imageView.heightAnchor.constraint(equalToConstant: 56),
+            imageView.widthAnchor.constraint(equalToConstant: 56),
             
             titleLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 15),
             titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor),
