@@ -125,6 +125,11 @@ class MusicPlayer {
         musicResults = results
         currentSongIndex = 0
     }
+
+  func getCurrentTime() -> Double {
+      return player?.currentTime().seconds ?? 0
+  }
+
 }
 
 extension MusicPlayer: MusicPlayerDelegate {

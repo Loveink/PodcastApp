@@ -7,130 +7,57 @@
 
 import UIKit
 import AVFoundation
+import Kingfisher
 
-class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
-  var favoriteVC: FavoritesViewController?
-
-  func reloadLikeButton() {
-
-  }
-
-  func configureCell(with musicResult: EpisodeModel1) {
-
-  }
-
-  func updateButtonImage(isPlay: Bool) {
-
-  }
-
-  func updateCurrentTimeLabel(duration: Int) {
-
-  }
-
-  func updateTotalDuration(duration: Float) {
-
-  }
-
-  func updateSlider(value: Float) {
-
-  }
-
-  func setDurationTime() {
-
-  }
-
+class NowPlayingViewController: UIViewController {
 
   var podcast = PodcastView()
   var galleryViewController = GalleryView()
 
+  private let musicPlayer = MusicPlayer.instance
+  private var currentTrackModel: EpisodeItem?
+
   var trackInfo: EpisodeItem? {
       didSet {
-          if let trackInfo = trackInfo {
-//              songVC.configureCell(with: trackInfo)
-//              albumVC.configureCell(with: trackInfo)
+        if trackInfo != nil {
           }
       }
   }
   var audioPlayer: AVAudioPlayer?
   var currentTrackIndex: Int = 0
   var musicArray: [String] = []
-  private let musicPlayer = MusicPlayer.instance
-  private var currentTrackModel: EpisodeModel?
+  private var timer: Timer?
+
 
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
-    fetch()
     setupConstraints()
+    setDurationTime()
+    setTargets()
+    updateButtonImage(isPlay: false)
+    startTimer()
   }
 
-  func fetch() {
-//        let dispatchGroup = DispatchGroup()
-//
-//        dispatchGroup.enter() // Входим в группу
-//        let networkService = NetworkService()
-//        networkService.fetchData(forPath: "/episodes/byfeedid?id=6569768") { (result: Result<EpisodeFeed, APIError>) in
-//            defer {
-//                dispatchGroup.leave()
-//            }
-//
-//            switch result {
-//            case .success(let podcastResponse):
-////              self.feeds.append(contentsOf: podcastResponse.items)
-//
-//                for podcast in self.feeds {
-//                    let imageURL = podcast.feedImage
-//                    self.galleryViewController.images.append(imageURL)
-//                    self.musicArray.append(podcast.enclosureUrl)
-//
-//                  print(self.musicArray)
-//                  print(podcast.enclosureLength)
-//                }
-//            case .failure(let error):
-//                print("Error: \(error)")
-//            }
-//        }
-//
-//        // Ожидаем завершения всех запросов
-//        dispatchGroup.notify(queue: .main) {
-//            // Этот код выполнится после завершения всех запросов
-//            self.galleryViewController.collectionView.reloadData()
-//          print("reload")
-//            if let audioURLString = self.musicArray.first,
-//               let audioURL = URL(string: audioURLString) {
-//                self.playAudio(withURL: audioURL)
-////                self.podcast.dur = podcast.enclosureLength
-//            } else {
-//                print("Первый аудиофайл в массиве не найден.")
-//            }
-//        }
+  deinit {
+      stopTimer()
     }
 
+  private func startTimer() {
+      timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
+    }
 
-  func canPlayAudioFile(withURL audioURL: URL) {
-      let session = URLSession.shared
-      let task = session.dataTask(with: audioURL) { [weak self] (data, response, error) in
-          if let error = error {
-              print("Error loading audio data: \(error.localizedDescription)")
-              return
-          }
+    // Функция для остановки таймера
+    private func stopTimer() {
+      timer?.invalidate()
+      timer = nil
+    }
 
-          if let data = data {
-              do {
-                  self?.audioPlayer = try AVAudioPlayer(data: data)
-                  self?.audioPlayer?.delegate = self
-                  self?.audioPlayer?.play()
-              } catch {
-                  print("Error creating audio player: \(error)")
-              }
-          }
-      }
-      task.resume()
-  }
-
-  func playAudio(withURL audioURL: URL) {
-      canPlayAudioFile(withURL: audioURL)
-  }
+  @objc private func updateCurrentTime() {
+      let currentTime = musicPlayer.getCurrentTime()
+      podcast.leftSliderLabel.text = "\(convertSecondsToMinutes(Float(currentTime)))"
+      podcast.sliderView.value = Float(currentTime)
+    }
 
   func setupConstraints() {
     galleryViewController.translatesAutoresizingMaskIntoConstraints = false
@@ -150,29 +77,87 @@ class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
       podcast.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
     ])
   }
-}
 
-extension NowPlayingViewController: AVAudioPlayerDelegate {
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if flag {
-            // Track finished, you can handle this event here.
-            // For example, move to the next track if available.
-            currentTrackIndex += 1
-            if currentTrackIndex < musicArray.count {
-              let audioURLString = musicArray[currentTrackIndex]
-              if let audioURL = URL(string: audioURLString + ".mp3") {
-                  playAudio(withURL: audioURL)
-              }
-            } else {
-                // No more tracks to play, you can handle this case accordingly.
-            }
+  func configureCell(with musicResult: EpisodeItem) {
+    currentTrackModel = musicResult
 
-            // Update the slider value to show the current position
-            if let audioPlayer = audioPlayer {
-                let duration = audioPlayer.duration
-                let currentTime = audioPlayer.currentTime
-                podcast.sliderView.value = Float(currentTime / duration)
-            }
-        }
+    podcast.songNameLabel.text = musicResult.title
+
+    let imageUrlString = musicResult.feedImage
+//    if let imageUrl = URL(string: imageUrlString) {
+//      if let firstImageView = galleryViewController.images.first {
+//        firstImageView.kf.setImage(with: imageUrl)
+//      }
+//    }
+  }
+
+  private func setTargets() {
+      podcast.sliderView.addTarget(self, action: #selector(rewindTrack), for: [.touchUpInside])
+      podcast.playButton.addTarget(self, action: #selector(controlPlayer), for: .touchUpInside)
+      podcast.nextTrackButton.addTarget(self, action: #selector(nextTrack), for: .touchUpInside)
+      podcast.previousTrackButton.addTarget(self, action: #selector(previousTrack), for: .touchUpInside)
     }
-}
+
+    private func convertSecondsToMinutes(_ totalSeconds: Float) -> Float {
+        let minute = Float(Int(totalSeconds) % 3600 / 60)
+        let seconds = Float(Int(totalSeconds) % 60)
+
+        return Float(minute + (seconds / 100))
+    }
+
+    @objc private func controlPlayer() {
+        musicPlayer.isPlayerPerforming() ? musicPlayer.pauseMusic() : musicPlayer.playMusic()
+    }
+
+    @objc private func rewindTrack() {
+        let currentTime = Int(podcast.sliderView.value)
+        musicPlayer.rewindTrack(at: Float(currentTime))
+        musicPlayer.playMusic()
+        updateCurrentTimeLabel(duration: currentTime)
+    }
+
+    @objc private func nextTrack() {
+        musicPlayer.playNextSong()
+        let duration = musicPlayer.getTrackDuration()
+      podcast.rightSliderLabel.text = "\(convertSecondsToMinutes(Float(duration)))"
+      podcast.sliderView.maximumValue = Float(duration)
+        updateCurrentTimeLabel(duration: 0)
+    }
+
+    @objc private func previousTrack() {
+        musicPlayer.playPreviousSong()
+        let duration = musicPlayer.getTrackDuration()
+      podcast.rightSliderLabel.text = "\(convertSecondsToMinutes(Float(duration)))"
+      podcast.sliderView.maximumValue = Float(duration)
+        updateCurrentTimeLabel(duration: 0)
+    }
+
+
+    func setDurationTime() {
+        let duration = musicPlayer.getTrackDuration()
+      podcast.rightSliderLabel.text = "\(convertSecondsToMinutes(Float(duration)))"
+      podcast.sliderView.maximumValue = Float(duration)
+    }
+
+    func updateButtonImage(isPlay: Bool) {
+        let image = isPlay ? UIImage(systemName: "pause.fill") : UIImage(systemName: "play")
+
+      podcast.playButton.setImage(image, for: .normal)
+    }
+
+    func updateCurrentTimeLabel(duration: Int) {
+        let currentTime = Int(podcast.sliderView.value)
+        podcast.leftSliderLabel.text = "\(convertSecondsToMinutes(Float(currentTime)))"
+    }
+
+
+    func updateTotalDuration(duration: Float) {
+      podcast.sliderView.maximumValue = convertSecondsToMinutes(duration)
+    }
+
+    func updateSlider(value: Float) {
+        let newValue = value / podcast.sliderView.maximumValue
+
+      podcast.sliderView.value = podcast.sliderView.maximumValue * newValue
+    }
+  }
