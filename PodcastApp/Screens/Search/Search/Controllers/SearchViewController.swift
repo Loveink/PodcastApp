@@ -13,11 +13,13 @@ protocol SearchViewControllerDelegate {
     func endTyping()
 }
 
+protocol SearchCellsDelegate {
+    func cellDidSelected(_ text: String)
+}
+
 
 
 class SearchViewController: UIViewController {
-
-//    let apiManager = APIManager()
     
     var gestureRecognizer = UITapGestureRecognizer()
     
@@ -28,6 +30,7 @@ class SearchViewController: UIViewController {
     var standartConstraints = [NSLayoutConstraint]()
     var bigTopGenresConstraints = [NSLayoutConstraint]()
     
+    var cellDidSelected: (_ text: String) -> () = {_ in }
     
     
     override func viewDidLoad() {
@@ -36,7 +39,11 @@ class SearchViewController: UIViewController {
         configureUI()
         configureConstraints()
         addGestureRecognizer()
+        
+        topGenresView.delegate = self
+        browseAllView.delegate = self
     }
+    
     
     
     private func configureUI() {
@@ -45,42 +52,6 @@ class SearchViewController: UIViewController {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         
         topGenresView.seeAllButton.addTarget(self, action: #selector(seeAllButtonTapped), for: .touchUpInside)
-    }
-    
-    
-    
-    private func configureConstraints() {
-        view.addSubview(searchBar)
-        view.addSubview(topGenresView)
-        view.addSubview(browseAllView)
-        
-        NSLayoutConstraint.activate([
-            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
-            searchBar.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            searchBar.heightAnchor.constraint(equalToConstant: 50),
-        ])
-        
-        standartConstraints = [
-            topGenresView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
-            topGenresView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            topGenresView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            topGenresView.heightAnchor.constraint(equalToConstant: 150),
-            
-            browseAllView.topAnchor.constraint(equalTo: topGenresView.bottomAnchor, constant: 10),
-            browseAllView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            browseAllView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            browseAllView.rightAnchor.constraint(equalTo: view.rightAnchor)
-        ]
-        
-        bigTopGenresConstraints = [
-            topGenresView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
-            topGenresView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
-            topGenresView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
-            topGenresView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ]
-        
-        NSLayoutConstraint.activate(standartConstraints)
     }
     
     
@@ -120,12 +91,10 @@ extension SearchViewController: SearchViewControllerDelegate {
         gestureRecognizer.isEnabled = true
     }
     
-    
     @objc func endTyping() {
         gestureRecognizer.isEnabled = false
         _ = searchBar.resignFirstResponder()
     }
-    
     
     @objc func searchButtonTapped() {
         endTyping()
@@ -138,16 +107,48 @@ extension SearchViewController: SearchViewControllerDelegate {
 }
 
 
+extension SearchViewController: SearchCellsDelegate {
+    func cellDidSelected(_ text: String) {
+        endTyping()
+        let resultVC = SearchResultsViewController(text)
+        navigationController?.pushViewController(resultVC, animated: true)
+    }
+}
 
-extension UIView {
-    func setBackgroundGradient() {
-        let gradientLayer = CAGradientLayer()
-        let startColour = UIColor(red: 253 / 255, green: 246 / 255, blue: 244 / 255, alpha: 1.0).cgColor
-        let endColour = UIColor(red: 239 / 255, green: 250 / 255, blue: 248 / 255, alpha: 1.0).cgColor
-        gradientLayer.colors = [startColour, endColour]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        gradientLayer.frame = self.bounds
-        self.layer.insertSublayer(gradientLayer, at: 0)
+
+
+extension SearchViewController {
+    private func configureConstraints() {
+        view.addSubview(searchBar)
+        view.addSubview(topGenresView)
+        view.addSubview(browseAllView)
+        
+        NSLayoutConstraint.activate([
+            searchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            searchBar.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchBar.heightAnchor.constraint(equalToConstant: 50),
+        ])
+        
+        standartConstraints = [
+            topGenresView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
+            topGenresView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            topGenresView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            topGenresView.heightAnchor.constraint(equalToConstant: 150),
+            
+            browseAllView.topAnchor.constraint(equalTo: topGenresView.bottomAnchor, constant: 10),
+            browseAllView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            browseAllView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            browseAllView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ]
+        
+        bigTopGenresConstraints = [
+            topGenresView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
+            topGenresView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            topGenresView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
+            topGenresView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ]
+        
+        NSLayoutConstraint.activate(standartConstraints)
     }
 }
