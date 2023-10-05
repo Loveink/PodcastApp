@@ -111,6 +111,7 @@ class PodcastCell: UICollectionViewCell {
         } else {
           self.categoriesLabel.text = ""
         }
+        self.likeButton.addTarget(self, action: #selector(self.likeButtonTapped), for: .touchUpInside)
       }
   }
 
@@ -118,7 +119,7 @@ class PodcastCell: UICollectionViewCell {
     contentView.addSubview(backgroundImageView)
     backgroundImageView.addSubview(podcastImageView)
     backgroundImageView.addSubview(titleLabel)
-    backgroundImageView.addSubview(likeButton)
+    contentView.addSubview(likeButton)
     backgroundImageView.addSubview(authorLabel)
     backgroundImageView.addSubview(categoriesLabel)
     categoriesLabel.textAlignment = .right

@@ -12,6 +12,7 @@ class CustomTabBar: UITabBarController, UITabBarControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.delegate = self
+
     setupItems()
     setTabBarAppearance()
   }
@@ -63,5 +64,10 @@ class CustomTabBar: UITabBarController, UITabBarControllerDelegate {
     tabBar.layer.shadowOffset = CGSize(width: 0, height: 4)
     tabBar.layer.shadowOpacity = 0.3
     tabBar.layer.shadowRadius = 6
+
+    tabBar.backgroundImage = UIImage()
+        tabBar.shadowImage = UIImage()
+    tabBar.layer.borderWidth = 0
+        tabBar.layer.borderColor = UIColor.clear.cgColor
   }
 }

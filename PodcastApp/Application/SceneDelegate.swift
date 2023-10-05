@@ -25,6 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let navigationController = UINavigationController(rootViewController: loginVC)
       navigationController.navigationBar.isHidden = true
 
+    navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController.navigationBar.shadowImage = UIImage()
+
       window.rootViewController = navigationController
       window.makeKeyAndVisible()
   }
