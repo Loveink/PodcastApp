@@ -8,7 +8,37 @@
 import UIKit
 import AVFoundation
 
-class NowPlayingViewController: UIViewController {
+class NowPlayingViewController: UIViewController, SongViewControllerProtocol {
+  var favoriteVC: FavoritesViewController?
+
+  func reloadLikeButton() {
+
+  }
+
+  func configureCell(with musicResult: EpisodeModel1) {
+
+  }
+
+  func updateButtonImage(isPlay: Bool) {
+
+  }
+
+  func updateCurrentTimeLabel(duration: Int) {
+
+  }
+
+  func updateTotalDuration(duration: Float) {
+
+  }
+
+  func updateSlider(value: Float) {
+
+  }
+
+  func setDurationTime() {
+
+  }
+
 
   var podcast = PodcastView()
   var galleryViewController = GalleryView()
@@ -17,6 +47,8 @@ class NowPlayingViewController: UIViewController {
   var audioPlayer: AVAudioPlayer?
   var currentTrackIndex: Int = 0
   var musicArray: [String] = []
+  private let musicPlayer = MusicPlayer.instance
+  private var currentTrackModel: EpisodeModel?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,7 +62,7 @@ class NowPlayingViewController: UIViewController {
 
         dispatchGroup.enter() // Входим в группу
         let networkService = NetworkService()
-        networkService.fetchData(forPath: "/episodes/byfeedid?id=656983") { (result: Result<EpisodeFeed, APIError>) in
+        networkService.fetchData(forPath: "/episodes/byfeedid?id=6569768") { (result: Result<EpisodeFeed, APIError>) in
             defer {
                 dispatchGroup.leave()
             }
@@ -43,7 +75,9 @@ class NowPlayingViewController: UIViewController {
                     let imageURL = podcast.feedImage
                     self.galleryViewController.images.append(imageURL)
                     self.musicArray.append(podcast.enclosureUrl)
+
                   print(self.musicArray)
+                  print(podcast.enclosureLength)
                 }
             case .failure(let error):
                 print("Error: \(error)")
@@ -58,6 +92,7 @@ class NowPlayingViewController: UIViewController {
             if let audioURLString = self.musicArray.first,
                let audioURL = URL(string: audioURLString) {
                 self.playAudio(withURL: audioURL)
+//                self.podcast.dur = podcast.enclosureLength
             } else {
                 print("Первый аудиофайл в массиве не найден.")
             }
@@ -111,7 +146,26 @@ class NowPlayingViewController: UIViewController {
 }
 
 extension NowPlayingViewController: AVAudioPlayerDelegate {
-  func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-    // Ваш код обработки завершения воспроизведения аудио
-  }
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if flag {
+            // Track finished, you can handle this event here.
+            // For example, move to the next track if available.
+            currentTrackIndex += 1
+            if currentTrackIndex < musicArray.count {
+              let audioURLString = musicArray[currentTrackIndex]
+              if let audioURL = URL(string: audioURLString + ".mp3") {
+                  playAudio(withURL: audioURL)
+              }
+            } else {
+                // No more tracks to play, you can handle this case accordingly.
+            }
+
+            // Update the slider value to show the current position
+            if let audioPlayer = audioPlayer {
+                let duration = audioPlayer.duration
+                let currentTime = audioPlayer.currentTime
+                podcast.sliderView.value = Float(currentTime / duration)
+            }
+        }
+    }
 }

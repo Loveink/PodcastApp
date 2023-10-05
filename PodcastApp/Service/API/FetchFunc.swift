@@ -12,9 +12,16 @@ import UIKit
 class FetchFunc: UIViewController {
 
   var audioPlayer: AVAudioPlayer?
-  var musicArray: [String] = []
+  var musicArray: [ParsePodcast] = []
   var collectionView: UICollectionView
   var audioURLHandler: ((String) -> Void)?
+
+  var currentElement: String = ""
+  var currentTitle: String = ""
+  var currentLength: String = ""
+  var currentURL: String = ""
+  var currentImageURL: String = ""
+  var currentCategory: String = ""
 
   init(collectionView: UICollectionView) {
     self.collectionView = collectionView
@@ -55,6 +62,7 @@ class FetchFunc: UIViewController {
 
         if let data = data {
           self.parseXML(data)
+
         }
       }
       task.resume()
@@ -72,16 +80,17 @@ class FetchFunc: UIViewController {
     collectionView1.reloadData()
   }
 
-    func getMusic(audioURL: String?) {
-        guard let audioURLString = audioURL, let audioURL = URL(string: audioURLString + ".mp3") else {
-            print("URL for audio is invalid.")
-            return
-        }
-
-        playAudio(withURL: audioURL)
-        print("play")
-
+  func getMusic(audioURL: String?) {
+      guard let audioURLString = audioURL else {
+          print("URL for audio is invalid.")
+          return
+      }
+      if let episode = musicArray.first {
+//      MusicPlayer.instance.playMusicWithURL(episode)
+      print("play")
+    }
   }
+
 
   func playAudio(withURL audioURL: URL) {
     let session = URLSession.shared
@@ -107,10 +116,50 @@ class FetchFunc: UIViewController {
 }
 
 extension FetchFunc: XMLParserDelegate {
+
   func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-    if elementName == "enclosure", let enclosureURL = attributeDict["url"] {
-      musicArray.append(enclosureURL)
+    currentElement = elementName
+
+    if elementName == "enclosure", let enclosureURL = attributeDict["url"], let enclosureLength = attributeDict["length"] {
+      currentURL = enclosureURL
+      currentLength = enclosureLength
       audioURLHandler?(enclosureURL)
+    } else if elementName == "title" {
+      currentTitle = ""
+    } else if elementName == "itunes:image", let imageURL = attributeDict["href"] {
+      currentImageURL = imageURL
+    } else if elementName == "itunes:category", let categoryText = attributeDict["text"] {
+      currentCategory = categoryText
     }
   }
+
+  func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+          if elementName == "item" {
+              currentTitle = currentTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+              currentLength = currentLength.trimmingCharacters(in: .whitespacesAndNewlines)
+              let episode = ParsePodcast(title: currentTitle, length: currentLength, url: currentURL, imageURL: currentImageURL, category: currentCategory)
+              musicArray.append(episode)
+          } else if elementName == "title" {
+              currentTitle = currentTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+          } else if elementName == "length" {
+              currentLength = currentLength.trimmingCharacters(in: .whitespacesAndNewlines)
+          }
+    print(musicArray)
+      }
+
+  func parser(_ parser: XMLParser, foundCharacters string: String) {
+      if currentElement == "title" {
+          currentTitle += string
+      } else if currentElement == "length" {
+          currentLength += string
+      }
+  }
+}
+
+struct ParsePodcast {
+    let title: String
+    let length: String
+    let url: String
+    let imageURL: String
+    let category: String
 }

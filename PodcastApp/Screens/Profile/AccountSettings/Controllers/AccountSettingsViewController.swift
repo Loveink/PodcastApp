@@ -42,7 +42,7 @@ class AccountSettingsViewController: UIViewController {
     }
     
     private func setupNavigation() {
-        
+        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = UIColor.black
         navigationItem.leftBarButtonItem = backButton

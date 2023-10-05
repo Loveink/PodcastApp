@@ -11,5 +11,5 @@ struct PodcastItemCell: Decodable {
 
   let title: String
   let image: String
-  let audioURL: String
+  let id: Int
 }

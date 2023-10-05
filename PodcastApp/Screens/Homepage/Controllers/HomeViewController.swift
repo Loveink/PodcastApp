@@ -2,26 +2,34 @@
 //  HomeViewController.swift
 //  PodcastApp
 //
-//  Created by Александра Савчук on 23.09.2023.
+//  Created by Александра Савчук on 01.10.2023.
 //
 
 import UIKit
 import AVFoundation
 
 class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
-  func didSelectRecipe(_ audioURL: String) {
-      // Остановите предыдущий аудиоплеер, если он существует
-      audioPlayer?.stop()
 
-      if let vc = self.vc {
-          vc.audioURLHandler = { [weak self] receivedAudioURL in
-              if receivedAudioURL == audioURL {
-                  self?.audioPlayer?.stop()
-              } else {
-                vc.getMusic(audioURL: receivedAudioURL)
-              }
+  func didSelectRecipe(id: Int) {
+      let channelVC = ChannelViewController()
+      channelVC.channelID = id
+
+      if let index = feeds.firstIndex(where: { $0.id == id }) {
+          let selectedFeed = feeds[index]
+        channelVC.channelTitleLabel.text = selectedFeed.title
+          let imageURLString = selectedFeed.image
+
+          if let imageURL = URL(string: imageURLString) {
+              URLSession.shared.dataTask(with: imageURL) { (data, _, _) in
+                  if let data = data, let image = UIImage(data: data) {
+                      DispatchQueue.main.async {
+                        channelVC.channelImageView.image = image
+                          self.navigationController?.pushViewController(channelVC, animated: true)
+                      }
+                  } else {
+                  }
+              }.resume()
           }
-          vc.audioURLHandler?(audioURL)
       }
   }
 
@@ -31,7 +39,10 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
   private let categoryCollectionView = CategoriesCollectionView()
   var feeds: [Feed] = []
   var vc: FetchFunc?
+  var id: [Int] = []
   var selectedIndexPath: IndexPath?
+  private let musicPlayer = MusicPlayer.instance
+  private let miniPlayerVC = MiniPlayerVC()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -59,37 +70,30 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
 
 
   func fetchPodcasts(dispatchGroup: DispatchGroup) {
-          let networkService = NetworkService()
-          dispatchGroup.enter() // Входим в группу
+            let networkService = NetworkService()
+            dispatchGroup.enter() // Входим в группу
 
-          networkService.fetchData(forPath: "/podcasts/trending?max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
-              guard let self = self else { return }
+            networkService.fetchData(forPath: "/podcasts/trending?max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
+                guard let self = self else { return }
 
-              defer {
-                  dispatchGroup.leave() // Покидаем группу после завершения запроса
-              }
-
-              switch result {
-              case .success(let podcastResponse):
-                  self.feeds.append(contentsOf: podcastResponse.feeds)
-                  var xmls = [String]()
-
-                for podcast in self.feeds {
-                    let imageURL = podcast.image
-                    let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL, audioURL: podcast.url)
-                    self.categoryCollectionView.recipes.append(podcastItem)
-                    xmls.append(podcast.url)
+                defer {
+                    dispatchGroup.leave() // Покидаем группу после завершения запроса
                 }
 
+                switch result {
+                case .success(let podcastResponse):
+                    self.feeds.append(contentsOf: podcastResponse.feeds)
 
-                  if let vc = self.vc {
-                      vc.fetchXMLs(xmls, dispatchGroup: dispatchGroup)
-                  } else {
-                      print("FetchFunc is nil.")
+                  for podcast in self.feeds {
+                      let imageURL = podcast.image
+                      let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id)
+                      self.categoryCollectionView.recipes.append(podcastItem)
+                      id.append(podcast.id)
                   }
-              case .failure(let error):
-                  print("Error: \(error)")
-              }
-          }
-      }
-  }
+
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+            }
+        }
+    }
