@@ -21,7 +21,7 @@ class MusicPlayer {
 
     static let instance = MusicPlayer()
 
-    weak var songController: SongViewControllerProtocol?
+    weak var songController: NowPlayingViewController?
     weak var delegate: MusicPlayerDelegate?
     private var player: AVPlayer?
     private var playerItem: AVPlayerItem?

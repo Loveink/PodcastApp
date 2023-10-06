@@ -135,9 +135,7 @@ class MiniPlayerVC: UIView {
 
     @objc private func switchToSongPageViewController() {
         guard let targetVC = targetController, let currentVC = currentViewController else { return }
-
         targetVC.modalPresentationStyle = .overFullScreen
-
         currentVC.present(targetVC, animated: true)
     }
 

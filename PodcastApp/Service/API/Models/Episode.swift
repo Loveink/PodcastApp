@@ -29,7 +29,7 @@ struct EpisodeItem: Decodable {
     let link: String
     let description: String
     let enclosureUrl: String
-    let enclosureLength: Int
+    let duration: Int
     let image: String
     let feedImage: String
 }

@@ -17,6 +17,7 @@ class ChannelViewController: UIViewController {
   let miniPlayerVC = MiniPlayerVC()
   let songPageViewController = NowPlayingViewController()
 
+
   private lazy var titleLabel = UILabel.makeLabel(text: "Channel", font: UIFont.plusJakartaSansBold(size: 18), textColor: UIColor.black)
 
   private lazy var backButton: UIBarButtonItem = {
@@ -78,7 +79,7 @@ class ChannelViewController: UIViewController {
         return label
     }()
     
-    private lazy var channelAuthor: UILabel = {
+    var channelAuthor: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .darkGray
@@ -160,7 +161,7 @@ class ChannelViewController: UIViewController {
     private func setupChannel() {
 //        channelTitleLabel.text = "Baby Pesut Podcast"
         numberOfEpisodes.text = String(feeds.count) + " Esp"
-        channelAuthor.text = "Dr. Oi om jean"
+//        channelAuthor.text = "Dr. Oi om jean"    songPageViewController.channelAuthor = channelAuthor.text
     }
     
 
@@ -270,7 +271,7 @@ extension ChannelViewController {
 
         for podcast in self.feeds {
           let imageURL = podcast.feedImage
-          let podcastItem = EpisodeItem(id: podcast.id, title: podcast.title, link: podcast.link, description: podcast.description, enclosureUrl: podcast.enclosureUrl, enclosureLength: podcast.enclosureLength, image: imageURL, feedImage: imageURL)
+          let podcastItem = EpisodeItem(id: podcast.id, title: podcast.title, link: podcast.link, description: podcast.description, enclosureUrl: podcast.enclosureUrl, duration: podcast.duration, image: imageURL, feedImage: imageURL)
           self.episodes.append(podcastItem)
         }
 
@@ -281,6 +282,7 @@ extension ChannelViewController {
 //              self.newSongsView.update(with: Music.shared.musicResults)
 //              self.recentlyMusicTableView.update(with: Music.shared.musicResults)
               self.musicPlayer.updateMusicResults(Music.shared.episodeResults)
+          self.songPageViewController.channelAuthor = self.channelAuthor.text
         }
 
       case .failure(let error):

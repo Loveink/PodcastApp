@@ -86,6 +86,7 @@ extension HomeViewController: PopularCollectionViewDelegate {
     if let index = feeds.firstIndex(where: { $0.id == id }) {
       let selectedFeed = feeds[index]
       channelVC.channelTitleLabel.text = selectedFeed.title
+      channelVC.channelAuthor.text = selectedFeed.author
       let imageURLString = selectedFeed.image
 
       if let imageURL = URL(string: imageURLString) {

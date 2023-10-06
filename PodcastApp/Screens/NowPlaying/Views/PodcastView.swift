@@ -87,7 +87,7 @@ final class PodcastView: UIView {
 
   lazy var playButton: UIButton = {
     let button = UIButton(type: .custom)
-    //    button.tintColor = .blue
+        button.tintColor = .blue
     button.setImage(UIImage(named: "play"), for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
@@ -152,6 +152,8 @@ final class PodcastView: UIView {
 
       buttonsStackView.topAnchor.constraint(equalTo: sliderView.bottomAnchor, constant: 30),
       buttonsStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+      buttonsStackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+      buttonsStackView.heightAnchor.constraint(equalToConstant: 80)
     ])
   }
 }
