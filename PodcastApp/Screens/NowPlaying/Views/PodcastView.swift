@@ -13,7 +13,7 @@ final class PodcastView: UIView {
   lazy var songNameLabel: UILabel = {
     let label = UILabel()
     label.textAlignment = .center
-    label.numberOfLines = 1
+    label.numberOfLines = 2
     label.text = "Robot Rock"
     label.font = .manropeBold(size: 20)
     label.textColor = .black
