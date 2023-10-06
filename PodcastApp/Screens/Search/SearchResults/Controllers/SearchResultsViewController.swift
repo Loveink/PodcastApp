@@ -66,13 +66,11 @@ class SearchResultsViewController: UIViewController {
         let networkService = NetworkService()
         dispatchGroup.enter()
         
-        networkService.fetchData(forPath: "/podcasts/trending?cat=" + text + "&max=15") { [weak self] (result: Result<PodcastSearch, APIError>) in
+        networkService.fetchData(forPath: "/podcasts/trending?cat=" + text + "&max=20") { [weak self] (result: Result<PodcastSearch, APIError>) in
             guard let self = self else { return }
-            
             defer {
                 self.dispatchGroup.leave()
             }
-            
             switch result {
             case .success(let podcastResponse):
                 self.feeds.append(contentsOf: podcastResponse.feeds)

@@ -78,6 +78,7 @@
 		E7B4C1702ACB48CB00B27053 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C16F2ACB48CB00B27053 /* CategoryList.swift */; };
 		E7B4C1722ACC053E00B27053 /* AllPodcatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C1712ACC053E00B27053 /* AllPodcatsView.swift */; };
 		E7B4C1742ACDB80F00B27053 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C1732ACDB80F00B27053 /* SearchCell.swift */; };
+		E7B4C1782AD0748300B27053 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C1772AD0748300B27053 /* Button.swift */; };
 		F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */; };
 		F4B839E62ACC50410044E921 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E52ACC50410044E921 /* CreateAccountView.swift */; };
 		F4CC1EB42ACCC1CA00370E6B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */; };
@@ -159,6 +160,7 @@
 		E7B4C16F2ACB48CB00B27053 /* CategoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryList.swift; path = PodcastApp/Extensions/CategoryList.swift; sourceTree = SOURCE_ROOT; };
 		E7B4C1712ACC053E00B27053 /* AllPodcatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AllPodcatsView.swift; path = PodcastApp/Screens/Search/SearchResults/AllPodcatsView.swift; sourceTree = SOURCE_ROOT; };
 		E7B4C1732ACDB80F00B27053 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchCell.swift; path = PodcastApp/Screens/Search/SearchResults/SearchCell.swift; sourceTree = SOURCE_ROOT; };
+		E7B4C1772AD0748300B27053 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F4B839E52ACC50410044E921 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		F4CC1EB92ACCDBC400370E6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */,
 				E57CF00E2AC59C92001600A8 /* TextField.swift */,
 				E7B4C16D2ACB467B00B27053 /* View.swift */,
+				E7B4C1772AD0748300B27053 /* Button.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -954,6 +957,7 @@
 				57724E922ABDAB52006C3318 /* SceneDelegate.swift in Sources */,
 				5769D0D12AC76FCD00D93A56 /* GalleryView.swift in Sources */,
 				A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */,
+				E7B4C1782AD0748300B27053 /* Button.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

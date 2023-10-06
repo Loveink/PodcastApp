@@ -17,16 +17,23 @@ class HomeViewController: UIViewController {
 
     var feeds: [Feed] = []
     var id: [Int] = []
-
+    
+    var standartConstraints = [NSLayoutConstraint]()
+    var trendingConstraints = [NSLayoutConstraint]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupCollectionView()
+        setupConstraints()
         fetchPodcasts()
+        trendingCollectionView.delegate = self
         categoryCollectionView.delegate = self
         trendingCollectionView.categoryDictionary = categoryDictionary
     }
-
+    
+    
+    
     private func setupCollectionView() {
         categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         trendingCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +98,59 @@ class HomeViewController: UIViewController {
      }
 }
 
+
+// MARK: - constraints
+extension HomeViewController {
+    private func setupConstraints() {
+        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        trendingCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        categoriesName.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(categoryCollectionView)
+        view.addSubview(trendingCollectionView)
+        view.addSubview(categoriesName)
+        view.addSubview(topInfoView)
+        
+        standartConstraints = [
+            topInfoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            topInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            topInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            topInfoView.heightAnchor.constraint(equalToConstant: 70),
+            
+            trendingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            trendingCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            trendingCollectionView.topAnchor.constraint(equalTo: topInfoView.bottomAnchor, constant: 10),
+            trendingCollectionView.heightAnchor.constraint(equalToConstant: 250),
+            
+            categoriesName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            categoriesName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            categoriesName.topAnchor.constraint(equalTo: trendingCollectionView.bottomAnchor),
+            categoriesName.heightAnchor.constraint(equalToConstant: 70),
+            
+            categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            categoryCollectionView.topAnchor.constraint(equalTo: categoriesName.bottomAnchor, constant: 10),
+            categoryCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ]
+        
+        trendingConstraints = [
+            topInfoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            topInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            topInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            topInfoView.heightAnchor.constraint(equalToConstant: 70),
+            
+            trendingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            trendingCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            trendingCollectionView.topAnchor.constraint(equalTo: topInfoView.bottomAnchor, constant: 10),
+            trendingCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(standartConstraints)
+    }
+}
+
+
+// MARK: - PopularCollectionViewDelegate
 extension HomeViewController: PopularCollectionViewDelegate {
     func didSelectPodcast(id: Int) {
         let channelVC = ChannelViewController()
@@ -116,5 +176,37 @@ extension HomeViewController: PopularCollectionViewDelegate {
 
             self.navigationController?.pushViewController(channelVC, animated: true)
         }
+    }
+}
+
+
+// MARK: - TrendingCollectionViewDelegate
+extension HomeViewController: TrendingCollectionViewDelegate {
+    func seeAllButtonPressed(_ isSelected: Bool) {
+        UIView.animate(withDuration: 0.2, animations: {
+            for view in [self.categoryCollectionView, self.categoriesName, self.trendingCollectionView] {
+                view.alpha = 0.0
+            }
+        }) { (_) in
+            
+            if isSelected {
+                NSLayoutConstraint.deactivate(self.trendingConstraints)
+                NSLayoutConstraint.activate(self.standartConstraints)
+            } else {
+                NSLayoutConstraint.deactivate(self.standartConstraints)
+                NSLayoutConstraint.activate(self.trendingConstraints)
+            }
+            UIView.animate(withDuration: 0.2) {
+                for view in [self.trendingCollectionView, self.categoryCollectionView, self.categoriesName] {
+                    view.alpha = 1.0
+                }
+            }
+        }
+    }
+    
+    func didSelectPodcastName(_ selectedPodcast: CategoryInfoForCell) {
+        let searchVC = SearchResultsViewController(selectedPodcast.categoryName)
+        searchVC.searchBar.textField.isEnabled = false
+        navigationController?.pushViewController(searchVC, animated: true)
     }
 }

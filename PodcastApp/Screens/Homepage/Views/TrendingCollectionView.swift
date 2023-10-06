@@ -15,12 +15,9 @@ class TrendingCollectionView: UIView {
         textColor: UIColor.black
     )
     
-    private lazy var seeAllLabel = UILabel.makeLabel(
-        text: "See all",
-        font: UIFont.plusJakartaSansMedium(size: 16),
-        textColor: UIColor.gray
-    )
+    private lazy var seeAllButton = UIButton.makeSeeAllButton()
     
+    let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
     weak var delegate: TrendingCollectionViewDelegate?
     
@@ -46,7 +43,9 @@ class TrendingCollectionView: UIView {
     }
     
     func configureCollection() {
-        let layout = UICollectionViewFlowLayout()
+        seeAllButton.addTarget(self, action: #selector(seeAllButtomPressed), for: .touchUpInside)
+        seeAllButton.translatesAutoresizingMaskIntoConstraints = false
+        
         layout.scrollDirection = .horizontal
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
@@ -57,20 +56,33 @@ class TrendingCollectionView: UIView {
         collectionView.dataSource = self
     }
     
+    
+    @objc private func seeAllButtomPressed(_ sender: UIButton) {
+        if sender.isSelected {
+            layout.scrollDirection = .horizontal
+        } else {
+            layout.scrollDirection = .vertical
+        }
+        delegate?.seeAllButtonPressed(sender.isSelected)
+        sender.isSelected = !sender.isSelected
+    }
+    
+    
     private func setupConstraints() {
         addSubview(categoryLabel)
-        addSubview(seeAllLabel)
+        addSubview(seeAllButton)
         self.addSubview(collectionView)
     
         NSLayoutConstraint.activate([
-            
             categoryLabel.topAnchor.constraint(equalTo: topAnchor),
             categoryLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             
-            seeAllLabel.topAnchor.constraint(equalTo: topAnchor),
-            seeAllLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            seeAllButton.topAnchor.constraint(equalTo: topAnchor),
+            seeAllButton.rightAnchor.constraint(equalTo: rightAnchor),
+            seeAllButton.centerYAnchor.constraint(equalTo: categoryLabel.centerYAnchor),
+//            seeAllButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            collectionView.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 0),
+            collectionView.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 10),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -97,18 +109,20 @@ extension TrendingCollectionView: UICollectionViewDelegate, UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if seeAllButton.isSelected {
+            return CGSize(width: frame.width / 2 - 5, height: 200)
+        }
         return CGSize(width: 144, height: 200)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if podcasts.count > 0 {
-            let selectedPodcast = podcasts[indexPath.item]
-            delegate?.didSelectPodcastName(selectedPodcast)
-        }
+        let selectedPodcast = podcasts[indexPath.item]
+        delegate?.didSelectPodcastName(selectedPodcast)
     }
 }
 
 //MARK: - Protocols
 protocol TrendingCollectionViewDelegate: AnyObject {
     func didSelectPodcastName(_ selectedPodcast: CategoryInfoForCell)
+    func seeAllButtonPressed(_ isSelected: Bool)
 }
