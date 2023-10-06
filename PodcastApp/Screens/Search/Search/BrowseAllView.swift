@@ -9,7 +9,7 @@ import UIKit
 
 class BrowseAllView: UIView {
     
-    let categoryList = ["Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty", "Music and chill", "Funny life", "Arts", "Books", "Design", "Fashion", "Beauty"]
+    var delegate: SearchCellsDelegate?
     
     var titleLabel = UILabel()
     var collectionView: UICollectionView!
@@ -20,6 +20,7 @@ class BrowseAllView: UIView {
         super.init(frame: .zero)
         configureUI()
         setConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -86,7 +87,8 @@ extension BrowseAllView: UICollectionViewDelegate, UICollectionViewDataSource, U
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("You selected Browse All Cell #\(indexPath.item)!")
+        let text = categoryList[indexPath.row]
+        delegate?.cellDidSelected(text)
     }
     
     

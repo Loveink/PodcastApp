@@ -8,92 +8,206 @@
 import UIKit
 import AVFoundation
 
-class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
+class HomeViewController: UIViewController {
 
-  func didSelectRecipe(id: Int) {
-      let channelVC = ChannelViewController()
-      channelVC.channelID = id
+    let topInfoView = TopInfoView()
+    let categoryCollectionView = PopularCollectionView()
+    let trendingCollectionView = TrendingCollectionView()
+    let categoriesName = CategoriesNames()
 
-      if let index = feeds.firstIndex(where: { $0.id == id }) {
-          let selectedFeed = feeds[index]
-        channelVC.channelTitleLabel.text = selectedFeed.title
-          let imageURLString = selectedFeed.image
-
-          if let imageURL = URL(string: imageURLString) {
-              URLSession.shared.dataTask(with: imageURL) { (data, _, _) in
-                  if let data = data, let image = UIImage(data: data) {
-                      DispatchQueue.main.async {
-                        channelVC.channelImageView.image = image
-                          self.navigationController?.pushViewController(channelVC, animated: true)
-                      }
-                  } else {
-                  }
-              }.resume()
-          }
-      }
-  }
-
-
-  var audioPlayer: AVAudioPlayer?
-  var musicArray: [String] = []
-  private let categoryCollectionView = CategoriesCollectionView()
-  var feeds: [Feed] = []
-  var vc: FetchFunc?
-  var id: [Int] = []
-  var selectedIndexPath: IndexPath?
-  private let musicPlayer = MusicPlayer.instance
-  private let miniPlayerVC = MiniPlayerVC()
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    view.backgroundColor = .white
-    setupCollectionView()
-    vc = FetchFunc(collectionView: categoryCollectionView.collectionView)
-    let dispatchGroup = DispatchGroup()
-    fetchPodcasts(dispatchGroup: dispatchGroup)
-    dispatchGroup.notify(queue: .main) {
-      print("All tasks are completed.")
+    var feeds: [Feed] = []
+    var id: [Int] = []
+    
+    var standartConstraints = [NSLayoutConstraint]()
+    var trendingConstraints = [NSLayoutConstraint]()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        setupConstraints()
+        fetchPodcasts()
+        trendingCollectionView.delegate = self
+        categoryCollectionView.delegate = self
+        trendingCollectionView.categoryDictionary = categoryDictionary
     }
-      categoryCollectionView.delegate = self
-  }
+    
+    
+    
+    private func setupCollectionView() {
+        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        trendingCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        categoriesName.translatesAutoresizingMaskIntoConstraints = false
 
-  private func setupCollectionView() {
-    categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(categoryCollectionView)
-    NSLayoutConstraint.activate([
-      categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-      categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-      categoryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      categoryCollectionView.heightAnchor.constraint(equalToConstant: 300),
-    ])
-  }
+//        view.addSubview(topInfoView)
+        view.addSubview(categoryCollectionView)
+        view.addSubview(trendingCollectionView)
+        view.addSubview(categoriesName)
+        view.addSubview(topInfoView)
+
+        NSLayoutConstraint.activate([
+
+            topInfoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            topInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            topInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            topInfoView.heightAnchor.constraint(equalToConstant: 70),
+
+            trendingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            trendingCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            trendingCollectionView.topAnchor.constraint(equalTo: topInfoView.bottomAnchor, constant: 10),
+            trendingCollectionView.heightAnchor.constraint(equalToConstant: 250),
+
+            categoriesName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            categoriesName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            categoriesName.topAnchor.constraint(equalTo: trendingCollectionView.bottomAnchor),
+            categoriesName.heightAnchor.constraint(equalToConstant: 70),
+
+            categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            categoryCollectionView.topAnchor.constraint(equalTo: categoriesName.bottomAnchor, constant: 10),
+            categoryCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
 
 
-  func fetchPodcasts(dispatchGroup: DispatchGroup) {
-            let networkService = NetworkService()
-            dispatchGroup.enter() // Входим в группу
+    func fetchPodcasts() {
+        let networkService = NetworkService()
 
-            networkService.fetchData(forPath: "/podcasts/trending?max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
-                guard let self = self else { return }
+        networkService.fetchData(forPath: "/podcasts/trending?max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
+            guard let self = self else { return }
 
-                defer {
-                    dispatchGroup.leave() // Покидаем группу после завершения запроса
+            switch result {
+            case .success(let podcastResponse):
+                self.feeds.append(contentsOf: podcastResponse.feeds)
+
+                for podcast in self.feeds {
+                    let imageURL = podcast.image
+                    let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id, author: podcast.author, categories: podcast.categories)
+                    self.categoryCollectionView.podcasts.append(podcastItem)
+                    self.id.append(podcast.id)
                 }
 
-                switch result {
-                case .success(let podcastResponse):
-                    self.feeds.append(contentsOf: podcastResponse.feeds)
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+  func likeButtonTapped(forPodcastId id: Int) {
+         // Получаем текущее состояние лайка из UserDefaults
+         let isLiked = UserDefaultsManager.shared.isPodcastLiked(forPodcastId: id)
 
-                  for podcast in self.feeds {
-                      let imageURL = podcast.image
-                      let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id)
-                      self.categoryCollectionView.recipes.append(podcastItem)
-                      id.append(podcast.id)
-                  }
+         // Инвертируем состояние (если был лайк, станет дизлайк, и наоборот)
+         let newLikeState = !isLiked
 
-                case .failure(let error):
-                    print("Error: \(error)")
+      UserDefaultsManager.shared.setPodcastLiked(forPodcastId: id)
+     }
+}
+
+
+// MARK: - constraints
+extension HomeViewController {
+    private func setupConstraints() {
+        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        trendingCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        categoriesName.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(categoryCollectionView)
+        view.addSubview(trendingCollectionView)
+        view.addSubview(categoriesName)
+        view.addSubview(topInfoView)
+        
+        standartConstraints = [
+            topInfoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            topInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            topInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            topInfoView.heightAnchor.constraint(equalToConstant: 70),
+            
+            trendingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            trendingCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            trendingCollectionView.topAnchor.constraint(equalTo: topInfoView.bottomAnchor, constant: 10),
+            trendingCollectionView.heightAnchor.constraint(equalToConstant: 250),
+            
+            categoriesName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            categoriesName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            categoriesName.topAnchor.constraint(equalTo: trendingCollectionView.bottomAnchor),
+            categoriesName.heightAnchor.constraint(equalToConstant: 70),
+            
+            categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 22),
+            categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            categoryCollectionView.topAnchor.constraint(equalTo: categoriesName.bottomAnchor, constant: 10),
+            categoryCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ]
+        
+        trendingConstraints = [
+            topInfoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            topInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            topInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            topInfoView.heightAnchor.constraint(equalToConstant: 70),
+            
+            trendingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
+            trendingCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            trendingCollectionView.topAnchor.constraint(equalTo: topInfoView.bottomAnchor, constant: 10),
+            trendingCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(standartConstraints)
+    }
+}
+
+
+// MARK: - PopularCollectionViewDelegate
+extension HomeViewController: PopularCollectionViewDelegate {
+    func didSelectPodcast(id: Int) {
+        let channelVC = ChannelViewController()
+        channelVC.channelID = id
+
+        if let index = feeds.firstIndex(where: { $0.id == id }) {
+            let selectedFeed = feeds[index]
+            channelVC.channelTitleLabel.text = selectedFeed.title
+            let imageURLString = selectedFeed.image
+
+            if let imageURL = URL(string: imageURLString) {
+                URLSession.shared.dataTask(with: imageURL) { (data, _, _) in
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            channelVC.channelImageView.image = image
+                            self.navigationController?.pushViewController(channelVC, animated: true)
+                        }
+                    }
+                }.resume()
+            }
+        }
+    }
+}
+
+
+// MARK: - TrendingCollectionViewDelegate
+extension HomeViewController: TrendingCollectionViewDelegate {
+    func seeAllButtonPressed(_ isSelected: Bool) {
+        UIView.animate(withDuration: 0.2, animations: {
+            for view in [self.categoryCollectionView, self.categoriesName, self.trendingCollectionView] {
+                view.alpha = 0.0
+            }
+        }) { (_) in
+            
+            if isSelected {
+                NSLayoutConstraint.deactivate(self.trendingConstraints)
+                NSLayoutConstraint.activate(self.standartConstraints)
+            } else {
+                NSLayoutConstraint.deactivate(self.standartConstraints)
+                NSLayoutConstraint.activate(self.trendingConstraints)
+            }
+            UIView.animate(withDuration: 0.2) {
+                for view in [self.trendingCollectionView, self.categoryCollectionView, self.categoriesName] {
+                    view.alpha = 1.0
                 }
             }
         }
     }
+    
+    func didSelectPodcastName(_ selectedPodcast: CategoryInfoForCell) {
+        let searchVC = SearchResultsViewController(selectedPodcast.categoryName)
+        searchVC.searchBar.textField.isEnabled = false
+        navigationController?.pushViewController(searchVC, animated: true)
+    }
+}
