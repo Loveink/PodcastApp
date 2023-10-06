@@ -15,7 +15,9 @@ class SearchResultView: UIView {
     let button = UIButton()
     let titleLabel = UILabel.makeLabel(font: .manropeBold(size: 16), textColor: .black)
     let imageView = UIImageView()
-    let episodesCounterLabel = UILabel.makeLabel(font: .manropeRegular(size: 14), textColor: .gray)
+    let episodesCounter = UILabel.makeLabel(font: .manropeRegular(size: 14), textColor: .gray)
+    let verticalDivisionView = UIView()
+    let creatorNameTitle = UILabel.makeLabel(font: .manropeRegular(size: 14), textColor: .gray)
     
     
     
@@ -32,8 +34,10 @@ class SearchResultView: UIView {
     
     
     func configureView(_ podcastItem: PodcastItemCell) {
+        print("configureView")
         titleLabel.text = podcastItem.title
-        episodesCounterLabel.text = "56 Eps"
+        episodesCounter.text = "56 Eps"
+        creatorNameTitle.text = "Dr. Oi om jean"
         
         DispatchQueue.main.async {
             self.imageView.kf.setImage(with: URL(string: podcastItem.image))
@@ -42,15 +46,19 @@ class SearchResultView: UIView {
     
     
     func makeVisible() {
-        episodesCounterLabel.isHidden = false
+        creatorNameTitle.isHidden = false
+        episodesCounter.isHidden = false
         imageView.isHidden = false
+        verticalDivisionView.isHidden = false
         titleLabel.isHidden = false
     }
     
     
     func makeInvisible() {
-        episodesCounterLabel.isHidden = true
+        creatorNameTitle.isHidden = true
+        episodesCounter.isHidden = true
         imageView.isHidden = true
+        verticalDivisionView.isHidden = true
         titleLabel.isHidden = true
         titleLabel.text = ""
     }
@@ -79,7 +87,12 @@ class SearchResultView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
-        episodesCounterLabel.translatesAutoresizingMaskIntoConstraints = false
+        episodesCounter.translatesAutoresizingMaskIntoConstraints = false
+        
+        verticalDivisionView.backgroundColor = .lightGray
+        verticalDivisionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        creatorNameTitle.translatesAutoresizingMaskIntoConstraints = false
     }
     
     
@@ -88,7 +101,9 @@ class SearchResultView: UIView {
         addSubview(title)
         addSubview(titleLabel)
         addSubview(imageView)
-        addSubview(episodesCounterLabel)
+        addSubview(episodesCounter)
+        addSubview(verticalDivisionView)
+        addSubview(creatorNameTitle)
         addSubview(button)
         
         NSLayoutConstraint.activate([
@@ -115,28 +130,19 @@ class SearchResultView: UIView {
             titleLabel.bottomAnchor.constraint(equalTo: imageView.centerYAnchor),
             titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             
-            episodesCounterLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 15),
-            episodesCounterLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            episodesCounterLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)
+            episodesCounter.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 15),
+            episodesCounter.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            episodesCounter.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+            
+            verticalDivisionView.leftAnchor.constraint(equalTo: episodesCounter.rightAnchor, constant: 10),
+            verticalDivisionView.topAnchor.constraint(equalTo: episodesCounter.topAnchor, constant: 5),
+            verticalDivisionView.bottomAnchor.constraint(equalTo: episodesCounter.bottomAnchor, constant: -5),
+            verticalDivisionView.widthAnchor.constraint(equalToConstant: 1),
+            
+            creatorNameTitle.leftAnchor.constraint(equalTo: verticalDivisionView.rightAnchor, constant: 10),
+            creatorNameTitle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            creatorNameTitle.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)
         ])
     }
 
-}
-
-
-extension SearchResultView {
-    private func fetchEpisodes(_ channelID: Int) {
-        let networkService = NetworkService()
-        networkService.fetchData(forPath: "/episodes/byfeedid?id=\(channelID)") { [weak self] (result: Result<EpisodeFeed, APIError>) in
-            guard self != nil else { return }
-            switch result {
-            case .success(let podcastResponse):
-                DispatchQueue.main.async {
-                    self!.episodesCounterLabel.text = "\(podcastResponse.count) Eps"
-                }
-            case .failure(let error):
-                print("SearchResultView Error: \(error)")
-            }
-        }
-    }
 }
