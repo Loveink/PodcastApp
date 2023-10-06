@@ -121,7 +121,7 @@ class NowPlayingViewController: UIViewController {
 //    podcast.performerNameLabel.text = channelAuthor.text
 //    print(chanelVC.channelAuthor.text)
 
-    let imageUrlString = musicResult.feedImage
+//    let imageUrlString = musicResult.feedImage
 //    if let imageUrl = URL(string: imageUrlString) {
 //      if let firstImageView = galleryViewController.images.first {
 //        firstImageView.kf.setImage(with: imageUrl)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoritesViewController: UIViewController {
 
@@ -30,8 +31,14 @@ class FavoritesViewController: UIViewController {
         self.setupConstraints()
         self.setupTableView()
         self.setupNavigationBar()
+      loadPodcastDataFromCoreData()
     }
-    
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    loadPodcastDataFromCoreData()
+  }
+
 // MARK: - Private methodes
     
     private func setupView() {
@@ -54,6 +61,32 @@ class FavoritesViewController: UIViewController {
         self.navigationItem.title = "Favorites"
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
+
+  private func loadPodcastDataFromCoreData() {
+          guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+              return
+          }
+          let context = appDelegate.persistentContainer.viewContext
+
+          do {
+              let fetchRequest: NSFetchRequest<PodcastSave> = PodcastSave.fetchRequest()
+              let podcastData = try context.fetch(fetchRequest)
+
+              favouriteChanels = podcastData.map { podcast in
+                  return PodcastItemCell(
+                    title: podcast.title ?? "",
+                    image: podcast.image ?? "",
+                      id: Int(podcast.id),
+                      author: "",
+                      categories: ["": ""]
+                  )
+              }
+            
+              favouriteChanelsTableView.reloadData()
+          } catch {
+              print("Ошибка при загрузке данных из Core Data: \(error)")
+          }
+      }
 }
 
 

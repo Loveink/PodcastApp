@@ -85,6 +85,15 @@ class HomeViewController: UIViewController {
             }
         }
     }
+  func likeButtonTapped(forPodcastId id: Int) {
+         // Получаем текущее состояние лайка из UserDefaults
+         let isLiked = UserDefaultsManager.shared.isPodcastLiked(forPodcastId: id)
+
+         // Инвертируем состояние (если был лайк, станет дизлайк, и наоборот)
+         let newLikeState = !isLiked
+
+      UserDefaultsManager.shared.setPodcastLiked(forPodcastId: id)
+     }
 }
 
 extension HomeViewController: PopularCollectionViewDelegate {
