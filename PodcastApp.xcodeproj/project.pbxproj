@@ -60,7 +60,6 @@
 		57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */; };
 		57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */; };
 		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
-		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
 		A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED22AC57F320013AC4B /* ChannelModel.swift */; };
 		A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */; };
 		A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */; };
@@ -176,7 +175,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */,
 				57B391A72ABED54300BD7E82 /* Kingfisher in Frameworks */,
 				F4CC1EB62ACCC1CA00370E6B /* GoogleSignInSwift in Frameworks */,
 				57B391A02ABED51F00BD7E82 /* FirebaseAnalytics in Frameworks */,
@@ -822,7 +820,6 @@
 				57B391A12ABED51F00BD7E82 /* FirebaseAuth */,
 				57B391A32ABED51F00BD7E82 /* FirebaseFirestore */,
 				57B391A62ABED54300BD7E82 /* Kingfisher */,
-				57B3920A2AC16D2800BD7E82 /* RealmSwift */,
 				F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */,
 				F4CC1EB52ACCC1CA00370E6B /* GoogleSignInSwift */,
 			);
@@ -857,7 +854,6 @@
 			packageReferences = (
 				57B3919E2ABED51F00BD7E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 57724E8D2ABDAB52006C3318 /* Products */;
@@ -1195,14 +1191,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -1233,11 +1221,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		57B3920A2AC16D2800BD7E82 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
