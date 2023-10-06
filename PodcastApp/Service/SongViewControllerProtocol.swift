@@ -8,9 +8,7 @@
 import UIKit
 
 protocol SongViewControllerProtocol: AnyObject {
-    var favoriteVC: FavoritesViewController? { get set }
-    func reloadLikeButton()
-    func configureCell(with musicResult: EpisodeModel1)
+    func configureCell(with musicResult: EpisodeItem)
     func updateButtonImage(isPlay: Bool)
     func updateCurrentTimeLabel(duration: Int)
     func updateTotalDuration(duration: Float)

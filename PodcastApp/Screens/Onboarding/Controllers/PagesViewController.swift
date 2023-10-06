@@ -21,7 +21,7 @@ class PagesViewController: UIPageViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Skip", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
-        $0.addTarget(self, action: #selector(goToLoginPage(_:)), for: .primaryActionTriggered)
+      $0.addTarget(PagesViewController.self, action: #selector(goToLoginPage(_:)), for: .primaryActionTriggered)
         return $0
     }(UIButton())
 
@@ -31,7 +31,7 @@ class PagesViewController: UIPageViewController {
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.backgroundColor = UIColor.borderGray
         $0.layer.cornerRadius = 20
-        $0.addTarget(self, action: #selector(nextTapped(_:)), for: .primaryActionTriggered)
+      $0.addTarget(PagesViewController.self, action: #selector(nextTapped(_:)), for: .primaryActionTriggered)
         return $0
     }(UIButton())
 

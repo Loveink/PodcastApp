@@ -13,8 +13,7 @@ protocol Reusable {
 }
 
 class FavouriteChannelCell: UITableViewCell {
-    
-    var channel: ChannelModel?
+
     let options: KingfisherOptionsInfo = [
     .cacheOriginalImage
   ]
@@ -75,9 +74,6 @@ class FavouriteChannelCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        self.channel = nil
-    }
     
     private func setupCell() {
         contentView.backgroundColor = .white

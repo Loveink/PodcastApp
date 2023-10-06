@@ -18,9 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     self.window = window
 
       let loginVC = CustomTabBar()
-      let onboardingVC = PagesViewController()
-      let createAccountVC = CreateAccountDetailViewController()
-      let createAccountDetailVC = CreateAccountDetailViewController()
+//      let onboardingVC = PagesViewController()
+//      let createAccountVC = CreateAccountDetailViewController()
+//      let createAccountDetailVC = CreateAccountDetailViewController()
 
       let navigationController = UINavigationController(rootViewController: loginVC)
       navigationController.navigationBar.isHidden = true
