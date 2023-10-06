@@ -11,6 +11,7 @@ class CustomSearchBar: UIView {
 
     let textField = UITextField()
     private let searchButton = UIButton()
+    private let crossButton = UIButton()
     
     var delegate: SearchViewControllerDelegate?
     
@@ -34,8 +35,9 @@ class CustomSearchBar: UIView {
     
     
     func setCloseSquare() {
-        searchButton.setImage(UIImage(systemName: "xmark"), for: .normal)
-        searchButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
+        crossButton.isHidden = false
+        searchButton.isHidden = true
+        textField.rightView = crossButton
     }
     
     @objc private func clearTextField() {
@@ -55,6 +57,11 @@ class CustomSearchBar: UIView {
         
         searchButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         searchButton.tintColor = .gray
+        
+        crossButton.isHidden = true
+        crossButton.tintColor = .gray
+        crossButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        crossButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
         
         let placeholder = NSAttributedString(string: "Podcast, channel, or artists", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray, NSAttributedString.Key.font: UIFont.manropeBold(size: 18)!])
         textField.attributedPlaceholder = placeholder
