@@ -35,8 +35,12 @@ class CustomSearchBar: UIView {
     
     func setCloseSquare() {
         searchButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        searchButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
     }
     
+    @objc private func clearTextField() {
+        textField.text = ""
+    }
     
     override func resignFirstResponder() -> Bool {
         textField.resignFirstResponder()
