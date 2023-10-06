@@ -58,7 +58,7 @@ class SearchResultsViewController: UIViewController {
     
     
     
-    func fetchPodcasts(_ text: String) {
+    private func fetchPodcasts(_ text: String) {
         let networkService = NetworkService()
         dispatchGroup.enter()
         

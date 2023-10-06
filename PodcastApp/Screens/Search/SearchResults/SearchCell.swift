@@ -52,12 +52,10 @@ class SearchCell: UICollectionViewCell {
         setupConstraints()
         
         titleLabel.text = podcastItem.title
-        timeLabel.text = "12:12"
-        episodeCounterLabel.text = "56 Eps"
-        
         DispatchQueue.main.async {
             self.imageView.kf.setImage(with: URL(string: podcastItem.image))
         }
+        fetchEpisodes(podcastItem.id)
     }
     
     
@@ -110,18 +108,28 @@ extension SearchCell {
             titleLabel.bottomAnchor.constraint(equalTo: imageView.centerYAnchor),
             titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
 
-            timeLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 15),
-            timeLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            timeLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
-
-            divisionCircle.leftAnchor.constraint(equalTo: timeLabel.rightAnchor, constant: 10),
-            divisionCircle.centerYAnchor.constraint(equalTo: timeLabel.centerYAnchor),
-            divisionCircle.widthAnchor.constraint(equalToConstant: 5),
-            divisionCircle.heightAnchor.constraint(equalToConstant: 5),
-
-            episodeCounterLabel.leftAnchor.constraint(equalTo: divisionCircle.rightAnchor, constant: 10),
+            episodeCounterLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor),
             episodeCounterLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             episodeCounterLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)
         ])
+    }
+}
+
+
+
+extension SearchCell {
+    func fetchEpisodes(_ channelID: Int) {
+        let networkService = NetworkService()
+        networkService.fetchData(forPath: "/episodes/byfeedid?id=\(channelID)") { [weak self] (result: Result<EpisodeFeed, APIError>) in
+            guard self != nil else { return }
+            switch result {
+            case .success(let podcastResponse):
+                DispatchQueue.main.async {
+                    self!.episodeCounterLabel.text = "\(podcastResponse.count) Eps"
+                }
+            case .failure(let error):
+                print("SearchCell Error: \(error)")
+            }
+        }
     }
 }
