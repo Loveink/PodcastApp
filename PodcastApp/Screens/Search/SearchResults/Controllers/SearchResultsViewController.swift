@@ -51,6 +51,10 @@ class SearchResultsViewController: UIViewController {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
 
     func configureSearchResult(_ podcastItem: PodcastItemCell) {
         self.searchResult.configureView(podcastItem)
