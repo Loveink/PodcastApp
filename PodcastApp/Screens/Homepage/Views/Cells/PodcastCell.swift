@@ -120,7 +120,6 @@ class PodcastCell: UICollectionViewCell {
           self.liked = isLiked
           self.likeButton.tintColor = isLiked ? .red : .gray
           self.likeButton.addTarget(self, action: #selector(self.likeButtonTapped), for: .touchUpInside)
-        print(self.liked)
       }
     }
 
