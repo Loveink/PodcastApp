@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		571B32882AD0511800F75AC8 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571B32872AD0511700F75AC8 /* UserDefaults.swift */; };
 		57677B452ACDFA4E00A1DFFA /* CategoryNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57677B432ACDFA4E00A1DFFA /* CategoryNameCell.swift */; };
 		57677B462ACDFA4E00A1DFFA /* CategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57677B442ACDFA4E00A1DFFA /* CategoriesCell.swift */; };
 		57677B492ACDFA6200A1DFFA /* CategoriesNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57677B472ACDFA6200A1DFFA /* CategoriesNames.swift */; };
@@ -60,10 +61,7 @@
 		57B391EF2AC16AC600BD7E82 /* NowPlayingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */; };
 		57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */; };
 		57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */; };
-		57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57B3920A2AC16D2800BD7E82 /* RealmSwift */; };
-		A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED22AC57F320013AC4B /* ChannelModel.swift */; };
 		A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */; };
-		A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */; };
 		A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */; };
 		A0B5C3B72AD00DF800EBB704 /* TopInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3B62AD00DF800EBB704 /* TopInfoView.swift */; };
 		E56199802AC6EE7300EC542D /* AccountImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E561997F2AC6EE7300EC542D /* AccountImageView.swift */; };
@@ -93,6 +91,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		571B32872AD0511700F75AC8 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = PodcastApp/Service/UserDefaults.swift; sourceTree = SOURCE_ROOT; };
 		57677B432ACDFA4E00A1DFFA /* CategoryNameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryNameCell.swift; sourceTree = "<group>"; };
 		57677B442ACDFA4E00A1DFFA /* CategoriesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesCell.swift; sourceTree = "<group>"; };
 		57677B472ACDFA6200A1DFFA /* CategoriesNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesNames.swift; sourceTree = "<group>"; };
@@ -145,7 +144,6 @@
 		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
 		A0594ED22AC57F320013AC4B /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteChannelCell.swift; sourceTree = "<group>"; };
-		A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeModel.swift; sourceTree = "<group>"; };
 		A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		A0B5C3B62AD00DF800EBB704 /* TopInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopInfoView.swift; sourceTree = "<group>"; };
 		E561997F2AC6EE7300EC542D /* AccountImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountImageView.swift; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57B3920B2AC16D2800BD7E82 /* RealmSwift in Frameworks */,
 				57B391A72ABED54300BD7E82 /* Kingfisher in Frameworks */,
 				F4CC1EB62ACCC1CA00370E6B /* GoogleSignInSwift in Frameworks */,
 				57B391A02ABED51F00BD7E82 /* FirebaseAnalytics in Frameworks */,
@@ -278,6 +275,7 @@
 				5769D0DA2AC9C8FB00D93A56 /* SongViewControllerProtocol.swift */,
 				5769D0D62AC972B500D93A56 /* MiniPlayerVC.swift */,
 				5769D0D82AC972E700D93A56 /* PodcastsSingltone.swift */,
+				571B32872AD0511700F75AC8 /* UserDefaults.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -595,7 +593,6 @@
 		57B391E82AC16A8000BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A0B5C3AA2AC5A41C00EBB704 /* EpisodeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -825,7 +822,6 @@
 				57B391A12ABED51F00BD7E82 /* FirebaseAuth */,
 				57B391A32ABED51F00BD7E82 /* FirebaseFirestore */,
 				57B391A62ABED54300BD7E82 /* Kingfisher */,
-				57B3920A2AC16D2800BD7E82 /* RealmSwift */,
 				F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */,
 				F4CC1EB52ACCC1CA00370E6B /* GoogleSignInSwift */,
 			);
@@ -860,7 +856,6 @@
 			packageReferences = (
 				57B3919E2ABED51F00BD7E82 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 57724E8D2ABDAB52006C3318 /* Products */;
@@ -912,6 +907,7 @@
 				57724E902ABDAB52006C3318 /* AppDelegate.swift in Sources */,
 				5769D0CF2AC76FC700D93A56 /* PodcastView.swift in Sources */,
 				57B391D92AC1694300BD7E82 /* CreateAccountViewController.swift in Sources */,
+				571B32882AD0511800F75AC8 /* UserDefaults.swift in Sources */,
 				57677B452ACDFA4E00A1DFFA /* CategoryNameCell.swift in Sources */,
 				5769D0CB2AC76FA700D93A56 /* PopularCollectionView.swift in Sources */,
 				5769D0DB2AC9C8FB00D93A56 /* SongViewControllerProtocol.swift in Sources */,
@@ -938,11 +934,9 @@
 				5769D0BE2AC76F8400D93A56 /* Podcast.swift in Sources */,
 				5769D0D92AC972E700D93A56 /* PodcastsSingltone.swift in Sources */,
 				57677B492ACDFA6200A1DFFA /* CategoriesNames.swift in Sources */,
-				A0B5C3AB2AC5A41C00EBB704 /* EpisodeModel.swift in Sources */,
 				5769D0C92AC76FA700D93A56 /* PodcastCell.swift in Sources */,
 				E7B4C1722ACC053E00B27053 /* AllPodcatsView.swift in Sources */,
 				5769D0C92AC76FA700D93A56 /* PodcastCell.swift in Sources */,
-				A0594ED32AC57F320013AC4B /* ChannelModel.swift in Sources */,
 				5769D0E42ACAE49700D93A56 /* SaveToCoreData.swift in Sources */,
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
 				E7B4C1742ACDB80F00B27053 /* SearchCell.swift in Sources */,
@@ -1199,14 +1193,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		F4CC1EB22ACCC1C900370E6B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -1237,11 +1223,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57B391A52ABED54300BD7E82 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		57B3920A2AC16D2800BD7E82 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 57B392072AC16D2800BD7E82 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
