@@ -14,7 +14,7 @@ class TopGenresView: UIView {
     var titleLabel = UILabel.makeLabel(text: "Top Genres", font: .manropeBold(size: 18), textColor: .black)
     let layout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView!
-    let seeAllButton = UIButton()
+    let seeAllButton = UIButton.makeSeeAllButton()
     
     var standartConstraint = [NSLayoutConstraint]()
     var bigViewConstraint = [NSLayoutConstraint]()
@@ -55,12 +55,6 @@ class TopGenresView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .none
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        seeAllButton.setTitle("See All", for: .normal)
-        seeAllButton.setTitle("Hide", for: .selected)
-        seeAllButton.titleLabel?.textAlignment = .left
-        seeAllButton.titleLabel?.font = .manropeRegular(size: 16)
-        seeAllButton.setTitleColor(.darkGray, for: .normal)
         seeAllButton.translatesAutoresizingMaskIntoConstraints = false
         
         layout.scrollDirection = .horizontal
