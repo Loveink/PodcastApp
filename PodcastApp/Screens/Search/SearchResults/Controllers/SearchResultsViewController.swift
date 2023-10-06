@@ -19,6 +19,8 @@ class SearchResultsViewController: UIViewController {
     var feeds: [Feed] = []
     let dispatchGroup = DispatchGroup()
 
+    let errorLabel = UILabel.makeLabel(text: "No results...", font: .manropeRegular(size: 14), textColor: .black)
+    
     let searchBar = CustomSearchBar()
     let searchResult = SearchResultView()
     let allPodcasts = AllPodcastsView()
@@ -49,16 +51,18 @@ class SearchResultsViewController: UIViewController {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
 
-    func configureView() {
-//        after API response
-//        searchResult.configureView()
-        
+    func configureSearchResult(_ podcastItem: PodcastItemCell) {
+        self.searchResult.configureView(podcastItem)
     }
     
     
     
-    func fetchPodcasts(_ text: String) {
+    private func fetchPodcasts(_ text: String) {
         let networkService = NetworkService()
         dispatchGroup.enter()
         
@@ -74,15 +78,23 @@ class SearchResultsViewController: UIViewController {
                 self.feeds.append(contentsOf: podcastResponse.feeds)
                 for podcast in self.feeds {
                     let imageURL = podcast.image
-                  let item = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id, author: podcast.author, categories: podcast.categories)
-                    
+                    let item = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id, author: podcast.author, categories: podcast.categories)
                     self.allPodcasts.podcasts.append(item)
-                    
-                    self.id.append(podcast.id)
+                    DispatchQueue.main.async {
+                        if self.searchResult.titleLabel.text == "" {
+                            self.configureSearchResult(item)
+                        }
+                    }
+                    id.append(podcast.id)
                 }
                 
             case .failure(let error):
                 print("Error: \(error)")
+                DispatchQueue.main.async {
+                    self.allPodcasts.isHidden = true
+                    self.searchResult.makeInvisible()
+                    self.errorLabel.isHidden = false
+                }
             }
         }
     }
@@ -98,8 +110,24 @@ class SearchResultsViewController: UIViewController {
     }
     
     
+    @objc func searchButtonTapped() {
+        id = []
+        feeds = []
+        allPodcasts.podcasts = []
+        errorLabel.isHidden = true
+        allPodcasts.isHidden = false
+        searchResult.makeVisible()
+        makeRequest(searchBar.textField.text ?? "")
+    }
+    
     private func configureUI() {
+        searchBar.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         view.backgroundColor = .white
+        
+        errorLabel.isHidden = true
+        errorLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        searchResult.button.addTarget(self, action: #selector(firstCellSelected), for: .touchUpInside)
         
         backButton.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
@@ -114,6 +142,10 @@ class SearchResultsViewController: UIViewController {
     
     @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func firstCellSelected() {
+        cellDidSelected(id[0])
     }
     
 }
@@ -154,6 +186,7 @@ extension SearchResultsViewController {
         view.addSubview(searchBar)
         view.addSubview(searchResult)
         view.addSubview(allPodcasts)
+        view.addSubview(errorLabel)
         
         NSLayoutConstraint.activate([
             backButton.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -171,10 +204,13 @@ extension SearchResultsViewController {
             searchResult.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
             searchResult.bottomAnchor.constraint(equalTo: searchResult.topAnchor, constant: 100),
             
-            allPodcasts.topAnchor.constraint(equalTo: searchResult.bottomAnchor),
+            allPodcasts.topAnchor.constraint(equalTo: searchResult.bottomAnchor, constant: 30),
             allPodcasts.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
             allPodcasts.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30),
-            allPodcasts.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            allPodcasts.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            errorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            errorLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
