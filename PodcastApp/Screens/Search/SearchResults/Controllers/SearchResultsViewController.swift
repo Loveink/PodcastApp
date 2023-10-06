@@ -78,7 +78,7 @@ class SearchResultsViewController: UIViewController {
                     
                     self.allPodcasts.podcasts.append(item)
                     
-                    id.append(podcast.id)
+                    self.id.append(podcast.id)
                 }
                 
             case .failure(let error):
