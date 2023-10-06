@@ -33,7 +33,9 @@ class MiniPlayerVC: UIView {
         super.init(frame: .zero)
         backgroundView.backgroundColor = UIColor(red: 0.8, green: 0.882, blue: 0.984, alpha: 1)
       backgroundView.layer.cornerRadius = 12
-      
+      songImageView.layer.cornerRadius = 20
+      songImageView.layer.masksToBounds = true
+
         setupViews()
         setupConstraints()
         addGestureToBackgroundView()
@@ -86,20 +88,20 @@ class MiniPlayerVC: UIView {
             songImageView.heightAnchor.constraint(equalToConstant: 40),
 
             songTitleLabel.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 8),
-            songTitleLabel.topAnchor.constraint(equalTo: songImageView.topAnchor, constant: -2),
-            songTitleLabel.widthAnchor.constraint(equalToConstant: 180),
+            songTitleLabel.centerYAnchor.constraint(equalTo: songImageView.centerYAnchor),
+            songTitleLabel.widthAnchor.constraint(equalToConstant: 230),
 
             songArtist.leadingAnchor.constraint(equalTo: songImageView.trailingAnchor, constant: 8),
             songArtist.bottomAnchor.constraint(equalTo: songImageView.bottomAnchor, constant: -2),
             songArtist.widthAnchor.constraint(equalToConstant: 180),
 
-            backButton.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -30),
+            backButton.trailingAnchor.constraint(equalTo: playButton.leadingAnchor, constant: -2),
             backButton.centerYAnchor.constraint(equalTo: centerYAnchor),
 
-            playButton.trailingAnchor.constraint(equalTo: forwardButton.leadingAnchor, constant: -30),
+            playButton.trailingAnchor.constraint(equalTo: forwardButton.leadingAnchor, constant: -2),
             playButton.centerYAnchor.constraint(equalTo: centerYAnchor),
 
-            forwardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -26),
+            forwardButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -2),
             forwardButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }

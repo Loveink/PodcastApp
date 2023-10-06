@@ -17,6 +17,7 @@ final class PodcastView: UIView {
     label.text = "Robot Rock"
     label.font = .manropeBold(size: 20)
     label.textColor = .black
+    label.adjustsFontSizeToFitWidth = true
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -136,6 +137,8 @@ final class PodcastView: UIView {
 
       songNameLabel.topAnchor.constraint(equalTo: topAnchor),
       songNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+      songNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+      songNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
 
       performerNameLabel.topAnchor.constraint(equalTo: songNameLabel.bottomAnchor, constant: 10),
       performerNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),

@@ -49,7 +49,7 @@ class ChannelViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     var channelTitleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -59,7 +59,7 @@ class ChannelViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private lazy var numberOfEpisodes: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -68,7 +68,7 @@ class ChannelViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private lazy var dashLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -78,7 +78,7 @@ class ChannelViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     var channelAuthor: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -87,7 +87,7 @@ class ChannelViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -97,7 +97,7 @@ class ChannelViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
-    
+
     private lazy var collectionTitle: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -107,7 +107,7 @@ class ChannelViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+
     private lazy var episodesCollectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(
@@ -120,7 +120,7 @@ class ChannelViewController: UIViewController {
 
 // MARK: - private properties
   var episodes: [EpisodeItem] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
@@ -133,37 +133,37 @@ class ChannelViewController: UIViewController {
       miniPlayerVC.delegate = self
       musicPlayer.delegate = self
     }
-    
+
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(channelImageView)
         view.addSubview(channelTitleLabel)
-        
+
         view.addSubview(stackView)
         stackView.addArrangedSubview(numberOfEpisodes)
         stackView.addArrangedSubview(dashLabel)
         stackView.addArrangedSubview(channelAuthor)
-        
+
         view.addSubview(collectionTitle)
         view.addSubview(episodesCollectionView)
     }
-    
+
     private func setupCollectionView() {
         episodesCollectionView.dataSource = self
         episodesCollectionView.delegate = self
-        
+
         episodesCollectionView.register(
             EpisodeCell.self,
             forCellWithReuseIdentifier: EpisodeCell.reuseIdentifier)
     }
 
-    
+
     private func setupChannel() {
 //        channelTitleLabel.text = "Baby Pesut Podcast"
         numberOfEpisodes.text = String(feeds.count) + " Esp"
 //        channelAuthor.text = "Dr. Oi om jean"    songPageViewController.channelAuthor = channelAuthor.text
     }
-    
+
 
 }
 
@@ -171,25 +171,25 @@ class ChannelViewController: UIViewController {
 // MARK: - collection protocols
 
 extension ChannelViewController: UICollectionViewDataSource {
-  
+
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     self.episodes.count
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
+
     guard let cell = collectionView.dequeueReusableCell(
       withReuseIdentifier: EpisodeCell.reuseIdentifier,
       for: indexPath) as? EpisodeCell else {
       let cell = EpisodeCell()
       return cell
     }
-    
+
     let episode = self.episodes[indexPath.row]
     cell.setup(withEpisode: episode)
     return cell
   }
-  
+
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     self.musicPlayer.stopMusic()
     let episode = episodes[indexPath.row]
@@ -209,23 +209,23 @@ extension ChannelViewController: UICollectionViewDataSource {
 
 
 extension ChannelViewController: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
+
         return UIEdgeInsets(
             top: 0,
             left: 32,
             bottom: 0,
             right: 32)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         let width = self.view.frame.width - 32*2
-        
+
         return CGSize(width: width, height: 72)
     }
-    
+
 }
 
 // MARK: - setup constraints
