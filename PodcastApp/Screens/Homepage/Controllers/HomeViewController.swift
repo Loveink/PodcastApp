@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         setupCollectionView()
         fetchPodcasts()
+        trendingCollectionView.delegate = self
         categoryCollectionView.delegate = self
         trendingCollectionView.categoryDictionary = categoryDictionary
     }
@@ -108,5 +109,15 @@ extension HomeViewController: PopularCollectionViewDelegate {
                 }.resume()
             }
         }
+    }
+}
+
+
+
+extension HomeViewController: TrendingCollectionViewDelegate {
+    func didSelectPodcastName(_ selectedPodcast: CategoryInfoForCell) {
+        let searchVC = SearchResultsViewController(selectedPodcast.categoryName)
+        searchVC.searchBar.textField.isEnabled = false
+        navigationController?.pushViewController(searchVC, animated: true)
     }
 }

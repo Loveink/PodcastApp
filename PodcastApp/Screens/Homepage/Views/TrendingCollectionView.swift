@@ -101,10 +101,8 @@ extension TrendingCollectionView: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if podcasts.count > 0 {
-            let selectedPodcast = podcasts[indexPath.item]
-            delegate?.didSelectPodcastName(selectedPodcast)
-        }
+        let selectedPodcast = podcasts[indexPath.item]
+        delegate?.didSelectPodcastName(selectedPodcast)
     }
 }
 
