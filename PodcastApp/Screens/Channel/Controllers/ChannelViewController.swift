@@ -16,6 +16,7 @@ class ChannelViewController: UIViewController {
   private let musicPlayer = MusicPlayer.instance
   let miniPlayerVC = MiniPlayerVC()
   let songPageViewController = NowPlayingViewController()
+  var placeholderImage: UIImage?
 
 
   private lazy var titleLabel = UILabel.makeLabel(text: "Channel", font: UIFont.plusJakartaSansBold(size: 18), textColor: UIColor.black)
@@ -159,9 +160,7 @@ class ChannelViewController: UIViewController {
 
 
     private func setupChannel() {
-//        channelTitleLabel.text = "Baby Pesut Podcast"
         numberOfEpisodes.text = String(feeds.count) + " Esp"
-//        channelAuthor.text = "Dr. Oi om jean"    songPageViewController.channelAuthor = channelAuthor.text
     }
 
 
@@ -177,18 +176,19 @@ extension ChannelViewController: UICollectionViewDataSource {
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+      guard let cell = collectionView.dequeueReusableCell(
+        withReuseIdentifier: EpisodeCell.reuseIdentifier,
+        for: indexPath) as? EpisodeCell else {
+        let cell = EpisodeCell()
+        cell.placeholderImage = self.placeholderImage
+        return cell
+      }
 
-    guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: EpisodeCell.reuseIdentifier,
-      for: indexPath) as? EpisodeCell else {
-      let cell = EpisodeCell()
+      let episode = self.episodes[indexPath.row]
+      cell.setup(withEpisode: episode)
       return cell
-    }
-
-    let episode = self.episodes[indexPath.row]
-    cell.setup(withEpisode: episode)
-    return cell
   }
+
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     self.musicPlayer.stopMusic()

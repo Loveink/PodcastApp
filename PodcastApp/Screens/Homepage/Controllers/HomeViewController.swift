@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
     func fetchPodcasts() {
         let networkService = NetworkService()
 
-        networkService.fetchData(forPath: "/podcasts/trending?max=10") { [weak self] (result: Result<PodcastSearch, APIError>) in
+        networkService.fetchData(forPath: "/podcasts/trending?max=30") { [weak self] (result: Result<PodcastSearch, APIError>) in
             guard let self = self else { return }
 
             switch result {
@@ -86,11 +86,6 @@ class HomeViewController: UIViewController {
         }
     }
   func likeButtonTapped(forPodcastId id: Int) {
-         // Получаем текущее состояние лайка из UserDefaults
-         let isLiked = UserDefaultsManager.shared.isPodcastLiked(forPodcastId: id)
-
-         // Инвертируем состояние (если был лайк, станет дизлайк, и наоборот)
-         let newLikeState = !isLiked
 
       UserDefaultsManager.shared.setPodcastLiked(forPodcastId: id)
      }
@@ -106,16 +101,20 @@ extension HomeViewController: PopularCollectionViewDelegate {
             channelVC.channelTitleLabel.text = selectedFeed.title
             let imageURLString = selectedFeed.image
 
+            channelVC.placeholderImage = UIImage(named: "placeholder_image")
+            channelVC.channelImageView.image = channelVC.placeholderImage
+
             if let imageURL = URL(string: imageURLString) {
                 URLSession.shared.dataTask(with: imageURL) { (data, _, _) in
                     if let data = data, let image = UIImage(data: data) {
                         DispatchQueue.main.async {
                             channelVC.channelImageView.image = image
-                            self.navigationController?.pushViewController(channelVC, animated: true)
                         }
                     }
                 }.resume()
             }
+
+            self.navigationController?.pushViewController(channelVC, animated: true)
         }
     }
 }

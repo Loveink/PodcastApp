@@ -11,9 +11,8 @@ import Kingfisher
 class EpisodeCell: UICollectionViewCell {
     
     var episode: EpisodeItem?
-    let options: KingfisherOptionsInfo = [
-    .cacheOriginalImage
-  ]
+    let options: KingfisherOptionsInfo = [.cacheOriginalImage]
+  var placeholderImage: UIImage?
 // MARK: - User Interface
     
     private let episodeImageView: UIImageView = {
@@ -87,14 +86,17 @@ class EpisodeCell: UICollectionViewCell {
 
 
   func setup(withEpisode episode: EpisodeItem) {
-    DispatchQueue.main.async {
-      self.episodeImageView.kf.setImage(with: URL(string: episode.image), options: self.options)
-      self.episodeTitleLabel.text = episode.title
-      let formattedDuration = self.formatDuration(length: episode.duration)
-      self.episodeDetaisLabel.text = formattedDuration
-    }
+      DispatchQueue.main.async {
+          if let placeholderImage = self.placeholderImage {
+              self.episodeImageView.image = placeholderImage
+          } else {
+              self.episodeImageView.kf.setImage(with: URL(string: episode.image), options: self.options)
+          }
+          self.episodeTitleLabel.text = episode.title
+          let formattedDuration = self.formatDuration(length: episode.duration)
+          self.episodeDetaisLabel.text = formattedDuration
+      }
   }
-    
 }
 
 extension EpisodeCell {

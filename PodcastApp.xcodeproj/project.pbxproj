@@ -141,7 +141,6 @@
 		57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowPlayingViewController.swift; sourceTree = "<group>"; };
 		57B391F82AC16B4000BD7E82 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsViewController.swift; sourceTree = "<group>"; };
-		A0594ED22AC57F320013AC4B /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteChannelCell.swift; sourceTree = "<group>"; };
 		A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		A0B5C3B62AD00DF800EBB704 /* TopInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopInfoView.swift; sourceTree = "<group>"; };
@@ -710,7 +709,6 @@
 		57B391FC2AC16B5000BD7E82 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A0594ED22AC57F320013AC4B /* ChannelModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

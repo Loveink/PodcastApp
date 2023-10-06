@@ -16,6 +16,8 @@ class PodcastCell: UICollectionViewCell {
   var currentPodcast: PodcastItemCell?
   var id: Int?
   var audioURLs: [String] = []
+  private let placeholderImage = UIImage(named: "placeholder_image")
+
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -103,17 +105,17 @@ class PodcastCell: UICollectionViewCell {
 
   public func configureCell(_ data: PodcastItemCell) {
       DispatchQueue.main.async {
-        self.titleLabel.text = data.title
-        self.podcastImageView.kf.setImage(with: URL(string: data.image), options: self.options)
-        self.currentPodcast = data
-        self.authorLabel.text = data.author
+          self.titleLabel.text = data.title
+          self.podcastImageView.kf.setImage(with: URL(string: data.image), placeholder: self.placeholderImage, options: self.options)
+          self.currentPodcast = data
+          self.authorLabel.text = data.author
 
-        if let categories = data.categories {
-          let categoryValues = categories.values.first
-          self.categoriesLabel.text = categoryValues
-        } else {
-          self.categoriesLabel.text = ""
-        }
+          if let categories = data.categories {
+              let categoryValues = categories.values.first
+              self.categoriesLabel.text = categoryValues
+          } else {
+              self.categoriesLabel.text = ""
+          }
 
           let id = data.id
           let isLiked = UserDefaultsManager.shared.isPodcastLiked(forPodcastId: id)
@@ -121,7 +123,8 @@ class PodcastCell: UICollectionViewCell {
           self.likeButton.tintColor = isLiked ? .red : .gray
           self.likeButton.addTarget(self, action: #selector(self.likeButtonTapped), for: .touchUpInside)
       }
-    }
+  }
+
 
   private func setupViews() {
     contentView.addSubview(backgroundImageView)

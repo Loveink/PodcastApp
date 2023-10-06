@@ -71,6 +71,7 @@ extension PopularCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         }
         cell.configureCell(podcasts[indexPath.row])
         cell.id = Int(podcasts[indexPath.row].id)
+      print(podcasts[indexPath.row])
         return cell
     }
     
