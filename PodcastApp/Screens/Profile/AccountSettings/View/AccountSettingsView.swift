@@ -6,17 +6,15 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseCore
+import FirebaseFirestore
 import FirebaseAuth
 
 class AccountSettingsView: UIView {
-
-    //MARK: - UI Components
-    
-    private lazy var firstNameField = UITextField.makeBlueTextField(text: "")
     
     //MARK: - UI Components
-    
+  let user = Auth.auth().currentUser
+  
     private lazy var firstNameField = UITextField.makeBlueBorderTextField(text: "", textPlaceholder: "Enter your name")
     
     private lazy var lastNameField = UITextField.makeBlueBorderTextField(text: "", textPlaceholder: "Enter your last name")
@@ -174,27 +172,7 @@ class AccountSettingsView: UIView {
             }
         }
     }
-    
-    //для проверки можно ввести данные пользователя igor@gmail.com с паролем 123456
-        private func fetchUserData() {
-            if let userID = Auth.auth().currentUser?.uid {
-                let db = Firestore.firestore()
-                let userRef = db.collection("users").document(userID)
 
-                userRef.getDocument { (document, error) in
-                    if let document = document, document.exists {
-                        if let data = document.data() {
-                            self.firstNameField.text = data["firstName"] as? String;
-                            self.lastNameField.text = data["lastName"] as? String;
-                            self.emailField.text = data["email"] as? String
-                        }
-                    } else {
-                        print("Документ пользователя не найден")
-                    }
-                }
-            }
-        }
-        
         @objc func handleDatePicker(sender: UIDatePicker) {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd MMM yyyy"
