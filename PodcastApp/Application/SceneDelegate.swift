@@ -20,8 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 //      let tabbar = CustomTabBar()
 //      let onboardingVC = PagesViewController()
-
-      let loginVC = CustomTabBar()
       let onboardingVC = PagesViewController()
 
 //      let onboardingVC = OnboardingViewController()
