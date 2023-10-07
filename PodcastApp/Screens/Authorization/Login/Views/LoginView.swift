@@ -6,15 +6,16 @@ import FirebaseAuth
 
 //добавить распознаватель тапа на лейбл внизу
 //добавить вход через google
+// почему кнопка гугла уезжает вверх, если повторно зайти на экран? например кликнуть "назад" с домашней страницы
 
 class LoginView: UIView {
   var navigationController: UINavigationController?
 
     // MARK: - UI Elements
 
-    private lazy var loginField = UITextField.makeTextfield(text: "login@gmail.com", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: false, securityButton: false)
+    private lazy var loginField = UITextField.makeTextfield(text: "login@gmail.com", textColor: UIColor.textDarkgray2, backgroundColor: UIColor.textfieldGray, security: false, securityButton: false)
 
-    private lazy var passwordField = UITextField.makeTextfield(text: "••••••", textColor: UIColor.textGrey, backgroundColor: UIColor.textfieldGray, security: true, securityButton: true)
+    private lazy var passwordField = UITextField.makeTextfield(text: "••••••", textColor: UIColor.textDarkgray2, backgroundColor: UIColor.textfieldGray, security: true, securityButton: true)
 
     private lazy var loginLabel = UILabel.makeLabel(text: "Login", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textGrey)
 

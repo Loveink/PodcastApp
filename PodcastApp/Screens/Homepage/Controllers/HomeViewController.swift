@@ -101,7 +101,6 @@ class HomeViewController: UIViewController {
   }
 
   func likeButtonTapped(forPodcastId id: Int) {
-
     UserDefaultsManager.shared.setPodcastLiked(forPodcastId: id)
   }
 }

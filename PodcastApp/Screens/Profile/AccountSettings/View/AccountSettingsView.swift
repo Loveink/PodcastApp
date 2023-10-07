@@ -6,22 +6,22 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 class AccountSettingsView: UIView {
     
     //MARK: - UI Components
+  let user = Auth.auth().currentUser
+  
+    private lazy var firstNameField = UITextField.makeBlueBorderTextField(text: "", textPlaceholder: "Enter your name")
     
-    private lazy var firstNameField = UITextField.makeBlueTextField(text: "")
+    private lazy var lastNameField = UITextField.makeBlueBorderTextField(text: "", textPlaceholder: "Enter your last name")
     
-    private lazy var lastNameField = UITextField.makeBlueTextField(text: "")
+    private lazy var emailField = UITextField.makeBlueBorderTextField(text: user?.email ?? "", textPlaceholder: "Enter your email address" )
     
-    private lazy var emailField = UITextField.makeBlueTextField(text: "")
-    
-    private lazy var birthdayField = UITextField.makeBlueTextField(text: "")
-    
-    private lazy var maleField = UITextField.makeBlueTextField(text: "Male")
-    
-    private lazy var femaleField = UITextField.makeBlueTextField(text: "Female")
+    private lazy var birthdayField = UITextField.makeBlueBorderTextField(text: "", textPlaceholder: "Enter your birthday")
     
     private lazy var firstNameLabel = UILabel.makeLabel(text: "First Name", font: UIFont.plusJakartaSansMedium(size: 14), textColor: UIColor.textGrey)
     
@@ -40,10 +40,12 @@ class AccountSettingsView: UIView {
     }()
     
     private lazy var datePicker: UIDatePicker = {
-        let datePicker = UIDatePicker(frame: .zero)
-        datePicker.datePickerMode = .date
-        datePicker.timeZone = TimeZone.current
-        return datePicker
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.timeZone = TimeZone.current
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
+        return picker
     }()
     
     private let genderSection = AccountGenderSelectorView()
@@ -66,10 +68,9 @@ class AccountSettingsView: UIView {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         datePicker.isHidden = true
-        birthdayField.inputView = datePicker
-        datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
         addSubviews()
         setupConstraints()
+        fetchUserData()
     }
     
     required init?(coder: NSCoder) {
@@ -79,7 +80,6 @@ class AccountSettingsView: UIView {
     //MARK: - Layout
     
     private func addSubviews() {
-        
         self.addSubview(firstNameField)
         self.addSubview(lastNameField)
         self.addSubview(emailField)
@@ -89,13 +89,13 @@ class AccountSettingsView: UIView {
         self.addSubview(lastNameLabel)
         self.addSubview(emailLabel)
         self.addSubview(birthdayLabel)
+        self.addSubview(datePicker)
         
         self.addSubview(genderSection)
         
         self.addSubview(saveButton)
         
         birthdayField.addSubview(calendarButton)
-        
     }
     
     private func setupConstraints() {
@@ -137,6 +137,9 @@ class AccountSettingsView: UIView {
             calendarButton.heightAnchor.constraint(equalToConstant: 24),
             calendarButton.widthAnchor.constraint(equalToConstant: 24),
             
+            datePicker.centerYAnchor.constraint(equalTo: birthdayField.centerYAnchor),
+            datePicker.trailingAnchor.constraint(equalTo: calendarButton.leadingAnchor, constant: -16),
+            
             genderSection.topAnchor.constraint(equalTo: birthdayField.bottomAnchor, constant: 8),
             genderSection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
             genderSection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
@@ -149,18 +152,42 @@ class AccountSettingsView: UIView {
     }
     
     //MARK: - Methods
-    
-    @objc func handleDatePicker(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        birthdayField.text = dateFormatter.string(from: sender.date)
+
+    //для проверки можно ввести данные пользователя igor@gmail.com с паролем 123456
+    private func fetchUserData() {
+        if let userID = Auth.auth().currentUser?.uid {
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(userID)
+
+            userRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let data = document.data() {
+                        self.firstNameField.text = data["firstName"] as? String;
+                        self.lastNameField.text = data["lastName"] as? String;
+                        self.emailField.text = data["email"] as? String
+                    }
+                } else {
+                    print("Документ пользователя не найден")
+                }
+            }
+        }
     }
-    
-    @objc private func saveButtonTapped() {
-        print ("Save button tapped")
+
+        @objc func handleDatePicker(sender: UIDatePicker) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM yyyy"
+            birthdayField.text = dateFormatter.string(from: sender.date)
+        }
+        
+        @objc private func saveButtonTapped() {
+            print ("Save button tapped")
+        }
+        
+        @objc private func datePickerTapped() {
+            if datePicker.isHidden == false {
+                datePicker.isHidden = true
+            } else {
+                datePicker.isHidden = false
+            }
+        }
     }
-    
-    @objc private func datePickerTapped() {
-        datePicker.isHidden = false
-    }
-}

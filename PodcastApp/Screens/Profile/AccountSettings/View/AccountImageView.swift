@@ -7,7 +7,17 @@
 
 import UIKit
 
+//MARK: - AccountImageViewDelegate
+
+protocol AccountImageViewDelegate: AnyObject {
+    func changePictureTapped()
+}
+
 class AccountImageView: UIView {
+    
+    weak var delegate: AccountImageViewDelegate?
+    
+    //private let currentUser: UserRealm
     
     //MARK: - UI Components
     
@@ -33,24 +43,30 @@ class AccountImageView: UIView {
     
     //MARK: - Unit
     
+//    init(user: UserRealm) {
+//        currentUser = user
+//        super.init
+//    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         addSubviews()
         setupConstraints()
+      //  updateUser()
+        editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // MARK: - Layout
     
     
     private func addSubviews() {
-        self.addSubview(profileImage)
-        self.addSubview(editButton)
+        addSubview(profileImage)
+        addSubview(editButton)
     }
     
     private func setupConstraints() {
@@ -66,4 +82,18 @@ class AccountImageView: UIView {
             editButton.heightAnchor.constraint(equalToConstant: 32),
         ])
     }
+    
+    //MARK: - Methods
+    
+    @objc private func editButtonTapped() {
+        delegate?.changePictureTapped()
+    }
+    
+//    private func updateUser() {
+//        if let userImageData = currentUser.userImageData {
+//            avatarImageView.image = UIImage(data: userImageData)
+//        } else {
+//            avatarImageView.image = UIImage(named: "mock-person")
+//        }
+//    }
 }
