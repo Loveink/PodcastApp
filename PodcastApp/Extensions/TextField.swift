@@ -9,12 +9,15 @@ import UIKit
 
 extension UITextField {
     
-    static func makeBlueTextField(text: String = "") -> UITextField {
+    static func makeBlueBorderTextField(text: String = "", textPlaceholder: String = "") -> UITextField {
         let padding = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
         
         let field = UITextField()
-        field.placeholder = text
+        field.text = text
         field.textColor = .black
+        field.attributedPlaceholder = NSAttributedString(
+            string: textPlaceholder,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.textLightGray])
         field.backgroundColor = .white
         field.layer.cornerRadius = 24
         field.layer.borderWidth = 1

@@ -7,7 +7,9 @@ extension UITextField {
         let field = UITextField()
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: field.frame.size.height))
 
-        field.placeholder = text
+        field.attributedPlaceholder = NSAttributedString(
+            string: text,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.textLightGray])
         field.textColor = textColor
         field.backgroundColor = backgroundColor
         field.layer.cornerRadius = 10
