@@ -6,6 +6,7 @@ import FirebaseAuth
 
 //добавить распознаватель тапа на лейбл внизу
 //добавить вход через google
+// почему кнопка гугла уезжает вверх, если повторно зайти на экран? например кликнуть "назад" с домашней страницы
 
 class LoginView: UIView {
   var navigationController: UINavigationController?

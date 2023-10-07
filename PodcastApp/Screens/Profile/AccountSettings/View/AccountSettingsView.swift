@@ -6,17 +6,14 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseFirestore
+import Firebase
 import FirebaseAuth
 
 class AccountSettingsView: UIView {
+
+    //MARK: - UI Components
     
-    //    var ref: DatabaseReference!
-    //
-    //    ref = Database.database().reference()
-    //
-    let user = Auth.auth().currentUser
+    private lazy var firstNameField = UITextField.makeBlueTextField(text: "")
     
     //MARK: - UI Components
     
@@ -75,7 +72,7 @@ class AccountSettingsView: UIView {
         datePicker.isHidden = true
         addSubviews()
         setupConstraints()
-        
+        fetchUserData()
     }
     
     required init?(coder: NSCoder) {
@@ -157,6 +154,26 @@ class AccountSettingsView: UIView {
     }
     
     //MARK: - Methods
+
+    //для проверки можно ввести данные пользователя igor@gmail.com с паролем 123456
+    private func fetchUserData() {
+        if let userID = Auth.auth().currentUser?.uid {
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(userID)
+
+            userRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let data = document.data() {
+                        self.firstNameField.text = data["firstName"] as? String;
+                        self.lastNameField.text = data["lastName"] as? String;
+                        self.emailField.text = data["email"] as? String
+                    }
+                } else {
+                    print("Документ пользователя не найден")
+                }
+            }
+        }
+    }
     
     //для проверки можно ввести данные пользователя igor@gmail.com с паролем 123456
         private func fetchUserData() {
