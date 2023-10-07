@@ -52,4 +52,28 @@ extension UIColor {
     static var lightGray: UIColor {
         return UIColor(red: 0.961, green: 0.961, blue: 0.961, alpha: 1)
     }
+    
+    static var textfieldGray: UIColor {
+        return UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1)
+    }
+    
+    static var borderGray: UIColor {
+        return UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1)
+    }
+    
+    static var textDarkgray: UIColor {
+        return UIColor(red: 0.42, green: 0.42, blue: 0.42, alpha: 1)
+    }
+    
+    static var onboardingViewBlue: UIColor {
+        return UIColor(red: 0.69, green: 0.82, blue: 0.98, alpha: 1)
+    }
+    
+    static var textDarkgray2: UIColor {
+        return UIColor(red: 0.25, green: 0.24, blue: 0.31, alpha: 1)
+    }
+    
+    static var textLightGray: UIColor {
+        return UIColor(red: 0.612, green: 0.643, blue: 0.671, alpha: 1)
+    }
 }

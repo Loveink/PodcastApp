@@ -6,18 +6,27 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 class AccountSettingsView: UIView {
     
+//    var ref: DatabaseReference!
+//
+//    ref = Database.database().reference()
+//
+    let user = Auth.auth().currentUser
+    
     //MARK: - UI Components
     
-    private lazy var firstNameField = UITextField.makeBlueTextField(text: "")
+    private lazy var firstNameField = UITextField.makeBlueBorderTextField(text: "", textPlaceholder: "Enter your name")
     
-    private lazy var lastNameField = UITextField.makeBlueTextField(text: "")
+    private lazy var lastNameField = UITextField.makeBlueBorderTextField(text: "", textPlaceholder: "Enter your last name")
     
-    private lazy var emailField = UITextField.makeBlueTextField(text: "")
+    private lazy var emailField = UITextField.makeBlueBorderTextField(text: user?.email ?? "", textPlaceholder: "Enter your email address" )
     
-    private lazy var birthdayField = UITextField.makeBlueTextField(text: "")
+    private lazy var birthdayField = UITextField.makeBlueBorderTextField(text: "", textPlaceholder: "Enter your birthday")
     
     private lazy var firstNameLabel = UILabel.makeLabel(text: "First Name", font: UIFont.plusJakartaSansMedium(size: 14), textColor: UIColor.textGrey)
     
@@ -35,12 +44,7 @@ class AccountSettingsView: UIView {
         return button
     }()
     
-    private lazy var datePicker: UIDatePicker = {
-        let datePicker = UIDatePicker(frame: .zero)
-        datePicker.datePickerMode = .date
-        datePicker.timeZone = TimeZone.current
-        return datePicker
-    }()
+    private lazy var datePickerView = DatePickerView()
     
     private let genderSection = AccountGenderSelectorView()
     
@@ -61,9 +65,28 @@ class AccountSettingsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-        datePicker.isHidden = true
-        birthdayField.inputView = datePicker
-        datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
+        datePickerView.isHidden = true
+        birthdayField.inputView = datePickerView
+        datePickerView.dismissClosure = { [weak self] in
+                   guard let self = self else {
+                       return
+                   }
+                   self.datePickerView.isHidden = true
+               }
+        datePickerView.changeClosure = { [weak self] val in
+            guard self != nil else {
+                       return
+                   }
+                   print(val)
+                   // do something with the selected date
+               }
+               
+               // add button action
+        //calendarButton.addTarget(self, action: #selector(tap(_:)), for: .touchUpInside)
+           
+      //  updateUser()
+        //datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
+        //}
         addSubviews()
         setupConstraints()
     }
@@ -131,6 +154,11 @@ class AccountSettingsView: UIView {
             calendarButton.heightAnchor.constraint(equalToConstant: 24),
             calendarButton.widthAnchor.constraint(equalToConstant: 24),
             
+            datePickerView.topAnchor.constraint(equalTo: self.topAnchor),
+            datePickerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            datePickerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            datePickerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            
             genderSection.topAnchor.constraint(equalTo: birthdayField.bottomAnchor, constant: 8),
             genderSection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
             genderSection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
@@ -155,6 +183,21 @@ class AccountSettingsView: UIView {
     }
     
     @objc private func datePickerTapped() {
-        datePicker.isHidden = false
+        datePickerView.isHidden = false
     }
+    
+//    private func setupTapGesture() {
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+//        view.addGestureRecognizer(tapGesture)
+//    }
+    
+//    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
+//        dismiss(animated: true, completion: nil)
+//    }
+    
+//    private func updateUser() {
+//            firstNameField.text = currentUser.firstName != "" ? currentUser.firstName : "Guest"
+//            lastNameField.text = currentUser.lastName
+//            emailField.text = currentUser.email
+//        }
 }

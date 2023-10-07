@@ -88,7 +88,7 @@ class HomeViewController: UIViewController, CategoriesCollectionViewDelegate {
                       let imageURL = podcast.image
                       let podcastItem = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id)
                       self.categoryCollectionView.recipes.append(podcastItem)
-                      id.append(podcast.id)
+                      self.id.append(podcast.id)
                   }
 
                 case .failure(let error):

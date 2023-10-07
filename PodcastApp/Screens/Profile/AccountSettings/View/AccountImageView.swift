@@ -17,6 +17,8 @@ class AccountImageView: UIView {
     
     weak var delegate: AccountImageViewDelegate?
     
+    //private let currentUser: UserRealm
+    
     //MARK: - UI Components
     
     private var profileImage: UIImageView = {
@@ -41,11 +43,17 @@ class AccountImageView: UIView {
     
     //MARK: - Unit
     
+//    init(user: UserRealm) {
+//        currentUser = user
+//        super.init
+//    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         addSubviews()
         setupConstraints()
+      //  updateUser()
         editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
     }
     
@@ -80,4 +88,12 @@ class AccountImageView: UIView {
     @objc private func editButtonTapped() {
         delegate?.changePictureTapped()
     }
+    
+//    private func updateUser() {
+//        if let userImageData = currentUser.userImageData {
+//            avatarImageView.image = UIImage(data: userImageData)
+//        } else {
+//            avatarImageView.image = UIImage(named: "mock-person")
+//        }
+//    }
 }

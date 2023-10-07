@@ -15,6 +15,17 @@ final class ChangePictureButton: UIButton {
         case takeAPhoto = "Take a photo"
         case chooseFrom = "Choose from your files"
         case deletePhoto = "Delete Photo"
+        
+        var imageName: String {
+            switch self {
+            case .takeAPhoto:
+                return "TakePhoto"
+            case .chooseFrom:
+                return "Folder"
+            case .deletePhoto:
+                return "Delete"
+            }
+        }
     }
     
     private let style: ButtonStyle
@@ -34,26 +45,15 @@ final class ChangePictureButton: UIButton {
     //MARK: - Methods
     
     private func configure() {
-        switch style {
-        case .takeAPhoto:
-            setImage(UIImage(named: "TakePhoto")!, for: .normal)
-            setTitleColor(.black, for: .normal)
-        case .chooseFrom:
-            setImage(UIImage(named: "Folder")!, for: .normal)
-            setTitleColor(.black, for: .normal)
-        case .deletePhoto:
-            setImage(UIImage(named: "Delete")!, for: .normal)
-            setTitleColor(.textRed, for: .normal)
-        }
-        
-        let imageInsets = UIEdgeInsets(top: 18, left: 16, bottom: 18, right: 259)
-        let titleInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 32)
-        
+        setImage(UIImage(named: style.imageName), for: .normal)
         setTitle(style.rawValue, for: .normal)
+        setTitleColor(style == .deletePhoto ? .textRed : .black, for: .normal)
         titleLabel?.font = UIFont.plusJakartaSansBold(size: 14)
         backgroundColor = .lightGray
         heightAnchor.constraint(equalToConstant: 60).isActive = true
         contentHorizontalAlignment = .left
+        let imageInsets = UIEdgeInsets(top: 18, left: 16, bottom: 18, right: 259)
+        let titleInsets = UIEdgeInsets(top: 0, left: 35, bottom: 0, right: 32)
         imageEdgeInsets = imageInsets
         titleEdgeInsets = titleInsets
         layer.cornerRadius = 8

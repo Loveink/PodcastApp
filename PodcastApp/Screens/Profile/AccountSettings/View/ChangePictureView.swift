@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol ChangePictureViewDelegate: AnyObject {
+    func didChooseCamera()
+    func didChooseFromGallery()
+    func didDeleteImage()
+}
+
 class ChangePictureView: UIView {
+    
+    weak var delegate: ChangePictureViewDelegate?
     
     //MARK: - UI Components
     
@@ -41,9 +49,14 @@ class ChangePictureView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
+        
         addSubviews()
         setupConstraints()
         setupView()
+        
+        takePhotoButton.addTarget(self, action: #selector(didTapCamera), for: .touchUpInside)
+        choosePhotoButton.addTarget(self, action: #selector(didTapAlbum), for: .touchUpInside)
+        deletePhotoButton.addTarget(self, action: #selector(didTapDelete), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -53,6 +66,18 @@ class ChangePictureView: UIView {
     private func setupView() {
         backgroundColor = .white
         layer.cornerRadius = 12
+    }
+    
+    @objc private func didTapCamera() {
+        delegate?.didChooseCamera()
+    }
+    
+    @objc private func didTapAlbum() {
+        delegate?.didChooseFromGallery()
+    }
+    
+    @objc private func didTapDelete() {
+        delegate?.didDeleteImage()
     }
     
     //MARK: - Layout
@@ -84,4 +109,18 @@ class ChangePictureView: UIView {
     }
     
     
+}
+
+extension ChangePictureView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            //userImage = image
+        }
+    }
 }

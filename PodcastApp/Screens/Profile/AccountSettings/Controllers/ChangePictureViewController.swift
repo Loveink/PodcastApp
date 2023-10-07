@@ -9,10 +9,16 @@ import UIKit
 
 class ChangePictureViewController: UIViewController {
     
+    enum PicturePickerType {
+        case camera
+        case photoLibrary
+    }
+    
     //MARK: - UI Components
     
     private let changePicturePopUp = ChangePictureView()
     
+   // private let blurBackgroundView = self.applyBlurEffect()
     private let blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
         let view = UIVisualEffectView(effect: blurEffect)
@@ -24,6 +30,8 @@ class ChangePictureViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        changePicturePopUp.delegate = self
+        changePicturePopUp.applyBlurEffect()
         addSubviews()
         setupConstraints()
         setupTapGesture()
@@ -59,5 +67,46 @@ class ChangePictureViewController: UIViewController {
     
     @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ChangePictureViewController: ChangePictureViewDelegate {
+    func didChooseCamera() {
+        presentProfilePicturePicker(type: .camera)
+    } 
+    
+    func didChooseFromGallery() {
+        presentProfilePicturePicker(type: .photoLibrary)
+    }
+    
+    func didDeleteImage() {
+        print("Delete")
+    }
+    
+    func presentProfilePicturePicker(type: PicturePickerType) {
+        let picker = UIImagePickerController()
+        picker.sourceType = type == .camera ? .camera : .photoLibrary
+        picker.delegate = self
+        picker.allowsEditing = true
+        present(picker, animated: true)
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension ChangePictureViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        guard let image = info[
+            UIImagePickerController.InfoKey.editedImage
+        ] as? UIImage else {
+            return
+        }
+        //.image = image
+        //blurView.removeFromSuperview()
     }
 }

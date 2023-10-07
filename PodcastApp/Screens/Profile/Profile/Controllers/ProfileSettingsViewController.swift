@@ -91,7 +91,7 @@ class ProfileSettingsViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
             profileImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             profileImage.widthAnchor.constraint(equalToConstant: 48),
             profileImage.heightAnchor.constraint(equalToConstant: 48),
@@ -126,11 +126,30 @@ class ProfileSettingsViewController: UIViewController {
     }
     
     @objc private func logoutButtonTapped() {
-        let vc = LoginViewController()
+        let loginVC = LoginViewController()
         DispatchQueue.main.async {
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(loginVC, animated: true)
         }
     }
+    
+//    @objc private func logoutButtonTapped() {
+//        AuthManager.shared.logOut { [weak self] result in
+//            switch result {
+//            case .success(let success):
+//                if success {
+//                    let loginVC = LoginViewController()
+//                    loginVC.modalTransitionStyle = .crossDissolve
+//                    loginVC.modalPresentationStyle = .fullScreen
+//                    self?.present(loginVC, animated: true)
+//                }
+//            case .failure(let error):
+//                let alert = UIAlertController.createAlert(
+//                    title: "Error", message: error.localizedDescription
+//                )
+//                self?.present(alert, animated: true)
+//            }
+//        }
+//    }
     
 }
 
