@@ -115,12 +115,15 @@ class LoginView: UIView {
         ])
     }
 
+    //MARK: - Selectors
+
     @objc private func loginButtonAction(_ sender: UIButton) {
 
         if let email = loginField.text, let password = passwordField.text {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if let error = error {
                     print("Ошибка входа: \(error.localizedDescription)")
+                    self.alertMessage()
                 } else {
                     if let user = user {
                         print("Пользователь авторизован: \(user)")
@@ -136,5 +139,31 @@ class LoginView: UIView {
             let email = user.email
             print (uid, email ?? "no email")
         }
+    }
+
+    @objc private func alertMessage() {
+
+        let alertMessage = UIAlertController(title: "Error", message: "Incorrect email and/or passwort", preferredStyle: .alert)
+
+        let okButton = UIAlertAction (title: "Ok", style: .default, handler: { (action) -> Void in print ("Ok button tapped")
+        })
+
+        alertMessage.addAction(okButton)
+        if let viewController = self.closestViewController() {
+                viewController.present(alertMessage, animated: true, completion: nil)
+            }
+    }
+}
+
+extension UIView {
+    func closestViewController() -> UIViewController? {
+        var responder: UIResponder? = self
+        while let currentResponder = responder {
+            if let viewController = currentResponder as? UIViewController {
+                return viewController
+            }
+            responder = currentResponder.next
+        }
+        return nil
     }
 }
