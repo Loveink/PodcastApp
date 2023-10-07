@@ -70,6 +70,8 @@
 		E57CF00A2AC43B7A001600A8 /* ProfileSettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */; };
 		E57CF00D2AC59B31001600A8 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF00C2AC59B31001600A8 /* AccountSettingsView.swift */; };
 		E57CF00F2AC59C92001600A8 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CF00E2AC59C92001600A8 /* TextField.swift */; };
+		E71FAFC72AD18F2B003898C0 /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FAFC62AD18F2B003898C0 /* PlaylistCell.swift */; };
+		E71FAFC92AD1B752003898C0 /* CreatePlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FAFC82AD1B752003898C0 /* CreatePlaylistViewController.swift */; };
 		E75FA2E52AC1BE1A005C947C /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2E42AC1BE1A005C947C /* CustomSearchBar.swift */; };
 		E75FA2E72AC1FBC3005C947C /* TopGenresView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2E62AC1FBC3005C947C /* TopGenresView.swift */; };
 		E75FA2E92AC1FCA6005C947C /* GenreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75FA2E82AC1FCA6005C947C /* GenreCell.swift */; };
@@ -79,6 +81,10 @@
 		E7B4C1722ACC053E00B27053 /* AllPodcatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C1712ACC053E00B27053 /* AllPodcatsView.swift */; };
 		E7B4C1742ACDB80F00B27053 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C1732ACDB80F00B27053 /* SearchCell.swift */; };
 		E7B4C1782AD0748300B27053 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C1772AD0748300B27053 /* Button.swift */; };
+		E7B4C17A2AD1401100B27053 /* FavoritesAndPlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C1792AD1401100B27053 /* FavoritesAndPlaylistViewController.swift */; };
+		E7B4C17C2AD146DA00B27053 /* PlaylistItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C17B2AD146DA00B27053 /* PlaylistItemCell.swift */; };
+		E7B4C17E2AD14EE700B27053 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C17D2AD14EE700B27053 /* Image.swift */; };
+		E7B4C1802AD184E800B27053 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B4C17F2AD184E800B27053 /* FavoriteCell.swift */; };
 		F4B839E42AC5A9A10044E921 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */; };
 		F4B839E62ACC50410044E921 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B839E52ACC50410044E921 /* CreateAccountView.swift */; };
 		F4CC1EB42ACCC1CA00370E6B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F4CC1EB32ACCC1CA00370E6B /* GoogleSignIn */; };
@@ -152,6 +158,8 @@
 		E57CF0092AC43B7A001600A8 /* ProfileSettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewCell.swift; sourceTree = "<group>"; };
 		E57CF00C2AC59B31001600A8 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 		E57CF00E2AC59C92001600A8 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		E71FAFC62AD18F2B003898C0 /* PlaylistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistCell.swift; path = PodcastApp/Screens/Favourites/PlaylistCell.swift; sourceTree = SOURCE_ROOT; };
+		E71FAFC82AD1B752003898C0 /* CreatePlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePlaylistViewController.swift; sourceTree = "<group>"; };
 		E75FA2E42AC1BE1A005C947C /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomSearchBar.swift; path = PodcastApp/Screens/Search/Search/CustomSearchBar.swift; sourceTree = SOURCE_ROOT; };
 		E75FA2E62AC1FBC3005C947C /* TopGenresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopGenresView.swift; path = PodcastApp/Screens/Search/Search/TopGenresView.swift; sourceTree = SOURCE_ROOT; };
 		E75FA2E82AC1FCA6005C947C /* GenreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenreCell.swift; path = PodcastApp/Screens/Search/Search/GenreCell.swift; sourceTree = SOURCE_ROOT; };
@@ -162,6 +170,10 @@
 		E7B4C1712ACC053E00B27053 /* AllPodcatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AllPodcatsView.swift; path = PodcastApp/Screens/Search/SearchResults/AllPodcatsView.swift; sourceTree = SOURCE_ROOT; };
 		E7B4C1732ACDB80F00B27053 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchCell.swift; path = PodcastApp/Screens/Search/SearchResults/SearchCell.swift; sourceTree = SOURCE_ROOT; };
 		E7B4C1772AD0748300B27053 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		E7B4C1792AD1401100B27053 /* FavoritesAndPlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesAndPlaylistViewController.swift; sourceTree = "<group>"; };
+		E7B4C17B2AD146DA00B27053 /* PlaylistItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlaylistItemCell.swift; path = PodcastApp/Screens/Favourites/PlaylistItemCell.swift; sourceTree = SOURCE_ROOT; };
+		E7B4C17D2AD14EE700B27053 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		E7B4C17F2AD184E800B27053 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoriteCell.swift; path = PodcastApp/Screens/Favourites/FavoriteCell.swift; sourceTree = SOURCE_ROOT; };
 		F4B839E32AC5A9A10044E921 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F4B839E52ACC50410044E921 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		F4CC1EB92ACCDBC400370E6B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -299,6 +311,7 @@
 				E57CF00E2AC59C92001600A8 /* TextField.swift */,
 				E7B4C16D2ACB467B00B27053 /* View.swift */,
 				E7B4C1772AD0748300B27053 /* Button.swift */,
+				E7B4C17D2AD14EE700B27053 /* Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -699,6 +712,8 @@
 			children = (
 				57B391B52ABED9B700BD7E82 /* FavoritesViewController.swift */,
 				A0594ED42AC583830013AC4B /* FavouriteChannelCell.swift */,
+				E7B4C1792AD1401100B27053 /* FavoritesAndPlaylistViewController.swift */,
+				E71FAFC82AD1B752003898C0 /* CreatePlaylistViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -706,6 +721,8 @@
 		57B391FB2AC16B4B00BD7E82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7B4C17F2AD184E800B27053 /* FavoriteCell.swift */,
+				E71FAFC62AD18F2B003898C0 /* PlaylistCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -714,6 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				A0594ED22AC57F320013AC4B /* ChannelModel.swift */,
+				E7B4C17B2AD146DA00B27053 /* PlaylistItemCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -902,6 +920,7 @@
 				57B391F92AC16B4000BD7E82 /* SearchResultsViewController.swift in Sources */,
 				E57CF00F2AC59C92001600A8 /* TextField.swift in Sources */,
 				57B391B42ABED98100BD7E82 /* SearchViewController.swift in Sources */,
+				E7B4C17C2AD146DA00B27053 /* PlaylistItemCell.swift in Sources */,
 				5769D0D72AC972B500D93A56 /* MiniPlayerVC.swift in Sources */,
 				5769D0DD2AC9CAEC00D93A56 /* HomeViewController.swift in Sources */,
 				57724E902ABDAB52006C3318 /* AppDelegate.swift in Sources */,
@@ -911,6 +930,7 @@
 				57677B452ACDFA4E00A1DFFA /* CategoryNameCell.swift in Sources */,
 				5769D0CB2AC76FA700D93A56 /* PopularCollectionView.swift in Sources */,
 				5769D0DB2AC9C8FB00D93A56 /* SongViewControllerProtocol.swift in Sources */,
+				E7B4C17A2AD1401100B27053 /* FavoritesAndPlaylistViewController.swift in Sources */,
 				57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */,
 				E75FA2E92AC1FCA6005C947C /* GenreCell.swift in Sources */,
 				57677B4C2ACE01D700A1DFFA /* CategoryItemCell.swift in Sources */,
@@ -937,9 +957,12 @@
 				5769D0C92AC76FA700D93A56 /* PodcastCell.swift in Sources */,
 				E7B4C1722ACC053E00B27053 /* AllPodcatsView.swift in Sources */,
 				5769D0C92AC76FA700D93A56 /* PodcastCell.swift in Sources */,
+				E71FAFC92AD1B752003898C0 /* CreatePlaylistViewController.swift in Sources */,
 				5769D0E42ACAE49700D93A56 /* SaveToCoreData.swift in Sources */,
+				E71FAFC72AD18F2B003898C0 /* PlaylistCell.swift in Sources */,
 				57B392012AC16C0000BD7E82 /* AccountSettingsViewController.swift in Sources */,
 				E7B4C1742ACDB80F00B27053 /* SearchCell.swift in Sources */,
+				E7B4C17E2AD14EE700B27053 /* Image.swift in Sources */,
 				E56199802AC6EE7300EC542D /* AccountImageView.swift in Sources */,
 				5769D0C22AC76FA000D93A56 /* PodcastItem.swift in Sources */,
 				57B391DB2AC1695700BD7E82 /* CreateAccountDetailViewController.swift in Sources */,
@@ -949,6 +972,7 @@
 				E7B4C1702ACB48CB00B27053 /* CategoryList.swift in Sources */,
 				57B391DD2AC1696C00BD7E82 /* LoginViewController.swift in Sources */,
 				F4DBA60F2AC445A8007AF64F /* CreateAccountDetailView.swift in Sources */,
+				E7B4C1802AD184E800B27053 /* FavoriteCell.swift in Sources */,
 				57B391E22AC16A5600BD7E82 /* PagesViewController.swift in Sources */,
 				57677B4A2ACDFA6200A1DFFA /* TrendingCollectionView.swift in Sources */,
 				F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */,
