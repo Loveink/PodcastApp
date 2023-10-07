@@ -34,7 +34,26 @@ class LoginView: UIView {
 
     private lazy var continueLabel = UILabel.makeLabel(text: "Or continue with", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
 
-    private lazy var signupLabel = UILabel.makeLabel(text: "Don't have an account yet? Sign up", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
+//    private lazy var signupLabel = UILabel.makeLabel(text: "Don't have an account yet? Sign up", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
+
+    private lazy var signUpView: UITextView = {
+
+        let attributedString = NSMutableAttributedString (string: "Don't have an account yet? Sign up")
+        attributedString.addAttribute(.link, value: "signUp", range: (attributedString.string as NSString).range(of: "Sign up"))
+
+        let tv = UITextView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.delegate = self
+        tv.linkTextAttributes = [.foregroundColor: UIColor.systemGreen]
+        tv.backgroundColor = .clear
+        tv.attributedText = attributedString
+        tv.textColor = UIColor.textDarkgray
+        tv.isSelectable = true
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.delaysContentTouches = false
+        return tv
+    }()
 
     // MARK: - Init
 
@@ -74,7 +93,7 @@ class LoginView: UIView {
 
     private func layout() {
 
-        [loginField, loginLabel, passwordLabel, passwordField, loginButton, continueLabel, signupLabel].forEach { self.addSubview($0) }
+        [loginField, loginLabel, passwordLabel, passwordField, loginButton, continueLabel, signUpView].forEach { self.addSubview($0) }
 
         let updownInset: CGFloat = 12
         let sideInset: CGFloat = 20
@@ -105,13 +124,8 @@ class LoginView: UIView {
             continueLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             continueLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: updownInset*4),
 
-            //            googleButton.topAnchor.constraint(equalTo: continueLabel.bottomAnchor, constant: updownInset*2),
-            //            googleButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: sideInset),
-            //            googleButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
-            //            googleButton.heightAnchor.constraint(equalToConstant: 57),
-
-            signupLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            signupLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
+            signUpView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            signUpView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
         ])
     }
 
@@ -134,11 +148,12 @@ class LoginView: UIView {
             }
         }
 
-        if let user = Auth.auth().currentUser {
-            let uid = user.uid
-            let email = user.email
-            print (uid, email ?? "no email")
-        }
+// получить доступ к данным текущего пользователя
+//        if let user = Auth.auth().currentUser {
+//            let uid = user.uid
+//            let email = user.email
+//            print (uid, email ?? "no email")
+//        }
     }
 
     @objc private func alertMessage() {
@@ -155,6 +170,8 @@ class LoginView: UIView {
     }
 }
 
+    //MARK: - Extensions
+
 extension UIView {
     func closestViewController() -> UIViewController? {
         var responder: UIResponder? = self
@@ -166,4 +183,15 @@ extension UIView {
         }
         return nil
     }
+}
+
+extension LoginView: UITextViewDelegate {
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+
+        if URL.scheme == "SignIn" {}
+
+        return true
+    }
+
 }

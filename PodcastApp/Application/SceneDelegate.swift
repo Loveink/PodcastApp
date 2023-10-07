@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     self.window = window
 
-//      let loginVC = CustomTabBar()
+//      let tabbar = CustomTabBar()
 //      let onboardingVC = PagesViewController()
 //      let onboardingVC = OnboardingViewController()
       let loginVC = LoginViewController()
