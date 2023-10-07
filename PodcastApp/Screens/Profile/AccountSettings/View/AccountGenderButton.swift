@@ -8,7 +8,9 @@
 import UIKit
 
 class AccountGenderButton: UIButton {
-
+    
+    //MARK: - Properties
+    
     enum ButtonStyle: String {
         case male = "Male"
         case female = "Female"
@@ -16,13 +18,17 @@ class AccountGenderButton: UIButton {
     
     private let style: ButtonStyle
     
-    private let checkOn = UIImage(named: "checkOn")
-    private let checkOff = UIImage(named: "checkOff")
-    
     private var isOn: Bool
     
     let imageInsets = UIEdgeInsets(top: 10, left: 16, bottom: 10, right: 116)
     let titleInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 32)
+    
+    //MARK: - UI Components
+    
+    private let checkOn = UIImage(named: "checkOn")
+    private let checkOff = UIImage(named: "checkOff")
+    
+    //MARK: - Unit
     
     init(withStyle style: ButtonStyle, isOn: Bool = false) {
         self.style = style
@@ -34,6 +40,8 @@ class AccountGenderButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //MARK: - Methods
     
     func setupCheck(status: Bool) {
         if status {
@@ -61,5 +69,5 @@ class AccountGenderButton: UIButton {
         layer.borderWidth = 1
         layer.borderColor = UIColor.blueBorder.cgColor
     }
-
+    
 }

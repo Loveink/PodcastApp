@@ -30,15 +30,13 @@ class ProfileSettingsViewController: UIViewController {
     
     private var profileImage: UIImageView = {
         let image = UIImageView()
-        //image.image =
-        image.frame = CGRect(x: 0, y: 0, width: 48, height: 48)
         image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
+        image.clipsToBounds = false
         image.isUserInteractionEnabled = true
         image.backgroundColor = .pinkBackground
         image.layer.cornerRadius = 12
-        image.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        image.layer.shadowOpacity = 1
+        image.layer.shadowColor = UIColor.black.cgColor
+        image.layer.shadowOpacity = 0.25
         image.layer.shadowRadius = 4
         image.layer.shadowOffset = CGSize(width: 0, height: 4)
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +47,7 @@ class ProfileSettingsViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Log Out", for: .normal)
         button.setTitleColor(.blueBorder, for: .normal)
+        button.titleLabel?.font = UIFont.plusJakartaSansMedium(size: 16)
         button.backgroundColor = .clear
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.blueBorder.cgColor
@@ -77,9 +76,7 @@ class ProfileSettingsViewController: UIViewController {
         tableView.dataSource = self
         addSubviews()
         setupConstraints()
-        
-        
-        // Do any additional setup after loading the view.
+        logOutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
     }
     
     //MARK: - Layout
@@ -94,10 +91,10 @@ class ProfileSettingsViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            profileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25),
             profileImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             profileImage.widthAnchor.constraint(equalToConstant: 48),
-            profileImage.heightAnchor.constraint(equalToConstant: 52),
+            profileImage.heightAnchor.constraint(equalToConstant: 48),
             
             userNameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 16),
             userNameLabel.topAnchor.constraint(equalTo: profileImage.topAnchor),
@@ -116,9 +113,6 @@ class ProfileSettingsViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             tableView.bottomAnchor.constraint(equalTo: logOutButton.topAnchor, constant: -12)
-            
-            
-            
         ])
     }
     
@@ -130,6 +124,32 @@ class ProfileSettingsViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    @objc private func logoutButtonTapped() {
+        let loginVC = LoginViewController()
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(loginVC, animated: true)
+        }
+    }
+    
+//    @objc private func logoutButtonTapped() {
+//        AuthManager.shared.logOut { [weak self] result in
+//            switch result {
+//            case .success(let success):
+//                if success {
+//                    let loginVC = LoginViewController()
+//                    loginVC.modalTransitionStyle = .crossDissolve
+//                    loginVC.modalPresentationStyle = .fullScreen
+//                    self?.present(loginVC, animated: true)
+//                }
+//            case .failure(let error):
+//                let alert = UIAlertController.createAlert(
+//                    title: "Error", message: error.localizedDescription
+//                )
+//                self?.present(alert, animated: true)
+//            }
+//        }
+//    }
     
 }
 
@@ -165,10 +185,6 @@ extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSou
         checkmark.image = imageForCheckmark
         checkmark.tintColor = .symbolsPurple
         cell.accessoryView = checkmark
-        
-        
-        
-        //cell.accessoryType = .detailDisclosureButton
         return cell
     }
 
