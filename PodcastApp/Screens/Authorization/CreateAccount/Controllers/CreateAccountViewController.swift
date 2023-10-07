@@ -18,7 +18,8 @@ class CreateAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-      createAccountView.navigationController = navigationController
+        createAccountView.navigationController = navigationController
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     // MARK: - Methods

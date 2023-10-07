@@ -9,6 +9,7 @@ import FirebaseAuth
 // почему кнопка гугла уезжает вверх, если повторно зайти на экран? например кликнуть "назад" с домашней страницы
 
 class LoginView: UIView {
+
   var navigationController: UINavigationController?
 
     // MARK: - UI Elements
@@ -34,12 +35,12 @@ class LoginView: UIView {
 
     private lazy var continueLabel = UILabel.makeLabel(text: "Or continue with", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
 
-//    private lazy var signupLabel = UILabel.makeLabel(text: "Don't have an account yet? Sign up", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
-
     private lazy var signUpView: UITextView = {
 
         let attributedString = NSMutableAttributedString (string: "Don't have an account yet? Sign up")
-        attributedString.addAttribute(.link, value: "signUp", range: (attributedString.string as NSString).range(of: "Sign up"))
+        attributedString.addAttribute(.link, value: "signUp://signUp", range: (attributedString.string as NSString).range(of: "Sign up"))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: attributedString.length))
+        
 
         let tv = UITextView()
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -141,8 +142,8 @@ class LoginView: UIView {
                 } else {
                     if let user = user {
                         print("Пользователь авторизован: \(user)")
-                      let createAccountVC = CustomTabBar()
-                      self.navigationController?.pushViewController(createAccountVC, animated: true)
+                      let tabbar = CustomTabBar()
+                      self.navigationController?.pushViewController(tabbar, animated: true)
                     }
                 }
             }
@@ -189,9 +190,10 @@ extension LoginView: UITextViewDelegate {
 
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
 
-        if URL.scheme == "SignIn" {}
-
+        if URL.scheme == "signUp" {
+            let createAccountVC = CreateAccountViewController()
+            self.navigationController?.pushViewController(createAccountVC, animated: true)
+        }
         return true
     }
-
 }
