@@ -86,7 +86,6 @@ class CreateAccountDetailViewController: UIViewController {
     }
 
     @objc private func backButtonAction() {
-        print("back button tapped")
     }
 
     @objc

@@ -16,7 +16,9 @@ class ChannelViewController: UIViewController {
   private let musicPlayer = MusicPlayer.instance
   let miniPlayerVC = MiniPlayerVC()
   let songPageViewController = NowPlayingViewController()
+//  var galleryViewController = GalleryView()
   var placeholderImage: UIImage?
+  var episodes: [EpisodeItem] = []
 
 
   private lazy var titleLabel = UILabel.makeLabel(text: "Channel", font: UIFont.plusJakartaSansBold(size: 18), textColor: UIColor.black)
@@ -44,8 +46,7 @@ class ChannelViewController: UIViewController {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 21
-        imageView.backgroundColor = UIColor(
-            red: 0.68, green: 0.89, blue: 0.95, alpha: 1.00)
+        imageView.image = UIImage(named: "placeholder_image")
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -120,7 +121,6 @@ class ChannelViewController: UIViewController {
 
 
 // MARK: - private properties
-  var episodes: [EpisodeItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -176,19 +176,18 @@ extension ChannelViewController: UICollectionViewDataSource {
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      guard let cell = collectionView.dequeueReusableCell(
-        withReuseIdentifier: EpisodeCell.reuseIdentifier,
-        for: indexPath) as? EpisodeCell else {
-        let cell = EpisodeCell()
-        cell.placeholderImage = self.placeholderImage
+        guard let cell = collectionView.dequeueReusableCell(
+          withReuseIdentifier: EpisodeCell.reuseIdentifier,
+          for: indexPath) as? EpisodeCell else {
+          let cell = EpisodeCell()
+          cell.placeholderImage = self.placeholderImage
+          return cell
+        }
+
+        let episode = self.episodes[indexPath.row]
+        cell.setup(withEpisode: episode)
         return cell
-      }
-
-      let episode = self.episodes[indexPath.row]
-      cell.setup(withEpisode: episode)
-      return cell
-  }
-
+    }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     self.musicPlayer.stopMusic()
@@ -260,36 +259,36 @@ extension ChannelViewController {
   }
 
   func fetchPodcasts() {
-    let networkService = NetworkService()
+      let networkService = NetworkService()
 
-    networkService.fetchData(forPath: "/episodes/byfeedid?id=\(channelID)") { [weak self] (result: Result<EpisodeFeed, APIError>) in
-      guard let self = self else { return }
+      networkService.fetchData(forPath: "/episodes/byfeedid?id=\(channelID)") { [weak self] (result: Result<EpisodeFeed, APIError>) in
+          guard let self = self else { return }
 
-      switch result {
-      case .success(let podcastResponse):
-        self.feeds.append(contentsOf: podcastResponse.items)
+          switch result {
+          case .success(let podcastResponse):
+              self.feeds.append(contentsOf: podcastResponse.items)
 
-        for podcast in self.feeds {
-          let imageURL = podcast.feedImage
-          let podcastItem = EpisodeItem(id: podcast.id, title: podcast.title, link: podcast.link, description: podcast.description, enclosureUrl: podcast.enclosureUrl, duration: podcast.duration, image: imageURL, feedImage: imageURL)
-          self.episodes.append(podcastItem)
-        }
+              for podcast in self.feeds {
+                  let imageURL = podcast.feedImage
+                  let podcastItem = EpisodeItem(id: podcast.id, title: podcast.title, link: podcast.link, description: podcast.description, enclosureUrl: podcast.enclosureUrl, duration: podcast.duration, image: imageURL, feedImage: imageURL)
+                  self.episodes.append(podcastItem)
+              }
 
-        DispatchQueue.main.async {
-          self.episodesCollectionView.reloadData()
-          self.numberOfEpisodes.text = String(self.feeds.count) + " Esp"
-          Music.shared.episodeResults = podcastResponse.items
-//              self.newSongsView.update(with: Music.shared.musicResults)
-//              self.recentlyMusicTableView.update(with: Music.shared.musicResults)
-              self.musicPlayer.updateMusicResults(Music.shared.episodeResults)
-          self.songPageViewController.channelAuthor = self.channelAuthor.text
-        }
+              DispatchQueue.main.async {
+                  self.episodesCollectionView.reloadData()
+                  self.numberOfEpisodes.text = String(self.feeds.count) + " Esp"
+                  Music.shared.episodeResults = podcastResponse.items
+                  self.musicPlayer.updateMusicResults(Music.shared.episodeResults)
+                  self.songPageViewController.channelAuthor = self.channelAuthor.text
+                  self.songPageViewController.channelImageView = self.channelImageView
+              }
 
-      case .failure(let error):
-        print("Error: \(error)")
+          case .failure(let error):
+              print("Error: \(error)")
+          }
       }
-    }
   }
+
 
   func showMiniPlayer() {
       miniPlayerVC.translatesAutoresizingMaskIntoConstraints = false

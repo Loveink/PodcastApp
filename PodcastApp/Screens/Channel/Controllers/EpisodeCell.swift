@@ -19,9 +19,9 @@ class EpisodeCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
-        imageView.backgroundColor = UIColor(
-            red: 0.94, green: 0.84, blue: 0.83, alpha: 1.00)
+        imageView.backgroundColor = .black
         imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "placeholder_image")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -86,16 +86,12 @@ class EpisodeCell: UICollectionViewCell {
 
 
   func setup(withEpisode episode: EpisodeItem) {
-      DispatchQueue.main.async {
-          if let placeholderImage = self.placeholderImage {
-              self.episodeImageView.image = placeholderImage
-          } else {
-              self.episodeImageView.kf.setImage(with: URL(string: episode.image), options: self.options)
-          }
-          self.episodeTitleLabel.text = episode.title
-          let formattedDuration = self.formatDuration(length: episode.duration)
-          self.episodeDetaisLabel.text = formattedDuration
-      }
+    DispatchQueue.main.async {
+      self.episodeImageView.kf.setImage(with: URL(string: episode.image), options: self.options)
+      self.episodeTitleLabel.text = episode.title
+      let formattedDuration = self.formatDuration(length: episode.duration)
+      self.episodeDetaisLabel.text = formattedDuration
+    }
   }
 }
 

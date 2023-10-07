@@ -20,7 +20,6 @@
 		5769D0C22AC76FA000D93A56 /* PodcastItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0C12AC76FA000D93A56 /* PodcastItem.swift */; };
 		5769D0C92AC76FA700D93A56 /* PodcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0C52AC76FA700D93A56 /* PodcastCell.swift */; };
 		5769D0CB2AC76FA700D93A56 /* PopularCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0C72AC76FA700D93A56 /* PopularCollectionView.swift */; };
-		5769D0CE2AC76FC700D93A56 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0CC2AC76FC700D93A56 /* ImageCollectionViewCell.swift */; };
 		5769D0CF2AC76FC700D93A56 /* PodcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0CD2AC76FC700D93A56 /* PodcastView.swift */; };
 		5769D0D12AC76FCD00D93A56 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0D02AC76FCD00D93A56 /* GalleryView.swift */; };
 		5769D0D52AC876BC00D93A56 /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5769D0D42AC876BC00D93A56 /* MusicPlayer.swift */; };
@@ -103,7 +102,6 @@
 		5769D0C12AC76FA000D93A56 /* PodcastItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastItem.swift; sourceTree = "<group>"; };
 		5769D0C52AC76FA700D93A56 /* PodcastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastCell.swift; sourceTree = "<group>"; };
 		5769D0C72AC76FA700D93A56 /* PopularCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularCollectionView.swift; sourceTree = "<group>"; };
-		5769D0CC2AC76FC700D93A56 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		5769D0CD2AC76FC700D93A56 /* PodcastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
 		5769D0D02AC76FCD00D93A56 /* GalleryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		5769D0D42AC876BC00D93A56 /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
@@ -344,10 +342,8 @@
 		57B391972ABED26400BD7E82 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
-				57B391E82AC16A8000BD7E82 /* Models */,
 				57B391E72AC16A7C00BD7E82 /* Views */,
 				57B391E62AC16A7700BD7E82 /* Controllers */,
-				A0594EDA2AC5A0680013AC4B /* Models */,
 			);
 			path = Channel;
 			sourceTree = "<group>";
@@ -589,17 +585,9 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		57B391E82AC16A8000BD7E82 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		57B391EB2AC16AAB00BD7E82 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5769D0D02AC76FCD00D93A56 /* GalleryView.swift */,
 				57B391EE2AC16AC600BD7E82 /* NowPlayingViewController.swift */,
 			);
 			path = Controllers;
@@ -608,8 +596,8 @@
 		57B391EC2AC16AB100BD7E82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5769D0CC2AC76FC700D93A56 /* ImageCollectionViewCell.swift */,
 				5769D0CD2AC76FC700D93A56 /* PodcastView.swift */,
+				5769D0D02AC76FCD00D93A56 /* GalleryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -766,13 +754,6 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		A0594EDA2AC5A0680013AC4B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		E57CF0002AC36644001600A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -922,7 +903,6 @@
 				5769D0E22ACADD4D00D93A56 /* DataModel.xcdatamodeld in Sources */,
 				5769D0D52AC876BC00D93A56 /* MusicPlayer.swift in Sources */,
 				E75FA2ED2AC2D45A005C947C /* BrowseAllView.swift in Sources */,
-				5769D0CE2AC76FC700D93A56 /* ImageCollectionViewCell.swift in Sources */,
 				E56199842AC97F5C00EC542D /* AccountGenderSelectorView.swift in Sources */,
 				5769D0C02AC76F8400D93A56 /* NetworkManager.swift in Sources */,
 				E75FA2E52AC1BE1A005C947C /* CustomSearchBar.swift in Sources */,
