@@ -25,7 +25,7 @@ class CustomTabBar: UITabBarController, UITabBarControllerDelegate {
     let search = SearchViewController()
     search.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Search")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "SearchFill")?.withRenderingMode(.alwaysOriginal))
 
-    let favorites = FavoritesViewController()
+    let favorites = FavoritesAndPlaylistViewController()
     favorites.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "Bookmark")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "BookmarkFill")?.withRenderingMode(.alwaysOriginal))
 
     let settings = ProfileSettingsViewController()
