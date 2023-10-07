@@ -12,26 +12,26 @@ class LoginViewController: UIViewController {
 
     // MARK: - UI Elements
 
-    private lazy var googleButton: GIDSignInButton = {
+    private lazy var googleButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
-        //        $0.setTitle("Continue with Google", for: .normal)
-        //        $0.setTitleColor(.black, for: .normal)
-        //        $0.titleLabel?.font = UIFont.manropeBold(size: 16)
+        $0.setTitle("Continue with Google", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = UIFont.manropeBold(size: 16)
         $0.backgroundColor = UIColor.white
         $0.layer.cornerRadius = 28
         $0.layer.borderColor = UIColor.black.cgColor
         $0.layer.borderWidth = 1
-        //        $0.style = .iconOnly
         $0.addTarget(self, action: #selector(googleButtonAction), for: .touchUpInside)
         return $0
-    }(GIDSignInButton())
+    }(UIButton())
 
     // MARK: - Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-      loginView.navigationController = navigationController
+        loginView.navigationController = navigationController
+        self.navigationController?.navigationBar.isHidden = true
     }
 
     // MARK: - Methods
@@ -48,7 +48,7 @@ class LoginViewController: UIViewController {
             loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            googleButton.bottomAnchor.constraint(equalTo: loginView.bottomAnchor, constant: -250),
+            googleButton.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: 600),
             googleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             googleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             googleButton.heightAnchor.constraint(equalToConstant: 57)
@@ -57,6 +57,7 @@ class LoginViewController: UIViewController {
 
     @objc private func googleButtonAction() {
         print ("google button tapped")
+
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
 
         let config = GIDConfiguration(clientID: clientID)
@@ -77,9 +78,10 @@ class LoginViewController: UIViewController {
             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                            accessToken: user.accessToken.tokenString)
             print (credential, user.userID as Any, user.idToken as Any, "авторизация успешна")
-//            if let tabbar = self.tabBarController {
-//                navigationController?.pushViewController(tabbar, animated: true)
-//            }
+
+            if let tabbar = self.tabBarController {
+                navigationController?.pushViewController(tabbar, animated: true)
+            }
         }
     }
 }

@@ -81,12 +81,13 @@ class CreateAccountDetailViewController: UIViewController {
             createAccountDetailView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             createAccountDetailView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             createAccountDetailView.heightAnchor.constraint(equalToConstant: 800),
-            createAccountDetailView.widthAnchor.constraint(equalToConstant: screenWidth)
+            createAccountDetailView.widthAnchor.constraint(equalToConstant: screenWidth),
         ])
     }
 
     @objc private func backButtonAction() {
         print("back button tapped")
+        self.navigationController?.popViewController(animated: true)
     }
 
     @objc
