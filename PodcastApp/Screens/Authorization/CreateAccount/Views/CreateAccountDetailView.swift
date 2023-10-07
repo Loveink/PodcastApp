@@ -58,7 +58,6 @@ class CreateAccountDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-        //      registerAuthStateHandler()
         layout()
     }
 
@@ -134,14 +133,6 @@ class CreateAccountDetailView: UIView {
             confirmField.heightAnchor.constraint(equalToConstant: 45),
         ])
     }
-
-    //    private func  registerAuthStateHandler() {
-    //        if authStateHandle == nil {
-    //            authStateHandle = Auth.auth().addStateDidChangeListener { auth, user in
-    //                self.user = user
-    //            }
-    //        }
-    //    }
 
     // MARK: - Selectors
 

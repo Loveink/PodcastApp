@@ -20,11 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //      let loginVC = CustomTabBar()
 //      let onboardingVC = PagesViewController()
 //      let onboardingVC = OnboardingViewController()
-      let loginVC = LoginViewController()
+//      let loginVC = LoginViewController()
 //      let createAccountVC = CreateAccountDetailViewController()
-//      let createAccountDetailVC = CreateAccountDetailViewController()
+      let createAccountDetailVC = CreateAccountDetailViewController()
 
-      let navigationController = UINavigationController(rootViewController: loginVC)
+      let navigationController = UINavigationController(rootViewController: createAccountDetailVC)
       navigationController.navigationBar.isHidden = true
 
     navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
