@@ -18,7 +18,6 @@ class ChangePictureViewController: UIViewController {
     
     private let changePicturePopUp = ChangePictureView()
     
-   // private let blurBackgroundView = self.applyBlurEffect()
     private let blurEffectView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .regular)
         let view = UIVisualEffectView(effect: blurEffect)
@@ -31,7 +30,6 @@ class ChangePictureViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         changePicturePopUp.delegate = self
-        changePicturePopUp.applyBlurEffect()
         addSubviews()
         setupConstraints()
         setupTapGesture()

@@ -63,6 +63,7 @@
 		A0B5C3AD2AC5AE5600EBB704 /* EpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */; };
 		E510024D2AD16B5500E63CC1 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E510024C2AD16B5400E63CC1 /* DatePickerView.swift */; };
 		E510024F2AD170E600E63CC1 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E510024E2AD170E600E63CC1 /* UIView.swift */; };
+		E51002512AD18FD600E63CC1 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51002502AD18FD600E63CC1 /* DatePickerViewController.swift */; };
 		E528739A2ACAE0B400FA33F6 /* ChangePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52873992ACAE0B400FA33F6 /* ChangePictureViewController.swift */; };
 		E528739E2ACBEFBA00FA33F6 /* ChangePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E528739D2ACBEFBA00FA33F6 /* ChangePictureView.swift */; };
 		E52873A02ACBF3BD00FA33F6 /* ChangePictureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E528739F2ACBF3BD00FA33F6 /* ChangePictureButton.swift */; };
@@ -142,6 +143,7 @@
 		A0B5C3AC2AC5AE5600EBB704 /* EpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCell.swift; sourceTree = "<group>"; };
 		E510024C2AD16B5400E63CC1 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		E510024E2AD170E600E63CC1 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		E51002502AD18FD600E63CC1 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		E52873992ACAE0B400FA33F6 /* ChangePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePictureViewController.swift; sourceTree = "<group>"; };
 		E528739D2ACBEFBA00FA33F6 /* ChangePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePictureView.swift; sourceTree = "<group>"; };
 		E528739F2ACBF3BD00FA33F6 /* ChangePictureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePictureButton.swift; sourceTree = "<group>"; };
@@ -710,6 +712,7 @@
 			children = (
 				E52873992ACAE0B400FA33F6 /* ChangePictureViewController.swift */,
 				57B392002AC16C0000BD7E82 /* AccountSettingsViewController.swift */,
+				E51002502AD18FD600E63CC1 /* DatePickerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				57B391EA2AC16A9100BD7E82 /* ChannelViewController.swift in Sources */,
 				E75FA2E92AC1FCA6005C947C /* GenreCell.swift in Sources */,
 				E56199822AC9790300EC542D /* AccountGenderButton.swift in Sources */,
+				E51002512AD18FD600E63CC1 /* DatePickerViewController.swift in Sources */,
 				E75FA2EF2AC48BFF005C947C /* SearchResultView.swift in Sources */,
 				57B391B02ABED87C00BD7E82 /* CustomTabBar.swift in Sources */,
 				F4B839E62ACC50410044E921 /* CreateAccountView.swift in Sources */,

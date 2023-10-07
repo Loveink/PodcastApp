@@ -10,13 +10,21 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
+protocol AccountSettingsViewDelegate: AnyObject {
+    func datePickerTapped()
+}
+
 class AccountSettingsView: UIView {
+    
+    weak var delegate: AccountSettingsViewDelegate?
     
 //    var ref: DatabaseReference!
 //
 //    ref = Database.database().reference()
 //
     let user = Auth.auth().currentUser
+    
+    var datePicker = DatePickerViewController()
     
     //MARK: - UI Components
     
@@ -40,11 +48,8 @@ class AccountSettingsView: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: "Calendar"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(datePickerTapped), for: .touchUpInside)
         return button
     }()
-    
-    private lazy var datePickerView = DatePickerView()
     
     private let genderSection = AccountGenderSelectorView()
     
@@ -65,30 +70,9 @@ class AccountSettingsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
-        datePickerView.isHidden = true
-        birthdayField.inputView = datePickerView
-        datePickerView.dismissClosure = { [weak self] in
-                   guard let self = self else {
-                       return
-                   }
-                   self.datePickerView.isHidden = true
-               }
-        datePickerView.changeClosure = { [weak self] val in
-            guard self != nil else {
-                       return
-                   }
-                   print(val)
-                   // do something with the selected date
-               }
-               
-               // add button action
-        //calendarButton.addTarget(self, action: #selector(tap(_:)), for: .touchUpInside)
-           
-      //  updateUser()
-        //datePicker.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
-        //}
         addSubviews()
         setupConstraints()
+        calendarButton.addTarget(self, action: #selector(datePickerTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -154,11 +138,6 @@ class AccountSettingsView: UIView {
             calendarButton.heightAnchor.constraint(equalToConstant: 24),
             calendarButton.widthAnchor.constraint(equalToConstant: 24),
             
-            datePickerView.topAnchor.constraint(equalTo: self.topAnchor),
-            datePickerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            datePickerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            datePickerView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
             genderSection.topAnchor.constraint(equalTo: birthdayField.bottomAnchor, constant: 8),
             genderSection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
             genderSection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
@@ -183,8 +162,9 @@ class AccountSettingsView: UIView {
     }
     
     @objc private func datePickerTapped() {
-        datePickerView.isHidden = false
+        delegate?.datePickerTapped()
     }
+
     
 //    private func setupTapGesture() {
 //        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
