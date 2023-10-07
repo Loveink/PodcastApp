@@ -10,21 +10,13 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 
-protocol AccountSettingsViewDelegate: AnyObject {
-    func datePickerTapped()
-}
-
 class AccountSettingsView: UIView {
     
-    weak var delegate: AccountSettingsViewDelegate?
-    
-//    var ref: DatabaseReference!
-//
-//    ref = Database.database().reference()
-//
+    //    var ref: DatabaseReference!
+    //
+    //    ref = Database.database().reference()
+    //
     let user = Auth.auth().currentUser
-    
-    var datePicker = DatePickerViewController()
     
     //MARK: - UI Components
     
@@ -48,7 +40,17 @@ class AccountSettingsView: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: "Calendar"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(datePickerTapped), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var datePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .date
+        picker.timeZone = TimeZone.current
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
+        return picker
     }()
     
     private let genderSection = AccountGenderSelectorView()
@@ -70,9 +72,10 @@ class AccountSettingsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.isHidden = true
         addSubviews()
         setupConstraints()
-        calendarButton.addTarget(self, action: #selector(datePickerTapped), for: .touchUpInside)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -91,6 +94,7 @@ class AccountSettingsView: UIView {
         self.addSubview(lastNameLabel)
         self.addSubview(emailLabel)
         self.addSubview(birthdayLabel)
+        self.addSubview(datePicker)
         
         self.addSubview(genderSection)
         
@@ -138,6 +142,9 @@ class AccountSettingsView: UIView {
             calendarButton.heightAnchor.constraint(equalToConstant: 24),
             calendarButton.widthAnchor.constraint(equalToConstant: 24),
             
+            datePicker.centerYAnchor.constraint(equalTo: birthdayField.centerYAnchor),
+            datePicker.trailingAnchor.constraint(equalTo: calendarButton.leadingAnchor, constant: -16),
+            
             genderSection.topAnchor.constraint(equalTo: birthdayField.bottomAnchor, constant: 8),
             genderSection.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
             genderSection.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
@@ -151,33 +158,41 @@ class AccountSettingsView: UIView {
     
     //MARK: - Methods
     
-    @objc func handleDatePicker(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        birthdayField.text = dateFormatter.string(from: sender.date)
-    }
-    
-    @objc private func saveButtonTapped() {
-        print ("Save button tapped")
-    }
-    
-    @objc private func datePickerTapped() {
-        delegate?.datePickerTapped()
-    }
+    //для проверки можно ввести данные пользователя igor@gmail.com с паролем 123456
+        private func fetchUserData() {
+            if let userID = Auth.auth().currentUser?.uid {
+                let db = Firestore.firestore()
+                let userRef = db.collection("users").document(userID)
 
-    
-//    private func setupTapGesture() {
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-//        view.addGestureRecognizer(tapGesture)
-//    }
-    
-//    @objc private func handleTap(_ gesture: UITapGestureRecognizer) {
-//        dismiss(animated: true, completion: nil)
-//    }
-    
-//    private func updateUser() {
-//            firstNameField.text = currentUser.firstName != "" ? currentUser.firstName : "Guest"
-//            lastNameField.text = currentUser.lastName
-//            emailField.text = currentUser.email
-//        }
-}
+                userRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        if let data = document.data() {
+                            self.firstNameField.text = data["firstName"] as? String;
+                            self.lastNameField.text = data["lastName"] as? String;
+                            self.emailField.text = data["email"] as? String
+                        }
+                    } else {
+                        print("Документ пользователя не найден")
+                    }
+                }
+            }
+        }
+        
+        @objc func handleDatePicker(sender: UIDatePicker) {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MMM yyyy"
+            birthdayField.text = dateFormatter.string(from: sender.date)
+        }
+        
+        @objc private func saveButtonTapped() {
+            print ("Save button tapped")
+        }
+        
+        @objc private func datePickerTapped() {
+            if datePicker.isHidden == false {
+                datePicker.isHidden = true
+            } else {
+                datePicker.isHidden = false
+            }
+        }
+    }

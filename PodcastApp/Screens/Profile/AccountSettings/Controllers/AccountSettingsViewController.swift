@@ -38,7 +38,6 @@ class AccountSettingsViewController: UIViewController {
         addSubviews()
         setupConstraints()
         setupNavigation()
-        accountSettingsView.delegate = self
         accountImageView.delegate = self
     }
     
@@ -100,16 +99,6 @@ class AccountSettingsViewController: UIViewController {
 extension AccountSettingsViewController: AccountImageViewDelegate {
     func changePictureTapped() {
         let vc = ChangePictureViewController()
-        vc.modalPresentationStyle = .overCurrentContext
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true, completion: nil)
-    }
-    
-}
-
-extension AccountSettingsViewController: AccountSettingsViewDelegate {
-    func datePickerTapped() {
-        let vc = DatePickerViewController()
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true, completion: nil)
