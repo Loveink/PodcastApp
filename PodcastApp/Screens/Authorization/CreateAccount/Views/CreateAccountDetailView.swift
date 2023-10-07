@@ -40,6 +40,14 @@ class CreateAccountDetailView: UIView {
 
     private lazy var confirmLabel = UILabel.makeLabel(text: "Confirm Password", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textGrey)
 
+    private lazy var errorLabel = UILabel.makeLabel(text: "All fields must be filled in", font: UIFont.sfProRegular(size: 7), textColor: UIColor.systemRed)
+
+    private lazy var emailForm = UILabel.makeLabel(text: "Email must be in @-format", font: UIFont.boldSystemFont(ofSize: 10), textColor: UIColor.systemRed)
+
+    private lazy var passwordMatch = UILabel.makeLabel(text: "Password do not match", font: UIFont.boldSystemFont(ofSize: 10), textColor: UIColor.systemRed)
+
+    private lazy var passwordLength = UILabel.makeLabel(text: "Password must be at least 6 charakcers long", font: UIFont.boldSystemFont(ofSize: 10), textColor: UIColor.systemRed)
+
     private lazy var signupButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.setTitle("Sign Up", for: .normal)
@@ -69,7 +77,12 @@ class CreateAccountDetailView: UIView {
 
     private func layout() {
 
-        [headLabel, firstnameField, lastnameField, emailField, passwordField, confirmField, firstnameLabel, lastnameLabel, emailLabel, passwordLabel, confirmLabel, signupButton, loginLabel].forEach { self.addSubview($0) }
+        [headLabel, firstnameField, lastnameField, emailField, passwordField, confirmField, firstnameLabel, lastnameLabel, emailLabel, passwordLabel, confirmLabel, signupButton, loginLabel, errorLabel, passwordMatch, emailForm, passwordLength].forEach { self.addSubview($0) }
+
+        errorLabel.isHidden = true
+        passwordMatch.isHidden = true
+        emailForm.isHidden = true
+        passwordLength.isHidden = true
 
         let sideInset: CGFloat = 24
         let updownInset: CGFloat = 8
@@ -79,10 +92,13 @@ class CreateAccountDetailView: UIView {
             headLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
             headLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 
-            signupButton.topAnchor.constraint(equalTo: confirmField.bottomAnchor, constant: 50),
+            signupButton.topAnchor.constraint(equalTo: confirmField.bottomAnchor, constant: 60),
             signupButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: sideInset),
             signupButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
             signupButton.heightAnchor.constraint(equalToConstant: 57),
+
+            errorLabel.bottomAnchor.constraint(equalTo: signupButton.topAnchor, constant: -updownInset),
+            errorLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 
             loginLabel.topAnchor.constraint(equalTo: signupButton.bottomAnchor, constant: 24),
             loginLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -114,6 +130,9 @@ class CreateAccountDetailView: UIView {
             emailField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
             emailField.heightAnchor.constraint(equalToConstant: 45),
 
+            emailForm.centerYAnchor.constraint(equalTo: emailLabel.centerYAnchor),
+            emailForm.trailingAnchor.constraint(equalTo: emailField.trailingAnchor),
+
             //констрейнты для поля пароля
             passwordLabel.topAnchor.constraint(equalTo: emailField.bottomAnchor, constant: 12),
             passwordLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: sideInset),
@@ -123,6 +142,9 @@ class CreateAccountDetailView: UIView {
             passwordField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
             passwordField.heightAnchor.constraint(equalToConstant: 45),
 
+            passwordLength.centerYAnchor.constraint(equalTo: passwordField.centerYAnchor),
+            passwordLength.trailingAnchor.constraint(equalTo: passwordField.trailingAnchor),
+
             //констрейнты для подтверждения пароля
             confirmLabel.topAnchor.constraint(equalTo: passwordField.bottomAnchor, constant: 12),
             confirmLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: sideInset),
@@ -131,27 +153,81 @@ class CreateAccountDetailView: UIView {
             confirmField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: sideInset),
             confirmField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
             confirmField.heightAnchor.constraint(equalToConstant: 45),
+
+            emailForm.centerYAnchor.constraint(equalTo: emailLabel.centerYAnchor),
+            emailForm.trailingAnchor.constraint(equalTo: emailField.trailingAnchor, constant: -sideInset + 20),
+
+            passwordMatch.centerYAnchor.constraint(equalTo: confirmLabel.centerYAnchor),
+            passwordMatch.trailingAnchor.constraint(equalTo: confirmField.trailingAnchor),
         ])
+    }
+
+    private func wrongTextField(_ textField: UITextField) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.1
+        animation.repeatCount = 2
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: textField.center.x - 5, y: textField.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 5, y: textField.center.y))
+        textField.layer.add(animation, forKey: "position")
     }
 
     // MARK: - Selectors
 
     @objc private func signupButtonAction(_ sender: UIButton) {
 
+        errorLabel.isHidden = true
+        passwordMatch.isHidden = true
+        emailForm.isHidden = true
+        passwordLength.isHidden = true
+
+        var fieldsArray: [UITextField] = []
+
+        fieldsArray.append(firstnameField)
+        fieldsArray.append(lastnameField)
+        fieldsArray.append(emailField)
+        fieldsArray.append(passwordField)
+        fieldsArray.append(confirmField)
+
         guard let firstName = firstnameField.text, !firstName.isEmpty,
               let lastName = lastnameField.text, !lastName.isEmpty,
               let email = emailField.text, !email.isEmpty,
-              let password = passwordField.text, !password.isEmpty
-
+              let password = passwordField.text, !password.isEmpty,
+              let confirmPassword = confirmField.text, !confirmPassword.isEmpty
         else {
             print ("одно из полей пусто")
+            fieldsArray.forEach {
+                if $0.text == "" {
+                    wrongTextField($0)
+                    errorLabel.isHidden = false
+                }
+            }
             return
         }
+
+        guard password == confirmPassword
+        else {
+            print ("пароли не совпадают")
+            wrongTextField(passwordField)
+            wrongTextField(confirmField)
+            passwordMatch.isHidden = false
+            return
+        }
+
+//        guard password.count < 6
+//        else {
+//            print ("пароль слишком короткий")
+//            wrongTextField(passwordField)
+//            passwordLength.isHidden = false
+//            return
+//        }
 
         Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) {
             (authResult, error) in
             if let error = error {
                 print("Ошибка регистрации: \(error.localizedDescription)")
+                self.wrongTextField(self.emailField)
+                self.emailForm.isHidden = false
             } else {
                 //регистрация прошла успешно
                 print ("Успешно зарегистрирован пользователь \(authResult?.user.email as Any)")
@@ -174,10 +250,12 @@ class CreateAccountDetailView: UIView {
                         }
                     }
                 }
-            }
 
-            let tabbar = CustomTabBar()
-            self.navigationController?.pushViewController(tabbar, animated: true)
+                print ("переход на другой экран")
+                let tabbar = CustomTabBar()
+                self.navigationController?.pushViewController(tabbar, animated: true)
+
+            }
         }
     }
 }
