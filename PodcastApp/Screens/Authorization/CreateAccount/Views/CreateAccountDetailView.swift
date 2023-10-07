@@ -5,8 +5,7 @@ import FirebaseFirestore
 
 // добавить сокрытие клавиатуры по тапу где-нибудь (на кнопку return например)
 // добавить распознаватель тапа для текста внизу
-// !!! решить вопрос с имейлом: либо тянуть с прошлого экрана, либо удалять тот экран и добавлять сюда новое текстовое поле
-// добавить проверки и условия текстовых полей, чтобы вводились корректные данные
+// отрефакторить отображение ошибок. Сейчас ошибки выпадают в том порядке, в котором возникают. Лучше: все ошибки показываются на экране одновременно
 
 class CreateAccountDetailView: UIView {
 
@@ -46,7 +45,7 @@ class CreateAccountDetailView: UIView {
 
     private lazy var passwordMatch = UILabel.makeLabel(text: "Password do not match", font: UIFont.boldSystemFont(ofSize: 10), textColor: UIColor.systemRed)
 
-    private lazy var passwordLength = UILabel.makeLabel(text: "Password must be at least 6 charakcers long", font: UIFont.boldSystemFont(ofSize: 10), textColor: UIColor.systemRed)
+    private lazy var passwordLength = UILabel.makeLabel(text: "Password must be at least 6 characters long", font: UIFont.boldSystemFont(ofSize: 10), textColor: UIColor.systemRed)
 
     private lazy var signupButton: UIButton = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -142,7 +141,7 @@ class CreateAccountDetailView: UIView {
             passwordField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
             passwordField.heightAnchor.constraint(equalToConstant: 45),
 
-            passwordLength.centerYAnchor.constraint(equalTo: passwordField.centerYAnchor),
+            passwordLength.centerYAnchor.constraint(equalTo: passwordLabel.centerYAnchor),
             passwordLength.trailingAnchor.constraint(equalTo: passwordField.trailingAnchor),
 
             //констрейнты для подтверждения пароля
@@ -153,9 +152,6 @@ class CreateAccountDetailView: UIView {
             confirmField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: sideInset),
             confirmField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
             confirmField.heightAnchor.constraint(equalToConstant: 45),
-
-            emailForm.centerYAnchor.constraint(equalTo: emailLabel.centerYAnchor),
-            emailForm.trailingAnchor.constraint(equalTo: emailField.trailingAnchor, constant: -sideInset + 20),
 
             passwordMatch.centerYAnchor.constraint(equalTo: confirmLabel.centerYAnchor),
             passwordMatch.trailingAnchor.constraint(equalTo: confirmField.trailingAnchor),
@@ -195,7 +191,7 @@ class CreateAccountDetailView: UIView {
               let password = passwordField.text, !password.isEmpty,
               let confirmPassword = confirmField.text, !confirmPassword.isEmpty
         else {
-            print ("одно из полей пусто")
+            print ("One or many fields aren't filled in")
             fieldsArray.forEach {
                 if $0.text == "" {
                     wrongTextField($0)
@@ -207,30 +203,27 @@ class CreateAccountDetailView: UIView {
 
         guard password == confirmPassword
         else {
-            print ("пароли не совпадают")
+            print ("Passwords do not match")
             wrongTextField(passwordField)
             wrongTextField(confirmField)
             passwordMatch.isHidden = false
             return
         }
 
-//        guard password.count < 6
-//        else {
-//            print ("пароль слишком короткий")
-//            wrongTextField(passwordField)
-//            passwordLength.isHidden = false
-//            return
-//        }
-
         Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) {
             (authResult, error) in
             if let error = error {
-                print("Ошибка регистрации: \(error.localizedDescription)")
-                self.wrongTextField(self.emailField)
-                self.emailForm.isHidden = false
+                print("Error: \(error.localizedDescription)")
+                if error.localizedDescription == "The email address is badly formatted." {
+                    self.wrongTextField(self.emailField)
+                    self.emailForm.isHidden = false
+                } else if error.localizedDescription == "The password must be 6 characters long or more." {
+                    self.wrongTextField(self.passwordField)
+                    self.passwordLength.isHidden = false
+                }
             } else {
                 //регистрация прошла успешно
-                print ("Успешно зарегистрирован пользователь \(authResult?.user.email as Any)")
+                print ("User \(authResult?.user.email as Any) has been successfully registered")
 
                 if let userID = authResult?.user.uid {
                     let db = Firestore.firestore()
@@ -244,14 +237,14 @@ class CreateAccountDetailView: UIView {
 
                     userRef.setData(userData) { error in
                         if let error = error {
-                            print ("Ошибка при сохранении данных пользователя")
+                            print ("Error when saving user data")
                         } else {
-                            print ("Данные были успешно сохранены в Firestore")
+                            print ("User data has been saved in Firestore")
                         }
                     }
                 }
 
-                print ("переход на другой экран")
+                print ("Push home screen")
                 let tabbar = CustomTabBar()
                 self.navigationController?.pushViewController(tabbar, animated: true)
 
