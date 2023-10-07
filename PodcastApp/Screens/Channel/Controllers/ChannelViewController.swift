@@ -162,11 +162,7 @@ class ChannelViewController: UIViewController {
     private func setupChannel() {
         numberOfEpisodes.text = String(feeds.count) + " Esp"
     }
-
-
 }
-
-
 // MARK: - collection protocols
 
 extension ChannelViewController: UICollectionViewDataSource {

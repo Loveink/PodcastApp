@@ -56,8 +56,7 @@ struct SaveToCoreData {
 
     do {
       let existingPodcasts = try context.fetch(fetchRequest)
-      if let existingPodcast = existingPodcasts.first {
-        // Podcast with the same ID already exists in Core Data
+      if existingPodcasts.first != nil {
         print("Podcast with ID \(id) already exists in Core Data")
         return
       }
