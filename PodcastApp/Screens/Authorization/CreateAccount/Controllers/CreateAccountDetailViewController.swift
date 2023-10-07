@@ -87,6 +87,7 @@ class CreateAccountDetailViewController: UIViewController {
 
     @objc private func backButtonAction() {
         print("back button tapped")
+        self.navigationController?.popViewController(animated: true)
     }
 
     @objc

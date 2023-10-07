@@ -13,12 +13,19 @@ class CreateAccountViewController: UIViewController {
     
     private lazy var createAccountView = CreateAccountView()
 
+    private lazy var backButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(named: "backArrow"), style: .done, target: self, action: #selector(backButtonAction))
+        button.tintColor = .purple
+        return button
+    }()
+
     // MARK: - Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         createAccountView.navigationController = navigationController
+        self.navigationItem.leftBarButtonItem = backButton
         self.navigationController?.navigationBar.isHidden = false
     }
 
@@ -36,5 +43,12 @@ class CreateAccountViewController: UIViewController {
             createAccountView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
         ])
+    }
+
+    //MARK: - Selectors
+
+    @objc private func backButtonAction() {
+        print("back button tapped")
+        self.navigationController?.popViewController(animated: true)
     }
 }
