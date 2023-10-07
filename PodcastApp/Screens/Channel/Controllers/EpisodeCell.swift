@@ -10,7 +10,7 @@ import Kingfisher
 
 class EpisodeCell: UICollectionViewCell {
     
-    var episode: EpisodeItemCell?
+    var episode: EpisodeItem?
     let options: KingfisherOptionsInfo = [
     .cacheOriginalImage
   ]
@@ -86,13 +86,12 @@ class EpisodeCell: UICollectionViewCell {
     }
 
 
-  func setup(withEpisode episode: EpisodeItemCell) {
+  func setup(withEpisode episode: EpisodeItem) {
     DispatchQueue.main.async {
       self.episodeImageView.kf.setImage(with: URL(string: episode.image), options: self.options)
       self.episodeTitleLabel.text = episode.title
       let formattedDuration = self.formatDuration(length: episode.duration)
       self.episodeDetaisLabel.text = formattedDuration
-      //      episodeDetaisLabel.text = "\(episode.episodeDutarion) | \(episode.episodeNumber) Eps"
     }
   }
     
@@ -124,7 +123,7 @@ extension EpisodeCell {
     }
 
   func formatDuration(length: Int) -> String {
-       let minutes = (length % 3600) / 60
+       let minutes = length / 60
        let seconds = length % 60
       return String(format: "%02d:%02d", minutes, seconds)
     }

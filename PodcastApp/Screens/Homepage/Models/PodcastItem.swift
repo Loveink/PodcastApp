@@ -12,4 +12,6 @@ struct PodcastItemCell: Decodable {
   let title: String
   let image: String
   let id: Int
+  let author: String
+  let categories: [String: String]?
 }
