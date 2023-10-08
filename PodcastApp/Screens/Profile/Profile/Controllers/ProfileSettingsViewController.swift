@@ -144,9 +144,7 @@ class ProfileSettingsViewController: UIViewController {
             }
         }
     }
-
-    //MARK: - Selectors
-
+    
     @objc private func logoutButtonTapped() {
 
         do {
@@ -161,7 +159,7 @@ class ProfileSettingsViewController: UIViewController {
         }
     }
 
-    //MARK: - Extensions
+//MARK: - Extensions
 
 extension ProfileSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
