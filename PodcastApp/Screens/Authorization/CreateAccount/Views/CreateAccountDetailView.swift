@@ -58,7 +58,28 @@ class CreateAccountDetailView: UIView {
         return $0
     }(UIButton())
 
-    private lazy var loginLabel = UILabel.makeLabel(text: "Already have an account? Login", font: UIFont.plusJakartaSansSemiBold(size: 16), textColor: UIColor.darkGray)
+//    private lazy var loginLabel = UILabel.makeLabel(text: "Already have an account? Login", font: UIFont.plusJakartaSansSemiBold(size: 16), textColor: UIColor.darkGray)
+
+    private lazy var loginLabel: UITextView = {
+
+        let attributedString = NSMutableAttributedString (string: "Already have an account? Login")
+        attributedString.addAttribute(.link, value: "login://login", range: (attributedString.string as NSString).range(of: "Login"))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: attributedString.length))
+
+
+        let tv = UITextView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.delegate = self
+        tv.linkTextAttributes = [.foregroundColor: UIColor.systemBlue]
+        tv.backgroundColor = .clear
+        tv.attributedText = attributedString
+        tv.textColor = UIColor.textDarkgray
+        tv.isSelectable = true
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.delaysContentTouches = false
+        return tv
+    }()
 
     // MARK: - Init
 
@@ -251,4 +272,18 @@ class CreateAccountDetailView: UIView {
             }
         }
     }
+}
+
+//MARK: - Extensions
+
+extension CreateAccountDetailView: UITextViewDelegate {
+
+func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+
+    if URL.scheme == "login" {
+        let loginVC = LoginViewController()
+        self.navigationController?.pushViewController(loginVC, animated: true)
+    }
+    return true
+}
 }

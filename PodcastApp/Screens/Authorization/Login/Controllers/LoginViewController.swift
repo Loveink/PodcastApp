@@ -31,7 +31,17 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         layout()
         loginView.navigationController = navigationController
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.titleView?.isHidden = true
+        self.navigationItem.largeTitleDisplayMode = .never
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
     }
 
     // MARK: - Methods
@@ -48,7 +58,7 @@ class LoginViewController: UIViewController {
             loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            googleButton.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: 600),
+            googleButton.bottomAnchor.constraint(equalTo: loginView.topAnchor, constant: 650),
             googleButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             googleButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             googleButton.heightAnchor.constraint(equalToConstant: 57)

@@ -197,6 +197,7 @@ extension PagesViewController {
     }
 
     @objc func goToLoginPage (_ sender: UIButton) {
+        AppSettingsManager.setOnboardingCompleted(true)
         let loginVC = LoginViewController()
         self.navigationController?.pushViewController(loginVC, animated: true)
     }

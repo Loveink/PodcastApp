@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,26 +15,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     guard let windowScene = (scene as? UIWindowScene) else { return }
 
-    let window = UIWindow(windowScene: windowScene)
-    self.window = window
+      let window = UIWindow(windowScene: windowScene)
 
+      let isOnboardingCompleted = AppSettingsManager.isOnboardingCompleted()
 
-//      let tabbar = CustomTabBar()
+      if isOnboardingCompleted {
+          if let _ = Auth.auth().currentUser {
+              let tabbar = CustomTabBar()
+              let navigationController = UINavigationController(rootViewController: tabbar)
+              navigationController.navigationBar.isHidden = true
+              navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+              navigationController.navigationBar.shadowImage = UIImage()
+              window.rootViewController = navigationController
+          } else {
+              let loginVC = LoginViewController()
+              let navigationController = UINavigationController(rootViewController: loginVC)
+              navigationController.navigationBar.isHidden = true
+              navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+              navigationController.navigationBar.shadowImage = UIImage()
+              window.rootViewController = navigationController
+          }
+      } else {
+          let onboardingVC = PagesViewController()
+          let navigationController = UINavigationController(rootViewController: onboardingVC)
+          navigationController.navigationBar.isHidden = true
+          navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+          navigationController.navigationBar.shadowImage = UIImage()
+          window.rootViewController = navigationController
+      }
+
+//      ниже закомментирован код для принудительного запуска онбординга
+
 //      let onboardingVC = PagesViewController()
-      let onboardingVC = PagesViewController()
+//      let navigationController = UINavigationController(rootViewController: onboardingVC)
+//      navigationController.navigationBar.isHidden = true
+//      navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+//      navigationController.navigationBar.shadowImage = UIImage()
+//      window.rootViewController = navigationController
 
-//      let onboardingVC = OnboardingViewController()
-      let loginVC = LoginViewController()
-//      let createAccountVC = CreateAccountDetailViewController()
-//      let createAccountDetailVC = CreateAccountDetailViewController()
-
-      let navigationController = UINavigationController(rootViewController: onboardingVC)
-      navigationController.navigationBar.isHidden = true
-
-    navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-    navigationController.navigationBar.shadowImage = UIImage()
-
-      window.rootViewController = navigationController
+      self.window = window
       window.makeKeyAndVisible()
   }
 
