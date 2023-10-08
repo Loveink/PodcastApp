@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import FirebaseAuth
+import Firebase
 
 class TopInfoView: UIView {
     
     
     private lazy var nameLabel = UILabel.makeLabel(
-        text: "Abigael Amaniah",
+        text: "User Name",
         font: UIFont.plusJakartaSansBold(size: 16),
         textColor: UIColor.black
     )
@@ -37,6 +39,7 @@ class TopInfoView: UIView {
       super.init(frame: frame)
       setupView()
       setupConstraints()
+        fetchUserData()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -71,6 +74,23 @@ class TopInfoView: UIView {
         
         NSLayoutConstraint.activate(constraints)
         
+    }
+
+    private func fetchUserData() {
+        if let userID = Auth.auth().currentUser?.uid {
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(userID)
+
+            userRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let data = document.data() {
+                        self.nameLabel.text = data["firstName"] as? String;
+                    }
+                } else {
+                    print("Документ пользователя не найден")
+                }
+            }
+        }
     }
 }
 

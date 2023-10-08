@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -19,12 +20,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let isOnboardingCompleted = AppSettingsManager.isOnboardingCompleted()
 
       if isOnboardingCompleted {
-          let tabbar = CustomTabBar()
-          let navigationController = UINavigationController(rootViewController: tabbar)
-          navigationController.navigationBar.isHidden = true
-          navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-          navigationController.navigationBar.shadowImage = UIImage()
-          window.rootViewController = navigationController
+          if let _ = Auth.auth().currentUser {
+              let tabbar = CustomTabBar()
+              let navigationController = UINavigationController(rootViewController: tabbar)
+              navigationController.navigationBar.isHidden = true
+              navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+              navigationController.navigationBar.shadowImage = UIImage()
+              window.rootViewController = navigationController
+          } else {
+              let loginVC = LoginViewController()
+              let navigationController = UINavigationController(rootViewController: loginVC)
+              navigationController.navigationBar.isHidden = true
+              navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+              navigationController.navigationBar.shadowImage = UIImage()
+              window.rootViewController = navigationController
+          }
       } else {
           let onboardingVC = PagesViewController()
           let navigationController = UINavigationController(rootViewController: onboardingVC)
@@ -46,6 +56,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       self.window = window
       window.makeKeyAndVisible()
   }
+
+    private func showHomeScreen() {
+        let tabbar = CustomTabBar()
+        let navigationController = UINavigationController(rootViewController: tabbar)
+        navigationController.navigationBar.isHidden = true
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        window?.rootViewController = navigationController
+    }
+
+    private func showLoginScreen() {
+        let loginVC = LoginViewController()
+        let navigationController = UINavigationController(rootViewController: loginVC)
+        navigationController.navigationBar.isHidden = true
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        window?.rootViewController = navigationController
+    }
+
+    private func showOnboarding() {
+        let onboardingVC = PagesViewController()
+        let navigationController = UINavigationController(rootViewController: onboardingVC)
+        navigationController.navigationBar.isHidden = true
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        window?.rootViewController = navigationController
+    }
 
   func sceneDidDisconnect(_ scene: UIScene) {
     // Called as the scene is being released by the system.
