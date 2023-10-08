@@ -497,8 +497,8 @@
 		57B391D32AC168E400BD7E82 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */,
 				F4B839E52ACC50410044E921 /* CreateAccountView.swift */,
+				F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

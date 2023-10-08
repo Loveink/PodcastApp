@@ -17,15 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     self.window = window
 
-    let loginVC = CustomTabBar()
-    //      let onboardingVC = PagesViewController()
-    //      let onboardingVC = OnboardingViewController()
-    //      let loginVC = LoginViewController()
-    //      let createAccountVC = CreateAccountDetailViewController()
-    let createAccountDetailVC = CreateAccountDetailViewController()
+//      let tabbar = CustomTabBar()
+//      let onboardingVC = PagesViewController()
+      let onboardingVC = PagesViewController()
 
-    let navigationController = UINavigationController(rootViewController: loginVC)
-    navigationController.navigationBar.isHidden = true
+//      let onboardingVC = OnboardingViewController()
+      let loginVC = LoginViewController()
+//      let createAccountVC = CreateAccountDetailViewController()
+//      let createAccountDetailVC = CreateAccountDetailViewController()
+
+      let navigationController = UINavigationController(rootViewController: onboardingVC)
+      navigationController.navigationBar.isHidden = true
 
     navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
     navigationController.navigationBar.shadowImage = UIImage()

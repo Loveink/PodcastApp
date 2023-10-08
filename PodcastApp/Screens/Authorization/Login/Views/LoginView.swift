@@ -9,6 +9,7 @@ import FirebaseAuth
 // почему кнопка гугла уезжает вверх, если повторно зайти на экран? например кликнуть "назад" с домашней страницы
 
 class LoginView: UIView {
+
   var navigationController: UINavigationController?
 
     // MARK: - UI Elements
@@ -34,7 +35,26 @@ class LoginView: UIView {
 
     private lazy var continueLabel = UILabel.makeLabel(text: "Or continue with", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
 
-    private lazy var signupLabel = UILabel.makeLabel(text: "Don't have an account yet? Sign up", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
+    private lazy var signUpView: UITextView = {
+
+        let attributedString = NSMutableAttributedString (string: "Don't have an account yet? Sign up")
+        attributedString.addAttribute(.link, value: "signUp://signUp", range: (attributedString.string as NSString).range(of: "Sign up"))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: attributedString.length))
+        
+
+        let tv = UITextView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.delegate = self
+        tv.linkTextAttributes = [.foregroundColor: UIColor.systemGreen]
+        tv.backgroundColor = .clear
+        tv.attributedText = attributedString
+        tv.textColor = UIColor.textDarkgray
+        tv.isSelectable = true
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.delaysContentTouches = false
+        return tv
+    }()
 
     // MARK: - Init
 
@@ -74,7 +94,7 @@ class LoginView: UIView {
 
     private func layout() {
 
-        [loginField, loginLabel, passwordLabel, passwordField, loginButton, continueLabel, signupLabel].forEach { self.addSubview($0) }
+        [loginField, loginLabel, passwordLabel, passwordField, loginButton, continueLabel, signUpView].forEach { self.addSubview($0) }
 
         let updownInset: CGFloat = 12
         let sideInset: CGFloat = 20
@@ -105,15 +125,12 @@ class LoginView: UIView {
             continueLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             continueLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: updownInset*4),
 
-            //            googleButton.topAnchor.constraint(equalTo: continueLabel.bottomAnchor, constant: updownInset*2),
-            //            googleButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: sideInset),
-            //            googleButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -sideInset),
-            //            googleButton.heightAnchor.constraint(equalToConstant: 57),
-
-            signupLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            signupLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
+            signUpView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            signUpView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
         ])
     }
+
+    //MARK: - Selectors
 
     @objc private func loginButtonAction(_ sender: UIButton) {
 
@@ -121,20 +138,62 @@ class LoginView: UIView {
             Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
                 if let error = error {
                     print("Ошибка входа: \(error.localizedDescription)")
+                    self.alertMessage()
                 } else {
                     if let user = user {
                         print("Пользователь авторизован: \(user)")
-                      let createAccountVC = CustomTabBar()
-                      self.navigationController?.pushViewController(createAccountVC, animated: true)
+                      let tabbar = CustomTabBar()
+                      self.navigationController?.pushViewController(tabbar, animated: true)
                     }
                 }
             }
         }
 
-        if let user = Auth.auth().currentUser {
-            let uid = user.uid
-            let email = user.email
-            print (uid, email ?? "no email")
+// получить доступ к данным текущего пользователя
+//        if let user = Auth.auth().currentUser {
+//            let uid = user.uid
+//            let email = user.email
+//            print (uid, email ?? "no email")
+//        }
+    }
+
+    @objc private func alertMessage() {
+
+        let alertMessage = UIAlertController(title: "Error", message: "Incorrect email and/or passwort", preferredStyle: .alert)
+
+        let okButton = UIAlertAction (title: "Ok", style: .default, handler: { (action) -> Void in print ("Ok button tapped")
+        })
+
+        alertMessage.addAction(okButton)
+        if let viewController = self.closestViewController() {
+                viewController.present(alertMessage, animated: true, completion: nil)
+            }
+    }
+}
+
+    //MARK: - Extensions
+
+extension UIView {
+    func closestViewController() -> UIViewController? {
+        var responder: UIResponder? = self
+        while let currentResponder = responder {
+            if let viewController = currentResponder as? UIViewController {
+                return viewController
+            }
+            responder = currentResponder.next
         }
+        return nil
+    }
+}
+
+extension LoginView: UITextViewDelegate {
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+
+        if URL.scheme == "signUp" {
+            let createAccountVC = CreateAccountViewController()
+            self.navigationController?.pushViewController(createAccountVC, animated: true)
+        }
+        return true
     }
 }

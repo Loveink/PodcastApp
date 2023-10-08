@@ -6,7 +6,9 @@ import UIKit
 //добавить распознаватель тапа
 
 class CreateAccountView: UIView {
+
   var navigationController: UINavigationController?
+
     // MARK: - UI Elements
 
     private lazy var headLabel = UILabel.makeLabel(text: "Create account", font: UIFont.plusJakartaSansBold(size: 24), textColor: UIColor.white)
@@ -33,9 +35,30 @@ class CreateAccountView: UIView {
         return $0
     }(UIButton())
 
-    lazy var continueLabel = UILabel.makeLabel(text: "Or continue with", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
+    private lazy var continueLabel = UILabel.makeLabel(text: "Or continue with", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
 
-    lazy var loginLabel = UILabel.makeLabel(text: "Already have an account? Login", font: UIFont.plusJakartaSansSemiBold(size: 16), textColor: UIColor.darkGray)
+//    lazy var loginLabel = UILabel.makeLabel(text: "Already have an account? Login", font: UIFont.plusJakartaSansSemiBold(size: 16), textColor: UIColor.darkGray)
+
+    private lazy var backToLoginView: UITextView = {
+
+        let attributedString = NSMutableAttributedString (string: "Already have an account? Login")
+        attributedString.addAttribute(.link, value: "login://login", range: (attributedString.string as NSString).range(of: "Login"))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: attributedString.length))
+
+
+        let tv = UITextView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.delegate = self
+        tv.linkTextAttributes = [.foregroundColor: UIColor.systemBlue]
+        tv.backgroundColor = .clear
+        tv.attributedText = attributedString
+        tv.textColor = UIColor.textDarkgray
+        tv.isSelectable = true
+        tv.isEditable = false
+        tv.isScrollEnabled = false
+        tv.delaysContentTouches = false
+        return tv
+    }()
 
     // MARK: - Init
 
@@ -75,7 +98,7 @@ class CreateAccountView: UIView {
 
     private func layout() {
 
-        [headLabel, backgroundView, emailLabel, emailField, continueButton, continueLabel, loginLabel].forEach { self.addSubview($0) }
+        [headLabel, backgroundView, emailLabel, emailField, continueButton, continueLabel, backToLoginView].forEach { self.addSubview($0) }
 
         let sideInset: CGFloat = 24
         let updownInset: CGFloat = 8
@@ -106,13 +129,28 @@ class CreateAccountView: UIView {
             continueLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             continueLabel.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: updownInset*4),
 
-            loginLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            loginLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
+            backToLoginView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            backToLoginView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -100)
             ])
     }
+
+    //MARK: - Selectors
 
   @objc private func continueButtonAction(_ sender: UIButton) {
     let createAccountDetailVC = CreateAccountDetailViewController()
     self.navigationController?.pushViewController(createAccountDetailVC, animated: true)
   }
+}
+
+    //MARK: - Extensions
+
+extension CreateAccountView: UITextViewDelegate {
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+
+        if URL.scheme == "login" {
+            self.navigationController?.popViewController(animated: true)
+        }
+        return true
+    }
 }
