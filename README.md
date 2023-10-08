@@ -1,5 +1,5 @@
 # Podcast App
-<img src="https://github.com/Loveink/BestRecipes/blob/develop/assets/readmegif.gif" width="900">
+<img src="https://github.com/Loveink/PodcastApp/blob/develop/assets/video.gif" width="900">
 
 ---
 
