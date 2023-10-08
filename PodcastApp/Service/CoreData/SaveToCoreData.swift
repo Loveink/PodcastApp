@@ -10,7 +10,7 @@ import UIKit
 
 struct SaveToCoreData {
 
-  static func savePodcastInfoToCoreData(_ image: String, _ title: String, _ id: Int)  {
+  static func savePodcastInfoToCoreData(_ image: String, _ title: String, _ id: Int, _ author: String)  {
     var context: NSManagedObjectContext!
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
       return
@@ -35,7 +35,7 @@ struct SaveToCoreData {
     podcastSave.title = title
     podcastSave.id = Int64(id)
     podcastSave.image = image
-
+    podcastSave.author = author
     do {
       try context.save()
       print("Подкаст успешно сохранен")

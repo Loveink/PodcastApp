@@ -71,16 +71,17 @@ class PodcastCell: UICollectionViewCell {
 
 
   private func saveData() {
-    guard let currentRecipe = currentPodcast else {
+    guard let currentPodcast = currentPodcast else {
       print("currentRecipe is nil")
       return
     }
 
-    let image = currentRecipe.image
-    let title = currentRecipe.title
-    let id = currentRecipe.id
+    let image = currentPodcast.image
+    let title = currentPodcast.title
+    let id = currentPodcast.id
+    let author = currentPodcast.author
 
-    SaveToCoreData.savePodcastInfoToCoreData(image, title, id)
+    SaveToCoreData.savePodcastInfoToCoreData(image, title, id, author)
   }
 
 

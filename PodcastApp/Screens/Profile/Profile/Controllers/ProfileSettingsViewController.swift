@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 class ProfileSettingsViewController: UIViewController {
-    
+
+  let user = Auth.auth().currentUser
+  
     //MARK: - Properties
     private let rowsIconSettings: [UIImage] = [
         UIImage(systemName: "person")!,
@@ -77,6 +82,8 @@ class ProfileSettingsViewController: UIViewController {
         addSubviews()
         setupConstraints()
         logOutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        navigationController?.navigationBar.isHidden = true
+      fetchUserData()
     }
     
     //MARK: - Layout
@@ -150,7 +157,22 @@ class ProfileSettingsViewController: UIViewController {
 //            }
 //        }
 //    }
-    
+  private func fetchUserData() {
+      if let userID = Auth.auth().currentUser?.uid {
+          let db = Firestore.firestore()
+          let userRef = db.collection("users").document(userID)
+
+          userRef.getDocument { (document, error) in
+              if let document = document, document.exists {
+                  if let data = document.data() {
+                      self.userNameLabel.text = data["firstName"] as? String;
+                  }
+              } else {
+                  print("Документ пользователя не найден")
+              }
+          }
+      }
+  }
 }
 
 //MARK: - Extensions

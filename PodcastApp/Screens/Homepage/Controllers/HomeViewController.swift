@@ -46,7 +46,6 @@ class HomeViewController: UIViewController {
     trendingCollectionView.translatesAutoresizingMaskIntoConstraints = false
     categoriesName.translatesAutoresizingMaskIntoConstraints = false
 
-    //        view.addSubview(topInfoView)
     view.addSubview(categoryCollectionView)
     view.addSubview(trendingCollectionView)
     view.addSubview(categoriesName)
@@ -75,7 +74,6 @@ class HomeViewController: UIViewController {
       categoryCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
     ])
   }
-
 
   func fetchPodcasts() {
     let networkService = NetworkService()

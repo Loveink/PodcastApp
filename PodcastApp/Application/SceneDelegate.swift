@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let window = UIWindow(windowScene: windowScene)
     self.window = window
 
-//      let tabbar = CustomTabBar()
+      let tabbar = CustomTabBar()
 //      let onboardingVC = PagesViewController()
       let onboardingVC = PagesViewController()
 
@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //      let createAccountVC = CreateAccountDetailViewController()
 //      let createAccountDetailVC = CreateAccountDetailViewController()
 
-      let navigationController = UINavigationController(rootViewController: onboardingVC)
+      let navigationController = UINavigationController(rootViewController: tabbar)
       navigationController.navigationBar.isHidden = true
 
     navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
