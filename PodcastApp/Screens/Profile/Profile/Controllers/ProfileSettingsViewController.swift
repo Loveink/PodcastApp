@@ -131,32 +131,24 @@ class ProfileSettingsViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    @objc private func logoutButtonTapped() {
-        let loginVC = LoginViewController()
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(loginVC, animated: true)
+
+    private func fetchUserData() {
+        if let userID = Auth.auth().currentUser?.uid {
+            let db = Firestore.firestore()
+            let userRef = db.collection("users").document(userID)
+
+            userRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let data = document.data() {
+                        self.userNameLabel.text = data["firstName"] as? String;
+                    }
+                } else {
+                    print("Документ пользователя не найден")
+                }
+            }
         }
     }
     
-//    @objc private func logoutButtonTapped() {
-//        AuthManager.shared.logOut { [weak self] result in
-//            switch result {
-//            case .success(let success):
-//                if success {
-//                    let loginVC = LoginViewController()
-//                    loginVC.modalTransitionStyle = .crossDissolve
-//                    loginVC.modalPresentationStyle = .fullScreen
-//                    self?.present(loginVC, animated: true)
-//                }
-//            case .failure(let error):
-//                let alert = UIAlertController.createAlert(
-//                    title: "Error", message: error.localizedDescription
-//                )
-//                self?.present(alert, animated: true)
-//            }
-//        }
-//    }
   private func fetchUserData() {
       if let userID = Auth.auth().currentUser?.uid {
           let db = Firestore.firestore()
@@ -174,6 +166,21 @@ class ProfileSettingsViewController: UIViewController {
       }
   }
 }
+
+    @objc private func logoutButtonTapped() {
+
+        do {
+            try Auth.auth().signOut()
+            let loginVC = LoginViewController()
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(loginVC, animated: true)
+            }
+            } catch let signOutError as NSError {
+                print ("Ошибка выхода: \(signOutError.localizedDescription)")
+            }
+        }
+    }
+
 
 //MARK: - Extensions
 

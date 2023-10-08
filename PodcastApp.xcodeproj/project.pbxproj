@@ -95,6 +95,7 @@
 		F4DBA60B2AC2F028007AF64F /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60A2AC2F028007AF64F /* LoginView.swift */; };
 		F4DBA60D2AC30919007AF64F /* TextfieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */; };
 		F4DBA60F2AC445A8007AF64F /* CreateAccountDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */; };
+		F4EE5E722AD2268D00206282 /* AppSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EE5E712AD2268D00206282 /* AppSettingsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -182,6 +183,7 @@
 		F4DBA60A2AC2F028007AF64F /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		F4DBA60C2AC30919007AF64F /* TextfieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextfieldExtension.swift; sourceTree = "<group>"; };
 		F4DBA60E2AC445A8007AF64F /* CreateAccountDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountDetailView.swift; sourceTree = "<group>"; };
+		F4EE5E712AD2268D00206282 /* AppSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +260,7 @@
 			children = (
 				57724E8F2ABDAB52006C3318 /* AppDelegate.swift */,
 				57724E912ABDAB52006C3318 /* SceneDelegate.swift */,
+				F4EE5E712AD2268D00206282 /* AppSettingsManager.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -933,6 +936,7 @@
 				E56199842AC97F5C00EC542D /* AccountGenderSelectorView.swift in Sources */,
 				5769D0C02AC76F8400D93A56 /* NetworkManager.swift in Sources */,
 				E75FA2E52AC1BE1A005C947C /* CustomSearchBar.swift in Sources */,
+				F4EE5E722AD2268D00206282 /* AppSettingsManager.swift in Sources */,
 				57677B462ACDFA4E00A1DFFA /* CategoriesCell.swift in Sources */,
 				A0594ED52AC583830013AC4B /* FavouriteChannelCell.swift in Sources */,
 				5769D0BF2AC76F8400D93A56 /* Episode.swift in Sources */,

@@ -37,8 +37,6 @@ class CreateAccountView: UIView {
 
     private lazy var continueLabel = UILabel.makeLabel(text: "Or continue with", font: UIFont.sfProRegular(size: 14), textColor: UIColor.textDarkgray)
 
-//    lazy var loginLabel = UILabel.makeLabel(text: "Already have an account? Login", font: UIFont.plusJakartaSansSemiBold(size: 16), textColor: UIColor.darkGray)
-
     private lazy var backToLoginView: UITextView = {
 
         let attributedString = NSMutableAttributedString (string: "Already have an account? Login")
