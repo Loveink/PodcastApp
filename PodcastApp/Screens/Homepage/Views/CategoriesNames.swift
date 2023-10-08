@@ -85,7 +85,8 @@ extension CategoriesNames: UICollectionViewDelegate, UICollectionViewDataSource,
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    delegateCollectionDidSelect?.fetchSearch(categoryName: categories[indexPath.item].lowercased())
+      let selectedCategory = categories[indexPath.item]
+      delegateCollectionDidSelect?.fetchSearch(categoryName: selectedCategory)
   }
 }
 

@@ -11,18 +11,17 @@ import Kingfisher
 class EpisodeCell: UICollectionViewCell {
     
     var episode: EpisodeItem?
-    let options: KingfisherOptionsInfo = [
-    .cacheOriginalImage
-  ]
+    let options: KingfisherOptionsInfo = [.cacheOriginalImage]
+  var placeholderImage: UIImage?
 // MARK: - User Interface
     
     private let episodeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
-        imageView.backgroundColor = UIColor(
-            red: 0.94, green: 0.84, blue: 0.83, alpha: 1.00)
+        imageView.backgroundColor = .black
         imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "placeholder_image")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -94,7 +93,6 @@ class EpisodeCell: UICollectionViewCell {
       self.episodeDetaisLabel.text = formattedDuration
     }
   }
-    
 }
 
 extension EpisodeCell {

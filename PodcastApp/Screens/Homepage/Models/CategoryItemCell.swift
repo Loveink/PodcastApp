@@ -9,7 +9,7 @@ import UIKit
 
 public let categoryDictionary: [String: String] = [
     "Arts & Books": "Arts,Books",
-    "Lifestyle": "Fashion,Beauty,Food,Home,Garden,Hobbies",
+    "Fashion & Home": "Fashion,Beauty,Food,Home,Garden,Hobbies",
     "Business & Career": "Business,Careers,Entrepreneurship,Investing,Management,Marketing",
     "Education & Learning": "Education,Courses,How-To,Language,Learning,Self-Improvement",
     "Entertainment": "Comedy,Interviews,Improv,Stand-Up",
@@ -25,7 +25,6 @@ public let categoryDictionary: [String: String] = [
     "Music & Commentary": "Music,Commentary",
     "Sports & Athletics": "Sports,Baseball,Basketball,Cricket,Fantasy,Football,Golf,Hockey,Rugby,Running,Soccer,Swimming,Tennis,Volleyball,Wrestling",
     "TV & Film": "TV,Film,After-Shows,Reviews",
-    "Environment & Climate": "Climate,Weather",
     "Games & Gaming": "Games,Tabletop,Role-Playing"
 ]
 

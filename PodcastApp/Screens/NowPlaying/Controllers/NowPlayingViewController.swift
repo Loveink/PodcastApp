@@ -12,7 +12,6 @@ import Kingfisher
 class NowPlayingViewController: UIViewController {
 
   var podcast = PodcastView()
-  var galleryViewController = GalleryView()
   private lazy var chanelVC = ChannelViewController()
 
   private let musicPlayer = MusicPlayer.instance
@@ -41,9 +40,24 @@ class NowPlayingViewController: UIViewController {
       return button
   }()
 
+  var channelImageView: UIImageView = {
+      let imageView = UIImageView()
+      imageView.layer.cornerRadius = 12
+      imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
+      imageView.translatesAutoresizingMaskIntoConstraints = false
+      return imageView
+  }()
+
   @objc private func backButtonTapped() {
-        dismiss(animated: true, completion: nil)
+      dismiss(animated: true) {
+          if let presentingVC = self.presentingViewController as? ChannelViewController {
+              presentingVC.tabBarController?.tabBar.isHidden = false
+              presentingVC.navigationController?.popToViewController(presentingVC, animated: true)
+          }
+      }
   }
+
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -89,26 +103,26 @@ class NowPlayingViewController: UIViewController {
 
 
   func setupConstraints() {
-    galleryViewController.translatesAutoresizingMaskIntoConstraints = false
     podcast.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(galleryViewController)
     view.addSubview(podcast)
     view.addSubview(backButton)
     view.addSubview(titleLabel)
+    view.addSubview(channelImageView)
 
     NSLayoutConstraint.activate([
       backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
       backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+
       titleLabel.centerYAnchor.constraint(equalTo: backButton.centerYAnchor),
       titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
 
-      galleryViewController.topAnchor.constraint(equalTo: view.topAnchor),
-      galleryViewController.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      galleryViewController.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      galleryViewController.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7),
+      channelImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+      channelImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+      channelImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+      channelImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
 
-      podcast.topAnchor.constraint(equalTo: galleryViewController.bottomAnchor, constant: -100),
+      podcast.topAnchor.constraint(equalTo: channelImageView.bottomAnchor, constant: 50),
       podcast.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       podcast.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       podcast.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -116,18 +130,11 @@ class NowPlayingViewController: UIViewController {
   }
 
   func configureCell(with musicResult: EpisodeItem) {
-    currentTrackModel = musicResult
-    podcast.songNameLabel.text = musicResult.title
-//    podcast.performerNameLabel.text = channelAuthor.text
-//    print(chanelVC.channelAuthor.text)
-
-//    let imageUrlString = musicResult.feedImage
-//    if let imageUrl = URL(string: imageUrlString) {
-//      if let firstImageView = galleryViewController.images.first {
-//        firstImageView.kf.setImage(with: imageUrl)
-//      }
-//    }
+      currentTrackModel = musicResult
+      podcast.songNameLabel.text = musicResult.title
+      podcast.performerNameLabel.text = channelAuthor
   }
+
 
   private func setTargets() {
       podcast.sliderView.addTarget(self, action: #selector(rewindTrack), for: [.touchUpInside])

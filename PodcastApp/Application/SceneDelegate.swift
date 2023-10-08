@@ -45,7 +45,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
 
 //      ниже закомментирован код для принудительного запуска онбординга
-
 //      let onboardingVC = PagesViewController()
 //      let navigationController = UINavigationController(rootViewController: onboardingVC)
 //      navigationController.navigationBar.isHidden = true

@@ -15,12 +15,12 @@ class FavoritesViewController: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
-//        tableView.backgroundColor = .red.withAlphaComponent(0.5)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
-    
+
+  private let titleLabel = UILabel.makeLabel(text: "Favorites", font: .manropeBold(size: 16), textColor: .black)
+
 // MARK: - private properties
     var favouriteChanels: [PodcastItemCell] = []
 //    private var favouriteChanels = ChannelModel.makeMockData()
@@ -30,7 +30,7 @@ class FavoritesViewController: UIViewController {
         self.setupView()
         self.setupConstraints()
         self.setupTableView()
-        self.setupNavigationBar()
+      setupNavigationBar()
       loadPodcastDataFromCoreData()
     }
 
@@ -43,6 +43,7 @@ class FavoritesViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
+        view.addSubview(titleLabel)
         view.addSubview(favouriteChanelsTableView)
     }
 
@@ -58,8 +59,9 @@ class FavoritesViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        self.navigationItem.title = "Favorites"
+        self.navigationController?.navigationItem.title = "Favorites"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.isHidden = false
     }
 
   private func loadPodcastDataFromCoreData() {
@@ -76,9 +78,9 @@ class FavoritesViewController: UIViewController {
                   return PodcastItemCell(
                     title: podcast.title ?? "",
                     image: podcast.image ?? "",
-                      id: Int(podcast.id),
-                      author: "",
-                      categories: ["": ""]
+                    id: Int(podcast.id),
+                    author: podcast.author ?? "",
+                    categories: ["": ""]
                   )
               }
             
@@ -87,6 +89,29 @@ class FavoritesViewController: UIViewController {
               print("Ошибка при загрузке данных из Core Data: \(error)")
           }
       }
+
+  func didSelectPodcast(id: Int) {
+    guard let selectedFeed = favouriteChanels.first(where: { $0.id == id }) else {
+      return
+    }
+
+    let channelVC = ChannelViewController()
+    channelVC.channelID = id
+    channelVC.channelTitleLabel.text = selectedFeed.title
+    channelVC.channelAuthor.text = selectedFeed.author
+    channelVC.placeholderImage = UIImage(named: "placeholder_image")
+
+    if let imageURL = URL(string: selectedFeed.image) {
+      URLSession.shared.dataTask(with: imageURL) { (data, _, _) in
+        if let data = data, let image = UIImage(data: data) {
+          DispatchQueue.main.async {
+            channelVC.channelImageView.image = image
+          }
+        }
+      }.resume()
+    }
+    self.navigationController?.pushViewController(channelVC, animated: true)
+  }
 }
 
 
@@ -114,12 +139,21 @@ extension FavoritesViewController: UITableViewDataSource {
         cell.setup(withChanel: favCahel)
         return cell
     }
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if favouriteChanels.count > 0 {
+        if let selectedCell = tableView.cellForRow(at: indexPath) as? FavouriteChannelCell,
+            let id = selectedCell.id {
+            didSelectPodcast(id: id)
+        }
+    }
+}
 }
 
 extension FavoritesViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
-    }
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+      return 80
+  }
 }
 
 // MARK: - setup constraints
@@ -128,9 +162,12 @@ extension FavoritesViewController {
     private func setupConstraints() {
         
         let constraints: [NSLayoutConstraint] = [
-            favouriteChanelsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            favouriteChanelsTableView.topAnchor.constraint(equalTo: view.topAnchor),
-            favouriteChanelsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+          titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+          titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            favouriteChanelsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            favouriteChanelsTableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            favouriteChanelsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             favouriteChanelsTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ]
         
