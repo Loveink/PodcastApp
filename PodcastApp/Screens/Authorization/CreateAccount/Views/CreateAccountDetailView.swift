@@ -257,7 +257,7 @@ class CreateAccountDetailView: UIView {
                     ]
 
                     userRef.setData(userData) { error in
-                        if let error = error {
+                      if error != nil {
                             print ("Error when saving user data")
                         } else {
                             print ("User data has been saved in Firestore")

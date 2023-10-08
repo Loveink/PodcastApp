@@ -99,9 +99,9 @@ extension ChangePictureViewController: UIImagePickerControllerDelegate, UINaviga
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
-        guard let image = info[
-            UIImagePickerController.InfoKey.editedImage
-        ] as? UIImage else {
+      guard info[
+        UIImagePickerController.InfoKey.editedImage
+      ] is UIImage else {
             return
         }
         //.image = image

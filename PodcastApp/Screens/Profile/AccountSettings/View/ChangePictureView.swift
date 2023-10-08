@@ -119,7 +119,7 @@ extension ChangePictureView: UIImagePickerControllerDelegate & UINavigationContr
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
-        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+      if info[UIImagePickerController.InfoKey.editedImage] is UIImage {
             //userImage = image
         }
     }

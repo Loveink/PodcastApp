@@ -20,7 +20,7 @@ class MiniPlayerVC: UIView {
     private let musicPlayer = MusicPlayer.instance
 
     private let backgroundView = UIView()
-    private let songImageView = UIImageView()
+    var songImageView = UIImageView()
     let songTitleLabel = UILabel()
     let songArtist = UILabel()
     private let backButton = UIButton(type: .system)

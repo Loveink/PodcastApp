@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import Kingfisher
 
 class ChannelViewController: UIViewController {
 
@@ -308,30 +309,30 @@ extension ChannelViewController: MiniPlayerViewDelegate {
 extension ChannelViewController: MusicPlayerDelegate {
 
   func updateCurrentURL(_ url: String) {
-    guard let musicResult = getMusicResultFromURL(url) else {
-      miniPlayerVC.updateSongTitle("")
-      miniPlayerVC.updateSongImage(nil)
-      return
-    }
+      guard let musicResult = getMusicResultFromURL(url) else {
+          miniPlayerVC.updateSongTitle("")
+          miniPlayerVC.updateSongImage(nil)
+          return
+      }
 
-    miniPlayerVC.updateSongTitle(musicResult.title)
-    let imageUrlString = musicResult.feedImage
-    if let imageUrl = URL(string: imageUrlString) {
-      URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-        self.backgroundQueue.async {
-          if let imageData = data, let image = UIImage(data: imageData) {
-            self.miniPlayerVC.updateSongImage(image)
-            self.songPageViewController.trackInfo = musicResult
-            self.songPageViewController.channelImageView.image = image
-          } else {
-            self.miniPlayerVC.updateSongImage(nil)
-          }
-        }
-      }.resume()
-    } else {
-      miniPlayerVC.updateSongImage(nil)
-    }
+      miniPlayerVC.updateSongTitle(musicResult.title)
+      let imageUrlString = musicResult.feedImage
+
+      if let imageUrl = URL(string: imageUrlString) {
+          miniPlayerVC.songImageView.kf.setImage(with: imageUrl, placeholder: nil, options: nil, completionHandler: { result in
+              switch result {
+              case .success(let value):
+                  self.songPageViewController.trackInfo = musicResult
+                  self.songPageViewController.channelImageView.image = value.image
+              case .failure(let error):
+                  print("Ошибка загрузки изображения: \(error)")
+              }
+          })
+      } else {
+          miniPlayerVC.updateSongImage(nil)
+      }
   }
+
 
   private func getMusicResultFromURL(_ url: String) -> EpisodeItem? {
     let entry = Music.shared.episodeResults.first { episode in
