@@ -16,10 +16,10 @@
 <p align="left"> 
 <a href="https://github.com/Loveink">
 <img src="https://img.shields.io/badge/Loveink-pink"/></a>
-<a href="https://github.com/Vanopr">
-<img src="https://img.shields.io/badge/Vanopr-red"/></a>
-<a href="https://github.com/sattarov-t">
-<img src="https://img.shields.io/badge/sattarov_t-green"/></a>
+<a href="https://github.com/CarolineTV">
+<img src="https://img.shields.io/badge/CarolineTV-red"/></a>
+<a href="https://github.com/michaelbolgar">
+<img src="https://img.shields.io/badge/michaelbolgar-green"/></a>
 <a href="https://github.com/vtagilov">
 <img src="https://img.shields.io/badge/vtagilov-blue"/></a>
 <a href="https://github.com/AnastasiaRybakova26">
@@ -29,7 +29,7 @@
 
 ---
 
-<img width="1670" src="https://github.com/Loveink/BestRecipes/blob/develop/assets/readmeimage.png">
+<img width="1670" src="https://github.com/Loveink/PodcastApp/blob/develop/assets/image.png">
 
 ---
 
