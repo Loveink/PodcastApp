@@ -42,13 +42,22 @@ class NowPlayingViewController: UIViewController {
 
   var channelImageView: UIImageView = {
       let imageView = UIImageView()
+      imageView.layer.cornerRadius = 12
+      imageView.contentMode = .scaleAspectFill
+    imageView.clipsToBounds = true
       imageView.translatesAutoresizingMaskIntoConstraints = false
       return imageView
   }()
 
   @objc private func backButtonTapped() {
-      dismiss(animated: true, completion: nil)
+      dismiss(animated: true) {
+          if let presentingVC = self.presentingViewController as? ChannelViewController {
+              presentingVC.tabBarController?.tabBar.isHidden = false
+              presentingVC.navigationController?.popToViewController(presentingVC, animated: true)
+          }
+      }
   }
+
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -99,7 +108,6 @@ class NowPlayingViewController: UIViewController {
     view.addSubview(backButton)
     view.addSubview(titleLabel)
     view.addSubview(channelImageView)
-    channelImageView.layer.cornerRadius = 12
 
     NSLayoutConstraint.activate([
       backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
