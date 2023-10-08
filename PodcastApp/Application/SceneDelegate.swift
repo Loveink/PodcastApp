@@ -57,33 +57,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       window.makeKeyAndVisible()
   }
 
-    private func showHomeScreen() {
-        let tabbar = CustomTabBar()
-        let navigationController = UINavigationController(rootViewController: tabbar)
-        navigationController.navigationBar.isHidden = true
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
-        window?.rootViewController = navigationController
-    }
-
-    private func showLoginScreen() {
-        let loginVC = LoginViewController()
-        let navigationController = UINavigationController(rootViewController: loginVC)
-        navigationController.navigationBar.isHidden = true
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
-        window?.rootViewController = navigationController
-    }
-
-    private func showOnboarding() {
-        let onboardingVC = PagesViewController()
-        let navigationController = UINavigationController(rootViewController: onboardingVC)
-        navigationController.navigationBar.isHidden = true
-        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController.navigationBar.shadowImage = UIImage()
-        window?.rootViewController = navigationController
-    }
-
   func sceneDidDisconnect(_ scene: UIScene) {
     // Called as the scene is being released by the system.
     // This occurs shortly after the scene enters the background, or when its session is discarded.
