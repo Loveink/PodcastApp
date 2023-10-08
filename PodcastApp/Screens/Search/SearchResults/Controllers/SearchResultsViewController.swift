@@ -97,11 +97,45 @@ class SearchResultsViewController: UIViewController {
         }
     }
     
-    
+  private func fetchPodcastsByTerm(_ term: String) {
+      let networkService = NetworkService()
+      dispatchGroup.enter()
+
+      networkService.fetchData(forPath: "/search/byterm?q=" + term) { [weak self] (result: Result<PodcastSearch, APIError>) in
+          guard let self = self else { return }
+          defer {
+              self.dispatchGroup.leave()
+          }
+          switch result {
+          case .success(let podcastResponse):
+              self.feeds.append(contentsOf: podcastResponse.feeds)
+              for podcast in self.feeds {
+                  let imageURL = podcast.image
+                  let item = PodcastItemCell(title: podcast.title, image: imageURL, id: podcast.id, author: podcast.author, categories: podcast.categories)
+                  self.allPodcasts.podcasts.append(item)
+                  DispatchQueue.main.async {
+                      if self.searchResult.titleLabel.text == "" {
+                          self.configureSearchResult(item)
+                      }
+                  }
+                  self.id.append(podcast.id)
+              }
+
+          case .failure(let error):
+              print("Error: \(error)")
+              DispatchQueue.main.async {
+                  self.allPodcasts.isHidden = true
+                  self.searchResult.makeInvisible()
+                  self.errorLabel.isHidden = false
+              }
+          }
+      }
+  }
+
     
     private func makeRequest(_ text: String) {
         let encodedStr = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        fetchPodcasts(encodedStr)
+        fetchPodcastsByTerm(encodedStr)
         dispatchGroup.notify(queue: .main) {
             self.allPodcasts.collectionView.reloadData()
         }
