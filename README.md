@@ -25,7 +25,7 @@
 <a href="https://github.com/AnastasiaRybakova26">
 <img src="https://img.shields.io/badge/AnastasiaRybakova26-purple"/></a>
 </p>
-Приложение сделано для https://t.me/swiftmarathon
+Приложение сделано для https://t.me/dev_rush
 
 ---
 
